@@ -10,25 +10,26 @@ import java.util.ArrayList;
 import java.util.List;
 
 import ru.arink_group.deliveryapp.R;
-import ru.arink_group.deliveryapp.domain.Category;
+import ru.arink_group.deliveryapp.domain.Product;
 
 /**
- * Created by kirillvs on 02.10.17.
+ * Created by kirillvs on 03.10.17.
  */
 
-public class CategoriesListAdapter extends RecyclerView.Adapter<CategoriesListAdapter.ViewHolder> {
+public class ProductsListAdapter extends RecyclerView.Adapter<ProductsListAdapter.ViewHolder> {
 
-    private List<Category> categories = new ArrayList<>();
-    private OnItemClickListener<Category> listener;
+    private List<Product> products = new ArrayList<>();
+    private OnItemClickListener<Product> listener;
 
-    public void setCategories(List<Category> categories) {
-        this.categories = categories;
+    public void setProducts(List<Product> products) {
+        this.products = products;
         notifyDataSetChanged();
     }
 
-    public void setListener(OnItemClickListener<Category> listener) {
+    public void setListener(OnItemClickListener<Product> listener) {
         this.listener = listener;
     }
+
 
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
@@ -38,19 +39,19 @@ public class CategoriesListAdapter extends RecyclerView.Adapter<CategoriesListAd
 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
-        final Category category = categories.get(position);
-        holder.textView.setText(category.getName());
+        final Product product = products.get(position);
+        holder.textView.setText(product.getName());
         holder.textView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                CategoriesListAdapter.this.listener.onItemClicked(category);
+                ProductsListAdapter.this.listener.onItemClicked(product);
             }
         });
     }
 
     @Override
     public int getItemCount() {
-        return categories.size();
+        return products.size();
     }
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
@@ -62,4 +63,5 @@ public class CategoriesListAdapter extends RecyclerView.Adapter<CategoriesListAd
             textView = itemView;
         }
     }
+
 }

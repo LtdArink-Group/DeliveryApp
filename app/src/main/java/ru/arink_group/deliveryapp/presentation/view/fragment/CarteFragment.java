@@ -16,12 +16,13 @@ import java.util.List;
 import ru.arink_group.deliveryapp.R;
 import ru.arink_group.deliveryapp.domain.Category;
 import ru.arink_group.deliveryapp.presentation.adapters.CategoriesListAdapter;
+import ru.arink_group.deliveryapp.presentation.adapters.OnItemClickListener;
 import ru.arink_group.deliveryapp.presentation.presenter.CartePresenter;
 import ru.arink_group.deliveryapp.presentation.presenter.CartePresenterImpl;
 import ru.arink_group.deliveryapp.presentation.view.CarteView;
 import ru.arink_group.deliveryapp.presentation.view.activity.ProductsActivity;
 
-public class CarteFragment extends Fragment implements CarteView {
+public class CarteFragment extends Fragment implements CarteView, OnItemClickListener<Category> {
 
     public static final String CATEGORY = "categoryId";
 
@@ -80,6 +81,7 @@ public class CarteFragment extends Fragment implements CarteView {
         mRecyclerView.setAdapter(categoriesAdapter);
 
         cartePresenter.getCategoriesList();
+        categoriesAdapter.setListener(this);
 
         return rootView;
     }
@@ -96,5 +98,14 @@ public class CarteFragment extends Fragment implements CarteView {
         super.onDetach();
     }
 
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        cartePresenter.destroy();
+    }
 
+    @Override
+    public void onItemClicked(Category model) {
+        cartePresenter.onItemSelected(model.getId());
+    }
 }
