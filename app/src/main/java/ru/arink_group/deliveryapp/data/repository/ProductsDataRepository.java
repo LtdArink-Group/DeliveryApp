@@ -30,8 +30,8 @@ public class ProductsDataRepository implements ProductsRepository {
 
 
     @Override
-    public Observable<List<Product>> productsList() {
-        return storeFactory.create().productsDataList();
+    public Observable<List<Product>> productsList(int categoryId) {
+        return storeFactory.create().productsDataList(categoryId);
     }
 
     @Override

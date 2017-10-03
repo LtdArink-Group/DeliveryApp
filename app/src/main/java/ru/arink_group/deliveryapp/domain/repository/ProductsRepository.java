@@ -11,7 +11,7 @@ import ru.arink_group.deliveryapp.domain.Product;
 
 public interface ProductsRepository {
 
-    Observable<List<Product>> productsList();
+    Observable<List<Product>> productsList(int categoryId);
 
     Observable<Product> product(int productId);
 

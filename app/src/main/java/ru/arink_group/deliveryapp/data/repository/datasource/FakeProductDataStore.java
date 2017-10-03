@@ -41,7 +41,7 @@ public class FakeProductDataStore implements ProductDataStore {
 
 
     @Override
-    public Observable<List<Product>> productsDataList() {
+    public Observable<List<Product>> productsDataList(int categoryId) {
 
         return Observable.just(products());
 
@@ -49,6 +49,10 @@ public class FakeProductDataStore implements ProductDataStore {
 
     @Override
     public Observable<Product> productData(int productId) {
-        return Observable.just(products().get(productId));
+        Product result = null;
+        for(Product product : products()) {
+            if (product.getId() == productId) result = product;
+        }
+        return Observable.just(result);
     }
 }

@@ -12,7 +12,7 @@ import ru.arink_group.deliveryapp.domain.Product;
 
 public interface ProductDataStore {
 
-    Observable<List<Product>> productsDataList();
+    Observable<List<Product>> productsDataList(int categoryId);
 
     Observable<Product> productData(int productId);
 }

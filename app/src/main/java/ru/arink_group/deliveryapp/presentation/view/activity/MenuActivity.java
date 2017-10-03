@@ -83,6 +83,8 @@ public class MenuActivity extends AppCompatActivity
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
 
+        menuPresenter.onItemMenuSelect(id);
+
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
             return true;
@@ -108,7 +110,8 @@ public class MenuActivity extends AppCompatActivity
     @Override
     public void changeFragment(Fragment fragment) {
         FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
-        fragmentTransaction.add(R.id.menu_fragment, fragment);
+        fragmentTransaction.replace(R.id.menu_fragment, fragment);
+        fragmentTransaction.addToBackStack(null);
         fragmentTransaction.commit();
 
     }

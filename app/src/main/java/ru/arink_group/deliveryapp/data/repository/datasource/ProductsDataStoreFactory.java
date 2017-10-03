@@ -21,7 +21,8 @@ public class ProductsDataStoreFactory {
     }
 
     public ProductDataStore create() {
-        return null;
+
+        return new FakeProductDataStore();
     }
 
     public ProductDataStore createProduct(int productId) {
