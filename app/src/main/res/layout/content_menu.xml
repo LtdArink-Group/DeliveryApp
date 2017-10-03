@@ -5,7 +5,20 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    tools:context="ru.arink_group.deliveryapp.presentation.Menu.MenuActivity"
+    tools:context="ru.arink_group.deliveryapp.presentation.view.activity.MenuActivity"
     tools:showIn="@layout/app_bar_menu">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical" >
+
+        <FrameLayout
+            android:id="@+id/menu_fragment"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"/>
+
+    </LinearLayout>
+
 
 </android.support.constraint.ConstraintLayout>

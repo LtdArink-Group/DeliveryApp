@@ -1,6 +1,7 @@
-package ru.arink_group.deliveryapp.presentation.Menu;
+package ru.arink_group.deliveryapp.presentation.view.activity;
 
 import android.app.Fragment;
+import android.app.FragmentTransaction;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -15,9 +16,15 @@ import android.view.Menu;
 import android.view.MenuItem;
 
 import ru.arink_group.deliveryapp.R;
+import ru.arink_group.deliveryapp.presentation.presenter.MenuPresenter;
+import ru.arink_group.deliveryapp.presentation.presenter.MenuPresenterImpl;
+import ru.arink_group.deliveryapp.presentation.view.MenuView;
+import ru.arink_group.deliveryapp.presentation.view.fragment.CarteFragment;
 
 public class MenuActivity extends AppCompatActivity
         implements MenuView, NavigationView.OnNavigationItemSelectedListener {
+
+    private MenuPresenter menuPresenter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,6 +50,13 @@ public class MenuActivity extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+
+        menuPresenter = new MenuPresenterImpl(this);
+
+        FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
+        fragmentTransaction.add(R.id.menu_fragment, new CarteFragment());
+        fragmentTransaction.commit();
+
     }
 
     @Override
@@ -83,19 +97,8 @@ public class MenuActivity extends AppCompatActivity
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
-        if (id == R.id.nav_camera) {
-            // Handle the camera action
-        } else if (id == R.id.nav_gallery) {
+        menuPresenter.onItemMenuSelect(id);
 
-        } else if (id == R.id.nav_slideshow) {
-
-        } else if (id == R.id.nav_manage) {
-
-        } else if (id == R.id.nav_share) {
-
-        } else if (id == R.id.nav_send) {
-
-        }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
@@ -103,7 +106,10 @@ public class MenuActivity extends AppCompatActivity
     }
 
     @Override
-    public void changeFragment(Fragment frag) {
+    public void changeFragment(Fragment fragment) {
+        FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
+        fragmentTransaction.add(R.id.menu_fragment, fragment);
+        fragmentTransaction.commit();
 
     }
 }

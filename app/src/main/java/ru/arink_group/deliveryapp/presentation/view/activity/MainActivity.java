@@ -1,12 +1,10 @@
-package ru.arink_group.deliveryapp.presentation;
+package ru.arink_group.deliveryapp.presentation.view.activity;
 
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
 import ru.arink_group.deliveryapp.R;
-import ru.arink_group.deliveryapp.presentation.Menu.MenuActivity;
-import ru.arink_group.deliveryapp.presentation.Menu.MenuActivity2;
 
 public class MainActivity extends AppCompatActivity {
 

@@ -1,4 +1,4 @@
-package ru.arink_group.deliveryapp.presentation.Menu;
+package ru.arink_group.deliveryapp.presentation.view.activity;
 
 import android.app.Fragment;
 import android.os.Bundle;
@@ -9,6 +9,7 @@ import android.view.MenuItem;
 import android.widget.TextView;
 
 import ru.arink_group.deliveryapp.R;
+import ru.arink_group.deliveryapp.presentation.view.MenuView;
 
 public class MenuActivity2 extends AppCompatActivity implements MenuView {
 

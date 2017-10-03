@@ -1,4 +1,4 @@
-package ru.arink_group.deliveryapp.presentation.Menu;
+package ru.arink_group.deliveryapp.presentation.view;
 
 import android.app.Fragment;
 
