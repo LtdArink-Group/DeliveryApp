@@ -1,9 +1,14 @@
 package ru.arink_group.deliveryapp.presentation.adapters;
 
+import android.content.Context;
+import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
+import android.widget.Spinner;
+import android.widget.SpinnerAdapter;
 import android.widget.TextView;
 
 import java.util.ArrayList;
@@ -33,15 +38,28 @@ public class ProductsListAdapter extends RecyclerView.Adapter<ProductsListAdapte
 
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        TextView tv = (TextView) LayoutInflater.from(parent.getContext()).inflate(R.layout.category_view, parent, false);
-        return new ViewHolder(tv);
+        View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_product, parent, false);
+        return new ViewHolder(v, parent.getContext());
     }
 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
         final Product product = products.get(position);
-        holder.textView.setText(product.getName());
-        holder.textView.setOnClickListener(new View.OnClickListener() {
+
+        TextView nameView = holder.view.findViewById(R.id.product_name);
+        nameView.setText(product.getName());
+
+        TextView descriptionView = holder.view.findViewById(R.id.product_description);
+        descriptionView.setText(product.getDescription());
+
+        Spinner sizeSpinner = (Spinner) holder.view.findViewById(R.id.product_size_spinner);
+        ArrayAdapter<String> sizes = new ArrayAdapter<>(holder.context, R.layout.support_simple_spinner_dropdown_item, product.getSize());
+        sizeSpinner.setAdapter(sizes);
+
+        TextView priceView = holder.view.findViewById(R.id.product_price);
+        priceView.setText(product.getPrice());
+
+        holder.view.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 ProductsListAdapter.this.listener.onItemClicked(product);
@@ -56,11 +74,13 @@ public class ProductsListAdapter extends RecyclerView.Adapter<ProductsListAdapte
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
 
-        public TextView textView;
+        public View view;
+        public Context context;
 
-        public ViewHolder(TextView itemView) {
+        public ViewHolder(View itemView, Context context) {
             super(itemView);
-            textView = itemView;
+            view = itemView;
+            this.context = context;
         }
     }
 

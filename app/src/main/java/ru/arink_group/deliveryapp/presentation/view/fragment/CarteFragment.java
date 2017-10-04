@@ -27,6 +27,7 @@ import ru.arink_group.deliveryapp.presentation.view.activity.ProductsActivity;
 public class CarteFragment extends Fragment implements CarteView, OnItemClickListener<Category> {
 
     public static final String CATEGORY = "categoryId";
+    public static final String CATEGORY_NAME = "categoryName";
 
     private List<Category> categories;
     private CategoriesListAdapter categoriesAdapter;
@@ -38,9 +39,10 @@ public class CarteFragment extends Fragment implements CarteView, OnItemClickLis
     }
 
     @Override
-    public void startCategory(int sectionId) {
+    public void startCategory(int sectionId, String name) {
         Intent intent = new Intent(this.getActivity(), ProductsActivity.class);
         intent.putExtra(CATEGORY, sectionId);
+        intent.putExtra(CATEGORY_NAME, name);
         getActivity().startActivity(intent);
     }
 
@@ -48,7 +50,6 @@ public class CarteFragment extends Fragment implements CarteView, OnItemClickLis
     public void setCategoriesList(List<Category> categories) {
         this.categories = categories;
         categoriesAdapter.setCategories(categories);
-        Toast.makeText(getActivity(), "Categories fetched", Toast.LENGTH_LONG).show();
     }
 
     @Override
@@ -72,19 +73,14 @@ public class CarteFragment extends Fragment implements CarteView, OnItemClickLis
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
         View rootView = inflater.inflate(R.layout.fragment_carte, container, false);
         RecyclerView mRecyclerView = rootView.findViewById(R.id.categories_recycler_view);
 
-        // use this setting to improve performance if you know that changes
-        // in content do not change the layout size of the RecyclerView
         mRecyclerView.setHasFixedSize(true);
 
-        // use a linear layout manager
         LinearLayoutManager mLayoutManager = new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false);
         mRecyclerView.setLayoutManager(mLayoutManager);
 
-        // specify an adapter (see also next example)
         categoriesAdapter = new CategoriesListAdapter();
         mRecyclerView.setAdapter(categoriesAdapter);
 
@@ -114,6 +110,6 @@ public class CarteFragment extends Fragment implements CarteView, OnItemClickLis
 
     @Override
     public void onItemClicked(Category model) {
-        cartePresenter.onItemSelected(model.getId());
+        cartePresenter.onItemSelected(model.getId(), model.getName());
     }
 }

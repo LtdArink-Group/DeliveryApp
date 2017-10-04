@@ -42,15 +42,11 @@ public class ProductsFragment extends Fragment implements ProductsView, OnItemCl
 
         productsPresenter = new ProductsPresenterImpl(this);
 
-        // use this setting to improve performance if you know that changes
-        // in content do not change the layout size of the RecyclerView
-//        mRecyclerView.setHasFixedSize(true);
-
-        // use a linear layout manager
         LinearLayoutManager mLayoutManager = new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false);
         mRecyclerView.setLayoutManager(mLayoutManager);
 
-        // specify an adapter (see also next example)
+        mRecyclerView.setHasFixedSize(true);
+
         productsListAdapter = new ProductsListAdapter();
         mRecyclerView.setAdapter(productsListAdapter);
 
@@ -70,8 +66,6 @@ public class ProductsFragment extends Fragment implements ProductsView, OnItemCl
 
     @Override
     public void setProductsList(List<Product> products) {
-
-        Toast.makeText(getActivity(), new Integer(products.size()).toString(), Toast.LENGTH_LONG).show();
         productsListAdapter.setProducts(products);
     }
 

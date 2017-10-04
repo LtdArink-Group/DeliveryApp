@@ -9,7 +9,7 @@ import ru.arink_group.deliveryapp.domain.Category;
  */
 
 public interface CarteView {
-    void startCategory(int sectionId);
+    void startCategory(int sectionId, String name);
     void setCategoriesList(List<Category> categories);
     void showErrorMessage(String message);
     void loadCompleted();

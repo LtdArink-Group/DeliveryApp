@@ -21,10 +21,14 @@ public class FakeCategoryDataStore implements CategoryDataStore {
         Category three = new Category();
         Category five = new Category();
 
-        one.setName("one");
-        two.setName("two");
-        three.setName("three");
-        five.setName("five");
+        one.setName("Пицца");
+        two.setName("Напитки");
+        three.setName("Гамбургеры");
+        five.setName("Суши");
+
+        one.setIcon("pizza");
+        two.setIcon("drink");
+        three.setIcon("hamburger");
 
         categoriestList.add(one);
         categoriestList.add(two);

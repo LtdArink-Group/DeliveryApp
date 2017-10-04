@@ -23,8 +23,8 @@ public class CartePresenterImpl implements CartePresenter {
     }
 
     @Override
-    public void onItemSelected(int sectionId) {
-        carteView.startCategory(sectionId);
+    public void onItemSelected(int sectionId, String name) {
+        carteView.startCategory(sectionId, name);
     }
 
     @Override

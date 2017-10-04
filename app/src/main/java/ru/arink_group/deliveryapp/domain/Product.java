@@ -12,7 +12,7 @@ public class Product {
     private String name;
     private String description;
     private String price;
-    private List<String> size;
+    private String[] size;
     private String imageUrl;
     private String unit;
 
@@ -48,11 +48,11 @@ public class Product {
         this.price = price;
     }
 
-    public List<String> getSize() {
+    public String[] getSize() {
         return size;
     }
 
-    public void setSize(List<String> size) {
+    public void setSize(String[] size) {
         this.size = size;
     }
 

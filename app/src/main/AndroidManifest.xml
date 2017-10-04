@@ -30,7 +30,8 @@
         <activity
             android:name=".presentation.view.activity.ProductsActivity"
             android:label="@string/title_activity_products"
-            android:theme="@style/AppTheme.NoActionBar" />
+            android:theme="@style/AppTheme.NoActionBar"
+            android:parentActivityName=".presentation.view.activity.MenuActivity"/>
     </application>
 
 </manifest>

@@ -18,4 +18,7 @@
     <string name="orders">Заказы</string>
     <string name="basket">Корзина</string>
     <string name="account">Аккаунт</string>
+    <string name="company_name">Chixx</string>
+    <string name="company_mail">info@chixx.ru</string>
+    <string name="company_phone">+7 (4212) 776 025</string>
 </resources>

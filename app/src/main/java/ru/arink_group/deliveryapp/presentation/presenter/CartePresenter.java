@@ -6,7 +6,7 @@ package ru.arink_group.deliveryapp.presentation.presenter;
 
 public interface CartePresenter extends Presenter{
 
-    void onItemSelected(int sectionId);
+    void onItemSelected(int sectionId, String name);
     void onCartPressed(); //no need now
     void getCategoriesList();
 }

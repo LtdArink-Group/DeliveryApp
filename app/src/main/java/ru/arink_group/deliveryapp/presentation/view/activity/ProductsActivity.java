@@ -22,6 +22,8 @@ public class ProductsActivity extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -35,6 +37,8 @@ public class ProductsActivity extends AppCompatActivity {
         ProductsFragment pf = new ProductsFragment();
 
         Intent mIntent = getIntent();
+
+        setTitle(mIntent.getStringExtra(CarteFragment.CATEGORY_NAME));
 
         Bundle bundle = new Bundle();
         bundle.putInt(CarteFragment.CATEGORY, mIntent.getIntExtra(CarteFragment.CATEGORY, 0));

@@ -4,6 +4,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import java.util.ArrayList;
@@ -11,6 +12,7 @@ import java.util.List;
 
 import ru.arink_group.deliveryapp.R;
 import ru.arink_group.deliveryapp.domain.Category;
+import ru.arink_group.deliveryapp.presentation.model.IconTransformer;
 
 /**
  * Created by kirillvs on 02.10.17.
@@ -32,15 +34,23 @@ public class CategoriesListAdapter extends RecyclerView.Adapter<CategoriesListAd
 
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        TextView tv = (TextView) LayoutInflater.from(parent.getContext()).inflate(R.layout.category_view, parent, false);
-        return new ViewHolder(tv);
+        View v = (View) LayoutInflater.from(parent.getContext()).inflate(R.layout.item_category, parent, false);
+        return new ViewHolder(v);
     }
 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
         final Category category = categories.get(position);
-        holder.textView.setText(category.getName());
-        holder.textView.setOnClickListener(new View.OnClickListener() {
+        TextView tv = holder.viewView.findViewById(R.id.category_name);
+        tv.setText(category.getName());
+
+        if (category.getIcon() != null) {
+            ImageView iv = holder.viewView.findViewById(R.id.category_icon);
+            int drawableIcon = IconTransformer.iconNameToId(category.getIcon());
+            iv.setImageResource(drawableIcon);
+        }
+
+        holder.viewView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 CategoriesListAdapter.this.listener.onItemClicked(category);
@@ -55,11 +65,11 @@ public class CategoriesListAdapter extends RecyclerView.Adapter<CategoriesListAd
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
 
-        public TextView textView;
+        public View viewView;
 
-        public ViewHolder(TextView itemView) {
+        public ViewHolder(View itemView) {
             super(itemView);
-            textView = itemView;
+            viewView = itemView;
         }
     }
 }
