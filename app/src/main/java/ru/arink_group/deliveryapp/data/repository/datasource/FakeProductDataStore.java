@@ -38,6 +38,11 @@ public class FakeProductDataStore implements ProductDataStore {
         three.setPrice("100500");
         five.setPrice("100500");
 
+        one.setUnit("гр.");
+        two.setUnit("гр.");
+        three.setUnit("гр.");
+        five.setUnit("гр.");
+
         one.setSize(size);
         two.setSize(size);
         three.setSize(size);

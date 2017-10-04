@@ -57,7 +57,7 @@ public class ProductsListAdapter extends RecyclerView.Adapter<ProductsListAdapte
         sizeSpinner.setAdapter(sizes);
 
         TextView priceView = holder.view.findViewById(R.id.product_price);
-        priceView.setText(product.getPrice());
+        priceView.setText(product.getPrice() + " \u20BD");
 
         holder.view.setOnClickListener(new View.OnClickListener() {
             @Override
