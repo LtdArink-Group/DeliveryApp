@@ -12,4 +12,5 @@ public interface CarteView {
     void startCategory(int sectionId);
     void setCategoriesList(List<Category> categories);
     void showErrorMessage(String message);
+    void loadCompleted();
 }

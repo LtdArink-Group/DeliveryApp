@@ -50,4 +50,9 @@ public class MenuActivity2 extends AppCompatActivity implements MenuView {
     public void changeFragment(Fragment frag) {
 
     }
+
+    @Override
+    public void contentLoaded() {
+
+    }
 }

@@ -67,7 +67,7 @@ public class CartePresenterImpl implements CartePresenter {
 
         @Override
         public void onComplete() {
-
+            carteView.loadCompleted();
         }
     }
 

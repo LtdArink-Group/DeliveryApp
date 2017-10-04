@@ -14,12 +14,14 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Toast;
 
 import ru.arink_group.deliveryapp.R;
 import ru.arink_group.deliveryapp.presentation.presenter.MenuPresenter;
 import ru.arink_group.deliveryapp.presentation.presenter.MenuPresenterImpl;
 import ru.arink_group.deliveryapp.presentation.view.MenuView;
 import ru.arink_group.deliveryapp.presentation.view.fragment.CarteFragment;
+import ru.arink_group.deliveryapp.presentation.view.fragment.LoadFragment;
 
 public class MenuActivity extends AppCompatActivity
         implements MenuView, NavigationView.OnNavigationItemSelectedListener {
@@ -108,10 +110,16 @@ public class MenuActivity extends AppCompatActivity
 
     @Override
     public void changeFragment(Fragment fragment) {
+
         FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
         fragmentTransaction.replace(R.id.menu_fragment, fragment);
         fragmentTransaction.addToBackStack(null);
         fragmentTransaction.commit();
 
+    }
+
+    @Override
+    public void contentLoaded() {
+//        menuPresenter.onItemMenuSelect(R.id.carte);
     }
 }

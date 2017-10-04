@@ -20,6 +20,8 @@ import ru.arink_group.deliveryapp.presentation.adapters.OnItemClickListener;
 import ru.arink_group.deliveryapp.presentation.presenter.CartePresenter;
 import ru.arink_group.deliveryapp.presentation.presenter.CartePresenterImpl;
 import ru.arink_group.deliveryapp.presentation.view.CarteView;
+import ru.arink_group.deliveryapp.presentation.view.MenuView;
+import ru.arink_group.deliveryapp.presentation.view.activity.MenuActivity;
 import ru.arink_group.deliveryapp.presentation.view.activity.ProductsActivity;
 
 public class CarteFragment extends Fragment implements CarteView, OnItemClickListener<Category> {
@@ -53,6 +55,12 @@ public class CarteFragment extends Fragment implements CarteView, OnItemClickLis
     public void showErrorMessage(String message) {
         Toast toast = Toast.makeText(getActivity(), message, Toast.LENGTH_LONG);
         toast.show();
+    }
+
+    @Override
+    public void loadCompleted() {
+        MenuView mv = (MenuActivity) getActivity();
+        mv.contentLoaded();
     }
 
 
