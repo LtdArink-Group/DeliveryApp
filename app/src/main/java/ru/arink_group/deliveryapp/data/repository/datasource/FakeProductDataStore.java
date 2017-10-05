@@ -5,6 +5,7 @@ import java.util.List;
 
 import io.reactivex.Observable;
 import ru.arink_group.deliveryapp.domain.Category;
+import ru.arink_group.deliveryapp.domain.Portion;
 import ru.arink_group.deliveryapp.domain.Product;
 
 /**
@@ -42,6 +43,19 @@ public class FakeProductDataStore implements ProductDataStore {
         two.setUnit("гр.");
         three.setUnit("гр.");
         five.setUnit("гр.");
+
+        Portion[] portions = new Portion[] {new Portion(), new Portion(), new Portion()};
+        portions[0].setName("Классик, 50 гр.");
+        portions[0].setPrice("250");
+        portions[1].setName("Классик, 150 гр.");
+        portions[1].setPrice("500");
+        portions[2].setName("Классик, 250 гр.");
+        portions[2].setPrice("700");
+
+        one.setPortions(portions);
+        two.setPortions(portions);
+        three.setPortions(portions);
+        five.setPortions(portions);
 
         one.setSize(size);
         two.setSize(size);

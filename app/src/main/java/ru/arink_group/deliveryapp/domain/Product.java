@@ -15,6 +15,15 @@ public class Product {
     private String[] size;
     private String imageUrl;
     private String unit;
+    private Portion[] portions;
+
+    public Portion[] getPortions() {
+        return portions;
+    }
+
+    public void setPortions(Portion[] portions) {
+        this.portions = portions;
+    }
 
     public int getId() {
         return id;

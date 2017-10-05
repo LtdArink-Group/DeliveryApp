@@ -7,6 +7,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.RadioGroup;
 import android.widget.Spinner;
 import android.widget.SpinnerAdapter;
 import android.widget.TextView;
@@ -16,6 +17,7 @@ import java.util.List;
 
 import ru.arink_group.deliveryapp.R;
 import ru.arink_group.deliveryapp.domain.Product;
+import ru.arink_group.deliveryapp.presentation.custom_elements.PortionList;
 
 /**
  * Created by kirillvs on 03.10.17.
@@ -52,9 +54,13 @@ public class ProductsListAdapter extends RecyclerView.Adapter<ProductsListAdapte
         TextView descriptionView = holder.view.findViewById(R.id.product_description);
         descriptionView.setText(product.getDescription());
 
-        Spinner sizeSpinner = (Spinner) holder.view.findViewById(R.id.product_size_spinner);
-        ArrayAdapter<String> sizes = new ArrayAdapter<>(holder.context, R.layout.support_simple_spinner_dropdown_item, product.getSize());
-        sizeSpinner.setAdapter(sizes);
+        PortionList pl = holder.view.findViewById(R.id.portion_list);
+        PortionList.Adapter adapter = new PortionList.Adapter(holder.context, product.getPortions(), R.layout.item_portion);
+        pl.setAdapter(adapter);
+
+//        Spinner sizeSpinner = (Spinner) holder.view.findViewById(R.id.product_size_spinner);
+//        ArrayAdapter<String> sizes = new ArrayAdapter<>(holder.context, R.layout.support_simple_spinner_dropdown_item, product.getSize());
+//        sizeSpinner.setAdapter(sizes);
 
         TextView priceView = holder.view.findViewById(R.id.product_price);
         priceView.setText(product.getPrice() + " \u20BD");
