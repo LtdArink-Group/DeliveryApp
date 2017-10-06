@@ -16,6 +16,15 @@ public class Product {
     private String imageUrl;
     private String unit;
     private Portion[] portions;
+    private Ingredient[] ingredients;
+
+    public Ingredient[] getIngredients() {
+        return ingredients;
+    }
+
+    public void setIngredients(Ingredient[] ingredients) {
+        this.ingredients = ingredients;
+    }
 
     public Portion[] getPortions() {
         return portions;
