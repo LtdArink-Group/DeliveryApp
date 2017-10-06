@@ -6,19 +6,21 @@
     android:background="@drawable/rounder_border"
     android:layout_margin="15dp">
 
-    <TextView
+    <CheckedTextView
         android:id="@+id/item1"
         android:layout_gravity="center"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAlignment="center"
+        android:background="@drawable/bg_item_ingredient"
         android:textColor="@drawable/ingredient_text_checked"/>
 
-    <TextView
+    <CheckedTextView
         android:id="@+id/item2"
         android:layout_gravity="center"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAlignment="center"
+        android:background="@drawable/bg_item_ingredient"
         android:textColor="@drawable/ingredient_text_checked"/>
 </LinearLayout>
