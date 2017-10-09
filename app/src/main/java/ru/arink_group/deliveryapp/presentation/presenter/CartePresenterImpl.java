@@ -2,10 +2,13 @@ package ru.arink_group.deliveryapp.presentation.presenter;
 
 import java.util.List;
 
+import javax.inject.Inject;
+
 import io.reactivex.annotations.NonNull;
 import io.reactivex.observers.DisposableObserver;
 import ru.arink_group.deliveryapp.domain.Category;
 import ru.arink_group.deliveryapp.domain.interactors.GetCategoriesList;
+import ru.arink_group.deliveryapp.presentation.App;
 import ru.arink_group.deliveryapp.presentation.view.CarteView;
 
 /**
@@ -15,11 +18,11 @@ import ru.arink_group.deliveryapp.presentation.view.CarteView;
 public class CartePresenterImpl implements CartePresenter {
 
     private CarteView carteView;
-    private GetCategoriesList getCategoriesListUseCase;
+    @Inject GetCategoriesList getCategoriesListUseCase;
 
     public CartePresenterImpl(CarteView carteView) {
         this.carteView = carteView;
-        getCategoriesListUseCase = new GetCategoriesList();
+        App.getComponent().inject(this);
     }
 
     @Override
