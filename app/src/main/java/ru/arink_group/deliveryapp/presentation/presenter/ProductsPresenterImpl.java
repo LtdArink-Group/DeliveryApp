@@ -2,10 +2,13 @@ package ru.arink_group.deliveryapp.presentation.presenter;
 
 import java.util.List;
 
+import javax.inject.Inject;
+
 import io.reactivex.annotations.NonNull;
 import io.reactivex.observers.DisposableObserver;
 import ru.arink_group.deliveryapp.domain.Product;
 import ru.arink_group.deliveryapp.domain.interactors.GetProductsList;
+import ru.arink_group.deliveryapp.presentation.App;
 import ru.arink_group.deliveryapp.presentation.view.ProductsView;
 
 /**
@@ -15,11 +18,12 @@ import ru.arink_group.deliveryapp.presentation.view.ProductsView;
 public class ProductsPresenterImpl implements ProductsPresenter {
 
     ProductsView productsView;
-    private GetProductsList getProductsListUseCase;
+
+    @Inject GetProductsList getProductsListUseCase;
 
     public ProductsPresenterImpl(ProductsView productsView) {
         this.productsView = productsView;
-        getProductsListUseCase = new GetProductsList();
+        App.getComponent().inject(this);
     }
 
     @Override

@@ -7,6 +7,8 @@ import javax.inject.Singleton;
 import dagger.Module;
 import dagger.Provides;
 import ru.arink_group.deliveryapp.domain.interactors.GetCategoriesList;
+import ru.arink_group.deliveryapp.domain.interactors.GetProduct;
+import ru.arink_group.deliveryapp.domain.interactors.GetProductsList;
 
 /**
  * Created by kirillvs on 06.10.17.
@@ -17,9 +19,20 @@ public class InteractorsModule {
 
     @Provides
     @NonNull
-    @Singleton
     public GetCategoriesList provideCategoriesListInteractor() {
         return new GetCategoriesList();
+    }
+
+    @Provides
+    @NonNull
+    public GetProductsList provideProductsListInteractor() {
+        return new GetProductsList();
+    }
+
+    @Provides
+    @NonNull
+    public GetProduct provideProduct() {
+        return new GetProduct();
     }
 
 }

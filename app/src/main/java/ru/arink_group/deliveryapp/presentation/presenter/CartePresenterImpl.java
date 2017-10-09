@@ -22,7 +22,6 @@ public class CartePresenterImpl implements CartePresenter {
 
     public CartePresenterImpl(CarteView carteView) {
         this.carteView = carteView;
-//        getCategoriesListUseCase = new GetCategoriesList();
         App.getComponent().inject(this);
     }
 
