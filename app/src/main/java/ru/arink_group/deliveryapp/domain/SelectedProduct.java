@@ -10,8 +10,10 @@ public class SelectedProduct {
     private String name;
     private String description;
     private String imageUrl;
-    private Portion selectedPportion;
+    private Portion portion;
     private SelectedIngredient[] selectedIngredients;
+    private SelectedPortion selectedPortion;
+
 
     public SelectedProduct() {
 
@@ -22,6 +24,18 @@ public class SelectedProduct {
         this.name = product.getName();
         this.description = product.getDescription();
         this.imageUrl = product.getImageUrl();
+    }
+
+    public SelectedPortion getSelectedPortionFromPortion() {
+        return new SelectedPortion(portion);
+    }
+
+    public SelectedPortion getSelectedPortion() {
+        return this.selectedPortion;
+    }
+
+    public void setSelectedPortion(SelectedPortion selectedPortion) {
+        this.selectedPortion = selectedPortion;
     }
 
     public int getId() {
@@ -56,12 +70,12 @@ public class SelectedProduct {
         this.imageUrl = imageUrl;
     }
 
-    public Portion getSelectedPportion() {
-        return selectedPportion;
+    public Portion getPortion() {
+        return portion;
     }
 
-    public void setSelectedPportion(Portion selectedPportion) {
-        this.selectedPportion = selectedPportion;
+    public void setPortion(Portion portion) {
+        this.portion = portion;
     }
 
     public SelectedIngredient[] getSelectedIngredients() {

@@ -8,6 +8,8 @@ public class SelectedIngredient {
 
     private int id;
     private String name;
+
+
     private float price;
     private String description;
     private String size;
@@ -34,6 +36,10 @@ public class SelectedIngredient {
             selectedIngredients[i] = new SelectedIngredient(ingredients[i]);
         }
         return selectedIngredients;
+    }
+
+    public float getPrice() {
+        return price;
     }
 
     public void setPrice(float price) {
