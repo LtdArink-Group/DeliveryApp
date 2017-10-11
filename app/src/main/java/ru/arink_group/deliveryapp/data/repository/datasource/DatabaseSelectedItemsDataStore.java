@@ -55,4 +55,15 @@ public class DatabaseSelectedItemsDataStore implements SelectedItemsDataStore {
             }
         });
     }
+
+    @Override
+    public Observable<Integer> addListItemsToBasket(final List<SelectedProduct> listItems) {
+        return Observable.create(new ObservableOnSubscribe<Integer>() {
+            @Override
+            public void subscribe(@NonNull ObservableEmitter<Integer> e) throws Exception {
+                e.onNext(db.addListItemsToBasket(listItems));
+                e.onComplete();
+            }
+        });
+    }
 }

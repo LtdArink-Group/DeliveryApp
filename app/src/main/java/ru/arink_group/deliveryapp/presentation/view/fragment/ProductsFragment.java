@@ -14,6 +14,7 @@ import java.util.List;
 
 import ru.arink_group.deliveryapp.R;
 import ru.arink_group.deliveryapp.domain.Product;
+import ru.arink_group.deliveryapp.domain.SelectedProduct;
 import ru.arink_group.deliveryapp.presentation.adapters.OnItemClickListener;
 import ru.arink_group.deliveryapp.presentation.adapters.ProductsListAdapter;
 import ru.arink_group.deliveryapp.presentation.presenter.ProductsPresenter;
@@ -67,6 +68,11 @@ public class ProductsFragment extends Fragment implements ProductsView, OnItemCl
     @Override
     public void setProductsList(List<Product> products) {
         productsListAdapter.setProducts(products);
+    }
+
+    @Override
+    public void updateProductList(List<SelectedProduct> selectedProducts) {
+        productsListAdapter.updateProductsFromBasket(selectedProducts);
     }
 
     @Override

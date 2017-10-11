@@ -16,7 +16,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 import ru.arink_group.deliveryapp.R;
+import ru.arink_group.deliveryapp.domain.Ingredient;
+import ru.arink_group.deliveryapp.domain.Portion;
 import ru.arink_group.deliveryapp.domain.Product;
+import ru.arink_group.deliveryapp.domain.SelectedIngredient;
+import ru.arink_group.deliveryapp.domain.SelectedPortion;
 import ru.arink_group.deliveryapp.domain.SelectedProduct;
 import ru.arink_group.deliveryapp.presentation.custom_elements.PortionList;
 
@@ -35,8 +39,40 @@ public class ProductsListAdapter extends RecyclerView.Adapter<ProductsListAdapte
     }
 
     public void updateProductsFromBasket(List<SelectedProduct> selectedProducts) {
-        // TODO implement method
-        this.notifyDataSetChanged();
+        searchProductsForUpdate(selectedProducts);
+//        this.notifyDataSetChanged(); // TODO bug with doubling^ maybe need to call another method
+    }
+
+    private void searchProductsForUpdate(List<SelectedProduct> sps) {
+        for (Product product : this.products) {
+            for (SelectedProduct selectedProduct : sps) {
+                if (product.getId() == selectedProduct.getId()) {
+                    this.updateProduct(product, selectedProduct);
+                }
+            }
+        }
+    }
+
+    private void updateProduct(Product product, SelectedProduct selectedProduct) {
+        product.setSelected(true);
+
+        for(Portion portion : product.getPortions()) {
+            if (portion.getId() == selectedProduct.getSelectedPortion().getId()) {
+                portion.setSelected(true);
+                portion.setCount(selectedProduct.getSelectedPortion().getCount());
+                break;
+            }
+        }
+
+        for (Ingredient ingredient : product.getIngredients()) {
+            for (SelectedIngredient selectedIngredient : selectedProduct.getSelectedIngredients()) {
+                if (selectedIngredient.getId() == ingredient.getId()) {
+                    ingredient.setSelected(true);
+                    ingredient.setCount(selectedIngredient.getCount());
+                }
+            }
+        }
+
     }
 
 
@@ -65,8 +101,12 @@ public class ProductsListAdapter extends RecyclerView.Adapter<ProductsListAdapte
         PortionList.Adapter adapter = new PortionList.Adapter(holder.context, product.getPortions(), R.layout.item_portion);
         pl.setAdapter(adapter);
 
+
         TextView priceView = holder.view.findViewById(R.id.product_price);
         priceView.setText(product.getPrice() + " \u20BD");
+
+        TextView countPortion = holder.view.findViewById(R.id.count_portion);
+        countPortion.setText(String.valueOf(product.getSelectedPortion().getCount()));
 
         holder.view.setOnClickListener(new View.OnClickListener() {
             @Override

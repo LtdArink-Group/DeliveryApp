@@ -7,6 +7,7 @@ import javax.inject.Singleton;
 import dagger.Module;
 import dagger.Provides;
 import ru.arink_group.deliveryapp.domain.interactors.AddItemToBasket;
+import ru.arink_group.deliveryapp.domain.interactors.AddListItemsToBasket;
 import ru.arink_group.deliveryapp.domain.interactors.GetCategoriesList;
 import ru.arink_group.deliveryapp.domain.interactors.GetListItemsFromBasket;
 import ru.arink_group.deliveryapp.domain.interactors.GetProduct;
@@ -54,6 +55,12 @@ public class InteractorsModule {
     @NonNull
     public GetListItemsFromBasket provideGetListItemsFromBasket() {
         return new GetListItemsFromBasket();
+    }
+
+    @Provides
+    @NonNull
+    public AddListItemsToBasket provideAddListItemsToBasket() {
+        return new AddListItemsToBasket();
     }
 
 }

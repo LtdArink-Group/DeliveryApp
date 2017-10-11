@@ -43,13 +43,19 @@ public class PortionList extends LinearLayout implements View.OnClickListener {
     public void setAdapter(PortionList.Adapter adapter) {
         items = new ArrayList<>();
         elementsIds = adapter.getElementsIds();
+        boolean selectedFlag = false;
         for(int i = 0; i < adapter.getElementSize(); i++) {
             View item = adapter.getElement(i);
+            boolean checked = adapter.isCheckedElement(i);
             this.addView(item);
             item.setOnClickListener(this);
             items.add(item);
-            if(i == 0) checkView(item);
+            if(checked && !selectedFlag) {
+                checkView(item);
+                selectedFlag = true;
+            }
         }
+        if (!selectedFlag) this.checkView(items.get(0));
     }
 
     public View getChecked() {
@@ -114,6 +120,10 @@ public class PortionList extends LinearLayout implements View.OnClickListener {
             price.setText(items[position].getPrice());
 
             return layout;
+        }
+
+        public boolean isCheckedElement(int position) {
+            return items[position].isSelected() || items[position].getCount() > 0;
         }
 
         public ArrayList<Integer> getElementsIds() {

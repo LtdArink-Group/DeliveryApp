@@ -7,7 +7,11 @@ import javax.inject.Inject;
 import io.reactivex.annotations.NonNull;
 import io.reactivex.observers.DisposableObserver;
 import ru.arink_group.deliveryapp.domain.Product;
+import ru.arink_group.deliveryapp.domain.SelectedProduct;
+import ru.arink_group.deliveryapp.domain.interactors.AddListItemsToBasket;
+import ru.arink_group.deliveryapp.domain.interactors.GetListItemsFromBasket;
 import ru.arink_group.deliveryapp.domain.interactors.GetProductsList;
+import ru.arink_group.deliveryapp.domain.transform.ProductToSelectedProductTransform;
 import ru.arink_group.deliveryapp.presentation.App;
 import ru.arink_group.deliveryapp.presentation.view.ProductsView;
 
@@ -20,6 +24,8 @@ public class ProductsPresenterImpl implements ProductsPresenter {
     ProductsView productsView;
 
     @Inject GetProductsList getProductsListUseCase;
+    @Inject GetListItemsFromBasket getListItemsFromBasket;
+    @Inject AddListItemsToBasket addListItemsToBasket;
 
     public ProductsPresenterImpl(ProductsView productsView) {
         this.productsView = productsView;
@@ -39,6 +45,7 @@ public class ProductsPresenterImpl implements ProductsPresenter {
     @Override
     public void destroy() {
         getProductsListUseCase.dispose();
+        getListItemsFromBasket.dispose();
     }
 
     @Override
@@ -46,9 +53,23 @@ public class ProductsPresenterImpl implements ProductsPresenter {
         getProductsListUseCase.execute(new ProdListObserver(), GetProductsList.Params.forProductsList(categoryId));
     }
 
+    private void updateProductsFromBasket() {
+        getListItemsFromBasket.execute(new SelectedListObserver(), null);
+    }
+
     @Override
     public void onProductSelect(int productId) {
         productsView.startProduct(productId);
+    }
+
+    private List<Product> getFinalProductsList() {
+        return null;
+    }
+
+    @Override
+    public void addItemsToCart() {
+        List<SelectedProduct> sps = ProductToSelectedProductTransform.execute(getFinalProductsList());
+        addListItemsToBasket.execute(new AddListItemsObserver(), AddListItemsToBasket.Params.forBasketAddItemsList(sps));
     }
 
     private final class ProdListObserver extends DisposableObserver<List<Product>> {
@@ -56,6 +77,42 @@ public class ProductsPresenterImpl implements ProductsPresenter {
         @Override
         public void onNext(@NonNull List<Product> products) {
             productsView.setProductsList(products);
+            ProductsPresenterImpl.this.updateProductsFromBasket();
+        }
+
+        @Override
+        public void onError(@NonNull Throwable e) {
+            productsView.showErrorMessage(e.getMessage());
+        }
+
+        @Override
+        public void onComplete() {
+        }
+    }
+
+    private final class SelectedListObserver extends DisposableObserver<List<SelectedProduct>> {
+
+        @Override
+        public void onNext(@NonNull List<SelectedProduct> selectedProducts) {
+            productsView.updateProductList(selectedProducts);
+        }
+
+        @Override
+        public void onError(@NonNull Throwable e) {
+            productsView.showErrorMessage(e.getMessage());
+        }
+
+        @Override
+        public void onComplete() {
+
+        }
+    }
+
+    private final class AddListItemsObserver extends DisposableObserver<Integer> {
+
+        @Override
+        public void onNext(@NonNull Integer addedRows) {
+            productsView.showErrorMessage(String.valueOf(addedRows));
         }
 
         @Override

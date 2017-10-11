@@ -8,5 +8,5 @@ public interface ProductsPresenter extends Presenter {
 
     void getProducts(int categoryId);
     void onProductSelect(int productId);
-
+    void addItemsToCart();
 }

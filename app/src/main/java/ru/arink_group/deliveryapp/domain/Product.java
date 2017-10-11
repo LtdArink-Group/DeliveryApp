@@ -17,9 +17,38 @@ public class Product {
     private String unit;
     private Portion[] portions;
     private Ingredient[] ingredients;
+    private boolean selected;
 
     public Ingredient[] getIngredients() {
         return ingredients;
+    }
+
+    public boolean isSelected() {
+        return selected;
+    }
+
+    public void setSelected(boolean selected) {
+        this.selected = selected;
+    }
+
+    public boolean haveRealSelectedPortion() {
+        for(Portion portion : this.getPortions()) {
+            if (portion.getCount() > 0) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    public Portion getSelectedPortion() {
+        for(Portion portion : this.getPortions()) {
+            if (portion.getCount() > 0) {
+                return portion;
+            }
+        }
+
+        return this.getPortions()[0];
     }
 
     public void setIngredients(Ingredient[] ingredients) {

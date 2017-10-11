@@ -39,10 +39,18 @@ public class Db {
         cv.put("image_url", selectedProduct.getId());
         long product_id = dbHelper.getWritableDatabase().insert("selected_products", null, cv);
         if (product_id != -1) {
-            insertPortion(product_id, selectedProduct.getSelectedPortionFromPortion());
+            insertPortion(product_id, selectedProduct.getSelectedPortion());
             insertIngredients(product_id, selectedProduct.getSelectedIngredients());
         }
         return null;
+    }
+
+    public Integer addListItemsToBasket(List<SelectedProduct> selectedProducts) {
+        int numb = selectedProducts.size(); // TODO rework to really updated rows
+        for (SelectedProduct sp : selectedProducts) {
+            addItemToBasket(sp);
+        }
+        return numb;
     }
 
     public SelectedProduct removeItemFromBasket(int selectedProductId) {

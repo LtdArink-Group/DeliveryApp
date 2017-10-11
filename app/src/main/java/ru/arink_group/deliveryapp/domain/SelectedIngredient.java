@@ -1,5 +1,8 @@
 package ru.arink_group.deliveryapp.domain;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * Created by kirillvs on 09.10.17.
  */
@@ -28,14 +31,17 @@ public class SelectedIngredient {
         this.description = ingredient.getDescription();
         this.size = ingredient.getSize();
         this.imageLink = ingredient.getImageLink();
+        this.count = ingredient.getCount();
     }
 
     public static SelectedIngredient[] fromIngredients(Ingredient[] ingredients) {
-        SelectedIngredient[] selectedIngredients = new SelectedIngredient[ingredients.length];
-        for(int i = 0; i < selectedIngredients.length; i++) {
-            selectedIngredients[i] = new SelectedIngredient(ingredients[i]);
+        List<SelectedIngredient> selectedIngredients = new ArrayList<>();
+        for(int i = 0; i < ingredients.length; i++) {
+            if (ingredients[i].getCount() > 0) selectedIngredients.add(new SelectedIngredient(ingredients[i]));
         }
-        return selectedIngredients;
+        SelectedIngredient[] sis = new SelectedIngredient[selectedIngredients.size()];
+        sis = selectedIngredients.toArray(sis);
+        return sis;
     }
 
     public float getPrice() {

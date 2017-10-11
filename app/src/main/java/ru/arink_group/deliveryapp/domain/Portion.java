@@ -16,6 +16,26 @@ public class Portion {
 
     private String size;
 
+    private boolean selected;
+
+    private int count;
+
+    public int getCount() {
+        return count;
+    }
+
+    public void setCount(int count) {
+        this.count = count;
+    }
+
+    public boolean isSelected() {
+        return selected;
+    }
+
+    public void setSelected(boolean selected) {
+        this.selected = selected;
+    }
+
     public String getName() {
         return name;
     }

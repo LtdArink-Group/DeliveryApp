@@ -8,6 +8,7 @@ import ru.arink_group.deliveryapp.data.db.DeliveryAppDatabaseHelper;
 import ru.arink_group.deliveryapp.data.repository.SelectedItemsDataRepository;
 import ru.arink_group.deliveryapp.data.repository.datasource.SelectedItemsDataFactory;
 import ru.arink_group.deliveryapp.domain.interactors.AddItemToBasket;
+import ru.arink_group.deliveryapp.domain.interactors.AddListItemsToBasket;
 import ru.arink_group.deliveryapp.domain.interactors.GetListItemsFromBasket;
 import ru.arink_group.deliveryapp.domain.interactors.RemoveItemFromBasket;
 import ru.arink_group.deliveryapp.presentation.di.module.AppModule;
@@ -34,4 +35,5 @@ public interface AppComponent {
     void inject(SelectedItemsDataRepository selectedItemsDataRepository);
     void inject(SelectedItemsDataFactory selectedItemsDataFactory);
     void inject(Db db);
+    void inject(AddListItemsToBasket addListItemsToBasket);
 }

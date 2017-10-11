@@ -28,6 +28,7 @@ public class SelectedPortion {
         this.description = portion.getDescription();
         this.price = Float.parseFloat(portion.getPrice());
         this.size = portion.getSize();
+        this.count = portion.getCount();
     }
 
     public int getId() {

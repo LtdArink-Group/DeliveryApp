@@ -12,6 +12,24 @@ public class Ingredient {
     private String description;
     private String size;
     private String imageLink;
+    private boolean selected;
+    private int count;
+
+    public int getCount() {
+        return count;
+    }
+
+    public void setCount(int count) {
+        this.count = count;
+    }
+
+    public boolean isSelected() {
+        return selected;
+    }
+
+    public void setSelected(boolean selected) {
+        this.selected = selected;
+    }
 
     public int getId() {
         return id;

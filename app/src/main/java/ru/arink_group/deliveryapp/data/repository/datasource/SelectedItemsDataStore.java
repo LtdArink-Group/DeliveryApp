@@ -14,4 +14,5 @@ public interface SelectedItemsDataStore {
     public Observable<SelectedProduct> addItemToBasket(SelectedProduct selectedProduct);
     public Observable<SelectedProduct> removeItemFromBasket(int selectedProductId);
     public Observable<List<SelectedProduct>> getListItemsFromBasket();
+    public Observable<Integer> addListItemsToBasket(List<SelectedProduct> listItems);
 }
