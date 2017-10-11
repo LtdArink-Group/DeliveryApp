@@ -17,6 +17,7 @@ import java.util.List;
 
 import ru.arink_group.deliveryapp.R;
 import ru.arink_group.deliveryapp.domain.Product;
+import ru.arink_group.deliveryapp.domain.SelectedProduct;
 import ru.arink_group.deliveryapp.presentation.custom_elements.PortionList;
 
 /**
@@ -32,6 +33,12 @@ public class ProductsListAdapter extends RecyclerView.Adapter<ProductsListAdapte
         this.products = products;
         notifyDataSetChanged();
     }
+
+    public void updateProductsFromBasket(List<SelectedProduct> selectedProducts) {
+        // TODO implement method
+        this.notifyDataSetChanged();
+    }
+
 
     public void setListener(OnItemClickListener<Product> listener) {
         this.listener = listener;
@@ -57,10 +64,6 @@ public class ProductsListAdapter extends RecyclerView.Adapter<ProductsListAdapte
         PortionList pl = holder.view.findViewById(R.id.portion_list);
         PortionList.Adapter adapter = new PortionList.Adapter(holder.context, product.getPortions(), R.layout.item_portion);
         pl.setAdapter(adapter);
-
-//        Spinner sizeSpinner = (Spinner) holder.view.findViewById(R.id.product_size_spinner);
-//        ArrayAdapter<String> sizes = new ArrayAdapter<>(holder.context, R.layout.support_simple_spinner_dropdown_item, product.getSize());
-//        sizeSpinner.setAdapter(sizes);
 
         TextView priceView = holder.view.findViewById(R.id.product_price);
         priceView.setText(product.getPrice() + " \u20BD");

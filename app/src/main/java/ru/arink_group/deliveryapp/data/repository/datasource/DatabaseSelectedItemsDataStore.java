@@ -1,6 +1,8 @@
 package ru.arink_group.deliveryapp.data.repository.datasource;
 
 
+import java.util.List;
+
 import io.reactivex.Observable;
 import io.reactivex.ObservableEmitter;
 import io.reactivex.ObservableOnSubscribe;
@@ -44,10 +46,10 @@ public class DatabaseSelectedItemsDataStore implements SelectedItemsDataStore {
     }
 
     @Override
-    public Observable<SelectedProduct[]> getListItemsFromBasket() {
-        return Observable.create(new ObservableOnSubscribe<SelectedProduct[]>() {
+    public Observable<List<SelectedProduct>> getListItemsFromBasket() {
+        return Observable.create(new ObservableOnSubscribe<List<SelectedProduct>>() {
             @Override
-            public void subscribe(@NonNull ObservableEmitter<SelectedProduct[]> e) throws Exception {
+            public void subscribe(@NonNull ObservableEmitter<List<SelectedProduct>> e) throws Exception {
                 e.onNext(db.getListItemsFromBasket());
                 e.onComplete();
             }

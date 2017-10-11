@@ -1,5 +1,7 @@
 package ru.arink_group.deliveryapp.domain.repository;
 
+import java.util.List;
+
 import io.reactivex.Observable;
 import ru.arink_group.deliveryapp.domain.SelectedProduct;
 
@@ -13,5 +15,5 @@ public interface SelectedItemsRepository {
 
     Observable<SelectedProduct> removeItemFromBasket(int selectedProductId);
 
-    Observable<SelectedProduct[]> getListItemsFromBasket();
+    Observable<List<SelectedProduct>> getListItemsFromBasket();
 }

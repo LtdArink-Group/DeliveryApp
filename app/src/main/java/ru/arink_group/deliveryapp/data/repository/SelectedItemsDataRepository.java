@@ -1,5 +1,7 @@
 package ru.arink_group.deliveryapp.data.repository;
 
+import java.util.List;
+
 import javax.inject.Inject;
 
 import io.reactivex.Observable;
@@ -32,7 +34,7 @@ public class SelectedItemsDataRepository implements SelectedItemsRepository {
     }
 
     @Override
-    public Observable<SelectedProduct[]> getListItemsFromBasket() {
+    public Observable<List<SelectedProduct>> getListItemsFromBasket() {
         return factory.create().getListItemsFromBasket();
     }
 }

@@ -6,6 +6,7 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import javax.inject.Inject;
 
@@ -60,7 +61,7 @@ public class Db {
         return null;
     }
 
-    public SelectedProduct[] getListItemsFromBasket() {
+    public List<SelectedProduct> getListItemsFromBasket() {
         ArrayList<SelectedProduct> sps = new ArrayList<>();
         Cursor cursor = dbHelper.getWritableDatabase().query("selected_products", null, null, null, null, null, null);
 
@@ -80,10 +81,8 @@ public class Db {
             sp.setSelectedPortion(this.getPortion(cursor.getLong(_id)));
             sps.add(sp);
         }
-        SelectedProduct[] selectedProducts = new SelectedProduct[sps.size()];
-        selectedProducts = sps.toArray(selectedProducts);
         cursor.close();
-        return selectedProducts;
+        return sps;
     }
 
     private SelectedIngredient[] getIngredients(long productDbId) {

@@ -23,10 +23,20 @@ public class AddItemToBasket extends UseCase<SelectedProduct, AddItemToBasket.Pa
 
     @Override
     Observable<SelectedProduct> buildUseCaseObservable(Params params) {
-        return null;
+        return selectedItemsRepository.addItemToBasket(params.selectedProduct);
     }
 
     public static final class Params {
+
+        private SelectedProduct selectedProduct;
+
+        private Params(SelectedProduct sp) {
+            this.selectedProduct = sp;
+        }
+
+        public Params forBasketAddItem(SelectedProduct sp) {
+            return new Params(sp);
+        }
 
     }
 }

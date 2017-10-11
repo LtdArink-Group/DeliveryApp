@@ -23,10 +23,21 @@ public class RemoveItemFromBasket extends UseCase<SelectedProduct, RemoveItemFro
 
     @Override
     Observable<SelectedProduct> buildUseCaseObservable(Params params) {
-        return null;
+        return selectedItemsRepository.removeItemFromBasket(params.selectedProductId);
     }
 
     public static final class Params {
+
+        private int selectedProductId;
+
+        private Params(int id) {
+            selectedProductId = id;
+        }
+
+        public Params forBasketRemoveItem(int id) {
+            return new Params(id);
+        }
+
 
     }
 
