@@ -11,57 +11,30 @@ public class Product {
     private int id;
     private String name;
     private String description;
-    private String price;
-    private String[] size;
     private String imageUrl;
-    private String unit;
     private Portion[] portions;
     private Ingredient[] ingredients;
-    private boolean selected;
+    private int count;
 
-    public Ingredient[] getIngredients() {
-        return ingredients;
-    }
-
-    public boolean isSelected() {
-        return selected;
-    }
-
-    public void setSelected(boolean selected) {
-        this.selected = selected;
-    }
-
-    public boolean haveRealSelectedPortion() {
-        for(Portion portion : this.getPortions()) {
-            if (portion.getCount() > 0) {
-                return true;
-            }
-        }
-
-        return false;
+    public Ingredient[] getSelectedIngredients() {
+        // TODO add implementation
+        return null;
     }
 
     public Portion getSelectedPortion() {
-        for(Portion portion : this.getPortions()) {
-            if (portion.getCount() > 0) {
-                return portion;
-            }
-        }
-
-        return this.getPortions()[0];
+        // TODO add implementation
+        return null;
     }
 
-    public void setIngredients(Ingredient[] ingredients) {
-        this.ingredients = ingredients;
+    public void setSelectedIngredients(Ingredient[] selectedIngredients) {
+        // TODO add implemantation
     }
 
-    public Portion[] getPortions() {
-        return portions;
+    public void setSelectedPortion(Portion selectedPortion) {
+        // TODO add implementation
     }
 
-    public void setPortions(Portion[] portions) {
-        this.portions = portions;
-    }
+    // Getters and Setters
 
     public int getId() {
         return id;
@@ -87,22 +60,6 @@ public class Product {
         this.description = description;
     }
 
-    public String getPrice() {
-        return price;
-    }
-
-    public void setPrice(String price) {
-        this.price = price;
-    }
-
-    public String[] getSize() {
-        return size;
-    }
-
-    public void setSize(String[] size) {
-        this.size = size;
-    }
-
     public String getImageUrl() {
         return imageUrl;
     }
@@ -111,11 +68,27 @@ public class Product {
         this.imageUrl = imageUrl;
     }
 
-    public String getUnit() {
-        return unit;
+    public Portion[] getPortions() {
+        return portions;
     }
 
-    public void setUnit(String unit) {
-        this.unit = unit;
+    public void setPortions(Portion[] portions) {
+        this.portions = portions;
+    }
+
+    public Ingredient[] getIngredients() {
+        return ingredients;
+    }
+
+    public void setIngredients(Ingredient[] ingredients) {
+        this.ingredients = ingredients;
+    }
+
+    public int getCount() {
+        return count;
+    }
+
+    public void setCount(int count) {
+        this.count = count;
     }
 }

@@ -5,7 +5,7 @@ import java.util.List;
 import javax.inject.Inject;
 
 import io.reactivex.Observable;
-import ru.arink_group.deliveryapp.domain.SelectedProduct;
+import ru.arink_group.deliveryapp.domain.Product;
 import ru.arink_group.deliveryapp.domain.repository.SelectedItemsRepository;
 import ru.arink_group.deliveryapp.presentation.App;
 
@@ -13,7 +13,7 @@ import ru.arink_group.deliveryapp.presentation.App;
  * Created by kirillvs on 09.10.17.
  */
 
-public class GetListItemsFromBasket extends UseCase<List<SelectedProduct>, GetListItemsFromBasket.Params> {
+public class GetListItemsFromBasket extends UseCase<List<Product>, GetListItemsFromBasket.Params> {
 
     @Inject public SelectedItemsRepository selectedItemsRepository;
 
@@ -23,7 +23,7 @@ public class GetListItemsFromBasket extends UseCase<List<SelectedProduct>, GetLi
     }
 
     @Override
-    Observable<List<SelectedProduct>> buildUseCaseObservable(Params params) {
+    Observable<List<Product>> buildUseCaseObservable(Params params) {
         return selectedItemsRepository.getListItemsFromBasket();
     }
 

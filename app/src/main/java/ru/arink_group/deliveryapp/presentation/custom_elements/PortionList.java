@@ -17,6 +17,7 @@ import java.util.Arrays;
 
 import ru.arink_group.deliveryapp.R;
 import ru.arink_group.deliveryapp.domain.Portion;
+import ru.arink_group.deliveryapp.domain.Product;
 
 /**
  * Created by kirillvs on 05.10.17.
@@ -58,8 +59,9 @@ public class PortionList extends LinearLayout implements View.OnClickListener {
         if (!selectedFlag) this.checkView(items.get(0));
     }
 
-    public View getChecked() {
-        return this.checkedItem;
+    public String getChecked() {
+        CheckedTextView title = this.checkedItem.findViewById(R.id.item1);
+        return String.valueOf(title.getText());
     }
 
     @Override
@@ -100,9 +102,9 @@ public class PortionList extends LinearLayout implements View.OnClickListener {
         Portion[] items;
         int layoutId;
 
-        public Adapter(Context context, Portion[] items, int layoutId) {
+        public Adapter(Context context, Product product, int layoutId) {
             this.context = context;
-            this.items = items;
+            this.items = product.getPortions();
             this.layoutId = layoutId;
         }
 
@@ -117,13 +119,13 @@ public class PortionList extends LinearLayout implements View.OnClickListener {
             CheckedTextView price = layout.findViewById(R.id.item2);
 
             name.setText(items[position].getName());
-            price.setText(items[position].getPrice());
+            price.setText(String.valueOf(items[position].getPrice()));
 
             return layout;
         }
 
         public boolean isCheckedElement(int position) {
-            return items[position].isSelected() || items[position].getCount() > 0;
+            return items[position].isChecked();
         }
 
         public ArrayList<Integer> getElementsIds() {

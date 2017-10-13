@@ -21,14 +21,14 @@ import ru.arink_group.deliveryapp.presentation.model.IconTransformer;
 public class CategoriesListAdapter extends RecyclerView.Adapter<CategoriesListAdapter.ViewHolder> {
 
     private List<Category> categories = new ArrayList<>();
-    private OnItemClickListener<Category> listener;
+    private OnCategoryClickListener<Category> listener;
 
     public void setCategories(List<Category> categories) {
         this.categories = categories;
         notifyDataSetChanged();
     }
 
-    public void setListener(OnItemClickListener<Category> listener) {
+    public void setListener(OnCategoryClickListener<Category> listener) {
         this.listener = listener;
     }
 

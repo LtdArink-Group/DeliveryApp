@@ -3,7 +3,7 @@ package ru.arink_group.deliveryapp.domain.interactors;
 import javax.inject.Inject;
 
 import io.reactivex.Observable;
-import ru.arink_group.deliveryapp.domain.SelectedProduct;
+import ru.arink_group.deliveryapp.domain.Product;
 import ru.arink_group.deliveryapp.domain.repository.SelectedItemsRepository;
 import ru.arink_group.deliveryapp.presentation.App;
 
@@ -11,7 +11,7 @@ import ru.arink_group.deliveryapp.presentation.App;
  * Created by kirillvs on 09.10.17.
  */
 
-public class AddItemToBasket extends UseCase<SelectedProduct, AddItemToBasket.Params> {
+public class AddItemToBasket extends UseCase<Boolean, AddItemToBasket.Params> {
 
     @Inject
     public SelectedItemsRepository selectedItemsRepository;
@@ -22,19 +22,19 @@ public class AddItemToBasket extends UseCase<SelectedProduct, AddItemToBasket.Pa
     }
 
     @Override
-    Observable<SelectedProduct> buildUseCaseObservable(Params params) {
+    Observable<Boolean> buildUseCaseObservable(Params params) {
         return selectedItemsRepository.addItemToBasket(params.selectedProduct);
     }
 
     public static final class Params {
 
-        private SelectedProduct selectedProduct;
+        private Product selectedProduct;
 
-        private Params(SelectedProduct sp) {
+        private Params(Product sp) {
             this.selectedProduct = sp;
         }
 
-        public Params forBasketAddItem(SelectedProduct sp) {
+        public Params forBasketAddItem(Product sp) {
             return new Params(sp);
         }
 

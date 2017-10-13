@@ -16,6 +16,7 @@ import java.util.List;
 import ru.arink_group.deliveryapp.R;
 import ru.arink_group.deliveryapp.domain.Category;
 import ru.arink_group.deliveryapp.presentation.adapters.CategoriesListAdapter;
+import ru.arink_group.deliveryapp.presentation.adapters.OnCategoryClickListener;
 import ru.arink_group.deliveryapp.presentation.adapters.OnItemClickListener;
 import ru.arink_group.deliveryapp.presentation.presenter.CartePresenter;
 import ru.arink_group.deliveryapp.presentation.presenter.CartePresenterImpl;
@@ -24,7 +25,7 @@ import ru.arink_group.deliveryapp.presentation.view.MenuView;
 import ru.arink_group.deliveryapp.presentation.view.activity.MenuActivity;
 import ru.arink_group.deliveryapp.presentation.view.activity.ProductsActivity;
 
-public class CarteFragment extends Fragment implements CarteView, OnItemClickListener<Category> {
+public class CarteFragment extends Fragment implements CarteView, OnCategoryClickListener<Category> {
 
     public static final String CATEGORY = "categoryId";
     public static final String CATEGORY_NAME = "categoryName";

@@ -14,9 +14,9 @@ import java.util.List;
 
 import ru.arink_group.deliveryapp.R;
 import ru.arink_group.deliveryapp.domain.Product;
-import ru.arink_group.deliveryapp.domain.SelectedProduct;
 import ru.arink_group.deliveryapp.presentation.adapters.OnItemClickListener;
 import ru.arink_group.deliveryapp.presentation.adapters.ProductsListAdapter;
+import ru.arink_group.deliveryapp.presentation.custom_elements.PortionList;
 import ru.arink_group.deliveryapp.presentation.presenter.ProductsPresenter;
 import ru.arink_group.deliveryapp.presentation.presenter.ProductsPresenterImpl;
 import ru.arink_group.deliveryapp.presentation.view.ProductsView;
@@ -60,10 +60,6 @@ public class ProductsFragment extends Fragment implements ProductsView, OnItemCl
         return rootView;
     }
 
-    @Override
-    public void startProduct(int productId) {
-        // TODO start product details
-    }
 
     @Override
     public void setProductsList(List<Product> products) {
@@ -71,7 +67,7 @@ public class ProductsFragment extends Fragment implements ProductsView, OnItemCl
     }
 
     @Override
-    public void updateProductList(List<SelectedProduct> selectedProducts) {
+    public void updateProductList(List<Product> selectedProducts) {
         productsListAdapter.updateProductsFromBasket(selectedProducts);
     }
 
@@ -82,8 +78,11 @@ public class ProductsFragment extends Fragment implements ProductsView, OnItemCl
     }
 
     @Override
-    public void onItemClicked(Product model) {
-        productsPresenter.onProductSelect(model.getId());
+    public void onItemClicked(boolean isAdd, Product model, View v) {
+        int countPortions = productsPresenter.onProductSelect(isAdd, model);
+        PortionList pl = v.findViewById(R.id.portion_list);
+        showErrorMessage(String.valueOf(pl.getChecked()));
+//        countPortionView.setText(String.valueOf(countPortions));
     }
 
     @Override

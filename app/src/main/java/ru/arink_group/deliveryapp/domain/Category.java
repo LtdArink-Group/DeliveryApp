@@ -8,8 +8,8 @@ public class Category {
 
     private int id;
     private String name;
-    private String icon;
     private String description;
+    private String icon;
 
     public int getId() {
         return id;

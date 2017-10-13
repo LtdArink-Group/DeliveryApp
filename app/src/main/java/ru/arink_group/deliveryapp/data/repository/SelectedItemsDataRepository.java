@@ -6,7 +6,7 @@ import javax.inject.Inject;
 
 import io.reactivex.Observable;
 import ru.arink_group.deliveryapp.data.repository.datasource.SelectedItemsDataFactory;
-import ru.arink_group.deliveryapp.domain.SelectedProduct;
+import ru.arink_group.deliveryapp.domain.Product;
 import ru.arink_group.deliveryapp.domain.repository.SelectedItemsRepository;
 import ru.arink_group.deliveryapp.presentation.App;
 
@@ -24,17 +24,17 @@ public class SelectedItemsDataRepository implements SelectedItemsRepository {
     }
 
     @Override
-    public Observable<SelectedProduct> addItemToBasket(SelectedProduct selectedProduct) {
+    public Observable<Boolean> addItemToBasket(Product selectedProduct) {
         return factory.create().addItemToBasket(selectedProduct);
     }
 
     @Override
-    public Observable<SelectedProduct> removeItemFromBasket(int selectedProductId) {
+    public Observable<Boolean> removeItemFromBasket(int selectedProductId) {
         return factory.create().removeItemFromBasket(selectedProductId);
     }
 
     @Override
-    public Observable<List<SelectedProduct>> getListItemsFromBasket() {
+    public Observable<List<Product>> getListItemsFromBasket() {
         return factory.create().getListItemsFromBasket();
     }
 }

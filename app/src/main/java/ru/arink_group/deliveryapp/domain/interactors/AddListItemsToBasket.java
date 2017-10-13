@@ -5,7 +5,7 @@ import java.util.List;
 import javax.inject.Inject;
 
 import io.reactivex.Observable;
-import ru.arink_group.deliveryapp.domain.SelectedProduct;
+import ru.arink_group.deliveryapp.domain.Product;
 import ru.arink_group.deliveryapp.domain.repository.SelectedItemsRepository;
 import ru.arink_group.deliveryapp.presentation.App;
 
@@ -29,13 +29,13 @@ public class AddListItemsToBasket extends UseCase<Integer, AddListItemsToBasket.
     }
 
     public static final class Params {
-        private List<SelectedProduct> selectedProductList;
+        private List<Product> selectedProductList;
 
-        private Params(List<SelectedProduct> sps) {
+        private Params(List<Product> sps) {
             this.selectedProductList = sps;
         }
 
-        public static Params forBasketAddItemsList(List<SelectedProduct> sps) {
+        public static Params forBasketAddItemsList(List<Product> sps) {
             return new Params(sps);
         }
     }

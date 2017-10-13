@@ -16,6 +16,8 @@ import ru.arink_group.deliveryapp.domain.Product;
 public class FakeProductDataStore implements ProductDataStore {
 
     private static List<Product> products() {
+        // TODO BIG REWORK
+
         List<Product> productsList = new ArrayList<>();
 
         String[] size = new String[] {"100", "200", "300"};
@@ -35,33 +37,19 @@ public class FakeProductDataStore implements ProductDataStore {
         three.setDescription("Lorem ipsum dolor sit amet, omnium ceteros nam ut. Odio nullam ut mei. Mea probo possim et, affert legimus erroribus ne sit, mundi vidisse malorum vix ut. Vis alienum omnesque platonem te. Oblique corpora accumsan id per, pri laudem luptatum no, ius eu virtute laoreet verterem.");
         five.setDescription("Lorem ipsum dolor sit amet, omnium ceteros nam ut. Odio nullam ut mei. Mea probo possim et, affert legimus erroribus ne sit, mundi vidisse malorum vix ut. Vis alienum omnesque platonem te. Oblique corpora accumsan id per, pri laudem luptatum no, ius eu virtute laoreet verterem.");
 
-        one.setPrice("100500");
-        two.setPrice("100500");
-        three.setPrice("100500");
-        five.setPrice("100500");
-
-        one.setUnit("гр.");
-        two.setUnit("гр.");
-        three.setUnit("гр.");
-        five.setUnit("гр.");
-
         Portion[] portions = new Portion[] {new Portion(), new Portion(), new Portion()};
         portions[0].setName("Пицель");
-        portions[0].setPrice("250");
+        portions[0].setPrice(250.0);
         portions[1].setName("Шницель");
-        portions[1].setPrice("500");
+        portions[1].setPrice(500.0);
         portions[2].setName("Водка");
-        portions[2].setPrice("700");
+        portions[2].setPrice(700.0);
 
         one.setPortions(portions);
         two.setPortions(portions);
         three.setPortions(portions);
         five.setPortions(portions);
 
-        one.setSize(size);
-        two.setSize(size);
-        three.setSize(size);
-        five.setSize(size);
 
         one.setId(1);
         two.setId(2);
@@ -72,23 +60,19 @@ public class FakeProductDataStore implements ProductDataStore {
 
         ingredients[0].setName("Соус");
         ingredients[0].setDescription("Вкуснейший соус");
-        ingredients[0].setSize("50");
-        ingredients[0].setPrice("100");
+        ingredients[0].setPrice(100.0);
 
         ingredients[1].setName("Кетчуп");
         ingredients[1].setDescription("Вкуснейший кетчуп");
-        ingredients[1].setSize("50");
-        ingredients[1].setPrice("250");
+        ingredients[1].setPrice(250.0);
 
         ingredients[2].setName("Подливка");
         ingredients[2].setDescription("Так себе");
-        ingredients[2].setSize("50");
-        ingredients[2].setPrice("30");
+        ingredients[2].setPrice(30.0);
 
         ingredients[3].setName("Зелень");
         ingredients[3].setDescription("Сойдет");
-        ingredients[3].setSize("50");
-        ingredients[3].setPrice("50");
+        ingredients[3].setPrice(50.0);
 
         one.setIngredients(ingredients);
         two.setIngredients(ingredients);

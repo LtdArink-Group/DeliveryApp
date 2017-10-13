@@ -3,7 +3,7 @@ package ru.arink_group.deliveryapp.domain.repository;
 import java.util.List;
 
 import io.reactivex.Observable;
-import ru.arink_group.deliveryapp.domain.SelectedProduct;
+import ru.arink_group.deliveryapp.domain.Product;
 
 /**
  * Created by kirillvs on 09.10.17.
@@ -11,9 +11,9 @@ import ru.arink_group.deliveryapp.domain.SelectedProduct;
 
 public interface SelectedItemsRepository {
 
-    Observable<SelectedProduct> addItemToBasket(SelectedProduct selectedProduct);
+    Observable<Boolean> addItemToBasket(Product selectedProduct);
 
-    Observable<SelectedProduct> removeItemFromBasket(int selectedProductId);
+    Observable<Boolean> removeItemFromBasket(int selectedProductId);
 
-    Observable<List<SelectedProduct>> getListItemsFromBasket();
+    Observable<List<Product>> getListItemsFromBasket();
 }
