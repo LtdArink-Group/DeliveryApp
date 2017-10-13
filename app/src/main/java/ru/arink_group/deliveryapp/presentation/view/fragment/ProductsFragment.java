@@ -16,6 +16,7 @@ import ru.arink_group.deliveryapp.R;
 import ru.arink_group.deliveryapp.domain.Product;
 import ru.arink_group.deliveryapp.presentation.adapters.OnItemClickListener;
 import ru.arink_group.deliveryapp.presentation.adapters.ProductsListAdapter;
+import ru.arink_group.deliveryapp.presentation.custom_elements.PortionList;
 import ru.arink_group.deliveryapp.presentation.presenter.ProductsPresenter;
 import ru.arink_group.deliveryapp.presentation.presenter.ProductsPresenterImpl;
 import ru.arink_group.deliveryapp.presentation.view.ProductsView;
@@ -36,7 +37,6 @@ public class ProductsFragment extends Fragment implements ProductsView, OnItemCl
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
         View rootView = inflater.inflate(R.layout.fragment_products, container, false);
         RecyclerView mRecyclerView = rootView.findViewById(R.id.products_recycler_view);
 
@@ -59,14 +59,16 @@ public class ProductsFragment extends Fragment implements ProductsView, OnItemCl
         return rootView;
     }
 
-    @Override
-    public void startProduct(int productId) {
-        // TODO start product details
-    }
 
     @Override
     public void setProductsList(List<Product> products) {
         productsListAdapter.setProducts(products);
+    }
+
+    @Override
+    public void updateProductList(List<Product> selectedProducts) {
+        Toast.makeText(getActivity(), String.valueOf(selectedProducts.size()), Toast.LENGTH_LONG).show();
+        productsListAdapter.updateProductsFromBasket(selectedProducts);
     }
 
     @Override
@@ -77,7 +79,7 @@ public class ProductsFragment extends Fragment implements ProductsView, OnItemCl
 
     @Override
     public void onItemClicked(Product model) {
-        productsPresenter.onProductSelect(model.getId());
+        productsPresenter.addItemToBasket(model);
     }
 
     @Override

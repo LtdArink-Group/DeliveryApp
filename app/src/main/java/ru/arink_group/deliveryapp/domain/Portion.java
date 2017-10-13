@@ -6,26 +6,14 @@ package ru.arink_group.deliveryapp.domain;
 
 public class Portion {
 
-    private int id;
-
     private String name;
-
     private String description;
+    private double price;
+    private boolean isChecked;
 
-    private String price;
-
-    private String size;
 
     public String getName() {
         return name;
-    }
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
     }
 
     public void setName(String name) {
@@ -40,19 +28,19 @@ public class Portion {
         this.description = description;
     }
 
-    public String getPrice() {
+    public double getPrice() {
         return price;
     }
 
-    public void setPrice(String price) {
+    public void setPrice(double price) {
         this.price = price;
     }
 
-    public String getSize() {
-        return size;
+    public boolean isChecked() {
+        return isChecked;
     }
 
-    public void setSize(String size) {
-        this.size = size;
+    public void setChecked(boolean checked) {
+        isChecked = checked;
     }
 }

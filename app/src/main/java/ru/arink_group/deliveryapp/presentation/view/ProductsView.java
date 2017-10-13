@@ -10,9 +10,9 @@ import ru.arink_group.deliveryapp.domain.Product;
 
 public interface ProductsView {
 
-    void startProduct(int productId);
-
     void setProductsList(List<Product> products);
+
+    void updateProductList(List<Product> selectedProducts);
 
     void showErrorMessage(String message);
 

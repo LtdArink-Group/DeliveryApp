@@ -1,5 +1,7 @@
 package ru.arink_group.deliveryapp.presentation.presenter;
 
+import ru.arink_group.deliveryapp.domain.Product;
+
 /**
  * Created by kirillvs on 03.10.17.
  */
@@ -7,6 +9,6 @@ package ru.arink_group.deliveryapp.presentation.presenter;
 public interface ProductsPresenter extends Presenter {
 
     void getProducts(int categoryId);
-    void onProductSelect(int productId);
-
+    void addItemsListToBasket();
+    void addItemToBasket(Product product);
 }
