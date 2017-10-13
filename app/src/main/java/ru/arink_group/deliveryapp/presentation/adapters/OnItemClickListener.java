@@ -8,5 +8,5 @@ import android.widget.TextView;
  */
 
 public interface OnItemClickListener <T> {
-    void onItemClicked(boolean isAdd, T model , View productView);
+    void onItemClicked(T model);
 }

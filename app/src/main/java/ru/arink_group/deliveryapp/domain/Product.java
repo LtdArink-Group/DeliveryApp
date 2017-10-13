@@ -1,5 +1,6 @@
 package ru.arink_group.deliveryapp.domain;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -17,21 +18,60 @@ public class Product {
     private int count;
 
     public Ingredient[] getSelectedIngredients() {
-        // TODO add implementation
-        return null;
+        List<Ingredient> sis = new ArrayList<>();
+
+        for(Ingredient ingredient : ingredients) {
+            if (ingredient.getCount() > 0) sis.add(ingredient);
+        }
+
+        Ingredient[] selectedIngredients = new Ingredient[sis.size()];
+        selectedIngredients = sis.toArray(selectedIngredients);
+
+        return selectedIngredients;
     }
 
     public Portion getSelectedPortion() {
-        // TODO add implementation
-        return null;
+        for (int i = 0; i < portions.length; i++) {
+            if (portions[i].isChecked()) return portions[i];
+        }
+        return portions[0];
     }
 
     public void setSelectedIngredients(Ingredient[] selectedIngredients) {
-        // TODO add implemantation
+        for (int i = 0; i < ingredients.length; i++) {
+            for (int j = 0; j < selectedIngredients.length; j++) {
+                if (ingredients[i].getName().equalsIgnoreCase(selectedIngredients[j].getName())) {
+                    ingredients[i].setCount(selectedIngredients[j].getCount());
+                }
+            }
+        }
+    }
+
+    public void setPortion(Portion portion) {
+        this.portions = new Portion[] {portion};
     }
 
     public void setSelectedPortion(Portion selectedPortion) {
-        // TODO add implementation
+        this.deselectAllPortions();
+        for (Portion portion : portions) {
+            if (portion.getName().equalsIgnoreCase(selectedPortion.getName())) {
+                portion.setChecked(true);
+            }
+        }
+
+    }
+
+    private void deselectAllPortions() {
+        for (Portion portion : portions) {
+            portion.setChecked(false);
+        }
+    }
+
+    public int getSelectedOrDefaultPortionPosition() {
+        for (int i = 0; i < portions.length; i++) {
+            if (portions[i].isChecked()) return i;
+        }
+        return 0;
     }
 
     // Getters and Setters
@@ -91,4 +131,5 @@ public class Product {
     public void setCount(int count) {
         this.count = count;
     }
+
 }

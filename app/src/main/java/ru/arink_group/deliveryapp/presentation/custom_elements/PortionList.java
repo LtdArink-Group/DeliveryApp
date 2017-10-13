@@ -40,28 +40,59 @@ public class PortionList extends LinearLayout implements View.OnClickListener {
     ArrayList<Integer> elementsIds;
     ArrayList<View> items;
     View checkedItem;
+    Portion[] portions;
+    Product product;
+    public boolean hasAdapter;
 
-    public void setAdapter(PortionList.Adapter adapter) {
+    private void addElementsToView(Adapter adapter) {
         items = new ArrayList<>();
         elementsIds = adapter.getElementsIds();
-        boolean selectedFlag = false;
-        for(int i = 0; i < adapter.getElementSize(); i++) {
-            View item = adapter.getElement(i);
-            boolean checked = adapter.isCheckedElement(i);
+        for(int i = 0; i < portions.length; i++) {
+            View item = adapter.getView();
+            CheckedTextView name = item.findViewById(R.id.item1);
+            CheckedTextView price = item.findViewById(R.id.item2);
+
+            name.setText(portions[i].getName());
+            price.setText(String.valueOf(portions[i].getPrice()));
+
             this.addView(item);
-            item.setOnClickListener(this);
+
+            final int pos = i;
+            item.setOnClickListener(new OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    PortionList.this.checkPortion(pos);
+                    PortionList.this.onClick(v);
+                }
+            });
             items.add(item);
-            if(checked && !selectedFlag) {
-                checkView(item);
-                selectedFlag = true;
-            }
         }
-        if (!selectedFlag) this.checkView(items.get(0));
+        checkView(items.get(product.getSelectedOrDefaultPortionPosition()));
     }
 
-    public String getChecked() {
-        CheckedTextView title = this.checkedItem.findViewById(R.id.item1);
-        return String.valueOf(title.getText());
+    private void checkPortion(int i) {
+        for(Portion portion : portions) {
+            portion.setChecked(false);
+        }
+        portions[i].setChecked(true);
+    }
+
+    public void updateElementChecked(int positionChecked) {
+        checkPortion(positionChecked);
+        uncheckAll();
+        checkView(items.get(positionChecked));
+    }
+
+    public void setState(Product product, Adapter adapter) {
+        this.product = product;
+        this.portions = product.getPortions();
+        if(hasAdapter) return;
+        hasAdapter = true;
+        addElementsToView(adapter);
+    }
+
+    public Portion[] getChecked() {
+        return portions;
     }
 
     @Override
@@ -99,33 +130,17 @@ public class PortionList extends LinearLayout implements View.OnClickListener {
     public static class Adapter {
 
         Context context;
-        Portion[] items;
         int layoutId;
 
-        public Adapter(Context context, Product product, int layoutId) {
+        public Adapter(Context context, int layoutId) {
             this.context = context;
-            this.items = product.getPortions();
             this.layoutId = layoutId;
         }
 
-        public int getElementSize() {
-            return items.length;
-        }
-
-        public View getElement(int position) {
+        public View getView() {
             View layout = LayoutInflater.from(context).inflate(layoutId, null);
 
-            CheckedTextView name = layout.findViewById(R.id.item1);
-            CheckedTextView price = layout.findViewById(R.id.item2);
-
-            name.setText(items[position].getName());
-            price.setText(String.valueOf(items[position].getPrice()));
-
             return layout;
-        }
-
-        public boolean isCheckedElement(int position) {
-            return items[position].isChecked();
         }
 
         public ArrayList<Integer> getElementsIds() {

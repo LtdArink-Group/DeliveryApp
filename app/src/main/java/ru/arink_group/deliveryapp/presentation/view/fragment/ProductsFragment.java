@@ -37,7 +37,6 @@ public class ProductsFragment extends Fragment implements ProductsView, OnItemCl
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
         View rootView = inflater.inflate(R.layout.fragment_products, container, false);
         RecyclerView mRecyclerView = rootView.findViewById(R.id.products_recycler_view);
 
@@ -68,6 +67,7 @@ public class ProductsFragment extends Fragment implements ProductsView, OnItemCl
 
     @Override
     public void updateProductList(List<Product> selectedProducts) {
+        Toast.makeText(getActivity(), String.valueOf(selectedProducts.size()), Toast.LENGTH_LONG).show();
         productsListAdapter.updateProductsFromBasket(selectedProducts);
     }
 
@@ -78,11 +78,8 @@ public class ProductsFragment extends Fragment implements ProductsView, OnItemCl
     }
 
     @Override
-    public void onItemClicked(boolean isAdd, Product model, View v) {
-        int countPortions = productsPresenter.onProductSelect(isAdd, model);
-        PortionList pl = v.findViewById(R.id.portion_list);
-        showErrorMessage(String.valueOf(pl.getChecked()));
-//        countPortionView.setText(String.valueOf(countPortions));
+    public void onItemClicked(Product model) {
+        productsPresenter.addItemToBasket(model);
     }
 
     @Override

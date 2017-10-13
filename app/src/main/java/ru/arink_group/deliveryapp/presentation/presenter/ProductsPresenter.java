@@ -9,6 +9,6 @@ import ru.arink_group.deliveryapp.domain.Product;
 public interface ProductsPresenter extends Presenter {
 
     void getProducts(int categoryId);
-    int onProductSelect(boolean isAdd, Product product);
-    void addItemsToCart();
+    void addItemsListToBasket();
+    void addItemToBasket(Product product);
 }

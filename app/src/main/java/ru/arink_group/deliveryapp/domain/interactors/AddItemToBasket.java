@@ -34,7 +34,7 @@ public class AddItemToBasket extends UseCase<Boolean, AddItemToBasket.Params> {
             this.selectedProduct = sp;
         }
 
-        public Params forBasketAddItem(Product sp) {
+        public static Params forBasketAddItem(Product sp) {
             return new Params(sp);
         }
 

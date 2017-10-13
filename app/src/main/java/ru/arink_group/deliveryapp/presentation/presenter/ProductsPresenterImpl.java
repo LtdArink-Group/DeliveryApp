@@ -8,6 +8,7 @@ import javax.inject.Inject;
 import io.reactivex.annotations.NonNull;
 import io.reactivex.observers.DisposableObserver;
 import ru.arink_group.deliveryapp.domain.Product;
+import ru.arink_group.deliveryapp.domain.interactors.AddItemToBasket;
 import ru.arink_group.deliveryapp.domain.interactors.AddListItemsToBasket;
 import ru.arink_group.deliveryapp.domain.interactors.GetListItemsFromBasket;
 import ru.arink_group.deliveryapp.domain.interactors.GetProductsList;
@@ -27,6 +28,7 @@ public class ProductsPresenterImpl implements ProductsPresenter {
     @Inject GetProductsList getProductsListUseCase;
     @Inject GetListItemsFromBasket getListItemsFromBasket;
     @Inject AddListItemsToBasket addListItemsToBasket;
+    @Inject AddItemToBasket addItemToBasket;
 
     public ProductsPresenterImpl(ProductsView productsView) {
         this.productsView = productsView;
@@ -60,30 +62,13 @@ public class ProductsPresenterImpl implements ProductsPresenter {
     }
 
     @Override
-    public int onProductSelect(boolean isAdd, Product product) {
-        if (isAdd){
-            return 100;
-        }
-        return 5;
-    }
-
-    private int addProductToBasketList(Product product) {
-        return 0;
-    }
-
-    private int removeProductFromBasketList(Product product) {
-        return 0;
-    }
-
-    private List<Product> getFinalProductsList() {
-        return null;
+    public void addItemsListToBasket() {
+        // TODO REWORK or NO NEED
     }
 
     @Override
-    public void addItemsToCart() {
-        // TODO REWORK
-        List<Product> sps = getFinalProductsList();
-        addListItemsToBasket.execute(new AddListItemsObserver(), AddListItemsToBasket.Params.forBasketAddItemsList(sps));
+    public void addItemToBasket(Product product) {
+        addItemToBasket.execute(new AddProductToBasketObserver(), AddItemToBasket.Params.forBasketAddItem(product));
     }
 
     private final class ProdListObserver extends DisposableObserver<List<Product>> {
@@ -109,6 +94,24 @@ public class ProductsPresenterImpl implements ProductsPresenter {
         @Override
         public void onNext(@NonNull List<Product> selectedProducts) {
             productsView.updateProductList(selectedProducts);
+        }
+
+        @Override
+        public void onError(@NonNull Throwable e) {
+            productsView.showErrorMessage(e.getMessage());
+        }
+
+        @Override
+        public void onComplete() {
+
+        }
+    }
+
+    private final class AddProductToBasketObserver extends DisposableObserver<Boolean> {
+
+        @Override
+        public void onNext(@NonNull Boolean aBoolean) {
+            // TODO Do Something, maybe update state
         }
 
         @Override

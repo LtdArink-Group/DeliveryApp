@@ -30,6 +30,9 @@ public class Db {
     }
 
     public Boolean addItemToBasket(Product selectedProduct) {
+        removeItemFromBasket(selectedProduct.getId());
+
+        if (selectedProduct.getCount() < 1) return true;
 
         ContentValues cv = new ContentValues();
         cv.put("product_id", selectedProduct.getId());
@@ -86,8 +89,8 @@ public class Db {
             sp.setDescription(cursor.getString(description));
             sp.setCount(cursor.getInt(count));
             sp.setImageUrl(cursor.getString(image_url));
-            sp.setSelectedIngredients(this.getIngredients(cursor.getLong(_id)));
-            sp.setSelectedPortion(this.getPortion(cursor.getLong(_id)));
+            sp.setIngredients(this.getIngredients(cursor.getLong(_id)));
+            sp.setPortion(this.getPortion(cursor.getLong(_id)));
             sps.add(sp);
         }
         cursor.close();
