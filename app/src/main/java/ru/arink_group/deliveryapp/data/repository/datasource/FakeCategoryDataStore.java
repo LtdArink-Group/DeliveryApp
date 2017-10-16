@@ -30,6 +30,11 @@ public class FakeCategoryDataStore implements CategoryDataStore {
         two.setIcon("drink");
         three.setIcon("hamburger");
 
+        one.setId(1);
+        two.setId(2);
+        three.setId(3);
+        five.setId(4);
+
         categoriestList.add(one);
         categoriestList.add(two);
         categoriestList.add(three);

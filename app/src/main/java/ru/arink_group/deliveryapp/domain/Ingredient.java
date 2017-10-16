@@ -1,10 +1,12 @@
 package ru.arink_group.deliveryapp.domain;
 
+import java.io.Serializable;
+
 /**
  * Created by kirillvs on 06.10.17.
  */
 
-public class Ingredient {
+public class Ingredient implements Serializable{
 
     private String name;
     private String description;

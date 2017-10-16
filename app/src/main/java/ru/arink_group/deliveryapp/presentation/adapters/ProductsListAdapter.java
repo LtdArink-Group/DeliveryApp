@@ -6,6 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CompoundButton;
+import android.widget.ImageButton;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
@@ -27,6 +28,7 @@ public class ProductsListAdapter extends RecyclerView.Adapter<ProductsListAdapte
 
     private List<Product> products = new ArrayList<>();
     private OnItemClickListener<Product> listener;
+    private OnIngredientClickListener ingredientListener;
     private List<TextView> productCounts = new ArrayList<>();
     private List<Map<String, RadioButton>> radioButtons = new ArrayList<>();
 
@@ -60,6 +62,9 @@ public class ProductsListAdapter extends RecyclerView.Adapter<ProductsListAdapte
 
     public void setListener(OnItemClickListener<Product> listener) {
         this.listener = listener;
+    }
+    public void setIngredientListener(OnIngredientClickListener listener) {
+        this.ingredientListener = listener;
     }
 
 
@@ -103,6 +108,14 @@ public class ProductsListAdapter extends RecyclerView.Adapter<ProductsListAdapte
 
         TextView priceView = holder.view.findViewById(R.id.product_price);
         priceView.setText(String.valueOf(100500.0) + " \u20BD");
+
+        ImageButton ib = holder.view.findViewById(R.id.ingredient_button);
+        ib.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ingredientListener.onIngredientClicked(product);
+            }
+        });
 
         final TextView countPortion = holder.view.findViewById(R.id.count_portion);
         countPortion.setText(String.valueOf(product.getCount()));

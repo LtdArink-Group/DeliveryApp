@@ -42,6 +42,7 @@ public class ProductsActivity extends AppCompatActivity {
 
         Bundle bundle = new Bundle();
         bundle.putInt(CarteFragment.CATEGORY, mIntent.getIntExtra(CarteFragment.CATEGORY, 0));
+        bundle.putString(CarteFragment.CATEGORY_NAME, mIntent.getStringExtra(CarteFragment.CATEGORY_NAME));
         pf.setArguments(bundle);
         fragmentTransaction.add(R.id.fragment_container, pf);
         fragmentTransaction.commit();

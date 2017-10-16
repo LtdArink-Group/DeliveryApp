@@ -1,5 +1,6 @@
 package ru.arink_group.deliveryapp.domain;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -7,7 +8,7 @@ import java.util.List;
  * Created by kirillvs on 02.10.17.
  */
 
-public class Product {
+public class Product implements Serializable {
 
     private int id;
     private String name;
