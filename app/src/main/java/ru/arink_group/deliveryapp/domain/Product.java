@@ -37,6 +37,13 @@ public class Product {
         return portions[0];
     }
 
+    public int getSelectedPortionIndex() {
+        for (int i = 0; i < portions.length; i++) {
+            if (portions[i].isChecked()) return i;
+        }
+        return 0;
+    }
+
     public void setSelectedIngredients(Ingredient[] selectedIngredients) {
         for (int i = 0; i < ingredients.length; i++) {
             for (int j = 0; j < selectedIngredients.length; j++) {
@@ -58,7 +65,20 @@ public class Product {
                 portion.setChecked(true);
             }
         }
+    }
 
+    public void setSelectedPortionByName(String name) {
+        this.deselectAllPortions();
+        for (Portion portion : portions) {
+            if (portion.getName().equalsIgnoreCase(name)) {
+                portion.setChecked(true);
+            }
+        }
+    }
+
+    public void setSelectedPortionByIndex(int index) {
+        this.deselectAllPortions();
+        portions[index].setChecked(true);
     }
 
     private void deselectAllPortions() {

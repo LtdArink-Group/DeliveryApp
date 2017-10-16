@@ -3,6 +3,7 @@ package ru.arink_group.deliveryapp.presentation.view.fragment;
 
 import android.os.Bundle;
 import android.app.Fragment;
+import android.os.Handler;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -17,7 +18,6 @@ import ru.arink_group.deliveryapp.R;
 import ru.arink_group.deliveryapp.domain.Product;
 import ru.arink_group.deliveryapp.presentation.adapters.OnItemClickListener;
 import ru.arink_group.deliveryapp.presentation.adapters.ProductsListAdapter;
-import ru.arink_group.deliveryapp.presentation.custom_elements.PortionList;
 import ru.arink_group.deliveryapp.presentation.presenter.ProductsPresenter;
 import ru.arink_group.deliveryapp.presentation.presenter.ProductsPresenterImpl;
 import ru.arink_group.deliveryapp.presentation.view.ProductsView;
@@ -29,12 +29,6 @@ public class ProductsFragment extends Fragment implements ProductsView, OnItemCl
 
     private ProductsPresenter productsPresenter;
     private ProductsListAdapter productsListAdapter;
-
-    public interface RecyclerViewReadyCallback {
-        void onLayoutReady();
-    }
-
-    private RecyclerViewReadyCallback recyclerViewReadyCallback;
 
     public ProductsFragment() {
         // Required empty public constructor
@@ -50,14 +44,6 @@ public class ProductsFragment extends Fragment implements ProductsView, OnItemCl
 
         productsPresenter = new ProductsPresenterImpl(this);
 
-        recyclerViewReadyCallback = new RecyclerViewReadyCallback() {
-            @Override
-            public void onLayoutReady() {
-                productsPresenter.updateProductsFromBasket();
-            }
-        };
-
-
         LinearLayoutManager mLayoutManager = new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false);
         mRecyclerView.setLayoutManager(mLayoutManager);
 
@@ -66,16 +52,6 @@ public class ProductsFragment extends Fragment implements ProductsView, OnItemCl
         productsListAdapter = new ProductsListAdapter();
         mRecyclerView.setAdapter(productsListAdapter);
 
-        mRecyclerView.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
-            @Override
-            public void onGlobalLayout() {
-                if (recyclerViewReadyCallback != null) {
-                    recyclerViewReadyCallback.onLayoutReady();
-                }
-
-                recyclerViewReadyCallback = null;
-            }
-        });
 
         final int categoryId = getArguments().getInt(CarteFragment.CATEGORY);
 
