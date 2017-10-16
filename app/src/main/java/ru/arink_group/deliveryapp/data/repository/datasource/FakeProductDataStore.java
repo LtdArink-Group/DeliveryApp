@@ -37,18 +37,39 @@ public class FakeProductDataStore implements ProductDataStore {
         three.setDescription("Lorem ipsum dolor sit amet, omnium ceteros nam ut. Odio nullam ut mei. Mea probo possim et, affert legimus erroribus ne sit, mundi vidisse malorum vix ut. Vis alienum omnesque platonem te. Oblique corpora accumsan id per, pri laudem luptatum no, ius eu virtute laoreet verterem.");
         five.setDescription("Lorem ipsum dolor sit amet, omnium ceteros nam ut. Odio nullam ut mei. Mea probo possim et, affert legimus erroribus ne sit, mundi vidisse malorum vix ut. Vis alienum omnesque platonem te. Oblique corpora accumsan id per, pri laudem luptatum no, ius eu virtute laoreet verterem.");
 
-        Portion[] portions = new Portion[] {new Portion(), new Portion(), new Portion()};
-        portions[0].setName("Пицель");
-        portions[0].setPrice(250.0);
-        portions[1].setName("Шницель");
-        portions[1].setPrice(500.0);
-        portions[2].setName("Водка");
-        portions[2].setPrice(700.0);
+        Portion[] portions1 = new Portion[] {new Portion(), new Portion(), new Portion()};
+        portions1[0].setName("Пицель");
+        portions1[0].setPrice(250.0);
+        portions1[1].setName("Шницель");
+        portions1[1].setPrice(500.0);
+        portions1[2].setName("Водка");
+        portions1[2].setPrice(700.0);
+        Portion[] portions2 = new Portion[] {new Portion(), new Portion(), new Portion()};
+        portions2[0].setName("Пицель");
+        portions2[0].setPrice(250.0);
+        portions2[1].setName("Шницель");
+        portions2[1].setPrice(500.0);
+        portions2[2].setName("Водка");
+        portions2[2].setPrice(700.0);
+        Portion[] portions3 = new Portion[] {new Portion(), new Portion(), new Portion()};
+        portions3[0].setName("Пицель");
+        portions3[0].setPrice(250.0);
+        portions3[1].setName("Шницель");
+        portions3[1].setPrice(500.0);
+        portions3[2].setName("Водка");
+        portions3[2].setPrice(700.0);
+        Portion[] portions4 = new Portion[] {new Portion(), new Portion(), new Portion()};
+        portions4[0].setName("Пицель");
+        portions4[0].setPrice(250.0);
+        portions4[1].setName("Шницель");
+        portions4[1].setPrice(500.0);
+        portions4[2].setName("Водка");
+        portions4[2].setPrice(700.0);
 
-        one.setPortions(portions);
-        two.setPortions(portions);
-        three.setPortions(portions);
-        five.setPortions(portions);
+        one.setPortions(portions1);
+        two.setPortions(portions2);
+        three.setPortions(portions3);
+        five.setPortions(portions4);
 
 
         one.setId(1);

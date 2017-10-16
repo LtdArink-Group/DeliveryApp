@@ -3,11 +3,13 @@ package ru.arink_group.deliveryapp.presentation.view.fragment;
 
 import android.os.Bundle;
 import android.app.Fragment;
+import android.os.Handler;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.ViewTreeObserver;
 import android.widget.Toast;
 
 import java.util.List;
@@ -16,7 +18,6 @@ import ru.arink_group.deliveryapp.R;
 import ru.arink_group.deliveryapp.domain.Product;
 import ru.arink_group.deliveryapp.presentation.adapters.OnItemClickListener;
 import ru.arink_group.deliveryapp.presentation.adapters.ProductsListAdapter;
-import ru.arink_group.deliveryapp.presentation.custom_elements.PortionList;
 import ru.arink_group.deliveryapp.presentation.presenter.ProductsPresenter;
 import ru.arink_group.deliveryapp.presentation.presenter.ProductsPresenterImpl;
 import ru.arink_group.deliveryapp.presentation.view.ProductsView;
@@ -38,6 +39,7 @@ public class ProductsFragment extends Fragment implements ProductsView, OnItemCl
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_products, container, false);
+
         RecyclerView mRecyclerView = rootView.findViewById(R.id.products_recycler_view);
 
         productsPresenter = new ProductsPresenterImpl(this);
@@ -49,6 +51,7 @@ public class ProductsFragment extends Fragment implements ProductsView, OnItemCl
 
         productsListAdapter = new ProductsListAdapter();
         mRecyclerView.setAdapter(productsListAdapter);
+
 
         final int categoryId = getArguments().getInt(CarteFragment.CATEGORY);
 

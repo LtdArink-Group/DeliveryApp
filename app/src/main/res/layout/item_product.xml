@@ -47,13 +47,11 @@
                     android:layout_height="wrap_content"
                     android:layout_margin="8dp" />
 
-                <ru.arink_group.deliveryapp.presentation.custom_elements.PortionList
-                    android:id="@+id/portion_list"
+                <RadioGroup
+                    android:id="@+id/portion_list_group"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
                     android:layout_margin="8dp"
-                    android:gravity="center"/>
+                    android:layout_height="wrap_content"/>
 
                 <RelativeLayout
                     android:layout_width="match_parent"
