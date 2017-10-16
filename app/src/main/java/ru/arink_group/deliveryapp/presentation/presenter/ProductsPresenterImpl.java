@@ -50,6 +50,8 @@ public class ProductsPresenterImpl implements ProductsPresenter {
     public void destroy() {
         getProductsListUseCase.dispose();
         getListItemsFromBasket.dispose();
+        addListItemsToBasket.dispose();
+        addItemToBasket.dispose();
     }
 
     @Override
@@ -57,7 +59,8 @@ public class ProductsPresenterImpl implements ProductsPresenter {
         getProductsListUseCase.execute(new ProdListObserver(), GetProductsList.Params.forProductsList(categoryId));
     }
 
-    private void updateProductsFromBasket() {
+    @Override
+    public void updateProductsFromBasket() {
         getListItemsFromBasket.execute(new SelectedListObserver(), null);
     }
 
@@ -76,7 +79,6 @@ public class ProductsPresenterImpl implements ProductsPresenter {
         @Override
         public void onNext(@NonNull List<Product> products) {
             productsView.setProductsList(products);
-            ProductsPresenterImpl.this.updateProductsFromBasket();
         }
 
         @Override

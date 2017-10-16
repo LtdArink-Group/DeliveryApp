@@ -3,6 +3,7 @@ package ru.arink_group.deliveryapp.data.db;
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -34,16 +35,19 @@ public class Db {
 
         if (selectedProduct.getCount() < 1) return true;
 
+        SQLiteDatabase writableDb = dbHelper.getWritableDatabase();
+
         ContentValues cv = new ContentValues();
         cv.put("product_id", selectedProduct.getId());
         cv.put("name", selectedProduct.getName());
         cv.put("description", selectedProduct.getDescription());
         cv.put("count", selectedProduct.getCount());
         cv.put("image_url", selectedProduct.getImageUrl());
-        long product_id = dbHelper.getWritableDatabase().insert("selected_products", null, cv);
+        long product_id = writableDb.insert("selected_products", null, cv);
         if (product_id == -1) return false;
         if (!insertPortion(product_id, selectedProduct.getSelectedPortion())) return false;
         if (!insertIngredients(product_id, selectedProduct.getSelectedIngredients())) return false;
+        writableDb.close();
         return true;
     }
 
@@ -56,24 +60,29 @@ public class Db {
     }
 
     public Boolean removeItemFromBasket(int selectedProductId) {
+        SQLiteDatabase writableDb = dbHelper.getWritableDatabase();
+
         ArrayList<Long> productDbIds = new ArrayList<>();
-        Cursor cursor = dbHelper.getWritableDatabase().query("selected_products", new String[] {"_id"}, "product_id = ?", new String[] {String.valueOf(selectedProductId)}, null, null, null, null);
+        Cursor cursor = writableDb.query("selected_products", new String[] {"_id"}, "product_id = ?", new String[] {String.valueOf(selectedProductId)}, null, null, null, null);
         while(cursor.moveToNext()) {
             productDbIds.add(cursor.getLong(0));
         }
         for (long id : productDbIds) {
-            dbHelper.getWritableDatabase().delete("selected_products", "_id = ?", new String[] {String.valueOf(id)});
+            writableDb.delete("selected_products", "_id = ?", new String[] {String.valueOf(id)});
             removeIngredients(id);
 
             removePortion(id);
         }
         cursor.close();
+        writableDb.close();
         return true;
     }
 
     public List<Product> getListItemsFromBasket() {
         ArrayList<Product> sps = new ArrayList<>();
-        Cursor cursor = dbHelper.getWritableDatabase().query("selected_products", null, null, null, null, null, null);
+        SQLiteDatabase writableDb = dbHelper.getWritableDatabase();
+
+        Cursor cursor = writableDb.query("selected_products", null, null, null, null, null, null);
 
         int _id = cursor.getColumnIndex("_id");
         int product_id = cursor.getColumnIndex("product_id");
@@ -94,12 +103,15 @@ public class Db {
             sps.add(sp);
         }
         cursor.close();
+        writableDb.close();
         return sps;
     }
 
     private Ingredient[] getIngredients(long productDbId) {
         ArrayList<Ingredient> sis = new ArrayList<>();
-        Cursor cursor = dbHelper.getWritableDatabase().query("selected_ingredients", null, "selected_product_id = ?", new String[] {String.valueOf(productDbId)}, null, null, null);
+        SQLiteDatabase writableDb = dbHelper.getWritableDatabase();
+
+        Cursor cursor = writableDb.query("selected_ingredients", null, "selected_product_id = ?", new String[] {String.valueOf(productDbId)}, null, null, null);
 
         int name = cursor.getColumnIndex("name");
         int description = cursor.getColumnIndex("description");
@@ -118,6 +130,7 @@ public class Db {
         Ingredient[] selectedIngredients = new Ingredient[sis.size()];
         selectedIngredients = sis.toArray(selectedIngredients);
         cursor.close();
+        writableDb.close();
         return selectedIngredients;
     }
 
@@ -125,7 +138,9 @@ public class Db {
 
         Portion selectedPortion = new Portion();
 
-        Cursor cursor = dbHelper.getWritableDatabase().query("selected_portions", null, "selected_product_id = ?", new String[] {String.valueOf(productDbId)}, null, null, null);
+        SQLiteDatabase writableDb = dbHelper.getWritableDatabase();
+
+        Cursor cursor = writableDb.query("selected_portions", null, "selected_product_id = ?", new String[] {String.valueOf(productDbId)}, null, null, null);
 
         int name = cursor.getColumnIndex("name");
         int description = cursor.getColumnIndex("description");
@@ -139,18 +154,29 @@ public class Db {
             selectedPortion.setChecked(true);
         }
         cursor.close();
+        writableDb.close();
         return selectedPortion;
     }
 
     private void removeIngredients(long productId) {
-        dbHelper.getWritableDatabase().delete("selected_ingredients", "selected_product_id = ?", new String[] {String.valueOf(productId)});
+        SQLiteDatabase writableDb = dbHelper.getWritableDatabase();
+
+        writableDb.delete("selected_ingredients", "selected_product_id = ?", new String[] {String.valueOf(productId)});
+
+        writableDb.close();
     }
 
     private void removePortion(long productId) {
-        dbHelper.getWritableDatabase().delete("selected_portions", "selected_product_id = ?", new String[] {String.valueOf(productId)});
+        SQLiteDatabase writableDb = dbHelper.getWritableDatabase();
+
+        writableDb.delete("selected_portions", "selected_product_id = ?", new String[] {String.valueOf(productId)});
+
+        writableDb.close();
     }
 
     private boolean insertIngredients(long product_id, Ingredient[] ingredients) {
+        SQLiteDatabase writableDb = dbHelper.getWritableDatabase();
+
         long[] insertedIds = new long[ingredients.length];
         for(int i = 0; i < ingredients.length; i ++) {
             ContentValues cv = new ContentValues();
@@ -159,23 +185,27 @@ public class Db {
             cv.put("price", ingredients[i].getPrice());
             cv.put("count", ingredients[i].getCount());
             cv.put("selected_product_id", product_id);
-            long ingredient_id = dbHelper.getWritableDatabase().insert("selected_ingredients", null, cv);
+            long ingredient_id = writableDb.insert("selected_ingredients", null, cv);
             insertedIds[i] = ingredient_id;
         }
         for(long inserId : insertedIds) {
             if (inserId == -1) return false;
         }
+        writableDb.close();
         return true;
     }
 
     private boolean insertPortion(long product_id, Portion portion) {
+        SQLiteDatabase writableDb = dbHelper.getWritableDatabase();
+
         ContentValues cv = new ContentValues();
         cv.put("name", portion.getName());
         cv.put("description", portion.getDescription());
         cv.put("price", portion.getPrice());
         cv.put("is_checked", portion.isChecked());
         cv.put("selected_product_id", product_id);
-        long portion_id = dbHelper.getWritableDatabase().insert("selected_portions", null, cv);
+        long portion_id = writableDb.insert("selected_portions", null, cv);
+        writableDb.close();
         if (portion_id == -1) return false;
         return true;
     }

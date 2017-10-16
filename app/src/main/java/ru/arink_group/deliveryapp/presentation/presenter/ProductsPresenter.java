@@ -9,6 +9,7 @@ import ru.arink_group.deliveryapp.domain.Product;
 public interface ProductsPresenter extends Presenter {
 
     void getProducts(int categoryId);
+    void updateProductsFromBasket();
     void addItemsListToBasket();
     void addItemToBasket(Product product);
 }

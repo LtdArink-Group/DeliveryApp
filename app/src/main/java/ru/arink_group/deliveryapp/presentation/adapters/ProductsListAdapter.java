@@ -52,8 +52,9 @@ public class ProductsListAdapter extends RecyclerView.Adapter<ProductsListAdapte
         product.setCount(selectedProduct.getCount());
         product.setSelectedPortion(selectedProduct.getSelectedPortion());
         product.setSelectedIngredients(selectedProduct.getSelectedIngredients());
-//        productCounts.get(pos).setText(String.valueOf(product.getCount()));
-//        portionLists.get(pos).updateElementChecked(product.getSelectedOrDefaultPortionPosition());
+        if(productCounts.size() - 1 < pos) return;
+        productCounts.get(pos).setText(String.valueOf(product.getCount()));
+        portionLists.get(pos).updateElementChecked(product.getSelectedOrDefaultPortionPosition());
     }
 
     public void setListener(OnItemClickListener<Product> listener) {

@@ -8,6 +8,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.ViewTreeObserver;
 import android.widget.Toast;
 
 import java.util.List;
@@ -29,6 +30,12 @@ public class ProductsFragment extends Fragment implements ProductsView, OnItemCl
     private ProductsPresenter productsPresenter;
     private ProductsListAdapter productsListAdapter;
 
+    public interface RecyclerViewReadyCallback {
+        void onLayoutReady();
+    }
+
+    private RecyclerViewReadyCallback recyclerViewReadyCallback;
+
     public ProductsFragment() {
         // Required empty public constructor
     }
@@ -38,9 +45,18 @@ public class ProductsFragment extends Fragment implements ProductsView, OnItemCl
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_products, container, false);
+
         RecyclerView mRecyclerView = rootView.findViewById(R.id.products_recycler_view);
 
         productsPresenter = new ProductsPresenterImpl(this);
+
+        recyclerViewReadyCallback = new RecyclerViewReadyCallback() {
+            @Override
+            public void onLayoutReady() {
+                productsPresenter.updateProductsFromBasket();
+            }
+        };
+
 
         LinearLayoutManager mLayoutManager = new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false);
         mRecyclerView.setLayoutManager(mLayoutManager);
@@ -49,6 +65,17 @@ public class ProductsFragment extends Fragment implements ProductsView, OnItemCl
 
         productsListAdapter = new ProductsListAdapter();
         mRecyclerView.setAdapter(productsListAdapter);
+
+        mRecyclerView.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
+            @Override
+            public void onGlobalLayout() {
+                if (recyclerViewReadyCallback != null) {
+                    recyclerViewReadyCallback.onLayoutReady();
+                }
+
+                recyclerViewReadyCallback = null;
+            }
+        });
 
         final int categoryId = getArguments().getInt(CarteFragment.CATEGORY);
 
