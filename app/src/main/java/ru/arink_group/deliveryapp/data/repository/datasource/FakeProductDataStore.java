@@ -77,28 +77,66 @@ public class FakeProductDataStore implements ProductDataStore {
         three.setId(3);
         five.setId(5);
 
-        Ingredient[] ingredients = new Ingredient[] {new Ingredient(), new Ingredient(), new Ingredient(), new Ingredient()};
+        Ingredient[] ingredients1 = new Ingredient[] {new Ingredient(), new Ingredient(), new Ingredient(), new Ingredient()};
+        ingredients1[0].setName("Соус");
+        ingredients1[0].setDescription("Вкуснейший соус");
+        ingredients1[0].setPrice(100.0);
+        ingredients1[1].setName("Кетчуп");
+        ingredients1[1].setDescription("Вкуснейший кетчуп");
+        ingredients1[1].setPrice(250.0);
+        ingredients1[2].setName("Подливка");
+        ingredients1[2].setDescription("Так себе");
+        ingredients1[2].setPrice(30.0);
+        ingredients1[3].setName("Зелень");
+        ingredients1[3].setDescription("Сойдет");
+        ingredients1[3].setPrice(50.0);
 
-        ingredients[0].setName("Соус");
-        ingredients[0].setDescription("Вкуснейший соус");
-        ingredients[0].setPrice(100.0);
+        Ingredient[] ingredients2 = new Ingredient[] {new Ingredient(), new Ingredient(), new Ingredient(), new Ingredient()};
+        ingredients2[0].setName("Соус");
+        ingredients2[0].setDescription("Вкуснейший соус");
+        ingredients2[0].setPrice(100.0);
+        ingredients2[1].setName("Кетчуп");
+        ingredients2[1].setDescription("Вкуснейший кетчуп");
+        ingredients2[1].setPrice(250.0);
+        ingredients2[2].setName("Подливка");
+        ingredients2[2].setDescription("Так себе");
+        ingredients2[2].setPrice(30.0);
+        ingredients2[3].setName("Зелень");
+        ingredients2[3].setDescription("Сойдет");
+        ingredients2[3].setPrice(50.0);
 
-        ingredients[1].setName("Кетчуп");
-        ingredients[1].setDescription("Вкуснейший кетчуп");
-        ingredients[1].setPrice(250.0);
+        Ingredient[] ingredients3 = new Ingredient[] {new Ingredient(), new Ingredient(), new Ingredient(), new Ingredient()};
+        ingredients3[0].setName("Соус");
+        ingredients3[0].setDescription("Вкуснейший соус");
+        ingredients3[0].setPrice(100.0);
+        ingredients3[1].setName("Кетчуп");
+        ingredients3[1].setDescription("Вкуснейший кетчуп");
+        ingredients3[1].setPrice(250.0);
+        ingredients3[2].setName("Подливка");
+        ingredients3[2].setDescription("Так себе");
+        ingredients3[2].setPrice(30.0);
+        ingredients3[3].setName("Зелень");
+        ingredients3[3].setDescription("Сойдет");
+        ingredients3[3].setPrice(50.0);
 
-        ingredients[2].setName("Подливка");
-        ingredients[2].setDescription("Так себе");
-        ingredients[2].setPrice(30.0);
+        Ingredient[] ingredients4 = new Ingredient[] {new Ingredient(), new Ingredient(), new Ingredient(), new Ingredient()};
+        ingredients4[0].setName("Соус");
+        ingredients4[0].setDescription("Вкуснейший соус");
+        ingredients4[0].setPrice(100.0);
+        ingredients4[1].setName("Кетчуп");
+        ingredients4[1].setDescription("Вкуснейший кетчуп");
+        ingredients4[1].setPrice(250.0);
+        ingredients4[2].setName("Подливка");
+        ingredients4[2].setDescription("Так себе");
+        ingredients4[2].setPrice(30.0);
+        ingredients4[3].setName("Зелень");
+        ingredients4[3].setDescription("Сойдет");
+        ingredients4[3].setPrice(50.0);
 
-        ingredients[3].setName("Зелень");
-        ingredients[3].setDescription("Сойдет");
-        ingredients[3].setPrice(50.0);
-
-        one.setIngredients(ingredients);
-        two.setIngredients(ingredients);
-        three.setIngredients(ingredients);
-        five.setIngredients(ingredients);
+        one.setIngredients(ingredients1);
+        two.setIngredients(ingredients2);
+        three.setIngredients(ingredients3);
+        five.setIngredients(ingredients4);
 
         productsList.add(one);
         productsList.add(two);
