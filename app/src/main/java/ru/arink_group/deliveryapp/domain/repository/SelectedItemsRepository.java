@@ -3,6 +3,7 @@ package ru.arink_group.deliveryapp.domain.repository;
 import java.util.List;
 
 import io.reactivex.Observable;
+import ru.arink_group.deliveryapp.domain.Ingredient;
 import ru.arink_group.deliveryapp.domain.Product;
 
 /**
@@ -16,4 +17,6 @@ public interface SelectedItemsRepository {
     Observable<Boolean> removeItemFromBasket(int selectedProductId);
 
     Observable<List<Product>> getListItemsFromBasket();
+
+    Observable<Boolean> addIngredientToProduct(int productId, Ingredient ingredient);
 }

@@ -30,6 +30,77 @@ public class Db {
         dbHelper = new DeliveryAppDatabaseHelper(context);
     }
 
+    public Boolean addIngredientToProduct(int productId, Ingredient ingredient) {
+        long id = getDbIdByProductId(productId);
+        if(id == -1) return false;
+
+        if(ingredient.getCount() == 0) {
+            return removeIngredient(id, ingredient);
+        }
+
+        if(updateIngredient(id, ingredient) >= 1) {
+            return true;
+        } else if(insertIngredient(id, ingredient) != -1) {
+            return true;
+        }
+
+        return false;
+    }
+
+    private int updateIngredient(long id, Ingredient ingredient) {
+        SQLiteDatabase writableDb = dbHelper.getWritableDatabase();
+
+        ContentValues cv = new ContentValues();
+        cv.put("count", ingredient.getCount());
+        int rowsAffected = writableDb.update("selected_ingredients", cv, "selected_product_id = ? & name = ?", new String[] {String.valueOf(id), ingredient.getName()});
+
+        writableDb.close();
+        return rowsAffected;
+    }
+
+
+    private long insertIngredient(long productId, Ingredient ingredient) {
+        SQLiteDatabase writableDb = dbHelper.getWritableDatabase();
+
+        ContentValues cv = new ContentValues();
+        cv.put("name", ingredient.getName());
+        cv.put("description", ingredient.getDescription());
+        cv.put("price", ingredient.getPrice());
+        cv.put("count", ingredient.getCount());
+        cv.put("selected_product_id", productId);
+        long ingredientId = writableDb.insert("selected_ingredients", null, cv);
+
+        writableDb.close();
+        return ingredientId;
+    }
+
+    private long getDbIdByProductId(int productId) {
+        SQLiteDatabase writableDb = dbHelper.getWritableDatabase();
+
+        Cursor cursor = writableDb.query("selected_products", new String[] {"_id"}, "product_id = ?", new String[] {String.valueOf(productId)}, null, null, null, null);
+
+        long result = -1;
+
+        if(cursor.moveToFirst()) {
+            result = cursor.getLong(0);
+        }
+
+        cursor.close();
+        writableDb.close();
+
+        return result;
+    }
+
+    private Boolean removeIngredient(long productId, Ingredient ingredient) {
+        SQLiteDatabase writableDb = dbHelper.getWritableDatabase();
+
+        int result = writableDb.delete("selected_ingredients", "selected_product_id = ? & name = ?", new String[] {String.valueOf(productId), ingredient.getName()});
+
+        writableDb.close();
+
+        return result > 0;
+    }
+
     public Boolean addItemToBasket(Product selectedProduct) {
         removeItemFromBasket(selectedProduct.getId());
 
@@ -177,6 +248,7 @@ public class Db {
     private boolean insertIngredients(long product_id, Ingredient[] ingredients) {
         SQLiteDatabase writableDb = dbHelper.getWritableDatabase();
 
+        // TODO move to insertIngredient
         long[] insertedIds = new long[ingredients.length];
         for(int i = 0; i < ingredients.length; i ++) {
             ContentValues cv = new ContentValues();

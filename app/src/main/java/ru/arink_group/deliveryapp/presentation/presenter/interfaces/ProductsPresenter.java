@@ -1,4 +1,4 @@
-package ru.arink_group.deliveryapp.presentation.presenter;
+package ru.arink_group.deliveryapp.presentation.presenter.interfaces;
 
 import ru.arink_group.deliveryapp.domain.Product;
 

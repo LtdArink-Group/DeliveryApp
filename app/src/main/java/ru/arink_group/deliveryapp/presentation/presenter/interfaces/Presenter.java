@@ -1,4 +1,4 @@
-package ru.arink_group.deliveryapp.presentation.presenter;
+package ru.arink_group.deliveryapp.presentation.presenter.interfaces;
 
 /**
  * Created by kirillvs on 03.10.17.

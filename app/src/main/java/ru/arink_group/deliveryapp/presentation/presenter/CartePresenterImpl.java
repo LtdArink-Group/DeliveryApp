@@ -9,6 +9,7 @@ import io.reactivex.observers.DisposableObserver;
 import ru.arink_group.deliveryapp.domain.Category;
 import ru.arink_group.deliveryapp.domain.interactors.GetCategoriesList;
 import ru.arink_group.deliveryapp.presentation.App;
+import ru.arink_group.deliveryapp.presentation.presenter.interfaces.CartePresenter;
 import ru.arink_group.deliveryapp.presentation.view.CarteView;
 
 /**

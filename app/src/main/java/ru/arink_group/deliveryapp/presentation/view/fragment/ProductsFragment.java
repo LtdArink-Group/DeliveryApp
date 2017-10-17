@@ -4,13 +4,11 @@ package ru.arink_group.deliveryapp.presentation.view.fragment;
 import android.content.Intent;
 import android.os.Bundle;
 import android.app.Fragment;
-import android.os.Handler;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.ViewTreeObserver;
 import android.widget.Toast;
 
 import java.util.List;
@@ -20,7 +18,7 @@ import ru.arink_group.deliveryapp.domain.Product;
 import ru.arink_group.deliveryapp.presentation.adapters.OnIngredientClickListener;
 import ru.arink_group.deliveryapp.presentation.adapters.OnItemClickListener;
 import ru.arink_group.deliveryapp.presentation.adapters.ProductsListAdapter;
-import ru.arink_group.deliveryapp.presentation.presenter.ProductsPresenter;
+import ru.arink_group.deliveryapp.presentation.presenter.interfaces.ProductsPresenter;
 import ru.arink_group.deliveryapp.presentation.presenter.ProductsPresenterImpl;
 import ru.arink_group.deliveryapp.presentation.view.ProductsView;
 import ru.arink_group.deliveryapp.presentation.view.activity.IngredientsActivity;
@@ -33,7 +31,6 @@ public class ProductsFragment extends Fragment implements ProductsView, OnItemCl
     private ProductsPresenter productsPresenter;
     private ProductsListAdapter productsListAdapter;
 
-    public static final String PRODUCTS_LIST = "products_list";
     public static final String PRODUCT_ID = "product_id";
     public static final String PRODUCT = "product";
 
@@ -71,7 +68,7 @@ public class ProductsFragment extends Fragment implements ProductsView, OnItemCl
 
         productsPresenter.getProducts(categoryId);
 
-        Toast.makeText(getActivity(), String.valueOf(categoryId), Toast.LENGTH_LONG).show();
+//        Toast.makeText(getActivity(), String.valueOf(categoryId), Toast.LENGTH_LONG).show();
         return rootView;
     }
 
@@ -106,7 +103,7 @@ public class ProductsFragment extends Fragment implements ProductsView, OnItemCl
     @Override
     public void onIngredientClicked(Product product) {
         if (product.getCount() < 1) {
-            showErrorMessage("Для начала добавьте товар в корзину!!!!!!");
+            showErrorMessage("Для начала добавьте товар в корзину!");
             return;
         }
         Intent intent = new Intent(getActivity(), IngredientsActivity.class);

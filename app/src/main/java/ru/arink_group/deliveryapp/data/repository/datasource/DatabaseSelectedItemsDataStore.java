@@ -8,6 +8,7 @@ import io.reactivex.ObservableEmitter;
 import io.reactivex.ObservableOnSubscribe;
 import io.reactivex.annotations.NonNull;
 import ru.arink_group.deliveryapp.data.db.Db;
+import ru.arink_group.deliveryapp.domain.Ingredient;
 import ru.arink_group.deliveryapp.domain.Product;
 
 /**
@@ -62,6 +63,17 @@ public class DatabaseSelectedItemsDataStore implements SelectedItemsDataStore {
             @Override
             public void subscribe(@NonNull ObservableEmitter<Integer> e) throws Exception {
                 e.onNext(db.addListItemsToBasket(listItems));
+                e.onComplete();
+            }
+        });
+    }
+
+    @Override
+    public Observable<Boolean> addIngredientToProduct(final int productId, final Ingredient ingredient) {
+        return Observable.create(new ObservableOnSubscribe<Boolean>() {
+            @Override
+            public void subscribe(@NonNull ObservableEmitter<Boolean> e) throws Exception {
+                e.onNext(db.addIngredientToProduct(productId, ingredient));
                 e.onComplete();
             }
         });
