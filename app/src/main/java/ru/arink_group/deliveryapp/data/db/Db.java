@@ -52,7 +52,7 @@ public class Db {
 
         ContentValues cv = new ContentValues();
         cv.put("count", ingredient.getCount());
-        int rowsAffected = writableDb.update("selected_ingredients", cv, "selected_product_id = ? & name = ?", new String[] {String.valueOf(id), ingredient.getName()});
+        int rowsAffected = writableDb.update("selected_ingredients", cv, "selected_product_id = ? and name = ?", new String[] {String.valueOf(id), ingredient.getName()});
 
         writableDb.close();
         return rowsAffected;
@@ -94,7 +94,7 @@ public class Db {
     private Boolean removeIngredient(long productId, Ingredient ingredient) {
         SQLiteDatabase writableDb = dbHelper.getWritableDatabase();
 
-        int result = writableDb.delete("selected_ingredients", "selected_product_id = ? & name = ?", new String[] {String.valueOf(productId), ingredient.getName()});
+        int result = writableDb.delete("selected_ingredients", "selected_product_id = ? and name = ?", new String[] {String.valueOf(productId), ingredient.getName()});
 
         writableDb.close();
 
