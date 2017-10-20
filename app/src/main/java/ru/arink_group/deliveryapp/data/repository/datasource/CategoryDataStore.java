@@ -4,14 +4,12 @@ import java.util.List;
 
 import io.reactivex.Observable;
 import ru.arink_group.deliveryapp.domain.Category;
+import ru.arink_group.deliveryapp.domain.dto.CategoryDTO;
 
 /**
  * Created by kirillvs on 03.10.17.
  */
 
 public interface CategoryDataStore {
-
-    Observable<List<Category>> categoriesDataList();
-
-    Observable<Category> categoryData(int categoryId);
+    Observable<List<CategoryDTO>> categoriesDataList();
 }

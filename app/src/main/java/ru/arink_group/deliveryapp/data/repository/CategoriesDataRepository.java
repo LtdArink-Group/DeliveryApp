@@ -6,6 +6,7 @@ import io.reactivex.Observable;
 import ru.arink_group.deliveryapp.data.repository.datasource.CategoryDataStore;
 import ru.arink_group.deliveryapp.data.repository.datasource.CategoryDataStoreFactory;
 import ru.arink_group.deliveryapp.domain.Category;
+import ru.arink_group.deliveryapp.domain.dto.CategoryDTO;
 
 /**
  * Created by kirillvs on 03.10.17.
@@ -29,7 +30,7 @@ public class CategoriesDataRepository implements ru.arink_group.deliveryapp.doma
     }
 
     @Override
-    public Observable<List<Category>> categoriesList() {
+    public Observable<List<CategoryDTO>> categoriesList() {
         CategoryDataStore dataStore = categoryDataStoreFactory.create();
         return dataStore.categoriesDataList();
     }

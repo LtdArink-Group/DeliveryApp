@@ -1,5 +1,7 @@
 package ru.arink_group.deliveryapp.data.repository.datasource;
 
+import ru.arink_group.deliveryapp.data.fake.FakeProductDataStore;
+
 /**
  * Created by kirillvs on 03.10.17.
  */

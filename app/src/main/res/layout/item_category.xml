@@ -16,7 +16,6 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="0"
-            app:srcCompat="@drawable/file_image"
             />
 
         <TextView
@@ -26,7 +25,7 @@
             android:layout_weight="5"
             android:paddingLeft="3dp"
             android:text="TextView"
-            android:textColor="@color/elementColor"/>
+            android:textColor="@color/colorPrimaryText"/>
 
     </LinearLayout>
 
