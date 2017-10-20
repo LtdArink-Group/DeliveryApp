@@ -87,6 +87,9 @@ public class ProductsListAdapter extends RecyclerView.Adapter<ProductsListAdapte
         TextView descriptionView = holder.view.findViewById(R.id.product_description);
         descriptionView.setText(product.getDescription());
 
+        final TextView priceView = holder.view.findViewById(R.id.product_price);
+        priceView.setText(String.valueOf(product.getSelectedPortion().getPrice()) + " \u20BD");
+
         final RadioGroup rg = holder.view.findViewById(R.id.portion_list_group);
         Map<String, RadioButton> bthGroup = new HashMap<>();
         radioButtons.add(position, bthGroup);
@@ -100,6 +103,7 @@ public class ProductsListAdapter extends RecyclerView.Adapter<ProductsListAdapte
                 public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                     if (isChecked) {
                         product.setSelectedPortionByName(String.valueOf(buttonView.getText()));
+                        priceView.setText(String.valueOf(product.getSelectedPortion().getPrice()) + " \u20BD");
                     }
                 }
             });
@@ -108,9 +112,6 @@ public class ProductsListAdapter extends RecyclerView.Adapter<ProductsListAdapte
             }
             bthGroup.put(product.getPortions()[i].getName(), rb);
         }
-
-        TextView priceView = holder.view.findViewById(R.id.product_price);
-        priceView.setText(String.valueOf(100500.0) + " \u20BD");
 
         ImageButton ib = holder.view.findViewById(R.id.ingredient_button);
         ib.setOnClickListener(new View.OnClickListener() {

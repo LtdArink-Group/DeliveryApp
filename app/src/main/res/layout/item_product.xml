@@ -51,6 +51,7 @@
                     android:id="@+id/portion_list_group"
                     android:layout_width="match_parent"
                     android:layout_margin="8dp"
+                    android:orientation="horizontal"
                     android:layout_height="wrap_content"/>
 
                 <RelativeLayout
@@ -71,7 +72,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_toLeftOf="@+id/button_minus"
-                        android:src="@drawable/chevron_right"
+                        app:srcCompat="@drawable/chevron_right"
                         />
 
 
@@ -80,7 +81,7 @@
                         android:id="@id/button_minus"
                         android:layout_width="45dp"
                         android:layout_height="45dp"
-                        android:src="@drawable/minus"
+                        app:srcCompat="@drawable/minus"
                         app:cb_color="@color/colorAccent"
                         app:cb_pressedRingWidth="8dp" />
 
@@ -99,7 +100,7 @@
                         android:id="@id/button_plus"
                         android:layout_width="45dp"
                         android:layout_height="45dp"
-                        android:src="@drawable/plus"
+                        app:srcCompat="@drawable/plus"
                         app:cb_color="@color/colorAccent"
                         app:cb_pressedRingWidth="8dp" />
 
