@@ -1,6 +1,7 @@
 package ru.arink_group.deliveryapp.data.fake;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import io.reactivex.Observable;
@@ -9,6 +10,9 @@ import ru.arink_group.deliveryapp.domain.Category;
 import ru.arink_group.deliveryapp.domain.Ingredient;
 import ru.arink_group.deliveryapp.domain.Portion;
 import ru.arink_group.deliveryapp.domain.Product;
+import ru.arink_group.deliveryapp.domain.dto.AdditionalInfoDTO;
+import ru.arink_group.deliveryapp.domain.dto.MainOptionDTO;
+import ru.arink_group.deliveryapp.domain.dto.ProductDTO;
 
 /**
  * Created by kirillvs on 03.10.17.
@@ -16,61 +20,59 @@ import ru.arink_group.deliveryapp.domain.Product;
 
 public class FakeProductDataStore implements ProductDataStore {
 
-    private static List<Product> products() {
+    private static List<ProductDTO> products() {
         // TODO BIG REWORK
 
-        List<Product> productsList = new ArrayList<>();
+        List<ProductDTO> productsList = new ArrayList<>();
 
-        String[] size = new String[] {"100", "200", "300"};
+        ProductDTO one = new ProductDTO();
+        ProductDTO two = new ProductDTO();
+        ProductDTO three = new ProductDTO();
+        ProductDTO five = new ProductDTO();
 
-        Product one = new Product();
-        Product two = new Product();
-        Product three = new Product();
-        Product five = new Product();
-
-        one.setName("Lorem");
-        two.setName("Lorem");
-        three.setName("Lorem");
-        five.setName("Lorem");
+        one.setTitle("Lorem");
+        two.setTitle("Lorem");
+        three.setTitle("Lorem");
+        five.setTitle("Lorem");
 
         one.setDescription("Lorem ipsum dolor sit amet, omnium ceteros nam ut. Odio nullam ut mei. Mea probo possim et, affert legimus erroribus ne sit, mundi vidisse malorum vix ut. Vis alienum omnesque platonem te. Oblique corpora accumsan id per, pri laudem luptatum no, ius eu virtute laoreet verterem.");
         two.setDescription("Lorem ipsum dolor sit amet, omnium ceteros nam ut. Odio nullam ut mei. Mea probo possim et, affert legimus erroribus ne sit, mundi vidisse malorum vix ut. Vis alienum omnesque platonem te. Oblique corpora accumsan id per, pri laudem luptatum no, ius eu virtute laoreet verterem.");
         three.setDescription("Lorem ipsum dolor sit amet, omnium ceteros nam ut. Odio nullam ut mei. Mea probo possim et, affert legimus erroribus ne sit, mundi vidisse malorum vix ut. Vis alienum omnesque platonem te. Oblique corpora accumsan id per, pri laudem luptatum no, ius eu virtute laoreet verterem.");
         five.setDescription("Lorem ipsum dolor sit amet, omnium ceteros nam ut. Odio nullam ut mei. Mea probo possim et, affert legimus erroribus ne sit, mundi vidisse malorum vix ut. Vis alienum omnesque platonem te. Oblique corpora accumsan id per, pri laudem luptatum no, ius eu virtute laoreet verterem.");
 
-        Portion[] portions1 = new Portion[] {new Portion(), new Portion(), new Portion()};
+        MainOptionDTO[] portions1 = new MainOptionDTO[] {new MainOptionDTO(), new MainOptionDTO(), new MainOptionDTO()};
         portions1[0].setName("Пицель");
-        portions1[0].setPrice(250.0);
+        portions1[0].setCost(250.0);
         portions1[1].setName("Шницель");
-        portions1[1].setPrice(500.0);
+        portions1[1].setCost(500.0);
         portions1[2].setName("Водка");
-        portions1[2].setPrice(700.0);
-        Portion[] portions2 = new Portion[] {new Portion(), new Portion(), new Portion()};
+        portions1[2].setCost(700.0);
+        MainOptionDTO[] portions2 = new MainOptionDTO[] {new MainOptionDTO(), new MainOptionDTO(), new MainOptionDTO()};
         portions2[0].setName("Пицель");
-        portions2[0].setPrice(250.0);
+        portions2[0].setCost(250.0);
         portions2[1].setName("Шницель");
-        portions2[1].setPrice(500.0);
+        portions2[1].setCost(500.0);
         portions2[2].setName("Водка");
-        portions2[2].setPrice(700.0);
-        Portion[] portions3 = new Portion[] {new Portion(), new Portion(), new Portion()};
+        portions2[2].setCost(700.0);
+        MainOptionDTO[] portions3 = new MainOptionDTO[] {new MainOptionDTO(), new MainOptionDTO(), new MainOptionDTO()};
         portions3[0].setName("Пицель");
-        portions3[0].setPrice(250.0);
+        portions3[0].setCost(250.0);
         portions3[1].setName("Шницель");
-        portions3[1].setPrice(500.0);
+        portions3[1].setCost(500.0);
         portions3[2].setName("Водка");
-        portions3[2].setPrice(700.0);
-        Portion[] portions4 = new Portion[] {new Portion(), new Portion(), new Portion()};
+        portions3[2].setCost(700.0);
+        MainOptionDTO[] portions4 = new MainOptionDTO[] {new MainOptionDTO(), new MainOptionDTO(), new MainOptionDTO()};
         portions4[0].setName("Пицель");
-        portions4[0].setPrice(250.0);
+        portions4[0].setCost(250.0);
         portions4[1].setName("Шницель");
-        portions4[1].setPrice(500.0);
+        portions4[1].setCost(500.0);
         portions4[2].setName("Водка");
-        portions4[2].setPrice(700.0);
+        portions4[2].setCost(700.0);
 
-        one.setPortions(portions1);
-        two.setPortions(portions2);
-        three.setPortions(portions3);
-        five.setPortions(portions4);
+        one.setMainOptions(new ArrayList<>(Arrays.asList(portions1)));
+        two.setMainOptions(new ArrayList<>(Arrays.asList(portions2)));
+        three.setMainOptions(new ArrayList<>(Arrays.asList(portions3)));
+        five.setMainOptions(new ArrayList<>(Arrays.asList(portions4)));
 
 
         one.setId(1);
@@ -78,66 +80,50 @@ public class FakeProductDataStore implements ProductDataStore {
         three.setId(3);
         five.setId(5);
 
-        Ingredient[] ingredients1 = new Ingredient[] {new Ingredient(), new Ingredient(), new Ingredient(), new Ingredient()};
+        AdditionalInfoDTO[] ingredients1 = new AdditionalInfoDTO[] {new AdditionalInfoDTO(), new AdditionalInfoDTO(), new AdditionalInfoDTO(), new AdditionalInfoDTO()};
         ingredients1[0].setName("Соус");
-        ingredients1[0].setDescription("Вкуснейший соус");
-        ingredients1[0].setPrice(100.0);
+        ingredients1[0].setCost(100.0);
         ingredients1[1].setName("Кетчуп");
-        ingredients1[1].setDescription("Вкуснейший кетчуп");
-        ingredients1[1].setPrice(250.0);
+        ingredients1[1].setCost(250.0);
         ingredients1[2].setName("Подливка");
-        ingredients1[2].setDescription("Так себе");
-        ingredients1[2].setPrice(30.0);
+        ingredients1[2].setCost(30.0);
         ingredients1[3].setName("Зелень");
-        ingredients1[3].setDescription("Сойдет");
-        ingredients1[3].setPrice(50.0);
+        ingredients1[3].setCost(50.0);
 
-        Ingredient[] ingredients2 = new Ingredient[] {new Ingredient(), new Ingredient(), new Ingredient(), new Ingredient()};
+        AdditionalInfoDTO[] ingredients2 = new AdditionalInfoDTO[] {new AdditionalInfoDTO(), new AdditionalInfoDTO(), new AdditionalInfoDTO(), new AdditionalInfoDTO()};
         ingredients2[0].setName("Соус");
-        ingredients2[0].setDescription("Вкуснейший соус");
-        ingredients2[0].setPrice(100.0);
+        ingredients2[0].setCost(100.0);
         ingredients2[1].setName("Кетчуп");
-        ingredients2[1].setDescription("Вкуснейший кетчуп");
-        ingredients2[1].setPrice(250.0);
+        ingredients2[1].setCost(250.0);
         ingredients2[2].setName("Подливка");
-        ingredients2[2].setDescription("Так себе");
-        ingredients2[2].setPrice(30.0);
+        ingredients2[2].setCost(30.0);
         ingredients2[3].setName("Зелень");
-        ingredients2[3].setDescription("Сойдет");
-        ingredients2[3].setPrice(50.0);
+        ingredients2[3].setCost(50.0);
 
-        Ingredient[] ingredients3 = new Ingredient[] {new Ingredient(), new Ingredient(), new Ingredient(), new Ingredient()};
+        AdditionalInfoDTO[] ingredients3 = new AdditionalInfoDTO[] {new AdditionalInfoDTO(), new AdditionalInfoDTO(), new AdditionalInfoDTO(), new AdditionalInfoDTO()};
         ingredients3[0].setName("Соус");
-        ingredients3[0].setDescription("Вкуснейший соус");
-        ingredients3[0].setPrice(100.0);
+        ingredients3[0].setCost(100.0);
         ingredients3[1].setName("Кетчуп");
-        ingredients3[1].setDescription("Вкуснейший кетчуп");
-        ingredients3[1].setPrice(250.0);
+        ingredients3[1].setCost(250.0);
         ingredients3[2].setName("Подливка");
-        ingredients3[2].setDescription("Так себе");
-        ingredients3[2].setPrice(30.0);
+        ingredients3[2].setCost(30.0);
         ingredients3[3].setName("Зелень");
-        ingredients3[3].setDescription("Сойдет");
-        ingredients3[3].setPrice(50.0);
+        ingredients3[3].setCost(50.0);
 
-        Ingredient[] ingredients4 = new Ingredient[] {new Ingredient(), new Ingredient(), new Ingredient(), new Ingredient()};
+        AdditionalInfoDTO[] ingredients4 = new AdditionalInfoDTO[] {new AdditionalInfoDTO(), new AdditionalInfoDTO(), new AdditionalInfoDTO(), new AdditionalInfoDTO()};
         ingredients4[0].setName("Соус");
-        ingredients4[0].setDescription("Вкуснейший соус");
-        ingredients4[0].setPrice(100.0);
+        ingredients4[0].setCost(100.0);
         ingredients4[1].setName("Кетчуп");
-        ingredients4[1].setDescription("Вкуснейший кетчуп");
-        ingredients4[1].setPrice(250.0);
+        ingredients4[1].setCost(250.0);
         ingredients4[2].setName("Подливка");
-        ingredients4[2].setDescription("Так себе");
-        ingredients4[2].setPrice(30.0);
+        ingredients4[2].setCost(30.0);
         ingredients4[3].setName("Зелень");
-        ingredients4[3].setDescription("Сойдет");
-        ingredients4[3].setPrice(50.0);
+        ingredients4[3].setCost(50.0);
 
-        one.setIngredients(ingredients1);
-        two.setIngredients(ingredients2);
-        three.setIngredients(ingredients3);
-        five.setIngredients(ingredients4);
+        one.setAdditionalInfo(new ArrayList<>(Arrays.asList(ingredients1)));
+        two.setAdditionalInfo(new ArrayList<>(Arrays.asList(ingredients2)));
+        three.setAdditionalInfo(new ArrayList<>(Arrays.asList(ingredients3)));
+        five.setAdditionalInfo(new ArrayList<>(Arrays.asList(ingredients4)));
 
         productsList.add(one);
         productsList.add(two);
@@ -149,16 +135,16 @@ public class FakeProductDataStore implements ProductDataStore {
 
 
     @Override
-    public Observable<List<Product>> productsDataList(int categoryId) {
+    public Observable<List<ProductDTO>> productsDataList(int categoryId) {
 
         return Observable.just(products());
 
     }
 
     @Override
-    public Observable<Product> productData(int productId) {
-        Product result = null;
-        for(Product product : products()) {
+    public Observable<ProductDTO> productData(int productId) {
+        ProductDTO result = null;
+        for(ProductDTO product : products()) {
             if (product.getId() == productId) result = product;
         }
         return Observable.just(result);

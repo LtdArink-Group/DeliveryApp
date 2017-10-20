@@ -1,8 +1,12 @@
 package ru.arink_group.deliveryapp.domain.interactors;
 
 import io.reactivex.Observable;
+import io.reactivex.annotations.NonNull;
+import io.reactivex.functions.Function;
 import ru.arink_group.deliveryapp.data.repository.ProductsDataRepository;
 import ru.arink_group.deliveryapp.domain.Product;
+import ru.arink_group.deliveryapp.domain.dto.ProductDTO;
+import ru.arink_group.deliveryapp.domain.dto.TransformerDTO;
 import ru.arink_group.deliveryapp.domain.repository.ProductsRepository;
 
 /**
@@ -20,7 +24,12 @@ public class GetProduct extends UseCase<Product, GetProduct.Params> {
 
     @Override
     Observable<Product> buildUseCaseObservable(Params params) {
-        return productsRepository.product(params.productId);
+        return productsRepository.product(params.productId).map(new Function<ProductDTO, Product>() {
+            @Override
+            public Product apply(@NonNull ProductDTO productDTO) throws Exception {
+                return TransformerDTO.transformProduct(productDTO);
+            }
+        });
     }
 
     public static final class Params {

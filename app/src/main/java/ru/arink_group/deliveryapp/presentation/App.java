@@ -18,6 +18,10 @@ public class App extends Application {
         return component;
     }
 
+    public static String getCompanyId() {
+        return "5";
+    }
+
     @Override
     public void onCreate() {
         super.onCreate();

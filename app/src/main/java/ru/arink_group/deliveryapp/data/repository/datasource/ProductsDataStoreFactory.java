@@ -1,6 +1,7 @@
 package ru.arink_group.deliveryapp.data.repository.datasource;
 
 import ru.arink_group.deliveryapp.data.fake.FakeProductDataStore;
+import ru.arink_group.deliveryapp.data.net.NetProductDataStore;
 
 /**
  * Created by kirillvs on 03.10.17.
@@ -24,7 +25,8 @@ public class ProductsDataStoreFactory {
 
     public ProductDataStore create() {
 
-        return new FakeProductDataStore();
+//        return new FakeProductDataStore();
+        return new NetProductDataStore();
     }
 
     public ProductDataStore createProduct(int productId) {

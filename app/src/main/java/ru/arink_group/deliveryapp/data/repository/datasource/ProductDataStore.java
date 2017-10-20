@@ -5,6 +5,7 @@ import java.util.List;
 import io.reactivex.Observable;
 import ru.arink_group.deliveryapp.domain.Category;
 import ru.arink_group.deliveryapp.domain.Product;
+import ru.arink_group.deliveryapp.domain.dto.ProductDTO;
 
 /**
  * Created by kirillvs on 03.10.17.
@@ -12,7 +13,7 @@ import ru.arink_group.deliveryapp.domain.Product;
 
 public interface ProductDataStore {
 
-    Observable<List<Product>> productsDataList(int categoryId);
+    Observable<List<ProductDTO>> productsDataList(int categoryId);
 
-    Observable<Product> productData(int productId);
+    Observable<ProductDTO> productData(int productId);
 }

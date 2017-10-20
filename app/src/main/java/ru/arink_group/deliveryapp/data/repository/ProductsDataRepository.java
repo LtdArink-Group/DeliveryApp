@@ -5,6 +5,7 @@ import java.util.List;
 import io.reactivex.Observable;
 import ru.arink_group.deliveryapp.data.repository.datasource.ProductsDataStoreFactory;
 import ru.arink_group.deliveryapp.domain.Product;
+import ru.arink_group.deliveryapp.domain.dto.ProductDTO;
 import ru.arink_group.deliveryapp.domain.repository.ProductsRepository;
 
 /**
@@ -30,12 +31,12 @@ public class ProductsDataRepository implements ProductsRepository {
 
 
     @Override
-    public Observable<List<Product>> productsList(int categoryId) {
+    public Observable<List<ProductDTO>> productsList(int categoryId) {
         return storeFactory.create().productsDataList(categoryId);
     }
 
     @Override
-    public Observable<Product> product(int productId) {
+    public Observable<ProductDTO> product(int productId) {
         return storeFactory.createProduct(productId).productData(productId);
     }
 }
