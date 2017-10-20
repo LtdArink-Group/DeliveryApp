@@ -1,10 +1,12 @@
-package ru.arink_group.deliveryapp.data.repository.datasource;
+package ru.arink_group.deliveryapp.data.fake;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import io.reactivex.Observable;
+import ru.arink_group.deliveryapp.data.repository.datasource.CategoryDataStore;
 import ru.arink_group.deliveryapp.domain.Category;
+import ru.arink_group.deliveryapp.domain.dto.CategoryDTO;
 
 /**
  * Created by kirillvs on 03.10.17.
@@ -13,22 +15,22 @@ import ru.arink_group.deliveryapp.domain.Category;
 public class FakeCategoryDataStore implements CategoryDataStore {
 
     @Override
-    public Observable<List<Category>> categoriesDataList() {
+    public Observable<List<CategoryDTO>> categoriesDataList() {
 
-        List<Category> categoriestList = new ArrayList<>();
-        Category one = new Category();
-        Category two = new Category();
-        Category three = new Category();
-        Category five = new Category();
+        List<CategoryDTO> categoriestList = new ArrayList<>();
+        CategoryDTO one = new CategoryDTO();
+        CategoryDTO two = new CategoryDTO();
+        CategoryDTO three = new CategoryDTO();
+        CategoryDTO five = new CategoryDTO();
 
         one.setName("Пицца");
         two.setName("Напитки");
         three.setName("Гамбургеры");
         five.setName("Суши");
 
-        one.setIcon("pizza");
-        two.setIcon("drink");
-        three.setIcon("hamburger");
+        one.setIconType("icon_pizza");
+        two.setIconType("icon_drinks");
+        three.setIconType("icon_burger");
 
         one.setId(1);
         two.setId(2);
@@ -44,8 +46,4 @@ public class FakeCategoryDataStore implements CategoryDataStore {
 
     }
 
-    @Override
-    public Observable<Category> categoryData(int categoryId) {
-        return null;
-    }
 }

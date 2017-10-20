@@ -14,9 +14,8 @@
     <color name="secondaryDarkColor">#790e8b</color>
     <!--<color name="primaryTextColor">#ffffff</color>-->
     <!--<color name="secondaryTextColor">#ffffff</color>-->
-    <color name="elementColor">#4a148c</color>
+    <color name="elementColor">#FF000000</color>
     <color name="colorMenuElement">#FF000000</color>
     <color name="checkedTextColor">#f7f6f6</color>
-
-
+    <color name="colorPrimaryText">#FF000000</color>
 </resources>
