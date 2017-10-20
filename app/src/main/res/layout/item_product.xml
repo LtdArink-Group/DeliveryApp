@@ -8,7 +8,7 @@
     <android.support.v7.widget.CardView
         android:id="@+id/card_view"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="450dp"
         android:layout_gravity="center"
         android:layout_marginLeft="15dp"
         android:layout_marginRight="15dp"
@@ -23,14 +23,14 @@
                 android:id="@+id/product_Image"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
-                android:layout_weight="1.0"
+                android:layout_weight="1.5"
                 android:scaleType="centerCrop"
                 android:src="@drawable/burger" />
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
-                android:layout_weight="1.0"
+                android:layout_weight="2.0"
                 android:orientation="vertical">
 
 

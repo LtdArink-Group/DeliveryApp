@@ -7,9 +7,12 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CompoundButton;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
+
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -116,6 +119,9 @@ public class ProductsListAdapter extends RecyclerView.Adapter<ProductsListAdapte
                 ingredientListener.onIngredientClicked(product);
             }
         });
+
+        ImageView productImage = holder.view.findViewById(R.id.product_Image);
+        Picasso.with(holder.context).load(product.getImageUrl()).into(productImage);
 
         final TextView countPortion = holder.view.findViewById(R.id.count_portion);
         countPortion.setText(String.valueOf(product.getCount()));
