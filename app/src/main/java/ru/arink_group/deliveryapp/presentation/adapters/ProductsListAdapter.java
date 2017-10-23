@@ -1,7 +1,10 @@
 package ru.arink_group.deliveryapp.presentation.adapters;
 
 import android.content.Context;
+import android.content.res.ColorStateList;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.RecyclerView;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -22,6 +25,8 @@ import java.util.Map;
 import at.markushi.ui.CircleButton;
 import ru.arink_group.deliveryapp.R;
 import ru.arink_group.deliveryapp.domain.Product;
+
+import static android.support.constraint.solver.widgets.ConstraintTableLayout.ALIGN_CENTER;
 
 /**
  * Created by kirillvs on 03.10.17.
@@ -88,7 +93,17 @@ public class ProductsListAdapter extends RecyclerView.Adapter<ProductsListAdapte
         descriptionView.setText(product.getDescription());
 
         final TextView priceView = holder.view.findViewById(R.id.product_price);
-        priceView.setText(String.valueOf(product.getSelectedPortion().getPrice()) + " \u20BD");
+        priceView.setText("\u20BD " + String.valueOf(product.getSelectedPortion().getPrice()));
+
+        int[][] states = new int[][] {
+                new int[] {android.R.attr.state_checked}, // checked
+                new int[] {-android.R.attr.state_checked}, // unchecked
+        };
+
+        int[] colors = new int[] {
+                ContextCompat.getColor(holder.context, R.color.colorCheckedText),
+                ContextCompat.getColor(holder.context, R.color.colorPrimaryText)
+        };
 
         final RadioGroup rg = holder.view.findViewById(R.id.portion_list_group);
         Map<String, RadioButton> bthGroup = new HashMap<>();
@@ -96,14 +111,28 @@ public class ProductsListAdapter extends RecyclerView.Adapter<ProductsListAdapte
         int selectedPortionIndex = product.getSelectedPortionIndex();
         for(int i = 0; i < product.getPortions().length; i++) {
             RadioButton rb = new RadioButton(holder.context);
+            rb.setWidth(holder.context.getResources().getDimensionPixelSize(R.dimen.ingredient_radiobutton_witdh));
+            rb.setButtonDrawable(android.R.color.transparent);
             rb.setText(product.getPortions()[i].getName());
+            rb.setGravity(Gravity.CENTER);
+            if(product.getPortions().length == 1){
+                rb.setBackground(ContextCompat.getDrawable(holder.context, R.drawable.bg_item_ingredient_single));
+            } else if(i == 0) {
+                rb.setBackground(ContextCompat.getDrawable(holder.context, R.drawable.bg_item_ingredient_left));
+            } else if( i == product.getPortions().length - 1) {
+                rb.setBackground(ContextCompat.getDrawable(holder.context, R.drawable.bg_item_ingredient_right));
+            } else {
+                rb.setBackground(ContextCompat.getDrawable(holder.context, R.drawable.bg_item_ingredient));
+            }
+            ColorStateList csl = new ColorStateList(states, colors);
+            rb.setTextColor(csl);
             rg.addView(rb);
             rb.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
                 @Override
                 public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                     if (isChecked) {
                         product.setSelectedPortionByName(String.valueOf(buttonView.getText()));
-                        priceView.setText(String.valueOf(product.getSelectedPortion().getPrice()) + " \u20BD");
+                        priceView.setText("\u20BD " + String.valueOf(product.getSelectedPortion().getPrice()));
                     }
                 }
             });
