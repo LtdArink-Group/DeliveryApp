@@ -48,7 +48,6 @@ class IngredientsPresenterImpl(internal val ingredientsView: IngredientsView) : 
 
     inner class IngredientDisposableObserver : DisposableObserver<Boolean>() {
         override fun onNext(t: Boolean) {
-            ingredientsView.showErrorMessage(t.toString())
         }
 
         override fun onComplete() {

@@ -73,7 +73,6 @@ public class IngredientsFragment extends Fragment implements IngredientsView, On
 
     @Override
     public void onIngredientClicked(Ingredient ingredient) {
-        Toast.makeText(getActivity(), ingredient.getName(), Toast.LENGTH_SHORT).show();
         ingredientsPresenter.addIngredientToBasket(product.getId(), ingredient);
     }
 }

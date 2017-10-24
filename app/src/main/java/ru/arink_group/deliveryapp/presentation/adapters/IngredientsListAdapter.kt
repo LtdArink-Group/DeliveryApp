@@ -23,6 +23,9 @@ class IngredientsListAdapter(internal val ingredientsList: Array<Ingredient>): R
         val ingredientName = v.findViewById<TextView>(R.id.ingredient_name)
         ingredientName.text = ingredientsList.get(position).name
 
+        val ingredientCost = v.findViewById<TextView>(R.id.ingredient_cost)
+        ingredientCost.text = "Цена: ${ingredientsList.get(position).price} \u20BD"
+
         val ingredientMinus = v.findViewById<CircleButton>(R.id.ingredient_minus)
         val ingredientPlus = v.findViewById<CircleButton>(R.id.ingredient_plus)
 

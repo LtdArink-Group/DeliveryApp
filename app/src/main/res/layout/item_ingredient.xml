@@ -6,7 +6,7 @@
     android:background="@drawable/realtive_layout_background">
 
     <LinearLayout
-        android:orientation="horizontal" android:layout_width="match_parent"
+        android:orientation="vertical" android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
         android:paddingTop="5dp"
@@ -16,9 +16,15 @@
             android:id="@+id/ingredient_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="5"
             android:paddingLeft="3dp"
-            android:textColor="@color/colorElement"/>
+            android:textColor="@color/colorPrimaryText"/>
+
+        <TextView
+            android:id="@+id/ingredient_cost"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingLeft="3dp"
+            android:textColor="@color/colorPrimaryText"/>
 
     </LinearLayout>
 
