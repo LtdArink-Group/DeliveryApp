@@ -10,7 +10,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.View;
 
 import ru.arink_group.deliveryapp.R;
-import ru.arink_group.deliveryapp.presentation.view.fragment.CarteFragment;
+import ru.arink_group.deliveryapp.presentation.view.fragment.CategoriesFragment;
 import ru.arink_group.deliveryapp.presentation.view.fragment.ProductsFragment;
 
 public class ProductsActivity extends AppCompatActivity {
@@ -38,11 +38,11 @@ public class ProductsActivity extends AppCompatActivity {
 
         Intent mIntent = getIntent();
 
-        setTitle(mIntent.getStringExtra(CarteFragment.CATEGORY_NAME));
+        setTitle(mIntent.getStringExtra(CategoriesFragment.CATEGORY_NAME));
 
         Bundle bundle = new Bundle();
-        bundle.putInt(CarteFragment.CATEGORY, mIntent.getIntExtra(CarteFragment.CATEGORY, 0));
-        bundle.putString(CarteFragment.CATEGORY_NAME, mIntent.getStringExtra(CarteFragment.CATEGORY_NAME));
+        bundle.putInt(CategoriesFragment.CATEGORY, mIntent.getIntExtra(CategoriesFragment.CATEGORY, 0));
+        bundle.putString(CategoriesFragment.CATEGORY_NAME, mIntent.getStringExtra(CategoriesFragment.CATEGORY_NAME));
         pf.setArguments(bundle);
         fragmentTransaction.add(R.id.fragment_container, pf);
         fragmentTransaction.commit();

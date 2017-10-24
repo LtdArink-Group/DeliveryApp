@@ -5,15 +5,15 @@
         <item
             android:id="@+id/carte"
             android:icon="@drawable/ic_menu_carte"
-            android:title="@string/carte" />
+            android:title="@string/categories" />
         <item
             android:id="@+id/orders"
             android:icon="@drawable/ic_menu_gallery"
-            android:title="@string/orders" />
+            android:title="@string/orders_history" />
         <item
             android:id="@+id/basket"
             android:icon="@drawable/ic_menu_cart"
-            android:title="@string/basket" />
+            android:title="@string/order" />
         <item
             android:id="@+id/account"
             android:icon="@drawable/ic_menu_manage"

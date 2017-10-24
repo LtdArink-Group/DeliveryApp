@@ -133,7 +133,7 @@ public class ProductsListAdapter extends RecyclerView.Adapter<ProductsListAdapte
                 public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                     if (isChecked) {
                         product.setSelectedPortionByName(String.valueOf(buttonView.getText()));
-                        priceView.setText("\u20BD " + String.valueOf(product.getSelectedPortion().getPrice()));
+                        priceView.setText(holder.context.getResources().getString(R.string.currency) + String.valueOf(product.getSelectedPortion().getPrice()));
                     }
                 }
             });
