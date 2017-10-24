@@ -19,7 +19,7 @@ import ru.arink_group.deliveryapp.R;
 import ru.arink_group.deliveryapp.presentation.presenter.interfaces.MenuPresenter;
 import ru.arink_group.deliveryapp.presentation.presenter.MenuPresenterImpl;
 import ru.arink_group.deliveryapp.presentation.view.MenuView;
-import ru.arink_group.deliveryapp.presentation.view.fragment.CarteFragment;
+import ru.arink_group.deliveryapp.presentation.view.fragment.CategoriesFragment;
 
 public class MenuActivity extends AppCompatActivity
         implements MenuView, NavigationView.OnNavigationItemSelectedListener {
@@ -31,7 +31,7 @@ public class MenuActivity extends AppCompatActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_menu);
 
-        setTitle(R.string.carte);
+        setTitle(R.string.categories);
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -58,7 +58,7 @@ public class MenuActivity extends AppCompatActivity
         menuPresenter = new MenuPresenterImpl(this);
 
         FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
-        fragmentTransaction.add(R.id.menu_fragment, new CarteFragment());
+        fragmentTransaction.add(R.id.menu_fragment, new CategoriesFragment());
         fragmentTransaction.commit();
 
     }

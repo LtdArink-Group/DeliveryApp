@@ -60,8 +60,8 @@ public class ProductsFragment extends Fragment implements ProductsView, OnItemCl
         mRecyclerView.setAdapter(productsListAdapter);
 
 
-        categoryId = getArguments().getInt(CarteFragment.CATEGORY);
-        categoryName = getArguments().getString(CarteFragment.CATEGORY_NAME);
+        categoryId = getArguments().getInt(CategoriesFragment.CATEGORY);
+        categoryName = getArguments().getString(CategoriesFragment.CATEGORY_NAME);
 
         productsListAdapter.setListener(this);
         productsListAdapter.setIngredientListener(this);
@@ -108,8 +108,8 @@ public class ProductsFragment extends Fragment implements ProductsView, OnItemCl
         }
         Intent intent = new Intent(getActivity(), IngredientsActivity.class);
         intent.putExtra(PRODUCT, product);
-        intent.putExtra(CarteFragment.CATEGORY, categoryId);
-        intent.putExtra(CarteFragment.CATEGORY_NAME, categoryName);
+        intent.putExtra(CategoriesFragment.CATEGORY, categoryId);
+        intent.putExtra(CategoriesFragment.CATEGORY_NAME, categoryName);
         getActivity().startActivity(intent);
     }
 }

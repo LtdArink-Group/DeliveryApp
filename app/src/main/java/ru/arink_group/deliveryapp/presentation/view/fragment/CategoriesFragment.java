@@ -17,25 +17,25 @@ import ru.arink_group.deliveryapp.R;
 import ru.arink_group.deliveryapp.domain.Category;
 import ru.arink_group.deliveryapp.presentation.adapters.CategoriesListAdapter;
 import ru.arink_group.deliveryapp.presentation.adapters.OnCategoryClickListener;
-import ru.arink_group.deliveryapp.presentation.presenter.interfaces.CartePresenter;
-import ru.arink_group.deliveryapp.presentation.presenter.CartePresenterImpl;
-import ru.arink_group.deliveryapp.presentation.view.CarteView;
+import ru.arink_group.deliveryapp.presentation.presenter.interfaces.CategoriesPresenter;
+import ru.arink_group.deliveryapp.presentation.presenter.CategoriesPresenterImpl;
+import ru.arink_group.deliveryapp.presentation.view.CategoriesView;
 import ru.arink_group.deliveryapp.presentation.view.MenuView;
 import ru.arink_group.deliveryapp.presentation.view.activity.MenuActivity;
 import ru.arink_group.deliveryapp.presentation.view.activity.ProductsActivity;
 
-public class CarteFragment extends Fragment implements CarteView, OnCategoryClickListener<Category> {
+public class CategoriesFragment extends Fragment implements CategoriesView, OnCategoryClickListener<Category> {
 
     public static final String CATEGORY = "categoryId";
     public static final String CATEGORY_NAME = "categoryName";
 
     private List<Category> categories;
     private CategoriesListAdapter categoriesAdapter;
-    private CartePresenter cartePresenter;
+    private CategoriesPresenter categoriesPresenter;
 
-    public CarteFragment() {
+    public CategoriesFragment() {
         // Required empty public constructor
-        cartePresenter = new CartePresenterImpl(this);
+        categoriesPresenter = new CategoriesPresenterImpl(this);
     }
 
     @Override
@@ -73,7 +73,7 @@ public class CarteFragment extends Fragment implements CarteView, OnCategoryClic
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View rootView = inflater.inflate(R.layout.fragment_carte, container, false);
+        View rootView = inflater.inflate(R.layout.fragment_categories, container, false);
         RecyclerView mRecyclerView = rootView.findViewById(R.id.categories_recycler_view);
 
         mRecyclerView.setHasFixedSize(true);
@@ -84,7 +84,7 @@ public class CarteFragment extends Fragment implements CarteView, OnCategoryClic
         categoriesAdapter = new CategoriesListAdapter();
         mRecyclerView.setAdapter(categoriesAdapter);
 
-        cartePresenter.getCategoriesList();
+        categoriesPresenter.getCategoriesList();
         categoriesAdapter.setListener(this);
 
         return rootView;
@@ -105,11 +105,11 @@ public class CarteFragment extends Fragment implements CarteView, OnCategoryClic
     @Override
     public void onDestroy() {
         super.onDestroy();
-        cartePresenter.destroy();
+        categoriesPresenter.destroy();
     }
 
     @Override
     public void onItemClicked(Category model) {
-        cartePresenter.onItemSelected(model.getId(), model.getName());
+        categoriesPresenter.onItemSelected(model.getId(), model.getName());
     }
 }

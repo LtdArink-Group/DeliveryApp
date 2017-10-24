@@ -4,7 +4,6 @@ import javax.inject.Singleton;
 
 import dagger.Component;
 import ru.arink_group.deliveryapp.data.db.Db;
-import ru.arink_group.deliveryapp.data.db.DeliveryAppDatabaseHelper;
 import ru.arink_group.deliveryapp.data.repository.SelectedItemsDataRepository;
 import ru.arink_group.deliveryapp.data.repository.datasource.SelectedItemsDataFactory;
 import ru.arink_group.deliveryapp.domain.interactors.AddIngredientToBasket;
@@ -17,7 +16,7 @@ import ru.arink_group.deliveryapp.presentation.di.module.FactoriesModule;
 import ru.arink_group.deliveryapp.presentation.di.module.InteractorsModule;
 import ru.arink_group.deliveryapp.presentation.di.module.RepositoriesModule;
 import ru.arink_group.deliveryapp.presentation.di.module.StoreModule;
-import ru.arink_group.deliveryapp.presentation.presenter.CartePresenterImpl;
+import ru.arink_group.deliveryapp.presentation.presenter.CategoriesPresenterImpl;
 import ru.arink_group.deliveryapp.presentation.presenter.IngredientsPresenterImpl;
 import ru.arink_group.deliveryapp.presentation.presenter.ProductsPresenterImpl;
 
@@ -29,7 +28,7 @@ import ru.arink_group.deliveryapp.presentation.presenter.ProductsPresenterImpl;
 @Component(modules = {AppModule.class, InteractorsModule.class, FactoriesModule.class, RepositoriesModule.class, StoreModule.class})
 @Singleton
 public interface AppComponent {
-    void inject(CartePresenterImpl carte);
+    void inject(CategoriesPresenterImpl carte);
     void inject(ProductsPresenterImpl products);
     void inject(RemoveItemFromBasket removeItemFromBasket);
     void inject(GetListItemsFromBasket getListItemsFromBasket);

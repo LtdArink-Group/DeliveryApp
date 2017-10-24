@@ -9,26 +9,26 @@ import io.reactivex.observers.DisposableObserver;
 import ru.arink_group.deliveryapp.domain.Category;
 import ru.arink_group.deliveryapp.domain.interactors.GetCategoriesList;
 import ru.arink_group.deliveryapp.presentation.App;
-import ru.arink_group.deliveryapp.presentation.presenter.interfaces.CartePresenter;
-import ru.arink_group.deliveryapp.presentation.view.CarteView;
+import ru.arink_group.deliveryapp.presentation.presenter.interfaces.CategoriesPresenter;
+import ru.arink_group.deliveryapp.presentation.view.CategoriesView;
 
 /**
  * Created by kirillvs on 02.10.17.
  */
 
-public class CartePresenterImpl implements CartePresenter {
+public class CategoriesPresenterImpl implements CategoriesPresenter {
 
-    private CarteView carteView;
+    private CategoriesView categoriesView;
     @Inject GetCategoriesList getCategoriesListUseCase;
 
-    public CartePresenterImpl(CarteView carteView) {
-        this.carteView = carteView;
+    public CategoriesPresenterImpl(CategoriesView categoriesView) {
+        this.categoriesView = categoriesView;
         App.getComponent().inject(this);
     }
 
     @Override
     public void onItemSelected(int sectionId, String name) {
-        carteView.startCategory(sectionId, name);
+        categoriesView.startCategory(sectionId, name);
     }
 
     @Override
@@ -61,17 +61,17 @@ public class CartePresenterImpl implements CartePresenter {
 
         @Override
         public void onNext(@NonNull List<Category> categories) {
-            carteView.setCategoriesList(categories);
+            categoriesView.setCategoriesList(categories);
         }
 
         @Override
         public void onError(@NonNull Throwable e) {
-            carteView.showErrorMessage(e.getMessage());
+            categoriesView.showErrorMessage(e.getMessage());
         }
 
         @Override
         public void onComplete() {
-            carteView.loadCompleted();
+            categoriesView.loadCompleted();
         }
     }
 

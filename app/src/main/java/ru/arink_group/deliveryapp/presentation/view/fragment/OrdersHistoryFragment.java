@@ -14,7 +14,7 @@ import com.google.android.gms.plus.PlusOneButton;
 /**
  * A fragment with a Google +1 button.
  */
-public class OrdersFragment extends Fragment {
+public class OrdersHistoryFragment extends Fragment {
 
     // The request code must be 0 or greater.
     private static final int PLUS_ONE_REQUEST_CODE = 0;
@@ -23,7 +23,7 @@ public class OrdersFragment extends Fragment {
     private PlusOneButton mPlusOneButton;
 
 
-    public OrdersFragment() {
+    public OrdersHistoryFragment() {
         // Required empty public constructor
     }
 
@@ -32,7 +32,7 @@ public class OrdersFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View view = inflater.inflate(R.layout.fragment_orders, container, false);
+        View view = inflater.inflate(R.layout.fragment_orders_history, container, false);
 
         //Find the +1 button
         mPlusOneButton = (PlusOneButton) view.findViewById(R.id.plus_one_button);

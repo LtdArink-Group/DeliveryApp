@@ -13,11 +13,13 @@
 
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="title_activity_products">ProductsActivity</string>
-    <string name="carte">Меню</string>
-    <string name="orders">Заказы</string>
-    <string name="basket">Корзина</string>
+    <string name="categories">Меню</string>
+    <string name="orders_history">Заказы</string>
+    <string name="order">Корзина</string>
     <string name="account">Аккаунт</string>
     <string name="company_name">Chixx</string>
     <string name="company_mail">info@chixx.ru</string>
     <string name="company_phone">+7 (4212) 776 025</string>
+    <string name="cost">Цена</string>
+    <string name="currency">₽</string>
 </resources>

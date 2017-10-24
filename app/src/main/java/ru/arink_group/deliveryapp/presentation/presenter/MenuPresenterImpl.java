@@ -6,9 +6,9 @@ import ru.arink_group.deliveryapp.R;
 import ru.arink_group.deliveryapp.presentation.presenter.interfaces.MenuPresenter;
 import ru.arink_group.deliveryapp.presentation.view.MenuView;
 import ru.arink_group.deliveryapp.presentation.view.fragment.AccountFragment;
-import ru.arink_group.deliveryapp.presentation.view.fragment.BasketFragment;
-import ru.arink_group.deliveryapp.presentation.view.fragment.CarteFragment;
-import ru.arink_group.deliveryapp.presentation.view.fragment.OrdersFragment;
+import ru.arink_group.deliveryapp.presentation.view.fragment.OrderFragment;
+import ru.arink_group.deliveryapp.presentation.view.fragment.CategoriesFragment;
+import ru.arink_group.deliveryapp.presentation.view.fragment.OrdersHistoryFragment;
 
 /**
  * Created by kirillvs on 02.10.17.
@@ -28,19 +28,19 @@ public class MenuPresenterImpl implements MenuPresenter {
         Fragment fragment;
 
         if (itemId == R.id.carte) {
-            fragment = new CarteFragment();
+            fragment = new CategoriesFragment();
         } else if (itemId == R.id.orders) {
-            fragment = new OrdersFragment();
+            fragment = new OrdersHistoryFragment();
         } else if (itemId == R.id.basket) {
-            fragment = new BasketFragment();
+            fragment = new OrderFragment();
         } else if (itemId == R.id.account) {
             fragment = new AccountFragment();
         } else if (itemId == R.id.nav_share) {
-            fragment = new CarteFragment(); // TODO change fragment
+            fragment = new CategoriesFragment(); // TODO change fragment
         } else if (itemId == R.id.nav_send) {
-            fragment = new CarteFragment(); // TODO change fragment
+            fragment = new CategoriesFragment(); // TODO change fragment
         } else {
-            fragment = new CarteFragment();
+            fragment = new CategoriesFragment();
         }
 
         menuView.changeFragment(fragment);
