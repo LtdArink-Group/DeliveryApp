@@ -106,6 +106,7 @@ public class ProductsListAdapter extends RecyclerView.Adapter<ProductsListAdapte
         };
 
         final RadioGroup rg = holder.view.findViewById(R.id.portion_list_group);
+        if(rg.getChildCount() > 0) return; // TODO костыль, тк дублируются радиобатоны, если оставить так,тогда надо передалать реренддеринг элемента при обновлении
         Map<String, RadioButton> bthGroup = new HashMap<>();
         radioButtons.add(position, bthGroup);
         int selectedPortionIndex = product.getSelectedPortionIndex();
