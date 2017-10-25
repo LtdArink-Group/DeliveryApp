@@ -1,30 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <!--<color name="colorPrimary">#4a148c</color>-->
-    <!--<color name="primaryLightColor">#7c43bd</color>-->
-    <!--<color name="colorPrimaryDark">#12005e</color>-->
-    <!--<color name="colorAccent">#ab47bc</color>-->
-    <!--<color name="secondaryLightColor">#df78ef</color>-->
-    <!--<color name="secondaryDarkColor">#790e8b</color>-->
-    <!--<color name="elementColor">#FF000000</color>-->
-    <!--<color name="colorMenuElement">#FF000000</color>-->
-    <!--<color name="checkedTextColor">#f7f6f6</color>-->
-    <!--<color name="colorPrimaryText">#FF000000</color>-->
-    <!--<color name="colorSecondaryText">#FF000000</color>-->
-
-    <!--<color name="colorPrimary">#ee7c0d</color>-->
-    <!--<color name="colorPrimaryLight">#f5b577</color>-->
-    <!--<color name="colorPrimaryDark">#ee7c0d</color>-->
-    <!--<color name="colorAccent">#ee7c0d</color>-->
-    <!--<color name="colorSecondaryDark">#95b824</color>-->
-    <!--<color name="colorSecondaryLight">#c1d486</color>-->
-    <!--<color name="colorElement">#FF000000</color>-->
-    <!--<color name="colorMenuElement">#FF000000</color>-->
-    <!--<color name="colorCheckedText">#f7f6f6</color>-->
-    <!--<color name="colorPrimaryText">#FF000000</color>-->
-    <!--<color name="colorSecondaryText">#FF000000</color>-->
-    <!--<color name="colorTransparentElement">#00000000</color>-->
-
     <color name="colorPrimary">#95b824</color>
     <color name="colorPrimaryLight">#c1d486</color>
     <color name="colorPrimaryDark">#95b824</color>
@@ -33,6 +8,8 @@
     <color name="colorSecondaryLight">#f5b577</color>
     <color name="colorElement">#FF000000</color>
     <color name="colorMenuElement">#FF000000</color>
+    <color name="colorOnPrimaryText">#f7f6f6</color>
+    <color name="colorOnSecondaryText">#f7f6f6</color>
     <color name="colorCheckedText">#f7f6f6</color>
     <color name="colorPrimaryText">#FF000000</color>
     <color name="colorSecondaryText">#FF000000</color>

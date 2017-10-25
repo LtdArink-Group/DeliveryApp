@@ -30,6 +30,11 @@ public class SelectedItemsDataRepository implements SelectedItemsRepository {
     }
 
     @Override
+    public Observable<Product> addItemToBasketOrNull(Product selectedProduct) {
+        return factory.create().addItemToBasketOrNull(selectedProduct);
+    }
+
+    @Override
     public Observable<Boolean> removeItemFromBasket(int selectedProductId) {
         return factory.create().removeItemFromBasket(selectedProductId);
     }

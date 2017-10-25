@@ -104,7 +104,7 @@ public class Db {
     public Boolean addItemToBasket(Product selectedProduct) {
         removeItemFromBasket(selectedProduct.getId());
 
-        if (selectedProduct.getCount() < 1) return true;
+        if (selectedProduct.getCount() < 1) return null;
 
         SQLiteDatabase writableDb = dbHelper.getWritableDatabase();
 
@@ -119,7 +119,34 @@ public class Db {
         if (!insertPortion(product_id, selectedProduct.getSelectedPortion())) return false;
         if (!insertIngredients(product_id, selectedProduct.getSelectedIngredients())) return false;
         writableDb.close();
+
+
         return true;
+    }
+
+    public Product addItemToBasketOrNull(Product selectedProduct) {
+        removeItemFromBasket(selectedProduct.getId());
+        Product nothing = new Product();
+        nothing.setId(selectedProduct.getId());
+
+        if (selectedProduct.getCount() < 1) return nothing;
+
+        SQLiteDatabase writableDb = dbHelper.getWritableDatabase();
+
+        ContentValues cv = new ContentValues();
+        cv.put("product_id", selectedProduct.getId());
+        cv.put("name", selectedProduct.getName());
+        cv.put("description", selectedProduct.getDescription());
+        cv.put("count", selectedProduct.getCount());
+        cv.put("image_url", selectedProduct.getImageUrl());
+        long product_id = writableDb.insert("selected_products", null, cv);
+        if (product_id == -1) return nothing;
+        if (!insertPortion(product_id, selectedProduct.getSelectedPortion())) return nothing;
+        if (!insertIngredients(product_id, selectedProduct.getSelectedIngredients())) return nothing;
+        writableDb.close();
+
+
+        return getItemFromBasket(selectedProduct.getId());
     }
 
     public Integer addListItemsToBasket(List<Product> selectedProducts) {
@@ -178,6 +205,40 @@ public class Db {
         return sps;
     }
 
+    public Product getItemFromBasket(int productId) {
+        SQLiteDatabase writableDb = dbHelper.getWritableDatabase();
+        Product product = new Product();
+
+        Product nothing = new Product();
+        nothing.setId(productId);
+
+        Cursor cursor = writableDb.query("selected_products", null, "product_id = ?", new String[] {String.valueOf(productId)}, null, null, null);
+
+        int _id = cursor.getColumnIndex("_id");
+        int product_id = cursor.getColumnIndex("product_id");
+        int name = cursor.getColumnIndex("name");
+        int description = cursor.getColumnIndex("description");
+        int count = cursor.getColumnIndex("count");
+        int image_url = cursor.getColumnIndex("image_url");
+
+        if (cursor.moveToFirst()) {
+            product.setId(cursor.getInt(product_id));
+            product.setName(cursor.getString(name));
+            product.setDescription(cursor.getString(description));
+            product.setCount(cursor.getInt(count));
+            product.setImageUrl(cursor.getString(image_url));
+            product.setIngredients(this.getIngredients(cursor.getLong(_id)));
+            product.setPortion(this.getPortion(cursor.getLong(_id)));
+        } else {
+            cursor.close();
+            writableDb.close();
+            return nothing;
+        }
+        cursor.close();
+        writableDb.close();
+        return product;
+    }
+
     private Ingredient[] getIngredients(long productDbId) {
         ArrayList<Ingredient> sis = new ArrayList<>();
         SQLiteDatabase writableDb = dbHelper.getWritableDatabase();
@@ -216,7 +277,6 @@ public class Db {
         int name = cursor.getColumnIndex("name");
         int description = cursor.getColumnIndex("description");
         int price = cursor.getColumnIndex("price");
-//        int is_checked = cursor.getColumnIndex("is_checked");
 
         if (cursor.moveToFirst()) {
             selectedPortion.setName(cursor.getString(name));

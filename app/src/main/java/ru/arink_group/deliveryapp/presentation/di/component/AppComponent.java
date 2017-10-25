@@ -8,6 +8,7 @@ import ru.arink_group.deliveryapp.data.repository.SelectedItemsDataRepository;
 import ru.arink_group.deliveryapp.data.repository.datasource.SelectedItemsDataFactory;
 import ru.arink_group.deliveryapp.domain.interactors.AddIngredientToBasket;
 import ru.arink_group.deliveryapp.domain.interactors.AddItemToBasket;
+import ru.arink_group.deliveryapp.domain.interactors.AddItemToBasketOrNull;
 import ru.arink_group.deliveryapp.domain.interactors.AddListItemsToBasket;
 import ru.arink_group.deliveryapp.domain.interactors.GetListItemsFromBasket;
 import ru.arink_group.deliveryapp.domain.interactors.RemoveItemFromBasket;
@@ -18,6 +19,7 @@ import ru.arink_group.deliveryapp.presentation.di.module.RepositoriesModule;
 import ru.arink_group.deliveryapp.presentation.di.module.StoreModule;
 import ru.arink_group.deliveryapp.presentation.presenter.CategoriesPresenterImpl;
 import ru.arink_group.deliveryapp.presentation.presenter.IngredientsPresenterImpl;
+import ru.arink_group.deliveryapp.presentation.presenter.OrderPresenterImpl;
 import ru.arink_group.deliveryapp.presentation.presenter.ProductsPresenterImpl;
 
 /**
@@ -39,4 +41,6 @@ public interface AppComponent {
     void inject(AddListItemsToBasket addListItemsToBasket);
     void inject(IngredientsPresenterImpl ingredientsPresenter);
     void inject(AddIngredientToBasket addIngredientToBasket);
+    void inject(OrderPresenterImpl orderPresenter);
+    void inject(AddItemToBasketOrNull addItemToBasketOrNull);
 }

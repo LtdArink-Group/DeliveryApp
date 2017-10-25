@@ -18,6 +18,13 @@ public class Product implements Serializable {
     private Ingredient[] ingredients;
     private int count;
 
+    private static Product nothing;
+
+    public static Product NOTHING() {
+        if(nothing == null) nothing = new Product();
+        return nothing;
+    }
+
     public Ingredient[] getSelectedIngredients() {
         List<Ingredient> sis = new ArrayList<>();
 

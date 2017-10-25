@@ -13,6 +13,7 @@ import ru.arink_group.deliveryapp.domain.Product;
 public interface SelectedItemsDataStore {
 
     Observable<Boolean> addItemToBasket(Product selectedProduct);
+    Observable<Product> addItemToBasketOrNull(Product selectedProduct);
     Observable<Boolean> removeItemFromBasket(int selectedProductId);
     Observable<List<Product>> getListItemsFromBasket();
     Observable<Integer> addListItemsToBasket(List<Product> listItems);

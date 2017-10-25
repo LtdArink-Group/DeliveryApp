@@ -36,6 +36,17 @@ public class DatabaseSelectedItemsDataStore implements SelectedItemsDataStore {
     }
 
     @Override
+    public Observable<Product> addItemToBasketOrNull(final Product selectedProduct) {
+        return Observable.create(new ObservableOnSubscribe<Product>() {
+            @Override
+            public void subscribe(@NonNull ObservableEmitter<Product> e) throws Exception {
+                e.onNext(db.addItemToBasketOrNull(selectedProduct));
+                e.onComplete();
+            }
+        });
+    }
+
+    @Override
     public Observable<Boolean> removeItemFromBasket(final int selectedProductId) {
         return Observable.create(new ObservableOnSubscribe<Boolean>() {
             @Override

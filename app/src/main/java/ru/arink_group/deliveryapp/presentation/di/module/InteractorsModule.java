@@ -8,6 +8,7 @@ import dagger.Module;
 import dagger.Provides;
 import ru.arink_group.deliveryapp.domain.interactors.AddIngredientToBasket;
 import ru.arink_group.deliveryapp.domain.interactors.AddItemToBasket;
+import ru.arink_group.deliveryapp.domain.interactors.AddItemToBasketOrNull;
 import ru.arink_group.deliveryapp.domain.interactors.AddListItemsToBasket;
 import ru.arink_group.deliveryapp.domain.interactors.GetCategoriesList;
 import ru.arink_group.deliveryapp.domain.interactors.GetListItemsFromBasket;
@@ -68,6 +69,12 @@ public class InteractorsModule {
     @NonNull
     public AddIngredientToBasket provideAddIngredientToBasket() {
         return new AddIngredientToBasket();
+    }
+
+    @Provides
+    @NonNull
+    public AddItemToBasketOrNull provideAddItemToBasketOrNull() {
+        return new AddItemToBasketOrNull();
     }
 
 }
