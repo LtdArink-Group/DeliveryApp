@@ -23,4 +23,12 @@
     <string name="cost">Цена</string>
     <string name="currency">₽</string>
     <string name="summary">Итого</string>
+    <string name="self_export">Самовывоз</string>
+    <string name="summary_cost">Сумма заказа</string>
+    <string name="discount">Скидка</string>
+    <string name="delivery_cost">Доставка</string>
+    <string name="to_pay">К оплате</string>
+    <string name="to_order">Заказать</string>
+    <string name="free">Бесплатно</string>
+    <string name="order_send_ok">Заказ успешно отправлен!</string>
 </resources>

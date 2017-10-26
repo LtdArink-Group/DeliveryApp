@@ -8,6 +8,8 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import ru.arink_group.deliveryapp.R;
+import ru.arink_group.deliveryapp.presentation.view.FabView;
+import ru.arink_group.deliveryapp.presentation.view.MenuView;
 
 import com.google.android.gms.plus.PlusOneButton;
 
@@ -36,6 +38,9 @@ public class OrdersHistoryFragment extends Fragment {
 
         //Find the +1 button
         mPlusOneButton = (PlusOneButton) view.findViewById(R.id.plus_one_button);
+
+        FabView menuView = (FabView) getActivity();
+        menuView.showOrderFab();
 
         return view;
     }

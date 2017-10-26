@@ -13,4 +13,7 @@ public interface OrderView {
     void updateProductState(Product product);
     void updateTotals();
     void showErrorMessage(String e);
+    void showSendingOrderOk();
+    void showPlaceholder();
+    List<Product> getListProducts();
 }

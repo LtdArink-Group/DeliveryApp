@@ -17,6 +17,7 @@ import ru.arink_group.deliveryapp.presentation.adapters.IngredientsListAdapter;
 import ru.arink_group.deliveryapp.presentation.adapters.OnIngredientButtonClickListener;
 import ru.arink_group.deliveryapp.presentation.presenter.IngredientsPresenterImpl;
 import ru.arink_group.deliveryapp.presentation.presenter.interfaces.IngredientsPresenter;
+import ru.arink_group.deliveryapp.presentation.view.FabView;
 import ru.arink_group.deliveryapp.presentation.view.IngredientsView;
 
 /**
@@ -52,6 +53,21 @@ public class IngredientsFragment extends Fragment implements IngredientsView, On
         recyclerView.setLayoutManager(llm);
         recyclerView.setHasFixedSize(true);
         recyclerView.setAdapter(ingredientsListAdapter);
+
+        final FabView fabView = (FabView) getActivity();
+        fabView.showOrderFab();
+
+        recyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
+            @Override
+            public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
+                if (dy > 0) {
+                    fabView.hideOrderFab();
+                } else if (dy < 0) {
+                    fabView.showOrderFab();
+                }
+                super.onScrolled(recyclerView, dx, dy);
+            }
+        });
 
         return rootView;
     }

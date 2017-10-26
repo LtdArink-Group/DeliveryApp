@@ -20,6 +20,7 @@ import ru.arink_group.deliveryapp.presentation.adapters.OnCategoryClickListener;
 import ru.arink_group.deliveryapp.presentation.presenter.interfaces.CategoriesPresenter;
 import ru.arink_group.deliveryapp.presentation.presenter.CategoriesPresenterImpl;
 import ru.arink_group.deliveryapp.presentation.view.CategoriesView;
+import ru.arink_group.deliveryapp.presentation.view.FabView;
 import ru.arink_group.deliveryapp.presentation.view.MenuView;
 import ru.arink_group.deliveryapp.presentation.view.activity.MenuActivity;
 import ru.arink_group.deliveryapp.presentation.view.activity.ProductsActivity;
@@ -64,7 +65,6 @@ public class CategoriesFragment extends Fragment implements CategoriesView, OnCa
         mv.contentLoaded();
     }
 
-
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -86,6 +86,21 @@ public class CategoriesFragment extends Fragment implements CategoriesView, OnCa
 
         categoriesPresenter.getCategoriesList();
         categoriesAdapter.setListener(this);
+
+        final FabView fabView = (FabView) getActivity();
+        fabView.showOrderFab();
+
+        mRecyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
+            @Override
+            public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
+                if (dy > 0) {
+                    fabView.hideOrderFab();
+                } else if (dy < 0) {
+                    fabView.showOrderFab();
+                }
+                super.onScrolled(recyclerView, dx, dy);
+            }
+        });
 
         return rootView;
     }

@@ -48,4 +48,9 @@ public class SelectedItemsDataRepository implements SelectedItemsRepository {
     public Observable<Boolean> addIngredientToProduct(int productId, Ingredient ingredient) {
         return factory.create().addIngredientToProduct(productId, ingredient);
     }
+
+    @Override
+    public Observable<Boolean> clearItemsFromBasket() {
+        return factory.create().clearSelectedItems();
+    }
 }

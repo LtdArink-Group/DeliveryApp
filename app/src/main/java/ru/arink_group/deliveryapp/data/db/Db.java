@@ -30,6 +30,17 @@ public class Db {
         dbHelper = new DeliveryAppDatabaseHelper(context);
     }
 
+    public Boolean clearAllItems() {
+        SQLiteDatabase writableDb = dbHelper.getWritableDatabase();
+
+        writableDb.delete("selected_products", null, null);
+        writableDb.delete("selected_portions", null, null);
+        writableDb.delete("selected_ingredients", null, null);
+
+        writableDb.close();
+        return true;
+    }
+
     public Boolean addIngredientToProduct(int productId, Ingredient ingredient) {
         long id = getDbIdByProductId(productId);
         if(id == -1) return false;

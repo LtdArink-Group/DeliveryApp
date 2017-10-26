@@ -20,6 +20,7 @@ import ru.arink_group.deliveryapp.presentation.adapters.OnItemClickListener;
 import ru.arink_group.deliveryapp.presentation.adapters.ProductsListAdapter;
 import ru.arink_group.deliveryapp.presentation.presenter.interfaces.ProductsPresenter;
 import ru.arink_group.deliveryapp.presentation.presenter.ProductsPresenterImpl;
+import ru.arink_group.deliveryapp.presentation.view.FabView;
 import ru.arink_group.deliveryapp.presentation.view.ProductsView;
 import ru.arink_group.deliveryapp.presentation.view.activity.IngredientsActivity;
 
@@ -68,7 +69,21 @@ public class ProductsFragment extends Fragment implements ProductsView, OnItemCl
 
         productsPresenter.getProducts(categoryId);
 
-//        Toast.makeText(getActivity(), String.valueOf(categoryId), Toast.LENGTH_LONG).show();
+        final FabView fabView = (FabView) getActivity();
+        fabView.showOrderFab();
+
+        mRecyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
+            @Override
+            public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
+                if (dy > 0) {
+                    fabView.hideOrderFab();
+                } else if (dy < 0) {
+                    fabView.showOrderFab();
+                }
+                super.onScrolled(recyclerView, dx, dy);
+            }
+        });
+
         return rootView;
     }
 

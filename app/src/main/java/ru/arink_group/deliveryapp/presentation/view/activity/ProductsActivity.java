@@ -10,10 +10,13 @@ import android.support.v7.widget.Toolbar;
 import android.view.View;
 
 import ru.arink_group.deliveryapp.R;
+import ru.arink_group.deliveryapp.presentation.view.FabView;
 import ru.arink_group.deliveryapp.presentation.view.fragment.CategoriesFragment;
 import ru.arink_group.deliveryapp.presentation.view.fragment.ProductsFragment;
 
-public class ProductsActivity extends AppCompatActivity {
+public class ProductsActivity extends AppCompatActivity implements FabView {
+
+    private FloatingActionButton fab;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -24,12 +27,13 @@ public class ProductsActivity extends AppCompatActivity {
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
+        fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
+                Intent intent = new Intent(ProductsActivity.this, MenuActivity.class);
+                intent.putExtra(MenuActivity.IS_ORDER_START, true);
+                ProductsActivity.this.startActivity(intent);
             }
         });
 
@@ -49,4 +53,13 @@ public class ProductsActivity extends AppCompatActivity {
 
     }
 
+    @Override
+    public void showOrderFab() {
+        fab.show();
+    }
+
+    @Override
+    public void hideOrderFab() {
+        fab.hide();
+    }
 }

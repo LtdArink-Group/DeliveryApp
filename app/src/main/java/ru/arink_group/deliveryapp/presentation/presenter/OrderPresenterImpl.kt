@@ -2,9 +2,7 @@ package ru.arink_group.deliveryapp.presentation.presenter
 
 import io.reactivex.observers.DisposableObserver
 import ru.arink_group.deliveryapp.domain.Product
-import ru.arink_group.deliveryapp.domain.interactors.AddItemToBasket
-import ru.arink_group.deliveryapp.domain.interactors.AddItemToBasketOrNull
-import ru.arink_group.deliveryapp.domain.interactors.GetListItemsFromBasket
+import ru.arink_group.deliveryapp.domain.interactors.*
 import ru.arink_group.deliveryapp.presentation.App
 import ru.arink_group.deliveryapp.presentation.presenter.interfaces.OrderPresenter
 import ru.arink_group.deliveryapp.presentation.view.OrderView
@@ -21,12 +19,15 @@ class OrderPresenterImpl(val orderView: OrderView): OrderPresenter {
     @Inject
     lateinit var addItemToBasketOrNull:AddItemToBasketOrNull
 
+    @Inject
+    lateinit var sendOrderToServer: SendOrderToServer
+
+    @Inject
+    lateinit var clearItemsFromBasket: ClearItemsFromBasket
+
+
     init {
         App.getComponent().inject(this)
-    }
-
-    override fun getProductsFromBasket() {
-        getListItemsFromBasket.execute(ProductsDisposableObserver(), GetListItemsFromBasket.Params())
     }
 
     override fun getTotals() {
@@ -46,8 +47,16 @@ class OrderPresenterImpl(val orderView: OrderView): OrderPresenter {
         addItemToBasketOrNull.dispose()
     }
 
+    override fun getProductsFromBasket() {
+        getListItemsFromBasket.execute(ProductsDisposableObserver(), GetListItemsFromBasket.Params())
+    }
+
     override fun updateProduct(product: Product) {
         addItemToBasketOrNull.execute(UpdateProductDisposableObserver(), AddItemToBasketOrNull.Params(product))
+    }
+
+    override fun sendOrderToServer() {
+        sendOrderToServer.execute(SendOrderToServerDisposableObserver(), SendOrderToServer.Params(orderView.listProducts))
     }
 
     inner class ProductsDisposableObserver: DisposableObserver<List<Product>>() {
@@ -57,6 +66,7 @@ class OrderPresenterImpl(val orderView: OrderView): OrderPresenter {
         }
 
         override fun onComplete() {
+            orderView.updateTotals()
         }
 
         override fun onNext(t: List<Product>) {
@@ -68,6 +78,7 @@ class OrderPresenterImpl(val orderView: OrderView): OrderPresenter {
     inner class UpdateProductDisposableObserver: DisposableObserver<Product>() {
 
         override fun onComplete() {
+            orderView.updateTotals()
         }
 
         override fun onError(e: Throwable) {
@@ -76,6 +87,35 @@ class OrderPresenterImpl(val orderView: OrderView): OrderPresenter {
 
         override fun onNext(t: Product) {
             orderView.updateProductState(t)
+        }
+
+    }
+
+    inner class SendOrderToServerDisposableObserver: DisposableObserver<Boolean>() {
+        override fun onError(e: Throwable) {
+            orderView.showErrorMessage(e.message)
+        }
+
+        override fun onComplete() {
+            clearItemsFromBasket.execute(ClearItemsFromBasketDisposableObserver(), ClearItemsFromBasket.Params())
+        }
+
+        override fun onNext(t: Boolean) {
+            orderView.showSendingOrderOk()
+        }
+
+    }
+
+    inner class ClearItemsFromBasketDisposableObserver: DisposableObserver<Boolean>() {
+        override fun onComplete() {
+            orderView.showPlaceholder()
+        }
+
+        override fun onError(e: Throwable) {
+            orderView.showErrorMessage(e.message)
+        }
+
+        override fun onNext(t: Boolean) {
         }
 
     }

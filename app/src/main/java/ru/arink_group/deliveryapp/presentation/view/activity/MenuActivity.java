@@ -18,13 +18,18 @@ import android.view.MenuItem;
 import ru.arink_group.deliveryapp.R;
 import ru.arink_group.deliveryapp.presentation.presenter.interfaces.MenuPresenter;
 import ru.arink_group.deliveryapp.presentation.presenter.MenuPresenterImpl;
+import ru.arink_group.deliveryapp.presentation.view.FabView;
 import ru.arink_group.deliveryapp.presentation.view.MenuView;
 import ru.arink_group.deliveryapp.presentation.view.fragment.CategoriesFragment;
+import ru.arink_group.deliveryapp.presentation.view.fragment.OrderFragment;
 
 public class MenuActivity extends AppCompatActivity
-        implements MenuView, NavigationView.OnNavigationItemSelectedListener {
+        implements MenuView, NavigationView.OnNavigationItemSelectedListener, FabView {
+
+    public static final String IS_ORDER_START = "is order start";
 
     private MenuPresenter menuPresenter;
+    private FloatingActionButton fab;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,14 +41,15 @@ public class MenuActivity extends AppCompatActivity
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
+        fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
+                OrderFragment orderFragment = new OrderFragment();
+                MenuActivity.this.changeFragment(orderFragment);
             }
         });
+
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -57,10 +63,18 @@ public class MenuActivity extends AppCompatActivity
 
         menuPresenter = new MenuPresenterImpl(this);
 
-        FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
-        fragmentTransaction.add(R.id.menu_fragment, new CategoriesFragment());
-        fragmentTransaction.commit();
+        starterFragment();
 
+    }
+
+    private void starterFragment() {
+        FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
+        if(getIntent().getBooleanExtra(IS_ORDER_START, false)) {
+            fragmentTransaction.add(R.id.menu_fragment, new OrderFragment());
+        } else {
+            fragmentTransaction.add(R.id.menu_fragment, new CategoriesFragment());
+        }
+        fragmentTransaction.commit();
     }
 
     @Override
@@ -124,5 +138,15 @@ public class MenuActivity extends AppCompatActivity
     @Override
     public void contentLoaded() {
 //        menuPresenter.onItemMenuSelect(R.id.carte);
+    }
+
+    @Override
+    public void showOrderFab() {
+        fab.show();
+    }
+
+    @Override
+    public void hideOrderFab(){
+        fab.hide();
     }
 }

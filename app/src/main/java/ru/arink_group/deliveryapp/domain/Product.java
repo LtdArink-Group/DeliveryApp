@@ -102,6 +102,15 @@ public class Product implements Serializable {
         return 0;
     }
 
+    public double getTotalSelectedSum() {
+        double mainOptionCost = this.getSelectedPortion().getPrice() * (double) this.getCount();
+        double ingredientsCost = 0.0;
+        for (Ingredient ingredient : this.getSelectedIngredients()) {
+            ingredientsCost += ingredient.getPrice() * (double) ingredient.getCount();
+        }
+        return mainOptionCost + ingredientsCost;
+    }
+
     // Getters and Setters
 
     public int getId() {

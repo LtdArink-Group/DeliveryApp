@@ -89,4 +89,15 @@ public class DatabaseSelectedItemsDataStore implements SelectedItemsDataStore {
             }
         });
     }
+
+    @Override
+    public Observable<Boolean> clearSelectedItems() {
+        return Observable.create(new ObservableOnSubscribe<Boolean>() {
+            @Override
+            public void subscribe(@NonNull ObservableEmitter<Boolean> e) throws Exception {
+                e.onNext(db.clearAllItems());
+                e.onComplete();
+            }
+        });
+    }
 }

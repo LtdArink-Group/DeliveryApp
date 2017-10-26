@@ -21,4 +21,6 @@ public interface SelectedItemsRepository {
     Observable<List<Product>> getListItemsFromBasket();
 
     Observable<Boolean> addIngredientToProduct(int productId, Ingredient ingredient);
+
+    Observable<Boolean> clearItemsFromBasket();
 }

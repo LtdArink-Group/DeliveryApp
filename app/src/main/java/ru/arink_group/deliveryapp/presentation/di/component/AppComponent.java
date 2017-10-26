@@ -10,6 +10,7 @@ import ru.arink_group.deliveryapp.domain.interactors.AddIngredientToBasket;
 import ru.arink_group.deliveryapp.domain.interactors.AddItemToBasket;
 import ru.arink_group.deliveryapp.domain.interactors.AddItemToBasketOrNull;
 import ru.arink_group.deliveryapp.domain.interactors.AddListItemsToBasket;
+import ru.arink_group.deliveryapp.domain.interactors.ClearItemsFromBasket;
 import ru.arink_group.deliveryapp.domain.interactors.GetListItemsFromBasket;
 import ru.arink_group.deliveryapp.domain.interactors.RemoveItemFromBasket;
 import ru.arink_group.deliveryapp.presentation.di.module.AppModule;
@@ -43,4 +44,5 @@ public interface AppComponent {
     void inject(AddIngredientToBasket addIngredientToBasket);
     void inject(OrderPresenterImpl orderPresenter);
     void inject(AddItemToBasketOrNull addItemToBasketOrNull);
+    void inject(ClearItemsFromBasket clearItemsFromBasket);
 }

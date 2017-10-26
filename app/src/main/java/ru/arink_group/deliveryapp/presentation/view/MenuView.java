@@ -10,5 +10,4 @@ public interface MenuView {
 
     void changeFragment(Fragment frag);
     void contentLoaded();
-
 }

@@ -10,4 +10,5 @@ public interface OrderPresenter extends Presenter {
     void getProductsFromBasket();
     void getTotals();
     void updateProduct(Product product);
+    void sendOrderToServer();
 }

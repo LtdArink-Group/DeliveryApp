@@ -10,11 +10,13 @@ import ru.arink_group.deliveryapp.domain.interactors.AddIngredientToBasket;
 import ru.arink_group.deliveryapp.domain.interactors.AddItemToBasket;
 import ru.arink_group.deliveryapp.domain.interactors.AddItemToBasketOrNull;
 import ru.arink_group.deliveryapp.domain.interactors.AddListItemsToBasket;
+import ru.arink_group.deliveryapp.domain.interactors.ClearItemsFromBasket;
 import ru.arink_group.deliveryapp.domain.interactors.GetCategoriesList;
 import ru.arink_group.deliveryapp.domain.interactors.GetListItemsFromBasket;
 import ru.arink_group.deliveryapp.domain.interactors.GetProduct;
 import ru.arink_group.deliveryapp.domain.interactors.GetProductsList;
 import ru.arink_group.deliveryapp.domain.interactors.RemoveItemFromBasket;
+import ru.arink_group.deliveryapp.domain.interactors.SendOrderToServer;
 
 /**
  * Created by kirillvs on 06.10.17.
@@ -77,4 +79,15 @@ public class InteractorsModule {
         return new AddItemToBasketOrNull();
     }
 
+    @Provides
+    @NonNull
+    public SendOrderToServer provideSendOrderToServer() {
+        return new SendOrderToServer();
+    }
+
+    @Provides
+    @NonNull
+    public ClearItemsFromBasket provideClearItemsFromBasket() {
+        return new ClearItemsFromBasket();
+    }
 }

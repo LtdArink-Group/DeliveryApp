@@ -86,6 +86,9 @@ class OrdersListAdapter: RecyclerView.Adapter<OrdersListAdapter.ViewHolder>() {
             orderProduct.count --
             productChangeListener.onChangeProduct(orderProduct)
         }
+        ingredientsAdapter.setOnIngredientChangeListener {
+            productChangeListener.onChangeProduct(orderProduct)
+        }
     }
 
     override fun getItemCount(): Int {
