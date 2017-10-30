@@ -19,13 +19,13 @@ import ru.arink_group.deliveryapp.presentation.App;
  * Created by kirillvs on 09.10.17.
  */
 
-public class Db {
+public class ProductsDbHelper {
 
     @Inject public Context context;
     private DeliveryAppDatabaseHelper dbHelper;
 
 
-    public Db() {
+    public ProductsDbHelper() {
         App.getComponent().inject(this);
         dbHelper = new DeliveryAppDatabaseHelper(context);
     }

@@ -1,7 +1,7 @@
-package ru.arink_group.deliveryapp.data.repository.datasource;
+package ru.arink_group.deliveryapp.data.repository.factory;
 
-import ru.arink_group.deliveryapp.data.fake.FakeProductDataStore;
 import ru.arink_group.deliveryapp.data.net.NetProductDataStore;
+import ru.arink_group.deliveryapp.data.repository.datasource.ProductDataStore;
 
 /**
  * Created by kirillvs on 03.10.17.

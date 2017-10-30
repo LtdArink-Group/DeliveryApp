@@ -1,7 +1,7 @@
-package ru.arink_group.deliveryapp.data.repository.datasource;
+package ru.arink_group.deliveryapp.data.repository.factory;
 
-import ru.arink_group.deliveryapp.data.fake.FakeCategoryDataStore;
 import ru.arink_group.deliveryapp.data.net.NetCategoryDataStore;
+import ru.arink_group.deliveryapp.data.repository.datasource.CategoryDataStore;
 
 /**
  * Created by kirillvs on 03.10.17.

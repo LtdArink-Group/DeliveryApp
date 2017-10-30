@@ -19,7 +19,7 @@ public class App extends Application {
     }
 
     public static String getCompanyId() {
-        return "6";
+        return "7";
     }
 
     @Override

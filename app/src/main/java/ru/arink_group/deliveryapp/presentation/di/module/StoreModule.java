@@ -4,7 +4,7 @@ import android.support.annotation.NonNull;
 
 import dagger.Module;
 import dagger.Provides;
-import ru.arink_group.deliveryapp.data.repository.datasource.DatabaseSelectedItemsDataStore;
+import ru.arink_group.deliveryapp.data.repository.datasource.implementation.DatabaseSelectedItemsDataStore;
 import ru.arink_group.deliveryapp.data.repository.datasource.SelectedItemsDataStore;
 
 /**

@@ -1,7 +1,8 @@
-package ru.arink_group.deliveryapp.data.repository.datasource;
+package ru.arink_group.deliveryapp.data.repository.factory;
 
 import javax.inject.Inject;
 
+import ru.arink_group.deliveryapp.data.repository.datasource.SelectedItemsDataStore;
 import ru.arink_group.deliveryapp.presentation.App;
 
 /**

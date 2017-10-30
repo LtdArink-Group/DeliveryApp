@@ -3,9 +3,9 @@ package ru.arink_group.deliveryapp.presentation.di.component;
 import javax.inject.Singleton;
 
 import dagger.Component;
-import ru.arink_group.deliveryapp.data.db.Db;
+import ru.arink_group.deliveryapp.data.db.ProductsDbHelper;
 import ru.arink_group.deliveryapp.data.repository.SelectedItemsDataRepository;
-import ru.arink_group.deliveryapp.data.repository.datasource.SelectedItemsDataFactory;
+import ru.arink_group.deliveryapp.data.repository.factory.SelectedItemsDataFactory;
 import ru.arink_group.deliveryapp.domain.interactors.AddIngredientToBasket;
 import ru.arink_group.deliveryapp.domain.interactors.AddItemToBasket;
 import ru.arink_group.deliveryapp.domain.interactors.AddItemToBasketOrNull;
@@ -38,7 +38,7 @@ public interface AppComponent {
     void inject(AddItemToBasket addItemToBasket);
     void inject(SelectedItemsDataRepository selectedItemsDataRepository);
     void inject(SelectedItemsDataFactory selectedItemsDataFactory);
-    void inject(Db db);
+    void inject(ProductsDbHelper productsDbHelper);
     void inject(AddListItemsToBasket addListItemsToBasket);
     void inject(IngredientsPresenterImpl ingredientsPresenter);
     void inject(AddIngredientToBasket addIngredientToBasket);

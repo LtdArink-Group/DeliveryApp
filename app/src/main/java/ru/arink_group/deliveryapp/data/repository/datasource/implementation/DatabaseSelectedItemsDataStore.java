@@ -1,4 +1,4 @@
-package ru.arink_group.deliveryapp.data.repository.datasource;
+package ru.arink_group.deliveryapp.data.repository.datasource.implementation;
 
 
 import java.util.List;
@@ -7,7 +7,8 @@ import io.reactivex.Observable;
 import io.reactivex.ObservableEmitter;
 import io.reactivex.ObservableOnSubscribe;
 import io.reactivex.annotations.NonNull;
-import ru.arink_group.deliveryapp.data.db.Db;
+import ru.arink_group.deliveryapp.data.db.ProductsDbHelper;
+import ru.arink_group.deliveryapp.data.repository.datasource.SelectedItemsDataStore;
 import ru.arink_group.deliveryapp.domain.Ingredient;
 import ru.arink_group.deliveryapp.domain.Product;
 
@@ -17,10 +18,10 @@ import ru.arink_group.deliveryapp.domain.Product;
 
 public class DatabaseSelectedItemsDataStore implements SelectedItemsDataStore {
 
-    Db db;
+    ProductsDbHelper productsDbHelper;
 
     public DatabaseSelectedItemsDataStore() {
-        db = new Db();
+        productsDbHelper = new ProductsDbHelper();
     }
 
 
@@ -29,7 +30,7 @@ public class DatabaseSelectedItemsDataStore implements SelectedItemsDataStore {
         return Observable.create(new ObservableOnSubscribe<Boolean>() {
             @Override
             public void subscribe(@NonNull ObservableEmitter<Boolean> e) throws Exception {
-                e.onNext(db.addItemToBasket(selectedProduct));
+                e.onNext(productsDbHelper.addItemToBasket(selectedProduct));
                 e.onComplete();
             }
         });
@@ -40,7 +41,7 @@ public class DatabaseSelectedItemsDataStore implements SelectedItemsDataStore {
         return Observable.create(new ObservableOnSubscribe<Product>() {
             @Override
             public void subscribe(@NonNull ObservableEmitter<Product> e) throws Exception {
-                e.onNext(db.addItemToBasketOrNull(selectedProduct));
+                e.onNext(productsDbHelper.addItemToBasketOrNull(selectedProduct));
                 e.onComplete();
             }
         });
@@ -51,7 +52,7 @@ public class DatabaseSelectedItemsDataStore implements SelectedItemsDataStore {
         return Observable.create(new ObservableOnSubscribe<Boolean>() {
             @Override
             public void subscribe(@NonNull ObservableEmitter<Boolean> e) throws Exception {
-                e.onNext(db.removeItemFromBasket(selectedProductId));
+                e.onNext(productsDbHelper.removeItemFromBasket(selectedProductId));
                 e.onComplete();
             }
         });
@@ -62,7 +63,7 @@ public class DatabaseSelectedItemsDataStore implements SelectedItemsDataStore {
         return Observable.create(new ObservableOnSubscribe<List<Product>>() {
             @Override
             public void subscribe(@NonNull ObservableEmitter<List<Product>> e) throws Exception {
-                e.onNext(db.getListItemsFromBasket());
+                e.onNext(productsDbHelper.getListItemsFromBasket());
                 e.onComplete();
             }
         });
@@ -73,7 +74,7 @@ public class DatabaseSelectedItemsDataStore implements SelectedItemsDataStore {
         return Observable.create(new ObservableOnSubscribe<Integer>() {
             @Override
             public void subscribe(@NonNull ObservableEmitter<Integer> e) throws Exception {
-                e.onNext(db.addListItemsToBasket(listItems));
+                e.onNext(productsDbHelper.addListItemsToBasket(listItems));
                 e.onComplete();
             }
         });
@@ -84,7 +85,7 @@ public class DatabaseSelectedItemsDataStore implements SelectedItemsDataStore {
         return Observable.create(new ObservableOnSubscribe<Boolean>() {
             @Override
             public void subscribe(@NonNull ObservableEmitter<Boolean> e) throws Exception {
-                e.onNext(db.addIngredientToProduct(productId, ingredient));
+                e.onNext(productsDbHelper.addIngredientToProduct(productId, ingredient));
                 e.onComplete();
             }
         });
@@ -95,7 +96,7 @@ public class DatabaseSelectedItemsDataStore implements SelectedItemsDataStore {
         return Observable.create(new ObservableOnSubscribe<Boolean>() {
             @Override
             public void subscribe(@NonNull ObservableEmitter<Boolean> e) throws Exception {
-                e.onNext(db.clearAllItems());
+                e.onNext(productsDbHelper.clearAllItems());
                 e.onComplete();
             }
         });
