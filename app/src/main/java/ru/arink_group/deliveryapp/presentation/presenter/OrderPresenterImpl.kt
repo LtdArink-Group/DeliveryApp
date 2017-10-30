@@ -3,7 +3,7 @@ package ru.arink_group.deliveryapp.presentation.presenter
 import io.reactivex.observers.DisposableObserver
 import ru.arink_group.deliveryapp.domain.Product
 import ru.arink_group.deliveryapp.domain.interactors.*
-import ru.arink_group.deliveryapp.presentation.App
+import ru.arink_group.deliveryapp.App
 import ru.arink_group.deliveryapp.presentation.presenter.interfaces.OrderPresenter
 import ru.arink_group.deliveryapp.presentation.view.OrderView
 import javax.inject.Inject

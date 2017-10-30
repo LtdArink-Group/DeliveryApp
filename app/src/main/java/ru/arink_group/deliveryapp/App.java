@@ -1,6 +1,9 @@
-package ru.arink_group.deliveryapp.presentation;
+package ru.arink_group.deliveryapp;
 
 import android.app.Application;
+import android.content.SharedPreferences;
+
+import java.util.UUID;
 
 import ru.arink_group.deliveryapp.presentation.di.component.AppComponent;
 import ru.arink_group.deliveryapp.presentation.di.component.DaggerAppComponent;
@@ -13,6 +16,9 @@ import ru.arink_group.deliveryapp.presentation.di.module.InteractorsModule;
 
 public class App extends Application {
 
+    private static String unigueID = null;
+    private static final String PREF_UNIQ_ID = "PREF_UNIQ_ID";
+
     private static AppComponent component;
     public static AppComponent getComponent() {
         return component;
@@ -22,10 +28,25 @@ public class App extends Application {
         return "7";
     }
 
+    public static String getUUID() {
+        return unigueID;
+    }
+
     @Override
     public void onCreate() {
         super.onCreate();
         component = buildComponent();
+
+        SharedPreferences sharedPreferences = this.getSharedPreferences(PREF_UNIQ_ID, this.MODE_PRIVATE);
+        unigueID = sharedPreferences.getString(PREF_UNIQ_ID, null);
+
+        if(unigueID == null) {
+            unigueID = UUID.randomUUID().toString();
+            SharedPreferences.Editor editor = sharedPreferences.edit();
+            editor.putString(PREF_UNIQ_ID, unigueID);
+            editor.commit();
+        }
+
     }
 
     protected AppComponent buildComponent() {

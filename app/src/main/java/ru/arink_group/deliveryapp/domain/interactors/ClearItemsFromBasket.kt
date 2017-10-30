@@ -2,7 +2,7 @@ package ru.arink_group.deliveryapp.domain.interactors
 
 import io.reactivex.Observable
 import ru.arink_group.deliveryapp.domain.repository.SelectedItemsRepository
-import ru.arink_group.deliveryapp.presentation.App
+import ru.arink_group.deliveryapp.App
 import javax.inject.Inject
 
 /**

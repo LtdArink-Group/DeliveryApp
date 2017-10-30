@@ -4,15 +4,23 @@ import javax.inject.Singleton;
 
 import dagger.Component;
 import ru.arink_group.deliveryapp.data.db.ProductsDbHelper;
+import ru.arink_group.deliveryapp.data.repository.AccountDataRepository;
 import ru.arink_group.deliveryapp.data.repository.SelectedItemsDataRepository;
+import ru.arink_group.deliveryapp.data.repository.factory.AccountDataFactory;
 import ru.arink_group.deliveryapp.data.repository.factory.SelectedItemsDataFactory;
+import ru.arink_group.deliveryapp.domain.interactors.AddAddress;
 import ru.arink_group.deliveryapp.domain.interactors.AddIngredientToBasket;
 import ru.arink_group.deliveryapp.domain.interactors.AddItemToBasket;
 import ru.arink_group.deliveryapp.domain.interactors.AddItemToBasketOrNull;
 import ru.arink_group.deliveryapp.domain.interactors.AddListItemsToBasket;
 import ru.arink_group.deliveryapp.domain.interactors.ClearItemsFromBasket;
+import ru.arink_group.deliveryapp.domain.interactors.CreateAccount;
+import ru.arink_group.deliveryapp.domain.interactors.DeleteAddress;
+import ru.arink_group.deliveryapp.domain.interactors.GetAccount;
 import ru.arink_group.deliveryapp.domain.interactors.GetListItemsFromBasket;
 import ru.arink_group.deliveryapp.domain.interactors.RemoveItemFromBasket;
+import ru.arink_group.deliveryapp.domain.interactors.UpdateAccount;
+import ru.arink_group.deliveryapp.domain.interactors.UpdateAddress;
 import ru.arink_group.deliveryapp.presentation.di.module.AppModule;
 import ru.arink_group.deliveryapp.presentation.di.module.FactoriesModule;
 import ru.arink_group.deliveryapp.presentation.di.module.InteractorsModule;
@@ -45,4 +53,12 @@ public interface AppComponent {
     void inject(OrderPresenterImpl orderPresenter);
     void inject(AddItemToBasketOrNull addItemToBasketOrNull);
     void inject(ClearItemsFromBasket clearItemsFromBasket);
+    void inject(AccountDataFactory accountDataFactory);
+    void inject(AccountDataRepository accountDataRepository);
+    void inject(CreateAccount createAccount);
+    void inject(UpdateAccount updateAccount);
+    void inject(AddAddress addAddress);
+    void inject(UpdateAddress updateAddress);
+    void inject(DeleteAddress deleteAddress);
+    void inject(GetAccount getAccount);
 }

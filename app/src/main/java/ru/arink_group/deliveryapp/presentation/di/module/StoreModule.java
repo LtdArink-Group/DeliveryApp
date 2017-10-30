@@ -4,6 +4,8 @@ import android.support.annotation.NonNull;
 
 import dagger.Module;
 import dagger.Provides;
+import ru.arink_group.deliveryapp.data.net.NetAccountDataStore;
+import ru.arink_group.deliveryapp.data.repository.datasource.AccountDataStore;
 import ru.arink_group.deliveryapp.data.repository.datasource.implementation.DatabaseSelectedItemsDataStore;
 import ru.arink_group.deliveryapp.data.repository.datasource.SelectedItemsDataStore;
 
@@ -18,5 +20,11 @@ public class StoreModule {
     @NonNull
     public SelectedItemsDataStore selectedItemsDataStore() {
         return new DatabaseSelectedItemsDataStore();
+    }
+
+    @Provides
+    @NonNull
+    public AccountDataStore provideAccountDataStore() {
+        return new NetAccountDataStore();
     }
 }

@@ -4,6 +4,7 @@ import android.support.annotation.NonNull;
 
 import dagger.Module;
 import dagger.Provides;
+import ru.arink_group.deliveryapp.data.repository.factory.AccountDataFactory;
 import ru.arink_group.deliveryapp.data.repository.factory.SelectedItemsDataFactory;
 
 /**
@@ -17,5 +18,11 @@ public class FactoriesModule {
     @NonNull
     public SelectedItemsDataFactory selectedItemsDataFactory() {
         return new SelectedItemsDataFactory();
+    }
+
+    @Provides
+    @NonNull
+    public AccountDataFactory accountDataFactory() {
+        return new AccountDataFactory();
     }
 }
