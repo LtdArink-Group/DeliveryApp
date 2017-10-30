@@ -7,7 +7,9 @@ import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Toast;
 
+import ru.arink_group.deliveryapp.App;
 import ru.arink_group.deliveryapp.R;
 import ru.arink_group.deliveryapp.presentation.view.fragment.LoadFragment;
 
@@ -34,8 +36,6 @@ public class MainActivity extends AppCompatActivity {
         };
 
         handler.postDelayed(r, 1000);
-
-
     }
 
     private void startApp() {

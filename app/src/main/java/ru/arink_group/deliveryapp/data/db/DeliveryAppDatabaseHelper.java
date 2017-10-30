@@ -46,6 +46,7 @@ public class DeliveryAppDatabaseHelper extends SQLiteOpenHelper {
                     + "price REAL, "
                     + "count INTEGER, "
                     + "selected_product_id INTEGER);");
+
     }
 
     @Override

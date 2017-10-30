@@ -13,19 +13,19 @@ import javax.inject.Inject;
 import ru.arink_group.deliveryapp.domain.Ingredient;
 import ru.arink_group.deliveryapp.domain.Portion;
 import ru.arink_group.deliveryapp.domain.Product;
-import ru.arink_group.deliveryapp.presentation.App;
+import ru.arink_group.deliveryapp.App;
 
 /**
  * Created by kirillvs on 09.10.17.
  */
 
-public class Db {
+public class ProductsDbHelper {
 
     @Inject public Context context;
     private DeliveryAppDatabaseHelper dbHelper;
 
 
-    public Db() {
+    public ProductsDbHelper() {
         App.getComponent().inject(this);
         dbHelper = new DeliveryAppDatabaseHelper(context);
     }

@@ -3,8 +3,7 @@ package ru.arink_group.deliveryapp.data.repository;
 import java.util.List;
 
 import io.reactivex.Observable;
-import ru.arink_group.deliveryapp.data.repository.datasource.ProductsDataStoreFactory;
-import ru.arink_group.deliveryapp.domain.Product;
+import ru.arink_group.deliveryapp.data.repository.factory.ProductsDataStoreFactory;
 import ru.arink_group.deliveryapp.domain.dto.ProductDTO;
 import ru.arink_group.deliveryapp.domain.repository.ProductsRepository;
 
