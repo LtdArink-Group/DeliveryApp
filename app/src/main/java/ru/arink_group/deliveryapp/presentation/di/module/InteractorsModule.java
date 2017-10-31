@@ -6,17 +6,23 @@ import javax.inject.Singleton;
 
 import dagger.Module;
 import dagger.Provides;
+import ru.arink_group.deliveryapp.domain.interactors.AddAddress;
 import ru.arink_group.deliveryapp.domain.interactors.AddIngredientToBasket;
 import ru.arink_group.deliveryapp.domain.interactors.AddItemToBasket;
 import ru.arink_group.deliveryapp.domain.interactors.AddItemToBasketOrNull;
 import ru.arink_group.deliveryapp.domain.interactors.AddListItemsToBasket;
 import ru.arink_group.deliveryapp.domain.interactors.ClearItemsFromBasket;
+import ru.arink_group.deliveryapp.domain.interactors.CreateAccount;
+import ru.arink_group.deliveryapp.domain.interactors.DeleteAddress;
+import ru.arink_group.deliveryapp.domain.interactors.GetAccount;
 import ru.arink_group.deliveryapp.domain.interactors.GetCategoriesList;
 import ru.arink_group.deliveryapp.domain.interactors.GetListItemsFromBasket;
 import ru.arink_group.deliveryapp.domain.interactors.GetProduct;
 import ru.arink_group.deliveryapp.domain.interactors.GetProductsList;
 import ru.arink_group.deliveryapp.domain.interactors.RemoveItemFromBasket;
 import ru.arink_group.deliveryapp.domain.interactors.SendOrderToServer;
+import ru.arink_group.deliveryapp.domain.interactors.UpdateAccount;
+import ru.arink_group.deliveryapp.domain.interactors.UpdateAddress;
 
 /**
  * Created by kirillvs on 06.10.17.
@@ -89,5 +95,41 @@ public class InteractorsModule {
     @NonNull
     public ClearItemsFromBasket provideClearItemsFromBasket() {
         return new ClearItemsFromBasket();
+    }
+
+    @Provides
+    @NonNull
+    public CreateAccount createAccount() {
+        return new CreateAccount();
+    }
+
+    @Provides
+    @NonNull
+    public UpdateAccount updateAccount() {
+        return new UpdateAccount();
+    }
+
+    @Provides
+    @NonNull
+    public AddAddress addAddress() {
+        return new AddAddress();
+    }
+
+    @Provides
+    @NonNull
+    public UpdateAddress updateAddress() {
+        return new UpdateAddress();
+    }
+
+    @Provides
+    @NonNull
+    public DeleteAddress deleteAddress() {
+        return new DeleteAddress();
+    }
+
+    @Provides
+    @NonNull
+    public GetAccount getAccount() {
+        return new GetAccount();
     }
 }

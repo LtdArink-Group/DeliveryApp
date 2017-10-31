@@ -4,12 +4,14 @@ import io.reactivex.Observable
 import ru.arink_group.deliveryapp.domain.dto.AccountDTO
 import ru.arink_group.deliveryapp.domain.repository.AccountRepository
 import ru.arink_group.deliveryapp.App
+import ru.arink_group.deliveryapp.domain.Account
+import ru.arink_group.deliveryapp.domain.dto.TransformerDTO
 import javax.inject.Inject
 
 /**
  * Created by kirillvs on 30.10.17.
  */
-class CreateAccount: UseCase<AccountDTO, CreateAccount.Params>() {
+class CreateAccount: UseCase<Account, CreateAccount.Params>() {
 
     @Inject
     lateinit var accountRepository: AccountRepository
@@ -18,8 +20,8 @@ class CreateAccount: UseCase<AccountDTO, CreateAccount.Params>() {
         App.getComponent().inject(this)
     }
 
-    override fun buildUseCaseObservable(params: Params): Observable<AccountDTO> {
-        return accountRepository.createAccount(params.account)
+    override fun buildUseCaseObservable(params: Params): Observable<Account> {
+        return accountRepository.createAccount(params.account).map { TransformerDTO.transformAccount(it) }
     }
 
     data class Params(val account: AccountDTO)

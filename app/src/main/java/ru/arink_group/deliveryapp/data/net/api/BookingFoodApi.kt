@@ -31,41 +31,38 @@ interface BookingFoodApi {
     @POST("/api/accounts")
     fun createAccount(@Body account: AccountDTO) : Observable<AccountDTO>
 
-    @POST("/api/accounts/1111/update")
-    fun updateAccount(@Body account: AccountDTO) : Observable<AccountDTO>
+    @POST("/api/accounts/{accountId}/update")
+    fun updateAccount(@Path("accountId") accountId: String, @Body account: AccountDTO) : Observable<AccountDTO>
 
-    @POST("/api/accounts/1111/addresses")
-    fun addAddress(@Body address: AddressDTO) : Observable<AddressDTO>
+    @POST("/api/accounts/{accountId}/addresses")
+    fun addAddress(@Path("accountId") accountId: String, @Body address: AddressDTO) : Observable<AddressDTO>
 
-    @PATCH("/api/accounts/1111/addresses/{id}")
-    fun updateAddress(@Path("id") addressId: String, @Body address: AddressDTO) : Observable<AddressDTO>
+    @PATCH("/api/accounts/{accountId}/addresses/{addressId}")
+    fun updateAddress(@Path("addressId") addressId: String, @Path("accountId") accountId: String, @Body address: AddressDTO) : Observable<AddressDTO>
 
-    @DELETE("/api/accounts/1111/addresses/{id}")
-    fun deleteAddress(@Path("id") addressId: String) : Observable<Void>
+    @DELETE("/api/accounts/{accountId}/addresses/{addressId}")
+    fun deleteAddress(@Path("addressId") addressId: String, @Path("accountId") accountId: String) : Observable<Void>
 
-    @GET("/api/accounts/1111")
-    fun getAccount(): Observable<AccountDTO>
-
-    // TODO rework, there is no need for 1111
-
+    @GET("/api/accounts/{accountId}")
+    fun getAccount(@Path("accountId") accountId: String): Observable<AccountDTO>
+    
     /**
      * Companion object to create the BoolingFoodApi
      */
     companion object Factory {
         fun create(): BookingFoodApi {
-            val client = OkHttpClient().newBuilder().addInterceptor {
-                chain: Interceptor.Chain ->
-                var request = chain.request()
-                val url = request.url().newBuilder().addQueryParameter("uuid", App.getUUID()).build()
-                request = request.newBuilder().url(url).build()
-                return@addInterceptor chain.proceed(request)
-            }.build()
+//            val client = OkHttpClient().newBuilder().addInterceptor {
+//                chain: Interceptor.Chain ->
+//                var request = chain.request()
+//                val url = request.url().newBuilder().addQueryParameter("uuid", App.getUUID()).build()
+//                request = request.newBuilder().url(url).build()
+//                return@addInterceptor chain.proceed(request)
+//            }.build()
 
             val retrofit = Retrofit.Builder()
                     .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
                     .addConverterFactory(GsonConverterFactory.create())
                     .baseUrl("http://23.101.67.216:8080/")
-                    .client(client)
                     .build()
 
             return retrofit.create(BookingFoodApi::class.java);

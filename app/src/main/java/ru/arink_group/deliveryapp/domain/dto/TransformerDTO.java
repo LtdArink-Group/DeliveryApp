@@ -3,6 +3,9 @@ package ru.arink_group.deliveryapp.domain.dto;
 import java.util.ArrayList;
 import java.util.List;
 
+import ru.arink_group.deliveryapp.App;
+import ru.arink_group.deliveryapp.domain.Account;
+import ru.arink_group.deliveryapp.domain.Address;
 import ru.arink_group.deliveryapp.domain.Category;
 import ru.arink_group.deliveryapp.domain.Ingredient;
 import ru.arink_group.deliveryapp.domain.Portion;
@@ -84,5 +87,35 @@ public class TransformerDTO {
         return ingredients;
     }
 
+    public static Account transformAccount(AccountDTO accountDTO) {
+        return new Account(
+                App.getUUID(),
+                accountDTO.getName(),
+                accountDTO.getEmail(),
+                accountDTO.getPhone(),
+                transformListAddresses(accountDTO.getAddresses())
+        );
+    }
 
+    public static List<Address> transformListAddresses(List<AddressDTO> addressesDTO) {
+        List<Address> addressList = new ArrayList<>();
+        for(AddressDTO addressDTO : addressesDTO) {
+            addressList.add(transformAddress(addressDTO));
+        }
+        return addressList;
+    }
+
+    public static Address transformAddress(AddressDTO addressDTO) {
+        return new Address(
+                addressDTO.getId(),
+                addressDTO.getTitle(),
+                addressDTO.getCity(),
+                addressDTO.getStreet(),
+                addressDTO.getHouse(),
+                addressDTO.getOffice(),
+                addressDTO.getFloor(),
+                addressDTO.getEntrance(),
+                addressDTO.getCode()
+        );
+    }
 }

@@ -31,4 +31,21 @@
     <string name="to_order">Заказать</string>
     <string name="free">Бесплатно</string>
     <string name="order_send_ok">Заказ успешно отправлен!</string>
+    <string name="account_main">Основные сведения</string>
+    <string name="account_name">Имя</string>
+    <string name="account_email">Email</string>
+    <string name="account_phone">Телефон</string>
+    <string name="account_address_title">Адрес</string>
+    <string name="address_title">Название адреса</string>
+    <string name="address_city">Город</string>
+    <string name="address_street">Улица</string>
+    <string name="address_house">Дом</string>
+    <string name="address_office">Квартира/офис</string>
+    <string name="address_floor">Этаж</string>
+    <string name="address_entrance">Подъезд</string>
+    <string name="address_code">Код домофона</string>
+    <string name="account_complete">Отправлено</string>
+    <string name="account_error">Ошибка</string>
+    <string name="account_idle">Отправить</string>
+    <string name="account_progress">Отправляем</string>
 </resources>

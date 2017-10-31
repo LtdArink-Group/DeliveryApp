@@ -26,6 +26,7 @@ import ru.arink_group.deliveryapp.presentation.di.module.FactoriesModule;
 import ru.arink_group.deliveryapp.presentation.di.module.InteractorsModule;
 import ru.arink_group.deliveryapp.presentation.di.module.RepositoriesModule;
 import ru.arink_group.deliveryapp.presentation.di.module.StoreModule;
+import ru.arink_group.deliveryapp.presentation.presenter.AccountPresenterImpl;
 import ru.arink_group.deliveryapp.presentation.presenter.CategoriesPresenterImpl;
 import ru.arink_group.deliveryapp.presentation.presenter.IngredientsPresenterImpl;
 import ru.arink_group.deliveryapp.presentation.presenter.OrderPresenterImpl;
@@ -61,4 +62,5 @@ public interface AppComponent {
     void inject(UpdateAddress updateAddress);
     void inject(DeleteAddress deleteAddress);
     void inject(GetAccount getAccount);
+    void inject(AccountPresenterImpl accountPresenter);
 }

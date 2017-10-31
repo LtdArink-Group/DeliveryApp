@@ -1,6 +1,7 @@
 package ru.arink_group.deliveryapp.data.net
 
 import io.reactivex.Observable
+import ru.arink_group.deliveryapp.App
 import ru.arink_group.deliveryapp.data.net.api.BookingFoodApi
 import ru.arink_group.deliveryapp.data.repository.datasource.AccountDataStore
 import ru.arink_group.deliveryapp.domain.dto.AccountDTO
@@ -18,23 +19,23 @@ class NetAccountDataStore: AccountDataStore {
     }
 
     override fun updateAccount(accountDTO: AccountDTO): Observable<AccountDTO> {
-        return apiService.updateAccount(accountDTO)
+        return apiService.updateAccount(App.getUUID(), accountDTO)
     }
 
     override fun addAddress(addressDTO: AddressDTO): Observable<AddressDTO> {
-        return apiService.addAddress(addressDTO)
+        return apiService.addAddress(App.getUUID(), addressDTO)
     }
 
     override fun updateAddress(addressId: String, addressDTO: AddressDTO): Observable<AddressDTO> {
-        return apiService.updateAddress(addressId, addressDTO)
+        return apiService.updateAddress(addressId, App.getUUID(), addressDTO)
     }
 
     override fun deleteAddress(addressId: String): Observable<Void> {
-        return apiService.deleteAddress(addressId)
+        return apiService.deleteAddress(addressId, App.getUUID())
     }
 
     override fun getAccount(): Observable<AccountDTO> {
-        return apiService.getAccount()
+        return apiService.getAccount(App.getUUID())
     }
 
 }
