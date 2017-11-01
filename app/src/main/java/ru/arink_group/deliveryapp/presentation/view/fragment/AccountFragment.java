@@ -4,15 +4,20 @@ package ru.arink_group.deliveryapp.presentation.view.fragment;
 import android.os.Bundle;
 import android.app.Fragment;
 import android.support.design.widget.TextInputEditText;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.Toast;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import ru.arink_group.deliveryapp.R;
 import ru.arink_group.deliveryapp.domain.Account;
+import ru.arink_group.deliveryapp.domain.Address;
+import ru.arink_group.deliveryapp.presentation.adapters.AddressesListAdapter;
 import ru.arink_group.deliveryapp.presentation.presenter.AccountPresenterImpl;
 import ru.arink_group.deliveryapp.presentation.presenter.interfaces.AccountPresenter;
 import ru.arink_group.deliveryapp.presentation.view.AccountView;
@@ -25,6 +30,8 @@ public class AccountFragment extends Fragment implements AccountView {
 
 
     private AccountPresenter accountPresenter;
+    private Account account;
+    private AddressesListAdapter addressesListAdapter;
 
     @BindView(R.id.account_name)
     TextInputEditText accountName;
@@ -34,6 +41,9 @@ public class AccountFragment extends Fragment implements AccountView {
 
     @BindView(R.id.account_phone)
     TextInputEditText accountPhone;
+
+    @BindView(R.id.send_account_button)
+    Button sendButton;
 
     public AccountFragment() {
         // Required empty public constructor
@@ -55,6 +65,26 @@ public class AccountFragment extends Fragment implements AccountView {
         accountPresenter = new AccountPresenterImpl(this);
         accountPresenter.getAccount();
 
+        RecyclerView recyclerView = rootView.findViewById(R.id.addresses_recycler_view);
+        recyclerView.setHasFixedSize(true);
+
+        addressesListAdapter = new AddressesListAdapter();
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false);
+
+        recyclerView.setLayoutManager(linearLayoutManager);
+        recyclerView.setAdapter(addressesListAdapter);
+
+        sendButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                updateAccountModel();
+                account.setAddresses(addressesListAdapter.getUpdatedList());
+                accountPresenter.updateAccount(account);
+            }
+        });
+
+
+
         return rootView;
     }
 
@@ -65,9 +95,26 @@ public class AccountFragment extends Fragment implements AccountView {
 
     @Override
     public void updateAccount(Account account) {
+        this.account = account;
+        this.updateAccountView();
+        this.addressesListAdapter.updateAddresses(account.getAddresses());
+    }
+
+    private void updateAccountModel() {
+        this.account.setName(accountName.getText().toString());
+        this.account.setEmail(accountEmail.getText().toString());
+        this.account.setPhone(accountPhone.getText().toString());
+    }
+
+    private void updateAccountView() {
         accountName.setText(account.getName());
         accountEmail.setText(account.getEmail());
         accountPhone.setText(account.getPhone());
+    }
+
+    @Override
+    public void updateAddress(Address address) {
+        addressesListAdapter.updateAddress(address);
     }
 
     @Override

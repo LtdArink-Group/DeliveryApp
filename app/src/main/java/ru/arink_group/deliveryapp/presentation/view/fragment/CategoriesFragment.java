@@ -16,7 +16,7 @@ import java.util.List;
 import ru.arink_group.deliveryapp.R;
 import ru.arink_group.deliveryapp.domain.Category;
 import ru.arink_group.deliveryapp.presentation.adapters.CategoriesListAdapter;
-import ru.arink_group.deliveryapp.presentation.adapters.OnCategoryClickListener;
+import ru.arink_group.deliveryapp.presentation.adapters.interfaces.OnCategoryClickListener;
 import ru.arink_group.deliveryapp.presentation.presenter.interfaces.CategoriesPresenter;
 import ru.arink_group.deliveryapp.presentation.presenter.CategoriesPresenterImpl;
 import ru.arink_group.deliveryapp.presentation.view.CategoriesView;

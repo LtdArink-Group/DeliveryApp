@@ -21,8 +21,8 @@ class UpdateAddress: UseCase<Address, UpdateAddress.Params>() {
     }
 
     override fun buildUseCaseObservable(params: Params): Observable<Address> {
-        return accountRepository.updateAddress(params.address.id.toString(), params.address).map { TransformerDTO.transformAddress(it) }
+        return accountRepository.updateAddress(params.address.id.toString(), params.addressDTO).map { TransformerDTO.transformAddress(it) }
     }
 
-    data class Params(val address: AddressDTO)
+    data class Params(val address: Address, val addressDTO: AddressDTO = TransformerDTO.transformAddressDTO(address))
 }

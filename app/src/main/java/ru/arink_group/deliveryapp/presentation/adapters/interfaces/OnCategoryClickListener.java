@@ -1,4 +1,4 @@
-package ru.arink_group.deliveryapp.presentation.adapters;
+package ru.arink_group.deliveryapp.presentation.adapters.interfaces;
 
 import android.widget.TextView;
 

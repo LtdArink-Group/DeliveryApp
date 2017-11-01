@@ -118,4 +118,37 @@ public class TransformerDTO {
                 addressDTO.getCode()
         );
     }
+
+    public static AccountDTO transformAccountDTO(Account account) {
+        AccountDTO accountDTO = new AccountDTO();
+        accountDTO.setEmail(account.getEmail());
+        accountDTO.setId(account.getId());
+        accountDTO.setName(account.getName());
+        accountDTO.setPhone(account.getPhone());
+        if (account.getAddresses() != null)
+            accountDTO.setAddresses(transformListAddressesDTO(account.getAddresses()));
+        return accountDTO;
+    }
+
+    public static List<AddressDTO> transformListAddressesDTO(List<Address> addresses) {
+        List<AddressDTO> addressesDTO = new ArrayList<>();
+        for (Address address : addresses) {
+            addressesDTO.add(transformAddressDTO(address));
+        }
+        return addressesDTO;
+    }
+
+    public static AddressDTO transformAddressDTO(Address address) {
+        AddressDTO addressDTO = new AddressDTO();
+        addressDTO.setId(address.getId());
+        addressDTO.setCity(address.getCity());
+        addressDTO.setCode(address.getCode());
+        addressDTO.setEntrance(address.getEntrance());
+        addressDTO.setFloor(address.getFloor());
+        addressDTO.setHouse(address.getHouse());
+        addressDTO.setOffice(address.getOffice());
+        addressDTO.setStreet(address.getStreet());
+        addressDTO.setTitle(address.getTitle());
+        return addressDTO;
+    }
 }

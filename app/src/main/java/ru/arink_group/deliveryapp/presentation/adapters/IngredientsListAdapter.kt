@@ -5,11 +5,11 @@ import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Switch
 import android.widget.TextView
 import at.markushi.ui.CircleButton
 import ru.arink_group.deliveryapp.R
 import ru.arink_group.deliveryapp.domain.Ingredient
+import ru.arink_group.deliveryapp.presentation.adapters.interfaces.OnIngredientButtonClickListener
 
 /**
  * Created by kirillvs on 17.10.17.

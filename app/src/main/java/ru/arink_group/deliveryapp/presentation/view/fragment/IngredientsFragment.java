@@ -14,7 +14,7 @@ import ru.arink_group.deliveryapp.R;
 import ru.arink_group.deliveryapp.domain.Ingredient;
 import ru.arink_group.deliveryapp.domain.Product;
 import ru.arink_group.deliveryapp.presentation.adapters.IngredientsListAdapter;
-import ru.arink_group.deliveryapp.presentation.adapters.OnIngredientButtonClickListener;
+import ru.arink_group.deliveryapp.presentation.adapters.interfaces.OnIngredientButtonClickListener;
 import ru.arink_group.deliveryapp.presentation.presenter.IngredientsPresenterImpl;
 import ru.arink_group.deliveryapp.presentation.presenter.interfaces.IngredientsPresenter;
 import ru.arink_group.deliveryapp.presentation.view.FabView;

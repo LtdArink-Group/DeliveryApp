@@ -25,8 +25,8 @@ import java.util.Map;
 import at.markushi.ui.CircleButton;
 import ru.arink_group.deliveryapp.R;
 import ru.arink_group.deliveryapp.domain.Product;
-
-import static android.support.constraint.solver.widgets.ConstraintTableLayout.ALIGN_CENTER;
+import ru.arink_group.deliveryapp.presentation.adapters.interfaces.OnIngredientClickListener;
+import ru.arink_group.deliveryapp.presentation.adapters.interfaces.OnItemClickListener;
 
 /**
  * Created by kirillvs on 03.10.17.

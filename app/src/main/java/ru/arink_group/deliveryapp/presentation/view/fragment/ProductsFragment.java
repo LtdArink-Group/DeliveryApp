@@ -15,8 +15,8 @@ import java.util.List;
 
 import ru.arink_group.deliveryapp.R;
 import ru.arink_group.deliveryapp.domain.Product;
-import ru.arink_group.deliveryapp.presentation.adapters.OnIngredientClickListener;
-import ru.arink_group.deliveryapp.presentation.adapters.OnItemClickListener;
+import ru.arink_group.deliveryapp.presentation.adapters.interfaces.OnIngredientClickListener;
+import ru.arink_group.deliveryapp.presentation.adapters.interfaces.OnItemClickListener;
 import ru.arink_group.deliveryapp.presentation.adapters.ProductsListAdapter;
 import ru.arink_group.deliveryapp.presentation.presenter.interfaces.ProductsPresenter;
 import ru.arink_group.deliveryapp.presentation.presenter.ProductsPresenterImpl;

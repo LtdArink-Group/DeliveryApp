@@ -1,4 +1,4 @@
-package ru.arink_group.deliveryapp.presentation.adapters;
+package ru.arink_group.deliveryapp.presentation.adapters.interfaces;
 
 import ru.arink_group.deliveryapp.domain.Ingredient;
 

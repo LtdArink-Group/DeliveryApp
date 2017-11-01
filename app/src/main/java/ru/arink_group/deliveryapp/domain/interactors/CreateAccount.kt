@@ -21,8 +21,8 @@ class CreateAccount: UseCase<Account, CreateAccount.Params>() {
     }
 
     override fun buildUseCaseObservable(params: Params): Observable<Account> {
-        return accountRepository.createAccount(params.account).map { TransformerDTO.transformAccount(it) }
+        return accountRepository.createAccount(params.accountDTO).map { TransformerDTO.transformAccount(it) }
     }
 
-    data class Params(val account: AccountDTO)
+    data class Params(val account: Account, val accountDTO: AccountDTO = TransformerDTO.transformAccountDTO(account))
 }
