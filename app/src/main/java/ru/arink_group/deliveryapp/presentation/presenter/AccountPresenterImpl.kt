@@ -32,6 +32,9 @@ class AccountPresenterImpl(val accountView: AccountView): AccountPresenter {
     @Inject
     lateinit var updateAddressPatch: UpdateAddressPatch
 
+    @Inject
+    lateinit var deleteAddress: DeleteAddress
+
     var newAccount: Boolean = true
 
     init {
@@ -61,6 +64,11 @@ class AccountPresenterImpl(val accountView: AccountView): AccountPresenter {
             addAddress.execute(AddAddressDisposable(), AddAddress.Params(address))
         }
     }
+
+    override fun deleteAddress(id: Int) {
+        deleteAddress.execute(DeleteAddressObserver(), DeleteAddress.Params(id))
+    }
+
 
     override fun updateAddressList(addresses: MutableList<Address>) {
         addresses.forEach { updateAddress(it) }
@@ -151,6 +159,18 @@ class AccountPresenterImpl(val accountView: AccountView): AccountPresenter {
         override fun onError(e: Throwable) {
             accountView.showErrorMessage("from address update ${e.message} ${e.stackTrace}")
             throw e
+        }
+    }
+
+    inner class DeleteAddressObserver: DisposableObserver<Unit>() {
+        override fun onComplete() {
+        }
+
+        override fun onError(e: Throwable) {
+            accountView.showErrorMessage(e.message)
+        }
+
+        override fun onNext(t: Unit) {
         }
     }
 

@@ -20,6 +20,7 @@ import ru.arink_group.deliveryapp.R;
 import ru.arink_group.deliveryapp.domain.Account;
 import ru.arink_group.deliveryapp.domain.Address;
 import ru.arink_group.deliveryapp.presentation.adapters.AddressesListAdapter;
+import ru.arink_group.deliveryapp.presentation.adapters.interfaces.OnAddressRemoveListener;
 import ru.arink_group.deliveryapp.presentation.presenter.AccountPresenterImpl;
 import ru.arink_group.deliveryapp.presentation.presenter.interfaces.AccountPresenter;
 import ru.arink_group.deliveryapp.presentation.view.AccountView;
@@ -28,7 +29,7 @@ import ru.arink_group.deliveryapp.presentation.view.FabView;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class AccountFragment extends Fragment implements AccountView {
+public class AccountFragment extends Fragment implements AccountView, OnAddressRemoveListener {
 
 
     private AccountPresenter accountPresenter;
@@ -72,6 +73,7 @@ public class AccountFragment extends Fragment implements AccountView {
         recyclerView.setHasFixedSize(true);
 
         addressesListAdapter = new AddressesListAdapter();
+        addressesListAdapter.setListener(this);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false);
 
         recyclerView.setLayoutManager(linearLayoutManager);
@@ -82,7 +84,7 @@ public class AccountFragment extends Fragment implements AccountView {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(getActivity(), "asdadsasd", Toast.LENGTH_SHORT).show();
+                addressesListAdapter.addNewAddress();
             }
         });
         fab.setImageResource(R.drawable.plus);
@@ -142,4 +144,8 @@ public class AccountFragment extends Fragment implements AccountView {
         accountPresenter.destroy();
     }
 
+    @Override
+    public void onAddressRemove(int id) {
+        accountPresenter.deleteAddress(id);
+    }
 }

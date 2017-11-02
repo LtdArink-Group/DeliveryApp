@@ -7,9 +7,12 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageButton
+import android.widget.LinearLayout
 import android.widget.TextView
 import ru.arink_group.deliveryapp.R
 import ru.arink_group.deliveryapp.domain.Address
+import ru.arink_group.deliveryapp.presentation.adapters.interfaces.OnAddressRemoveListener
+import ru.arink_group.deliveryapp.presentation.model.CoolAnimation
 
 /**
  * Created by kirillvs on 01.11.17.
@@ -18,10 +21,12 @@ class AddressesListAdapter: RecyclerView.Adapter<AddressesListAdapter.ViewHolder
 
     var addresses: MutableList<Address> = ArrayList<Address>()
     var views: MutableList<View> = ArrayList<View>()
+    lateinit var listener: OnAddressRemoveListener
 
     fun updateAddresses(newAddresses: List<Address>) {
         if (addresses.size > 0) return
         addresses = newAddresses.toMutableList()
+        addresses.sortByDescending { it.id }
         notifyDataSetChanged()
     }
 
@@ -41,6 +46,12 @@ class AddressesListAdapter: RecyclerView.Adapter<AddressesListAdapter.ViewHolder
 
             notifyItemChanged(index)
         }
+    }
+
+    fun addNewAddress() {
+        val address = Address(null)
+        addresses.add(address)
+        notifyDataSetChanged()
     }
 
     fun getUpdatedList(): MutableList<Address> {
@@ -83,6 +94,8 @@ class AddressesListAdapter: RecyclerView.Adapter<AddressesListAdapter.ViewHolder
             deleteAddressButton.setOnClickListener {
                 addresses.removeAt(position)
                 views.removeAt(position)
+                if (address.id != null)
+                    listener.onAddressRemove(address.id!!)
                 notifyItemRemoved(position)
             }
         }
@@ -109,6 +122,34 @@ class AddressesListAdapter: RecyclerView.Adapter<AddressesListAdapter.ViewHolder
         if (titleView.text.isNotEmpty()) titleTextView.text = "$addrString (${titleView.text})"
 
         titleView.setOnFocusChangeListener { v, hasFocus -> if (titleView.text.isNotEmpty()) titleTextView.text = "$addrString (${titleView.text})" }
+
+        val expandableLayout = v.findViewById<LinearLayout>(R.id.expandable_address)
+
+        val expandButton = v.findViewById<ImageButton>(R.id.expand_address_button)
+        val collapseButton = v.findViewById<ImageButton>(R.id.collapse_address_button)
+
+        expandButton.setOnClickListener {
+            CoolAnimation.expand(expandableLayout)
+            collapseButton.visibility = ImageButton.VISIBLE
+            expandButton.visibility = ImageButton.GONE
+        }
+
+        collapseButton.setOnClickListener {
+            CoolAnimation.collapse(expandableLayout)
+            collapseButton.visibility = ImageButton.GONE
+            expandButton.visibility = ImageButton.VISIBLE
+        }
+
+        if (address.id != null) {
+            collapseButton.visibility = ImageButton.GONE
+            expandButton.visibility = ImageButton.VISIBLE
+            CoolAnimation.collapse(expandableLayout)
+        } else {
+            collapseButton.visibility = ImageButton.VISIBLE
+            expandButton.visibility = ImageButton.GONE
+            CoolAnimation.expand(expandableLayout)
+        }
+
 
         views.add(position, v)
     }

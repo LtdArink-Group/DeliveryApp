@@ -19,4 +19,6 @@ public interface AccountPresenter extends Presenter{
 
     void updateAddressList(List<Address> addresses);
 
+    void deleteAddress(int id);
+
 }

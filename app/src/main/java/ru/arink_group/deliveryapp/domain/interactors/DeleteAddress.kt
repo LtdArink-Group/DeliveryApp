@@ -8,7 +8,7 @@ import javax.inject.Inject
 /**
  * Created by kirillvs on 30.10.17.
  */
-class DeleteAddress: UseCase<Void, DeleteAddress.Params>() {
+class DeleteAddress: UseCase<Unit, DeleteAddress.Params>() {
 
     @Inject
     lateinit var accountRepository: AccountRepository
@@ -17,8 +17,8 @@ class DeleteAddress: UseCase<Void, DeleteAddress.Params>() {
         App.getComponent().inject(this)
     }
 
-    override fun buildUseCaseObservable(params: Params): Observable<Void> {
-        return accountRepository.deleteAddress(params.addressId.toString())
+    override fun buildUseCaseObservable(params: Params): Observable<Unit> {
+        return accountRepository.deleteAddress(params.addressId.toString()).map { a: Void? -> Unit }
     }
 
     data class Params(val addressId: Int)
