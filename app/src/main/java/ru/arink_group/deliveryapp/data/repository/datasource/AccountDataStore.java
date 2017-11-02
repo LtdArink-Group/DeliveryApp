@@ -15,6 +15,7 @@ public interface AccountDataStore {
     Observable<AccountDTO> updateAccount(AccountDTO accountDTO);
     Observable<AddressDTO> addAddress(AddressDTO addressDTO);
     Observable<AddressDTO> updateAddress(String addressId, AddressDTO addressDTO);
+    Observable<Void> updateAddressPatch(String addressId, AddressDTO addressDTO);
     Observable<Void> deleteAddress(String addressId);
     Observable<AccountDTO> getAccount();
 }

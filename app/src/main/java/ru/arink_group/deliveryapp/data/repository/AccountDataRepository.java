@@ -43,6 +43,11 @@ public class AccountDataRepository implements AccountRepository {
     }
 
     @Override
+    public Observable<Void> updateAddressPatch(String addressId, AddressDTO addressDTO) {
+        return accountDataFactory.create().updateAddressPatch(addressId, addressDTO);
+    }
+
+    @Override
     public Observable<Void> deleteAddress(String addressId) {
         return accountDataFactory.create().deleteAddress(addressId);
     }

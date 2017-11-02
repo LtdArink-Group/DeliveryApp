@@ -21,6 +21,7 @@ import ru.arink_group.deliveryapp.domain.interactors.GetListItemsFromBasket;
 import ru.arink_group.deliveryapp.domain.interactors.RemoveItemFromBasket;
 import ru.arink_group.deliveryapp.domain.interactors.UpdateAccount;
 import ru.arink_group.deliveryapp.domain.interactors.UpdateAddress;
+import ru.arink_group.deliveryapp.domain.interactors.UpdateAddressPatch;
 import ru.arink_group.deliveryapp.presentation.di.module.AppModule;
 import ru.arink_group.deliveryapp.presentation.di.module.FactoriesModule;
 import ru.arink_group.deliveryapp.presentation.di.module.InteractorsModule;
@@ -63,4 +64,5 @@ public interface AppComponent {
     void inject(DeleteAddress deleteAddress);
     void inject(GetAccount getAccount);
     void inject(AccountPresenterImpl accountPresenter);
+    void inject(UpdateAddressPatch updateAddressPatch);
 }

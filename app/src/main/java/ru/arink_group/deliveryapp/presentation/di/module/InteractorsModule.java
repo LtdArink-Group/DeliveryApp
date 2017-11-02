@@ -23,6 +23,7 @@ import ru.arink_group.deliveryapp.domain.interactors.RemoveItemFromBasket;
 import ru.arink_group.deliveryapp.domain.interactors.SendOrderToServer;
 import ru.arink_group.deliveryapp.domain.interactors.UpdateAccount;
 import ru.arink_group.deliveryapp.domain.interactors.UpdateAddress;
+import ru.arink_group.deliveryapp.domain.interactors.UpdateAddressPatch;
 
 /**
  * Created by kirillvs on 06.10.17.
@@ -119,6 +120,12 @@ public class InteractorsModule {
     @NonNull
     public UpdateAddress updateAddress() {
         return new UpdateAddress();
+    }
+
+    @Provides
+    @NonNull
+    public UpdateAddressPatch updateAddressPatch() {
+        return new UpdateAddressPatch();
     }
 
     @Provides

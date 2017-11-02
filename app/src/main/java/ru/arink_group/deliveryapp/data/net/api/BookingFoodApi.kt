@@ -37,8 +37,11 @@ interface BookingFoodApi {
     @POST("/api/accounts/{accountId}/addresses")
     fun addAddress(@Path("accountId") accountId: String, @Body address: AddressDTO) : Observable<AddressDTO>
 
-    @PATCH("/api/accounts/{accountId}/addresses/{addressId}")
+    @POST("/api/accounts/{accountId}/addresses/{addressId}")
     fun updateAddress(@Path("addressId") addressId: String, @Path("accountId") accountId: String, @Body address: AddressDTO) : Observable<AddressDTO>
+
+    @PATCH("/api/accounts/{accountId}/addresses/{addressId}")
+    fun updateAddressPatch(@Path("addressId") addressId: String, @Path("accountId") accountId: String, @Body address: AddressDTO) : Observable<Void?>
 
     @DELETE("/api/accounts/{accountId}/addresses/{addressId}")
     fun deleteAddress(@Path("addressId") addressId: String, @Path("accountId") accountId: String) : Observable<Void>

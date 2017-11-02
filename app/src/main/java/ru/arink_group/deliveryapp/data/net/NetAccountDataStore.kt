@@ -30,6 +30,10 @@ class NetAccountDataStore: AccountDataStore {
         return apiService.updateAddress(addressId, App.getUUID(), addressDTO)
     }
 
+    override fun updateAddressPatch(addressId: String, addressDTO: AddressDTO): Observable<Void?> {
+        return apiService.updateAddressPatch(addressId, App.getUUID(), addressDTO)
+    }
+
     override fun deleteAddress(addressId: String): Observable<Void> {
         return apiService.deleteAddress(addressId, App.getUUID())
     }

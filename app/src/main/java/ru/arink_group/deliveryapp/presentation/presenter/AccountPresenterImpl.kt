@@ -29,6 +29,9 @@ class AccountPresenterImpl(val accountView: AccountView): AccountPresenter {
     @Inject
     lateinit var updateAddress: UpdateAddress
 
+    @Inject
+    lateinit var updateAddressPatch: UpdateAddressPatch
+
     var newAccount: Boolean = true
 
     init {
@@ -52,7 +55,8 @@ class AccountPresenterImpl(val accountView: AccountView): AccountPresenter {
 
     override fun updateAddress(address: Address) {
         if (address.id != null) {
-            updateAddress.execute(UpdateAddressDisposable(), UpdateAddress.Params(address))
+//            updateAddress.execute(UpdateAddressDisposable(), UpdateAddress.Params(address))
+            updateAddressPatch.execute(UpdateAddressPatchDisposable(), UpdateAddressPatch.Params(address))
         } else {
             addAddress.execute(AddAddressDisposable(), AddAddress.Params(address))
         }
@@ -137,6 +141,19 @@ class AccountPresenterImpl(val accountView: AccountView): AccountPresenter {
         }
     }
 
+    inner class UpdateAddressPatchDisposable: DisposableObserver<Unit>() {
+        override fun onNext(t: Unit) {
+        }
+
+        override fun onComplete() {
+        }
+
+        override fun onError(e: Throwable) {
+            accountView.showErrorMessage("from address update ${e.message} ${e.stackTrace}")
+            throw e
+        }
+    }
+
     override fun resume() {
     }
 
@@ -149,5 +166,6 @@ class AccountPresenterImpl(val accountView: AccountView): AccountPresenter {
         addAddress.dispose()
         updateAddress.dispose()
         updateAccount.dispose()
+        updateAddressPatch.dispose()
     }
 }

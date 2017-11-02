@@ -20,6 +20,7 @@ class AddressesListAdapter: RecyclerView.Adapter<AddressesListAdapter.ViewHolder
     var views: MutableList<View> = ArrayList<View>()
 
     fun updateAddresses(newAddresses: List<Address>) {
+        if (addresses.size > 0) return
         addresses = newAddresses.toMutableList()
         notifyDataSetChanged()
     }
