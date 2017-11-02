@@ -26,7 +26,7 @@ class AddressesListAdapter: RecyclerView.Adapter<AddressesListAdapter.ViewHolder
     fun updateAddresses(newAddresses: List<Address>) {
         if (addresses.size > 0) return
         addresses = newAddresses.toMutableList()
-        addresses.sortByDescending { it.id }
+        addresses.sortBy { it.id }
         notifyDataSetChanged()
     }
 

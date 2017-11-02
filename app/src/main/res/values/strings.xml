@@ -48,4 +48,7 @@
     <string name="account_error">Ошибка</string>
     <string name="account_idle">Отправить</string>
     <string name="account_progress">Отправляем</string>
+
+    <!--Errors-->
+    <string name="error_cant_be_blank">Не может быть пустым!</string>
 </resources>

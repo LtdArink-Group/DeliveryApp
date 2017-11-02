@@ -14,6 +14,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.Toast;
 
+import butterknife.BindString;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import ru.arink_group.deliveryapp.R;
@@ -48,6 +49,9 @@ public class AccountFragment extends Fragment implements AccountView, OnAddressR
 
     @BindView(R.id.send_account_button)
     Button sendButton;
+
+    @BindString(R.string.error_cant_be_blank)
+    String errorCantBeBlankString;
 
     public AccountFragment() {
         // Required empty public constructor
@@ -92,6 +96,7 @@ public class AccountFragment extends Fragment implements AccountView, OnAddressR
         sendButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                if(!verifyAccountModel()) return;
                 updateAccountModel();
                 account.setAddresses(addressesListAdapter.getUpdatedList());
                 accountPresenter.updateAccount(account);
@@ -119,6 +124,24 @@ public class AccountFragment extends Fragment implements AccountView, OnAddressR
         this.account.setName(accountName.getText().toString());
         this.account.setEmail(accountEmail.getText().toString());
         this.account.setPhone(accountPhone.getText().toString());
+    }
+
+    private boolean verifyAccountModel() {
+        boolean flag = true;
+        if (accountName.getText().toString().isEmpty()) {
+            accountName.setError(errorCantBeBlankString);
+            flag = false;
+        }
+        if (accountEmail.getText().toString().isEmpty()) {
+            accountEmail.setError(errorCantBeBlankString);
+            flag = false;
+        }
+        if (accountPhone.getText().toString().isEmpty()) {
+            accountPhone.setError(errorCantBeBlankString);
+            flag = false;
+        }
+
+        return flag;
     }
 
     private void updateAccountView() {
