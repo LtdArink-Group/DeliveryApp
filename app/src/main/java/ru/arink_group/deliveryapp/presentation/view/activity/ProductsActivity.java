@@ -1,5 +1,6 @@
 package ru.arink_group.deliveryapp.presentation.view.activity;
 
+import android.app.Fragment;
 import android.app.FragmentTransaction;
 import android.content.Intent;
 import android.os.Bundle;
@@ -61,5 +62,15 @@ public class ProductsActivity extends AppCompatActivity implements FabView {
     @Override
     public void hideOrderFab() {
         fab.hide();
+    }
+
+    @Override
+    public FloatingActionButton getFab() {
+        return fab;
+    }
+
+    @Override
+    public void changeFragment(Fragment fragment) {
+        // no-op
     }
 }

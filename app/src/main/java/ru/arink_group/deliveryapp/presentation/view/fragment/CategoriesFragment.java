@@ -90,6 +90,15 @@ public class CategoriesFragment extends Fragment implements CategoriesView, OnCa
         final FabView fabView = (FabView) getActivity();
         fabView.showOrderFab();
 
+        fabView.getFab().setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                OrderFragment orderFragment = new OrderFragment();
+                fabView.changeFragment(orderFragment);
+            }
+        });
+
+
         mRecyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
             @Override
             public void onScrolled(RecyclerView recyclerView, int dx, int dy) {

@@ -39,8 +39,16 @@ public class OrdersHistoryFragment extends Fragment {
         //Find the +1 button
         mPlusOneButton = (PlusOneButton) view.findViewById(R.id.plus_one_button);
 
-        FabView menuView = (FabView) getActivity();
-        menuView.showOrderFab();
+        final FabView fabView = (FabView) getActivity();
+        fabView.showOrderFab();
+
+        fabView.getFab().setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                OrderFragment orderFragment = new OrderFragment();
+                fabView.changeFragment(orderFragment);
+            }
+        });
 
         return view;
     }

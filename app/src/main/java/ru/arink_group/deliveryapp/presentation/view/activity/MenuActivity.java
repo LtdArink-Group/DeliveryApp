@@ -44,14 +44,6 @@ public class MenuActivity extends AppCompatActivity
         setSupportActionBar(toolbar);
 
         fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                OrderFragment orderFragment = new OrderFragment();
-                MenuActivity.this.changeFragment(orderFragment);
-            }
-        });
-
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -150,5 +142,10 @@ public class MenuActivity extends AppCompatActivity
     @Override
     public void hideOrderFab(){
         fab.hide();
+    }
+
+    @Override
+    public FloatingActionButton getFab() {
+        return fab;
     }
 }

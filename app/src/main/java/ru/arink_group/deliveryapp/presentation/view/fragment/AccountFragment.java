@@ -3,7 +3,9 @@ package ru.arink_group.deliveryapp.presentation.view.fragment;
 
 import android.os.Bundle;
 import android.app.Fragment;
+import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.TextInputEditText;
+import android.support.v7.content.res.AppCompatResources;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -32,6 +34,7 @@ public class AccountFragment extends Fragment implements AccountView {
     private AccountPresenter accountPresenter;
     private Account account;
     private AddressesListAdapter addressesListAdapter;
+    private FloatingActionButton fab;
 
     @BindView(R.id.account_name)
     TextInputEditText accountName;
@@ -73,6 +76,16 @@ public class AccountFragment extends Fragment implements AccountView {
 
         recyclerView.setLayoutManager(linearLayoutManager);
         recyclerView.setAdapter(addressesListAdapter);
+
+        FabView fabView = (FabView) getActivity();
+        fab = fabView.getFab();
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(getActivity(), "asdadsasd", Toast.LENGTH_SHORT).show();
+            }
+        });
+        fab.setImageResource(R.drawable.plus);
 
         sendButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -118,8 +131,15 @@ public class AccountFragment extends Fragment implements AccountView {
     }
 
     @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        fab.setImageResource(R.drawable.cart);
+    }
+
+    @Override
     public void onDestroy() {
         super.onDestroy();
+        accountPresenter.destroy();
     }
 
 }
