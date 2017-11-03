@@ -76,7 +76,7 @@ public class AccountFragment extends Fragment implements AccountView, OnAddressR
         RecyclerView recyclerView = rootView.findViewById(R.id.addresses_recycler_view);
         recyclerView.setHasFixedSize(true);
 
-        addressesListAdapter = new AddressesListAdapter();
+        addressesListAdapter = new AddressesListAdapter(errorCantBeBlankString);
         addressesListAdapter.setListener(this);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false);
 
@@ -97,6 +97,7 @@ public class AccountFragment extends Fragment implements AccountView, OnAddressR
             @Override
             public void onClick(View v) {
                 if(!verifyAccountModel()) return;
+                if(!verifyAddresses()) return;
                 updateAccountModel();
                 account.setAddresses(addressesListAdapter.getUpdatedList());
                 accountPresenter.updateAccount(account);
@@ -142,6 +143,10 @@ public class AccountFragment extends Fragment implements AccountView, OnAddressR
         }
 
         return flag;
+    }
+
+    private boolean verifyAddresses() {
+        return addressesListAdapter.verifyAddressesList();
     }
 
     private void updateAccountView() {

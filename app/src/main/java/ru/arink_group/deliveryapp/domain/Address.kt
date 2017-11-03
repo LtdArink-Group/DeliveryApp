@@ -6,7 +6,7 @@ package ru.arink_group.deliveryapp.domain
 data class Address(
         var id: Int?,
         var title: String = "",
-        var city: String = "",
+        var city: String = "Хабаровск",
         var street: String = "",
         var house: String = "",
         var office: String = "",

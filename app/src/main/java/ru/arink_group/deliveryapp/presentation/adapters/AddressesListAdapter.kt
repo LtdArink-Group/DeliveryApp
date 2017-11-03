@@ -17,10 +17,10 @@ import ru.arink_group.deliveryapp.presentation.model.CoolAnimation
 /**
  * Created by kirillvs on 01.11.17.
  */
-class AddressesListAdapter: RecyclerView.Adapter<AddressesListAdapter.ViewHolder>() {
+class AddressesListAdapter(private val errorCantBeBlankString: String): RecyclerView.Adapter<AddressesListAdapter.ViewHolder>() {
 
-    var addresses: MutableList<Address> = ArrayList<Address>()
-    var views: MutableList<View> = ArrayList<View>()
+    private var addresses: MutableList<Address> = ArrayList<Address>()
+    private var addressesViews: MutableList<View> = ArrayList<View>()
     lateinit var listener: OnAddressRemoveListener
 
     fun updateAddresses(newAddresses: List<Address>) {
@@ -45,6 +45,7 @@ class AddressesListAdapter: RecyclerView.Adapter<AddressesListAdapter.ViewHolder
             address.city = newAddress.city
 
             notifyItemChanged(index)
+//            notifyDataSetChanged()
         }
     }
 
@@ -54,9 +55,70 @@ class AddressesListAdapter: RecyclerView.Adapter<AddressesListAdapter.ViewHolder
         notifyDataSetChanged()
     }
 
+    fun verifyAddressesList(): Boolean {
+        if (addresses.size == 0) return false
+        var flag = true
+
+        addressesViews.forEach {
+            if (!verifyAddressViews(it)) flag = false
+        }
+
+        return flag
+    }
+
+    private fun verifyAddressViews(addressView: View): Boolean {
+        var flag = true
+
+        val titleView = addressView.findViewById<TextInputEditText>(R.id.address_title)
+        val cityView = addressView.findViewById<TextInputEditText>(R.id.address_city)
+        val streetView = addressView.findViewById<TextInputEditText>(R.id.address_street)
+        val houseView = addressView.findViewById<TextInputEditText>(R.id.address_house)
+
+//        -- Not required! --
+//        val codeView = addressView.findViewById<TextInputEditText>(R.id.address_code)
+//        val entranceView = addressView.findViewById<TextInputEditText>(R.id.address_entrance)
+//        val floorView = addressView.findViewById<TextInputEditText>(R.id.address_floor)
+//        val officeView = addressView.findViewById<TextInputEditText>(R.id.address_office)
+
+        if (!verifyViewItem(titleView)) flag = false
+        if (!verifyViewItem(cityView)) flag = false
+        if (!verifyViewItem(streetView)) flag = false
+        if (!verifyViewItem(houseView)) flag = false
+
+//                -- Not required! --
+//        if (!verifyViewItem(codeView)) flag = false
+//        if (!verifyViewItem(entranceView)) flag = false
+//        if (!verifyViewItem(floorView)) flag = false
+//        if (!verifyViewItem(officeView)) flag = false
+
+        return flag
+    }
+
+    private fun verifyViewItem(v: TextInputEditText): Boolean {
+        if (v.text.toString().isEmpty()) {
+            v.error = errorCantBeBlankString
+            return false
+        }
+
+        return true
+    }
+
+    private fun collapseAllExcept(v: View) {
+        addressesViews.forEach {
+            if (it == v) return
+            val collapseView = it.findViewById<ImageButton>(R.id.collapse_address_button)
+            val expandButton = it.findViewById<ImageButton>(R.id.expand_address_button)
+            val collapseButton = it.findViewById<ImageButton>(R.id.collapse_address_button)
+            CoolAnimation.collapse(collapseView)
+            collapseButton.visibility = ImageButton.GONE
+            expandButton.visibility = ImageButton.VISIBLE
+
+        }
+    }
+
     fun getUpdatedList(): MutableList<Address> {
         addresses.forEachIndexed { index, address ->
-            val v = views[index]
+            val v = addressesViews[index]
 
             val titleView = v.findViewById<TextInputEditText>(R.id.address_title)
             val cityView = v.findViewById<TextInputEditText>(R.id.address_city)
@@ -88,17 +150,6 @@ class AddressesListAdapter: RecyclerView.Adapter<AddressesListAdapter.ViewHolder
         val addrString = context.getString(R.string.account_address_title)
 
         val deleteAddressButton = v.findViewById<ImageButton>(R.id.delete_address_button)
-        if (position == 0) {
-            deleteAddressButton.visibility = ImageButton.GONE
-        } else {
-            deleteAddressButton.setOnClickListener {
-                addresses.removeAt(position)
-                views.removeAt(position)
-                if (address.id != null)
-                    listener.onAddressRemove(address.id!!)
-                notifyItemRemoved(position)
-            }
-        }
 
         val titleTextView = v.findViewById<TextView>(R.id.address_title_text)
         val titleView = v.findViewById<TextInputEditText>(R.id.address_title)
@@ -132,6 +183,7 @@ class AddressesListAdapter: RecyclerView.Adapter<AddressesListAdapter.ViewHolder
             CoolAnimation.expand(expandableLayout)
             collapseButton.visibility = ImageButton.VISIBLE
             expandButton.visibility = ImageButton.GONE
+//            collapseAllExcept(v)
         }
 
         collapseButton.setOnClickListener {
@@ -140,18 +192,33 @@ class AddressesListAdapter: RecyclerView.Adapter<AddressesListAdapter.ViewHolder
             expandButton.visibility = ImageButton.VISIBLE
         }
 
+        if (position == 0) {
+            deleteAddressButton.visibility = ImageButton.GONE
+        } else {
+            deleteAddressButton.setOnClickListener {
+                CoolAnimation.collapse(expandableLayout)
+                addresses.removeAt(position)
+                addressesViews.removeAt(position)
+                if (address.id != null)
+                    listener.onAddressRemove(address.id!!)
+                notifyDataSetChanged()
+            }
+        }
+
+
         if (address.id != null) {
             collapseButton.visibility = ImageButton.GONE
             expandButton.visibility = ImageButton.VISIBLE
             CoolAnimation.collapse(expandableLayout)
         } else {
+//            collapseAllExcept(v)
             collapseButton.visibility = ImageButton.VISIBLE
             expandButton.visibility = ImageButton.GONE
             CoolAnimation.expand(expandableLayout)
         }
 
 
-        views.add(position, v)
+        addressesViews.add(position, v)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {

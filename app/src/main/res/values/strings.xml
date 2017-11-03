@@ -40,10 +40,10 @@
     <string name="address_city">Город</string>
     <string name="address_street">Улица</string>
     <string name="address_house">Дом</string>
-    <string name="address_office">Квартира/офис</string>
-    <string name="address_floor">Этаж</string>
-    <string name="address_entrance">Подъезд</string>
-    <string name="address_code">Код домофона</string>
+    <string name="address_office">Квартира/офис (Необязательно)</string>
+    <string name="address_floor">Этаж (Необязательно)</string>
+    <string name="address_entrance">Подъезд (Необязательно)</string>
+    <string name="address_code">Код домофона (Необязательно)</string>
     <string name="account_complete">Отправлено</string>
     <string name="account_error">Ошибка</string>
     <string name="account_idle">Отправить</string>
