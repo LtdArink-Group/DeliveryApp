@@ -102,7 +102,7 @@
                         android:layout_width="45dp"
                         android:layout_height="45dp"
                         android:layout_centerVertical="true"
-                        app:srcCompat="@drawable/minus"
+                        android:src="@drawable/minus"
                         app:cb_color="@color/colorAccent"
                         app:cb_pressedRingWidth="8dp" />
 
@@ -122,7 +122,7 @@
                         android:layout_width="45dp"
                         android:layout_height="45dp"
                         android:layout_centerVertical="true"
-                        app:srcCompat="@drawable/plus"
+                        android:src="@drawable/plus"
                         app:cb_color="@color/colorAccent"
                         app:cb_pressedRingWidth="8dp" />
 

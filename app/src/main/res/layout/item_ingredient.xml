@@ -33,7 +33,7 @@
         android:id="@+id/ingredient_minus"
         android:layout_width="45dp"
         android:layout_height="45dp"
-        app:srcCompat="@drawable/minus"
+        android:src="@drawable/minus"
         app:cb_color="@color/colorAccent"
         app:cb_pressedRingWidth="8dp" />
 
@@ -52,7 +52,7 @@
         android:id="@id/ingredient_plus"
         android:layout_width="45dp"
         android:layout_height="45dp"
-        app:srcCompat="@drawable/plus"
+        android:src="@drawable/plus"
         app:cb_color="@color/colorAccent"
         app:cb_pressedRingWidth="8dp" />
 

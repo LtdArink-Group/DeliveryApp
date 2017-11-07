@@ -6,7 +6,7 @@ android {
     buildToolsVersion '26.0.2'
     defaultConfig {
         applicationId "ru.arink_group.deliveryapp"
-        minSdkVersion 16
+        minSdkVersion 17
         targetSdkVersion 26
         versionCode 1
         versionName "1.0"
@@ -44,6 +44,7 @@ dependencies {
     compile 'com.google.android.gms:play-services-plus:11.0.4'
     compile 'com.github.markushi:circlebutton:1.1'
     compile 'com.squareup.picasso:picasso:2.5.2'
+    compile 'br.com.simplepass:loading-button-android:1.8.3'
     testCompile 'junit:junit:4.12'
     annotationProcessor 'com.google.dagger:dagger-compiler:2.11'
     annotationProcessor 'com.jakewharton:butterknife-compiler:8.7.0'
@@ -53,3 +54,5 @@ dependencies {
 repositories {
     mavenCentral()
 }
+
+apply plugin: 'kotlin-android-extensions'

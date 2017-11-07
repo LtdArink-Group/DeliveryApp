@@ -30,7 +30,8 @@
     <string name="to_pay">К оплате</string>
     <string name="to_order">Заказать</string>
     <string name="free">Бесплатно</string>
-    <string name="order_send_ok">Заказ успешно отправлен!</string>
+    <string name="order_send_ok">Успешно</string>
+    <string name="order_send_fail">X</string>
     <string name="account_main">Основные сведения</string>
     <string name="account_name">Имя</string>
     <string name="account_email">Email</string>
@@ -48,7 +49,10 @@
     <string name="account_error">Ошибка</string>
     <string name="account_idle">Отправить</string>
     <string name="account_progress">Отправляем</string>
+    <string name="send_ok">Успешно</string>
+    <string name="send_fail">X</string>
 
     <!--Errors-->
     <string name="error_cant_be_blank">Не может быть пустым!</string>
+    <string name="empty_cart">Ваша корзина пуста :(</string>
 </resources>

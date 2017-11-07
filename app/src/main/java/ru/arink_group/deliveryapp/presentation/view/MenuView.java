@@ -9,5 +9,6 @@ import android.app.Fragment;
 public interface MenuView {
 
     void changeFragment(Fragment frag);
+    void changeFragmentToPlaceHolder(Fragment frag);
     void contentLoaded();
 }

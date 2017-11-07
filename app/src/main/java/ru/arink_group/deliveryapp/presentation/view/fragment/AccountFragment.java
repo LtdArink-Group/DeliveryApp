@@ -3,6 +3,7 @@ package ru.arink_group.deliveryapp.presentation.view.fragment;
 
 import android.os.Bundle;
 import android.app.Fragment;
+import android.os.Handler;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.TextInputEditText;
 import android.support.v7.content.res.AppCompatResources;
@@ -14,6 +15,8 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.Toast;
 
+import br.com.simplepass.loading_button_lib.customViews.CircularProgressButton;
+import br.com.simplepass.loading_button_lib.interfaces.OnAnimationEndListener;
 import butterknife.BindString;
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -48,10 +51,16 @@ public class AccountFragment extends Fragment implements AccountView, OnAddressR
     TextInputEditText accountPhone;
 
     @BindView(R.id.send_account_button)
-    Button sendButton;
+    CircularProgressButton sendButton;
 
     @BindString(R.string.error_cant_be_blank)
     String errorCantBeBlankString;
+
+    @BindString(R.string.send_ok)
+    String sendOk;
+
+    @BindString(R.string.send_fail)
+    String sendFail;
 
     public AccountFragment() {
         // Required empty public constructor
@@ -101,6 +110,24 @@ public class AccountFragment extends Fragment implements AccountView, OnAddressR
                 updateAccountModel();
                 account.setAddresses(addressesListAdapter.getUpdatedList());
                 accountPresenter.updateAccount(account);
+                sendButton.startAnimation();
+
+                Handler handler = new Handler();
+
+                handler.postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        sendButton.revertAnimation(new OnAnimationEndListener() {
+                            @Override
+                            public void onAnimationEnd() {
+                                if (!sendButton.getText().toString().equalsIgnoreCase(sendFail)) {
+                                    sendButton.setText(sendOk);
+                                    sendButton.setBackgroundColor(getResources().getColor(R.color.green));
+                                }
+                            }
+                        });
+                    }
+                }, 1000);
             }
         });
 
@@ -111,7 +138,15 @@ public class AccountFragment extends Fragment implements AccountView, OnAddressR
 
     @Override
     public void showErrorMessage(String message) {
-        Toast.makeText(getActivity(), message, Toast.LENGTH_SHORT).show();
+        sendButton.revertAnimation(new OnAnimationEndListener() {
+            @Override
+            public void onAnimationEnd() {
+                sendButton.setText(sendFail);
+                sendButton.setBackgroundColor(getResources().getColor(android.R.color.holo_red_dark));
+            }
+        });
+
+//        Toast.makeText(getActivity(), message, Toast.LENGTH_SHORT).show();
     }
 
     @Override

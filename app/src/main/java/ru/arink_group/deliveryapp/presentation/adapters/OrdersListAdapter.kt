@@ -24,12 +24,14 @@ class OrdersListAdapter: RecyclerView.Adapter<OrdersListAdapter.ViewHolder>() {
 
     interface ProductChangeListener {
         fun onChangeProduct(product: Product)
+        fun showPlaceholder()
     }
 
     fun updateOrder(product: Product) {
         val position = ordersList.indexOfFirst { it.id == product.id }
         if (product.count == 0) {
             ordersList.removeAt(position)
+            if (ordersList.isEmpty()) productChangeListener.showPlaceholder()
             notifyItemRemoved(position)
             return
         }

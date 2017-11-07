@@ -36,8 +36,6 @@ public class OrdersHistoryFragment extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_orders_history, container, false);
 
-        //Find the +1 button
-        mPlusOneButton = (PlusOneButton) view.findViewById(R.id.plus_one_button);
 
         final FabView fabView = (FabView) getActivity();
         fabView.showOrderFab();
@@ -56,9 +54,6 @@ public class OrdersHistoryFragment extends Fragment {
     @Override
     public void onResume() {
         super.onResume();
-
-        // Refresh the state of the +1 button each time the activity receives focus.
-        mPlusOneButton.initialize(PLUS_ONE_URL, PLUS_ONE_REQUEST_CODE);
     }
 
 

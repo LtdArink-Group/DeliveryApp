@@ -58,6 +58,7 @@
                         android:layout_gravity="center_vertical"
                         android:id="@+id/order_button_minus"
                         app:cb_color="@color/colorAccent"
+                        android:src="@drawable/minus"
                         />
 
                     <at.markushi.ui.CircleButton
@@ -66,6 +67,7 @@
                         android:layout_gravity="center_vertical"
                         android:id="@+id/order_button_plus"
                         app:cb_color="@color/colorAccent"
+                        android:src="@drawable/plus"
                         />
                 </LinearLayout>
 

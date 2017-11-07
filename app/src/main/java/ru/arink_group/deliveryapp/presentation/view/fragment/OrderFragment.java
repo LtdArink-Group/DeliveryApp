@@ -16,6 +16,8 @@ import android.widget.Toast;
 
 import java.util.List;
 
+import br.com.simplepass.loading_button_lib.customViews.CircularProgressButton;
+import br.com.simplepass.loading_button_lib.interfaces.OnAnimationEndListener;
 import butterknife.BindString;
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -53,13 +55,16 @@ public class OrderFragment extends Fragment implements OrderView, OrdersListAdap
     TextView summary;
 
     @BindView(R.id.send_order_button)
-    Button sendButton;
+    CircularProgressButton sendButton;
 
     @BindString(R.string.free)
     String freeString;
 
     @BindString(R.string.order_send_ok)
     String orderSendOkString;
+
+    @BindString(R.string.order_send_fail)
+    String orderSendFailString;
 
     @BindString(R.string.order)
     String titleString;
@@ -151,17 +156,37 @@ public class OrderFragment extends Fragment implements OrderView, OrdersListAdap
 
     @Override
     public void showErrorMessage(String e) {
-        Toast.makeText(getActivity(), e, Toast.LENGTH_SHORT).show();
+        sendButton.revertAnimation(new OnAnimationEndListener() {
+            @Override
+            public void onAnimationEnd() {
+                sendButton.setText(orderSendFailString);
+                sendButton.setBackgroundColor(getResources().getColor(android.R.color.holo_red_dark));
+            }
+        });
+
+//        Toast.makeText(getActivity(), e, Toast.LENGTH_SHORT).show();
     }
 
     @Override
     public void showSendingOrderOk() {
-        Toast.makeText(getActivity(), orderSendOkString, Toast.LENGTH_SHORT).show();
+        sendButton.revertAnimation(new OnAnimationEndListener() {
+            @Override
+            public void onAnimationEnd() {
+                sendButton.setText(orderSendOkString);
+                sendButton.setBackgroundColor(getResources().getColor(R.color.green));
+            }
+        });
+        sendButton.setOnClickListener(null);
+//        Toast.makeText(getActivity(), orderSendOkString, Toast.LENGTH_SHORT).show();
     }
 
     @Override
     public void showPlaceholder() {
+        MenuView menuView = (MenuView) getActivity();
 
+        EmptyOrderFragment emptyOrderFragment = new EmptyOrderFragment();
+
+        menuView.changeFragmentToPlaceHolder(emptyOrderFragment);
     }
 
     @Override
@@ -171,6 +196,7 @@ public class OrderFragment extends Fragment implements OrderView, OrdersListAdap
 
     @Override
     public void onChangeProduct(Product product) {
+        if (sendButton.getText().toString().equalsIgnoreCase(orderSendOkString)) return;
         orderPresenter.updateProduct(product);
     }
 
@@ -182,6 +208,7 @@ public class OrderFragment extends Fragment implements OrderView, OrdersListAdap
 
     @Override
     public void onClick(View v) {
+        sendButton.startAnimation();
         if(v.getId() == sendButton.getId()) orderPresenter.sendOrderToServer();
     }
 }

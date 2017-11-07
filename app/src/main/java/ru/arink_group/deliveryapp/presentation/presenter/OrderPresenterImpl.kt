@@ -70,7 +70,11 @@ class OrderPresenterImpl(val orderView: OrderView): OrderPresenter {
         }
 
         override fun onNext(t: List<Product>) {
-            orderView.setProducts(t)
+            if (t.isEmpty()) {
+                orderView.showPlaceholder()
+            } else {
+                orderView.setProducts(t)
+            }
         }
 
     }
@@ -98,17 +102,17 @@ class OrderPresenterImpl(val orderView: OrderView): OrderPresenter {
 
         override fun onComplete() {
             clearItemsFromBasket.execute(ClearItemsFromBasketDisposableObserver(), ClearItemsFromBasket.Params())
+            orderView.showSendingOrderOk()
         }
 
         override fun onNext(t: Boolean) {
-            orderView.showSendingOrderOk()
         }
 
     }
 
     inner class ClearItemsFromBasketDisposableObserver: DisposableObserver<Boolean>() {
         override fun onComplete() {
-            orderView.showPlaceholder()
+//            orderView.showPlaceholder()
         }
 
         override fun onError(e: Throwable) {

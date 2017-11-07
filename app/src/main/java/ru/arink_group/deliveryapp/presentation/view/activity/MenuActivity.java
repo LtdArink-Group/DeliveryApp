@@ -14,6 +14,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.FrameLayout;
+import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import ru.arink_group.deliveryapp.App;
@@ -65,6 +67,8 @@ public class MenuActivity extends AppCompatActivity
         FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
         if(getIntent().getBooleanExtra(IS_ORDER_START, false)) {
             fragmentTransaction.add(R.id.menu_fragment, new OrderFragment());
+            setTitle(R.string.order);
+
         } else {
             fragmentTransaction.add(R.id.menu_fragment, new CategoriesFragment());
         }
@@ -121,12 +125,19 @@ public class MenuActivity extends AppCompatActivity
 
     @Override
     public void changeFragment(Fragment fragment) {
-
         FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
+        fragmentTransaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
         fragmentTransaction.replace(R.id.menu_fragment, fragment);
-        fragmentTransaction.addToBackStack(null);
+//        fragmentTransaction.addToBackStack(null); //TODO Разобраться в баге с переходом,старый фрагмент остается на экране позади
         fragmentTransaction.commit();
+    }
 
+    @Override
+    public void changeFragmentToPlaceHolder(Fragment fragment) {
+        FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
+        fragmentTransaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
+        fragmentTransaction.replace(R.id.menu_fragment, fragment);
+        fragmentTransaction.commit();
     }
 
     @Override

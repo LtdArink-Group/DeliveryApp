@@ -77,16 +77,31 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
 
-            <Button
-                android:padding="@dimen/medium_margin"
-                android:layout_marginBottom="@dimen/big_margin"
+            <!--<Button-->
+                <!--android:padding="@dimen/medium_margin"-->
+                <!--android:layout_marginBottom="@dimen/big_margin"-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:layout_gravity="center_horizontal"-->
+                <!--android:background="@color/colorAccent"-->
+                <!--android:textColor="@color/colorOnPrimaryText"-->
+                <!--android:text="@string/account_idle"-->
+                <!--android:id="@+id/send_account_button"/>-->
+
+            <br.com.simplepass.loading_button_lib.customViews.CircularProgressButton
+                android:id="@+id/send_account_button"
+                android:layout_gravity="center_horizontal"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
                 android:background="@color/colorAccent"
                 android:textColor="@color/colorOnPrimaryText"
+                app:spinning_bar_color="@color/colorOnPrimaryText"
                 android:text="@string/account_idle"
-                android:id="@+id/send_account_button"/>
+                android:padding="@dimen/medium_margin"
+                android:layout_marginBottom="@dimen/big_margin"
+                app:spinning_bar_padding="0dp"
+                />
+
 
 
         </LinearLayout>
