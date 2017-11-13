@@ -9,11 +9,14 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.Spinner;
 import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import br.com.simplepass.loading_button_lib.customViews.CircularProgressButton;
@@ -22,6 +25,7 @@ import butterknife.BindString;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import ru.arink_group.deliveryapp.R;
+import ru.arink_group.deliveryapp.domain.Address;
 import ru.arink_group.deliveryapp.domain.Product;
 import ru.arink_group.deliveryapp.presentation.adapters.OrdersListAdapter;
 import ru.arink_group.deliveryapp.presentation.presenter.OrderPresenterImpl;
@@ -38,6 +42,8 @@ public class OrderFragment extends Fragment implements OrderView, OrdersListAdap
 
     private OrderPresenter orderPresenter;
     private OrdersListAdapter ordersListAdapter;
+    private ArrayAdapter<String> addressesStringAdaptet;
+    private List<Address> addresses;
 
     @BindView(R.id.summary_self_export_switch)
     Switch selfExportSwitch;
@@ -57,6 +63,12 @@ public class OrderFragment extends Fragment implements OrderView, OrdersListAdap
     @BindView(R.id.send_order_button)
     CircularProgressButton sendButton;
 
+    @BindView(R.id.summary_address_list_spinner)
+    Spinner addressListSpinner;
+
+    @BindView((R.id.summary_create_address_button))
+    Button summaryCreateAddressButton;
+
     @BindString(R.string.free)
     String freeString;
 
@@ -69,6 +81,8 @@ public class OrderFragment extends Fragment implements OrderView, OrdersListAdap
     @BindString(R.string.order)
     String titleString;
 
+    @BindString(R.string.error_address_empty)
+    String errorAddressEmpty;
 
     public OrderFragment() {
         // Required empty public constructor
@@ -109,8 +123,21 @@ public class OrderFragment extends Fragment implements OrderView, OrdersListAdap
         AppCompatActivity activity = (AppCompatActivity) getActivity();
         activity.getSupportActionBar().setTitle(titleString);
 
-        FabView menuView = (FabView) getActivity();
+        final FabView menuView = (FabView) getActivity();
         menuView.hideOrderFab();
+
+        summaryCreateAddressButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                AccountFragment accountFragment = new AccountFragment();
+                menuView.changeFragment(accountFragment);
+            }
+        });
+
+        addressesStringAdaptet = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_spinner_dropdown_item, new ArrayList<String>());
+        addressListSpinner.setAdapter(addressesStringAdaptet);
+
+        orderPresenter.getAddresses();
 
         return root;
     }
@@ -152,6 +179,39 @@ public class OrderFragment extends Fragment implements OrderView, OrdersListAdap
         allSummary = allSummary >= 0.0 ? allSummary : 0.0;
 
         this.summary.setText(String.valueOf(allSummary));
+    }
+
+    @Override
+    public void updateAddresses(List<Address> addresses) {
+        Toast.makeText(getActivity(), String.valueOf(addresses.size()), Toast.LENGTH_SHORT).show();
+        if (addresses.size() > 0) {
+            this.addresses = addresses;
+            List<String> addressesString = new ArrayList<>();
+            for (int i = 0; i < addresses.size(); i++) {
+                addressesString.add(i, this.concatAddressName(addresses.get(i)));
+            }
+            addressesStringAdaptet.addAll(addressesString);
+        } else {
+            addressListSpinner.setVisibility(View.GONE);
+            summaryCreateAddressButton.setVisibility(View.VISIBLE);
+        }
+    }
+
+    @Override
+    public void showCreateAccountButton() {
+        addressListSpinner.setVisibility(View.GONE);
+        summaryCreateAddressButton.setVisibility(View.VISIBLE);
+    }
+
+    private String concatAddressName(Address a) {
+        StringBuilder addressName = new StringBuilder();
+        addressName.append(a.getTitle());
+        addressName.append(" (");
+        addressName.append(a.getStreet());
+        addressName.append(", ");
+        addressName.append(a.getHouse());
+        addressName.append(")");
+        return addressName.toString();
     }
 
     @Override
@@ -209,6 +269,18 @@ public class OrderFragment extends Fragment implements OrderView, OrdersListAdap
     @Override
     public void onClick(View v) {
         sendButton.startAnimation();
-        if(v.getId() == sendButton.getId()) orderPresenter.sendOrderToServer();
+        if(v.getId() == sendButton.getId()) {
+            if (verifyOrder()) {
+                orderPresenter.sendOrderToServer();
+            } else {
+                this.showErrorMessage(errorAddressEmpty);
+            }
+        }
+    }
+
+    private boolean verifyOrder() {
+        if (addressListSpinner.getSelectedItemPosition() != Spinner.INVALID_POSITION ) return true;
+        Toast.makeText(getActivity(), errorAddressEmpty, Toast.LENGTH_SHORT).show();
+        return false;
     }
 }

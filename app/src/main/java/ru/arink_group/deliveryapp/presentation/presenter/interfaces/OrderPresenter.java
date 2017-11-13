@@ -8,6 +8,7 @@ import ru.arink_group.deliveryapp.domain.Product;
 
 public interface OrderPresenter extends Presenter {
     void getProductsFromBasket();
+    void getAddresses();
     void getTotals();
     void updateProduct(Product product);
     void sendOrderToServer();
