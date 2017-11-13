@@ -4,6 +4,7 @@ import io.reactivex.observers.DisposableObserver
 import ru.arink_group.deliveryapp.domain.Product
 import ru.arink_group.deliveryapp.domain.interactors.*
 import ru.arink_group.deliveryapp.App
+import ru.arink_group.deliveryapp.domain.Account
 import ru.arink_group.deliveryapp.presentation.presenter.interfaces.OrderPresenter
 import ru.arink_group.deliveryapp.presentation.view.OrderView
 import javax.inject.Inject
@@ -12,7 +13,6 @@ import javax.inject.Inject
  * Created by kirillvs on 24.10.17.
  */
 class OrderPresenterImpl(val orderView: OrderView): OrderPresenter {
-
     @Inject
     lateinit var getListItemsFromBasket:GetListItemsFromBasket
 
@@ -24,6 +24,9 @@ class OrderPresenterImpl(val orderView: OrderView): OrderPresenter {
 
     @Inject
     lateinit var clearItemsFromBasket: ClearItemsFromBasket
+
+    @Inject
+    lateinit var getAccount: GetAccount
 
 
     init {
@@ -45,6 +48,7 @@ class OrderPresenterImpl(val orderView: OrderView): OrderPresenter {
     override fun destroy() {
         getListItemsFromBasket.dispose()
         addItemToBasketOrNull.dispose()
+        getAccount.dispose()
     }
 
     override fun getProductsFromBasket() {
@@ -57,6 +61,23 @@ class OrderPresenterImpl(val orderView: OrderView): OrderPresenter {
 
     override fun sendOrderToServer() {
         sendOrderToServer.execute(SendOrderToServerDisposableObserver(), SendOrderToServer.Params(orderView.listProducts))
+    }
+
+    override fun getAddresses() {
+        getAccount.execute(AccountDisposableObserver(), GetAccount.Params())
+    }
+
+    inner class AccountDisposableObserver: DisposableObserver<Account>() {
+        override fun onError(e: Throwable) {
+            orderView.showCreateAccountButton()
+        }
+
+        override fun onComplete() {
+        }
+
+        override fun onNext(t: Account) {
+            orderView.updateAddresses(t.addresses)
+        }
     }
 
     inner class ProductsDisposableObserver: DisposableObserver<List<Product>>() {

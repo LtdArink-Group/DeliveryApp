@@ -24,7 +24,7 @@
                 android:layout_height="0dp"
                 android:layout_weight="0.5"
                 android:orientation="horizontal"
-                android:background="@color/colorSecondaryDark">
+                android:background="@color/colorSecondaryLight">
 
                 <TextView
                     android:id="@+id/product_name"
