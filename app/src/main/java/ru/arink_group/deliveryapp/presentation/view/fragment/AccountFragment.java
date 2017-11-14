@@ -1,12 +1,12 @@
 package ru.arink_group.deliveryapp.presentation.view.fragment;
 
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.app.Fragment;
 import android.os.Handler;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.TextInputEditText;
-import android.support.v7.content.res.AppCompatResources;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -24,22 +24,29 @@ import ru.arink_group.deliveryapp.R;
 import ru.arink_group.deliveryapp.domain.Account;
 import ru.arink_group.deliveryapp.domain.Address;
 import ru.arink_group.deliveryapp.presentation.adapters.AddressesListAdapter;
-import ru.arink_group.deliveryapp.presentation.adapters.interfaces.OnAddressRemoveListener;
+import ru.arink_group.deliveryapp.presentation.adapters.interfaces.OnAddressListener;
 import ru.arink_group.deliveryapp.presentation.presenter.AccountPresenterImpl;
 import ru.arink_group.deliveryapp.presentation.presenter.interfaces.AccountPresenter;
 import ru.arink_group.deliveryapp.presentation.view.AccountView;
 import ru.arink_group.deliveryapp.presentation.view.FabView;
+import ru.arink_group.deliveryapp.presentation.view.activity.AddressActivity;
 
 /**
  * A simple {@link Fragment} subclass.
  */
-public class AccountFragment extends Fragment implements AccountView, OnAddressRemoveListener {
+public class AccountFragment extends Fragment implements AccountView, OnAddressListener {
 
 
     private AccountPresenter accountPresenter;
     private Account account;
     private AddressesListAdapter addressesListAdapter;
     private FloatingActionButton fab;
+
+    @BindView(R.id.addresses_recycler_view)
+    RecyclerView recyclerView;
+
+    @BindView(R.id.summary_create_address_button)
+    Button summaryCreateAccountButton;
 
     @BindView(R.id.account_name)
     TextInputEditText accountName;
@@ -82,22 +89,28 @@ public class AccountFragment extends Fragment implements AccountView, OnAddressR
         accountPresenter = new AccountPresenterImpl(this);
         accountPresenter.getAccount();
 
-        RecyclerView recyclerView = rootView.findViewById(R.id.addresses_recycler_view);
         recyclerView.setHasFixedSize(true);
 
-        addressesListAdapter = new AddressesListAdapter(errorCantBeBlankString);
+        addressesListAdapter = new AddressesListAdapter();
         addressesListAdapter.setListener(this);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false);
 
         recyclerView.setLayoutManager(linearLayoutManager);
         recyclerView.setAdapter(addressesListAdapter);
 
-        FabView fabView = (FabView) getActivity();
+        final FabView fabView = (FabView) getActivity();
         fab = fabView.getFab();
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                addressesListAdapter.addNewAddress();
+                if (accountPresenter.isNewAccount()) {
+                    if (!verifyAccountModel()) return;
+                    updateAccountModel();
+                    accountPresenter.createAccountWithAddress(account);
+                } else {
+                    Intent intent = new Intent(getActivity(), AddressActivity.class);
+                    getActivity().startActivity(intent);
+                }
             }
         });
         fab.setImageResource(R.drawable.plus);
@@ -106,9 +119,8 @@ public class AccountFragment extends Fragment implements AccountView, OnAddressR
             @Override
             public void onClick(View v) {
                 if(!verifyAccountModel()) return;
-                if(!verifyAddresses()) return;
                 updateAccountModel();
-                account.setAddresses(addressesListAdapter.getUpdatedList());
+                account.setAddresses(addressesListAdapter.getAddresses());
                 accountPresenter.updateAccount(account);
                 sendButton.startAnimation();
 
@@ -128,6 +140,20 @@ public class AccountFragment extends Fragment implements AccountView, OnAddressR
                         });
                     }
                 }, 1000);
+            }
+        });
+
+        summaryCreateAccountButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (accountPresenter.isNewAccount()) {
+                    if (!verifyAccountModel()) return;
+                    updateAccountModel();
+                    accountPresenter.createAccountWithAddress(account);
+                } else {
+                    Intent intent = new Intent(getActivity(), AddressActivity.class);
+                    getActivity().startActivity(intent);
+                }
             }
         });
 
@@ -153,7 +179,17 @@ public class AccountFragment extends Fragment implements AccountView, OnAddressR
     public void updateAccount(Account account) {
         this.account = account;
         this.updateAccountView();
-        this.addressesListAdapter.updateAddresses(account.getAddresses());
+        if(account.getAddresses().size() > 0 && !(account.getAddresses().size() == 1 && account.getAddresses().get(0).getId() == null)) {
+            this.addressesListAdapter.updateAddresses(account.getAddresses());
+            recyclerView.setVisibility(View.VISIBLE);
+            summaryCreateAccountButton.setVisibility(View.GONE);
+        }
+    }
+
+    @Override
+    public void startNewAddressAfterCreateAccount() {
+        Intent intent = new Intent(getActivity(), AddressActivity.class);
+        getActivity().startActivity(intent);
     }
 
     private void updateAccountModel() {
@@ -180,19 +216,10 @@ public class AccountFragment extends Fragment implements AccountView, OnAddressR
         return flag;
     }
 
-    private boolean verifyAddresses() {
-        return addressesListAdapter.verifyAddressesList();
-    }
-
     private void updateAccountView() {
         accountName.setText(account.getName());
         accountEmail.setText(account.getEmail());
         accountPhone.setText(account.getPhone());
-    }
-
-    @Override
-    public void updateAddress(Address address) {
-        addressesListAdapter.updateAddress(address);
     }
 
     @Override
@@ -208,7 +235,18 @@ public class AccountFragment extends Fragment implements AccountView, OnAddressR
     }
 
     @Override
-    public void onAddressRemove(int id) {
+    public void onAddressRemove(int id, int addrSize) {
+        if (addrSize == 1) {
+            Toast.makeText(getActivity(), R.string.error_must_be_at_leat_one_address, Toast.LENGTH_SHORT).show();
+            return;
+        }
         accountPresenter.deleteAddress(id);
+    }
+
+    @Override
+    public void onAddressEdit(Address address) {
+        Intent intent = new Intent(getActivity(), AddressActivity.class);
+        intent.putExtra(AddressActivity.ADDRESS_SER, address);
+        getActivity().startActivity(intent);
     }
 }

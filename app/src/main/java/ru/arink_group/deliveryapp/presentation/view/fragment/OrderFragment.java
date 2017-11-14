@@ -183,7 +183,6 @@ public class OrderFragment extends Fragment implements OrderView, OrdersListAdap
 
     @Override
     public void updateAddresses(List<Address> addresses) {
-        Toast.makeText(getActivity(), String.valueOf(addresses.size()), Toast.LENGTH_SHORT).show();
         if (addresses.size() > 0) {
             this.addresses = addresses;
             List<String> addressesString = new ArrayList<>();

@@ -14,9 +14,9 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:screenOrientation="nosensor"
             android:name=".presentation.view.activity.MainActivity"
-            android:noHistory="true">
+            android:noHistory="true"
+            android:screenOrientation="nosensor">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -24,21 +24,22 @@
             </intent-filter>
         </activity>
         <activity
-            android:screenOrientation="nosensor"
             android:name=".presentation.view.activity.MenuActivity"
             android:label="@string/title_activity_menu"
+            android:screenOrientation="nosensor"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:screenOrientation="nosensor"
             android:name=".presentation.view.activity.ProductsActivity"
             android:label="@string/title_activity_products"
             android:parentActivityName=".presentation.view.activity.MenuActivity"
+            android:screenOrientation="nosensor"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:screenOrientation="nosensor"
             android:name=".presentation.view.activity.IngredientsActivity"
             android:parentActivityName=".presentation.view.activity.ProductsActivity"
+            android:screenOrientation="nosensor"
             android:theme="@style/AppTheme.NoActionBar" />
+        <activity android:name=".presentation.view.activity.AddressActivity"></activity>
     </application>
 
 </manifest>

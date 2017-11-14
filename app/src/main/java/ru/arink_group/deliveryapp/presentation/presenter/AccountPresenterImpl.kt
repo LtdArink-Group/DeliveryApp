@@ -24,21 +24,16 @@ class AccountPresenterImpl(val accountView: AccountView): AccountPresenter {
     lateinit var updateAccount: UpdateAccount
 
     @Inject
-    lateinit var addAddress: AddAddress
-
-    @Inject
-    lateinit var updateAddress: UpdateAddress
-
-    @Inject
-    lateinit var updateAddressPatch: UpdateAddressPatch
-
-    @Inject
     lateinit var deleteAddress: DeleteAddress
 
     var newAccount: Boolean = true
 
     init {
         App.getComponent().inject(this)
+    }
+
+    override fun isNewAccount(): Boolean {
+        return newAccount
     }
 
     override fun getAccount() {
@@ -49,30 +44,21 @@ class AccountPresenterImpl(val accountView: AccountView): AccountPresenter {
         val addresses = account.addresses
         account.addresses = null
         if (newAccount){
-            createAccount.execute(CreateAccountDisposable(addresses!!.toMutableList()), CreateAccount.Params(account))
+            createAccount.execute(CreateAccountDisposable(), CreateAccount.Params(account))
         } else {
             updateAccount.execute(UpdateAccountDisposable(), UpdateAccount.Params(account))
-            updateAddressList(addresses!!.toMutableList())
         }
     }
 
-    override fun updateAddress(address: Address) {
-        if (address.id != null) {
-//            updateAddress.execute(UpdateAddressDisposable(), UpdateAddress.Params(address))
-            updateAddressPatch.execute(UpdateAddressPatchDisposable(), UpdateAddressPatch.Params(address))
-        } else {
-            addAddress.execute(AddAddressDisposable(), AddAddress.Params(address))
-        }
+    override fun createAccountWithAddress(account: Account) {
+        createAccount.execute(CreateAccountForAddressDisposable(), CreateAccount.Params(account))
     }
+
 
     override fun deleteAddress(id: Int) {
         deleteAddress.execute(DeleteAddressObserver(), DeleteAddress.Params(id))
     }
 
-
-    override fun updateAddressList(addresses: MutableList<Address>) {
-        addresses.forEach { updateAddress(it) }
-    }
 
     inner class GetAccountDisposable: DisposableObserver<Account>() {
 
@@ -95,9 +81,8 @@ class AccountPresenterImpl(val accountView: AccountView): AccountPresenter {
         }
     }
 
-    inner class CreateAccountDisposable(val addresses: MutableList<Address>): DisposableObserver<Account>() {
+    inner class CreateAccountDisposable: DisposableObserver<Account>() {
         override fun onComplete() {
-            updateAddressList(addresses)
         }
 
         override fun onError(e: Throwable) {
@@ -106,6 +91,20 @@ class AccountPresenterImpl(val accountView: AccountView): AccountPresenter {
 
         override fun onNext(t: Account) {
             accountView.updateAccount(t)
+        }
+
+    }
+
+    inner class CreateAccountForAddressDisposable: DisposableObserver<Account>() {
+        override fun onComplete() {
+        }
+
+        override fun onError(e: Throwable) {
+            accountView.showErrorMessage(e.message)
+        }
+
+        override fun onNext(t: Account) {
+            accountView.startNewAddressAfterCreateAccount()
         }
 
     }
@@ -120,45 +119,6 @@ class AccountPresenterImpl(val accountView: AccountView): AccountPresenter {
         }
 
         override fun onComplete() {
-        }
-    }
-
-    inner class AddAddressDisposable: DisposableObserver<Address>() {
-        override fun onError(e: Throwable) {
-            accountView.showErrorMessage(e.message)
-        }
-
-        override fun onComplete() {
-        }
-
-        override fun onNext(t: Address) {
-            accountView.updateAddress(t)
-        }
-    }
-
-    inner class UpdateAddressDisposable: DisposableObserver<Address>() {
-        override fun onComplete() {
-        }
-
-        override fun onNext(t: Address) {
-            accountView.updateAddress(t)
-        }
-
-        override fun onError(e: Throwable) {
-            accountView.showErrorMessage(e.message)
-        }
-    }
-
-    inner class UpdateAddressPatchDisposable: DisposableObserver<Unit>() {
-        override fun onNext(t: Unit) {
-        }
-
-        override fun onComplete() {
-        }
-
-        override fun onError(e: Throwable) {
-            accountView.showErrorMessage("from address update ${e.message} ${e.stackTrace}")
-            throw e
         }
     }
 
@@ -183,9 +143,6 @@ class AccountPresenterImpl(val accountView: AccountView): AccountPresenter {
     override fun destroy() {
         getAccount.dispose()
         createAccount.dispose()
-        addAddress.dispose()
-        updateAddress.dispose()
         updateAccount.dispose()
-        updateAddressPatch.dispose()
     }
 }

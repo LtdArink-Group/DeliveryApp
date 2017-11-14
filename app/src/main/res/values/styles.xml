@@ -23,4 +23,9 @@
         <item name="android:textColor">@color/colorAccent</item>
     </style>
 
+    <style name="AppTheme.MyBorderButton" parent="Widget.AppCompat.Button.Colored">
+        <item name="colorButtonNormal">@color/colorAccent</item>
+        <item name="android:textColor">@color/colorCheckedText</item>
+    </style>
+
 </resources>
