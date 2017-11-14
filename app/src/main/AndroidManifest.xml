@@ -39,7 +39,9 @@
             android:parentActivityName=".presentation.view.activity.ProductsActivity"
             android:screenOrientation="nosensor"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".presentation.view.activity.AddressActivity"></activity>
+        <activity android:name=".presentation.view.activity.AddressActivity"
+            android:screenOrientation="nosensor"
+            />
     </application>
 
 </manifest>
