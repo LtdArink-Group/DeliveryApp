@@ -10,5 +10,5 @@ import ru.arink_group.deliveryapp.domain.Address;
 public interface AccountView {
     void showErrorMessage(String message);
     void updateAccount(Account account);
-    void updateAddress(Address address);
+    void startNewAddressAfterCreateAccount();
 }

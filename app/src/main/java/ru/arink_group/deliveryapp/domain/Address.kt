@@ -1,5 +1,7 @@
 package ru.arink_group.deliveryapp.domain
 
+import java.io.Serializable
+
 /**
  * Created by kirillvs on 31.10.17.
  */
@@ -13,4 +15,4 @@ data class Address(
         var floor: String = "",
         var entrance: String = "",
         var code: String = ""
-)
+) : Serializable

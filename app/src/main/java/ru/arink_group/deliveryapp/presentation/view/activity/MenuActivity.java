@@ -24,6 +24,7 @@ import ru.arink_group.deliveryapp.presentation.presenter.interfaces.MenuPresente
 import ru.arink_group.deliveryapp.presentation.presenter.MenuPresenterImpl;
 import ru.arink_group.deliveryapp.presentation.view.FabView;
 import ru.arink_group.deliveryapp.presentation.view.MenuView;
+import ru.arink_group.deliveryapp.presentation.view.fragment.AccountFragment;
 import ru.arink_group.deliveryapp.presentation.view.fragment.CategoriesFragment;
 import ru.arink_group.deliveryapp.presentation.view.fragment.OrderFragment;
 
@@ -31,6 +32,7 @@ public class MenuActivity extends AppCompatActivity
         implements MenuView, NavigationView.OnNavigationItemSelectedListener, FabView {
 
     public static final String IS_ORDER_START = "is order start";
+    public static final String IS_ACCOUNT_START = "is account start";
 
     private MenuPresenter menuPresenter;
     private FloatingActionButton fab;
@@ -64,11 +66,16 @@ public class MenuActivity extends AppCompatActivity
     }
 
     private void starterFragment() {
+        //TODO that is the bug!!!!!!!!!!!!!!!!!!!!!! i use add instead of replace
         FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
         if(getIntent().getBooleanExtra(IS_ORDER_START, false)) {
             fragmentTransaction.add(R.id.menu_fragment, new OrderFragment());
             setTitle(R.string.order);
 
+        } else if(getIntent().getBooleanExtra(IS_ACCOUNT_START, false)){
+            AccountFragment accountFragment = new AccountFragment();
+            fragmentTransaction.add(R.id.menu_fragment, accountFragment);
+            setTitle(R.string.account);
         } else {
             fragmentTransaction.add(R.id.menu_fragment, new CategoriesFragment());
         }

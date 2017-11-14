@@ -11,6 +11,9 @@
     <string name="title_dashboard">Dashboard</string>
     <string name="title_notifications">Notifications</string>
 
+    <string name="title_ingredients">Ингредиенты</string>
+    <string name="title_address">Адрес</string>
+
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="title_activity_products">ProductsActivity</string>
     <string name="categories">Меню</string>
@@ -53,9 +56,15 @@
     <string name="send_fail">X</string>
 
     <!--Errors-->
+    <string name="error_must_be_at_leat_one_address">Минимум один адрес!</string>
     <string name="error_cant_be_blank">Не может быть пустым!</string>
     <string name="empty_cart">Ваша корзина пуста :(</string>
     <string name="summary_address_list">Адрес доставки</string>
     <string name="summary_create_account">Добавить адрес</string>
     <string name="error_address_empty">Необходимо выбрать адрес</string>
+    <string name="account_addresses">Ваши адреса</string>
+    <string name="account_address">Создать адрес</string>
+    <string name="address_button">Добавить адрес</string>
+    <string name="delete_address">Удалить адрес</string>
+    <string name="address_button_submit">Применить</string>
 </resources>

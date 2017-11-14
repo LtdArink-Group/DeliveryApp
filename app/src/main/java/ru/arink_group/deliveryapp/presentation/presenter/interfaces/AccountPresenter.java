@@ -15,10 +15,10 @@ public interface AccountPresenter extends Presenter{
 
     void updateAccount(Account account);
 
-    void updateAddress(Address address);
-
-    void updateAddressList(List<Address> addresses);
+    void createAccountWithAddress(Account account);
 
     void deleteAddress(int id);
+
+    boolean isNewAccount();
 
 }
