@@ -27,6 +27,7 @@ import butterknife.ButterKnife;
 import ru.arink_group.deliveryapp.R;
 import ru.arink_group.deliveryapp.domain.Address;
 import ru.arink_group.deliveryapp.domain.Product;
+import ru.arink_group.deliveryapp.presentation.adapters.OrderAddressesListAdapter;
 import ru.arink_group.deliveryapp.presentation.adapters.OrdersListAdapter;
 import ru.arink_group.deliveryapp.presentation.presenter.OrderPresenterImpl;
 import ru.arink_group.deliveryapp.presentation.presenter.interfaces.OrderPresenter;
@@ -134,7 +135,8 @@ public class OrderFragment extends Fragment implements OrderView, OrdersListAdap
             }
         });
 
-        addressesStringAdaptet = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_spinner_dropdown_item, new ArrayList<String>());
+//        addressesStringAdaptet = new ArrayAdapter<String>(getActivity(), R.layout.item_spinner_address, new ArrayList<String>());
+        addressesStringAdaptet = new OrderAddressesListAdapter(getActivity(), R.layout.item_spinner_address, new ArrayList<String>());
         addressListSpinner.setAdapter(addressesStringAdaptet);
 
         orderPresenter.getAddresses();
