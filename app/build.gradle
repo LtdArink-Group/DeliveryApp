@@ -45,6 +45,7 @@ dependencies {
     compile 'com.github.markushi:circlebutton:1.1'
     compile 'com.squareup.picasso:picasso:2.5.2'
     compile 'br.com.simplepass:loading-button-android:1.8.3'
+    compile 'com.google.code.gson:gson:2.8.2'
     testCompile 'junit:junit:4.12'
     annotationProcessor 'com.google.dagger:dagger-compiler:2.11'
     annotationProcessor 'com.jakewharton:butterknife-compiler:8.7.0'

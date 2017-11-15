@@ -1,6 +1,6 @@
 package ru.arink_group.deliveryapp.presentation.adapters.interfaces;
 
-import ru.arink_group.deliveryapp.domain.Address;
+import ru.arink_group.deliveryapp.domain.dao.Address;
 
 /**
  * Created by kirillvs on 02.11.17.

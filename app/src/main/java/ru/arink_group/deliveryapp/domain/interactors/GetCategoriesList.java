@@ -6,7 +6,7 @@ import io.reactivex.Observable;
 import io.reactivex.annotations.NonNull;
 import io.reactivex.functions.Function;
 import ru.arink_group.deliveryapp.data.repository.CategoriesDataRepository;
-import ru.arink_group.deliveryapp.domain.Category;
+import ru.arink_group.deliveryapp.domain.dao.Category;
 import ru.arink_group.deliveryapp.domain.dto.CategoryDTO;
 import ru.arink_group.deliveryapp.domain.dto.TransformerDTO;
 import ru.arink_group.deliveryapp.domain.repository.CategoriesRepository;

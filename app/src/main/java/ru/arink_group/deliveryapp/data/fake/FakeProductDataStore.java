@@ -6,10 +6,6 @@ import java.util.List;
 
 import io.reactivex.Observable;
 import ru.arink_group.deliveryapp.data.repository.datasource.ProductDataStore;
-import ru.arink_group.deliveryapp.domain.Category;
-import ru.arink_group.deliveryapp.domain.Ingredient;
-import ru.arink_group.deliveryapp.domain.Portion;
-import ru.arink_group.deliveryapp.domain.Product;
 import ru.arink_group.deliveryapp.domain.dto.AdditionalInfoDTO;
 import ru.arink_group.deliveryapp.domain.dto.MainOptionDTO;
 import ru.arink_group.deliveryapp.domain.dto.ProductDTO;

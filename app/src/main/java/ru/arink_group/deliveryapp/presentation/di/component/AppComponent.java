@@ -5,8 +5,10 @@ import javax.inject.Singleton;
 import dagger.Component;
 import ru.arink_group.deliveryapp.data.db.ProductsDbHelper;
 import ru.arink_group.deliveryapp.data.repository.AccountDataRepository;
+import ru.arink_group.deliveryapp.data.repository.CompanyDataRepository;
 import ru.arink_group.deliveryapp.data.repository.SelectedItemsDataRepository;
 import ru.arink_group.deliveryapp.data.repository.factory.AccountDataFactory;
+import ru.arink_group.deliveryapp.data.repository.factory.CompanyDataFactory;
 import ru.arink_group.deliveryapp.data.repository.factory.SelectedItemsDataFactory;
 import ru.arink_group.deliveryapp.domain.interactors.AddAddress;
 import ru.arink_group.deliveryapp.domain.interactors.AddIngredientToBasket;
@@ -17,6 +19,7 @@ import ru.arink_group.deliveryapp.domain.interactors.ClearItemsFromBasket;
 import ru.arink_group.deliveryapp.domain.interactors.CreateAccount;
 import ru.arink_group.deliveryapp.domain.interactors.DeleteAddress;
 import ru.arink_group.deliveryapp.domain.interactors.GetAccount;
+import ru.arink_group.deliveryapp.domain.interactors.GetCompany;
 import ru.arink_group.deliveryapp.domain.interactors.GetListItemsFromBasket;
 import ru.arink_group.deliveryapp.domain.interactors.RemoveItemFromBasket;
 import ru.arink_group.deliveryapp.domain.interactors.UpdateAccount;
@@ -67,4 +70,7 @@ public interface AppComponent {
     void inject(AccountPresenterImpl accountPresenter);
     void inject(UpdateAddressPatch updateAddressPatch);
     void inject(AddressPresenterImpl addressPresenter);
+    void inject(CompanyDataRepository  companyDataRepository);
+    void inject(CompanyDataFactory companyDataFactory);
+    void inject(GetCompany getCompany);
 }

@@ -14,7 +14,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".presentation.view.activity.MainActivity"
+            android:name=".presentation.view.activity.StarterActivity"
             android:noHistory="true"
             android:screenOrientation="nosensor">
             <intent-filter>

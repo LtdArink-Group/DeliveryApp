@@ -2,8 +2,8 @@ package ru.arink_group.deliveryapp.presentation.view;
 
 import java.util.List;
 
-import ru.arink_group.deliveryapp.domain.Address;
-import ru.arink_group.deliveryapp.domain.Product;
+import ru.arink_group.deliveryapp.domain.dao.Address;
+import ru.arink_group.deliveryapp.domain.dao.Product;
 
 /**
  * Created by kirillvs on 24.10.17.

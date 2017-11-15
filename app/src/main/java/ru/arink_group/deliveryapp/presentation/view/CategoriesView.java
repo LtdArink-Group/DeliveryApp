@@ -2,7 +2,7 @@ package ru.arink_group.deliveryapp.presentation.view;
 
 import java.util.List;
 
-import ru.arink_group.deliveryapp.domain.Category;
+import ru.arink_group.deliveryapp.domain.dao.Category;
 
 /**
  * Created by kirillvs on 02.10.17.

@@ -1,8 +1,8 @@
 package ru.arink_group.deliveryapp.presentation.presenter
 
 import io.reactivex.observers.DisposableObserver
-import ru.arink_group.deliveryapp.domain.Ingredient
-import ru.arink_group.deliveryapp.domain.Product
+import ru.arink_group.deliveryapp.domain.dao.Ingredient
+import ru.arink_group.deliveryapp.domain.dao.Product
 import ru.arink_group.deliveryapp.domain.interactors.AddIngredientToBasket
 import ru.arink_group.deliveryapp.App
 import ru.arink_group.deliveryapp.presentation.presenter.interfaces.IngredientsPresenter

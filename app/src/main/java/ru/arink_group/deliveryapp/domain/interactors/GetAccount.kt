@@ -1,10 +1,9 @@
 package ru.arink_group.deliveryapp.domain.interactors
 
 import io.reactivex.Observable
-import ru.arink_group.deliveryapp.domain.dto.AccountDTO
 import ru.arink_group.deliveryapp.domain.repository.AccountRepository
 import ru.arink_group.deliveryapp.App
-import ru.arink_group.deliveryapp.domain.Account
+import ru.arink_group.deliveryapp.domain.dao.Account
 import ru.arink_group.deliveryapp.domain.dto.TransformerDTO
 import javax.inject.Inject
 

@@ -5,8 +5,10 @@ import android.support.annotation.NonNull;
 import dagger.Module;
 import dagger.Provides;
 import ru.arink_group.deliveryapp.data.repository.AccountDataRepository;
+import ru.arink_group.deliveryapp.data.repository.CompanyDataRepository;
 import ru.arink_group.deliveryapp.data.repository.SelectedItemsDataRepository;
 import ru.arink_group.deliveryapp.domain.repository.AccountRepository;
+import ru.arink_group.deliveryapp.domain.repository.CompanyRepository;
 import ru.arink_group.deliveryapp.domain.repository.SelectedItemsRepository;
 
 /**
@@ -26,6 +28,12 @@ public class RepositoriesModule {
     @NonNull
     public AccountRepository accountRepository() {
         return new AccountDataRepository();
+    }
+
+    @Provides
+    @NonNull
+    public CompanyRepository companyRepository() {
+        return new CompanyDataRepository();
     }
 
 }

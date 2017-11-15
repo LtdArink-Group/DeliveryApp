@@ -8,7 +8,7 @@ import android.view.ViewGroup
 import android.widget.TextView
 import at.markushi.ui.CircleButton
 import ru.arink_group.deliveryapp.R
-import ru.arink_group.deliveryapp.domain.Ingredient
+import ru.arink_group.deliveryapp.domain.dao.Ingredient
 
 /**
  * Created by kirillvs on 25.10.17.

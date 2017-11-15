@@ -12,7 +12,7 @@ import android.widget.Button
 import android.widget.Toast
 
 import ru.arink_group.deliveryapp.R
-import ru.arink_group.deliveryapp.domain.Address
+import ru.arink_group.deliveryapp.domain.dao.Address
 import ru.arink_group.deliveryapp.presentation.presenter.AddressPresenterImpl
 import ru.arink_group.deliveryapp.presentation.presenter.interfaces.AddressPresenter
 import ru.arink_group.deliveryapp.presentation.view.AddressView

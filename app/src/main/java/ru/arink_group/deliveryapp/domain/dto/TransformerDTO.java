@@ -4,12 +4,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 import ru.arink_group.deliveryapp.App;
-import ru.arink_group.deliveryapp.domain.Account;
-import ru.arink_group.deliveryapp.domain.Address;
-import ru.arink_group.deliveryapp.domain.Category;
-import ru.arink_group.deliveryapp.domain.Ingredient;
-import ru.arink_group.deliveryapp.domain.Portion;
-import ru.arink_group.deliveryapp.domain.Product;
+import ru.arink_group.deliveryapp.domain.dao.Account;
+import ru.arink_group.deliveryapp.domain.dao.Address;
+import ru.arink_group.deliveryapp.domain.dao.Category;
+import ru.arink_group.deliveryapp.domain.dao.Company;
+import ru.arink_group.deliveryapp.domain.dao.ContactInfo;
+import ru.arink_group.deliveryapp.domain.dao.Ingredient;
+import ru.arink_group.deliveryapp.domain.dao.Portion;
+import ru.arink_group.deliveryapp.domain.dao.Product;
 
 /**
  * Created by kirillvs on 20.10.17.
@@ -150,5 +152,24 @@ public class TransformerDTO {
         addressDTO.setStreet(address.getStreet());
         addressDTO.setTitle(address.getTitle());
         return addressDTO;
+    }
+
+    public static ContactInfo transformContactInfo(ContactInfoDTO contactInfoDTO) {
+        return new ContactInfo(contactInfoDTO.getEmail(), contactInfoDTO.getPhone());
+    }
+
+    public static Company transformCompany(CompanyDTO companyDTO) {
+        //TODO rework after adding discounts
+        Company company = new Company(
+                companyDTO.getId(),
+                companyDTO.getName(),
+                companyDTO.getCategories(),
+                companyDTO.getDescription(),
+                transformContactInfo(companyDTO.getContactInfo()),
+                companyDTO.getUrl(),
+                0.0,
+                0.0,
+                0.0);
+        return company;
     }
 }

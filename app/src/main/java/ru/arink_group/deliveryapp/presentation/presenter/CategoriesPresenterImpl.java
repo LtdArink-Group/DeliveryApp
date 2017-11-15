@@ -6,7 +6,7 @@ import javax.inject.Inject;
 
 import io.reactivex.annotations.NonNull;
 import io.reactivex.observers.DisposableObserver;
-import ru.arink_group.deliveryapp.domain.Category;
+import ru.arink_group.deliveryapp.domain.dao.Category;
 import ru.arink_group.deliveryapp.domain.interactors.GetCategoriesList;
 import ru.arink_group.deliveryapp.App;
 import ru.arink_group.deliveryapp.presentation.presenter.interfaces.CategoriesPresenter;

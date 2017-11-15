@@ -9,8 +9,8 @@ import io.reactivex.ObservableOnSubscribe;
 import io.reactivex.annotations.NonNull;
 import ru.arink_group.deliveryapp.data.db.ProductsDbHelper;
 import ru.arink_group.deliveryapp.data.repository.datasource.SelectedItemsDataStore;
-import ru.arink_group.deliveryapp.domain.Ingredient;
-import ru.arink_group.deliveryapp.domain.Product;
+import ru.arink_group.deliveryapp.domain.dao.Ingredient;
+import ru.arink_group.deliveryapp.domain.dao.Product;
 
 /**
  * Created by kirillvs on 09.10.17.

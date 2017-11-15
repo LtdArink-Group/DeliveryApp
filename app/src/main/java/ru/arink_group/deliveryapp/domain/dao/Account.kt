@@ -1,6 +1,4 @@
-package ru.arink_group.deliveryapp.domain
-
-import java.util.ArrayList
+package ru.arink_group.deliveryapp.domain.dao
 
 /**
  * Created by kirillvs on 31.10.17.

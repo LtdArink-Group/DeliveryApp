@@ -1,4 +1,4 @@
-package ru.arink_group.deliveryapp.domain;
+package ru.arink_group.deliveryapp.domain.dao;
 
 import java.io.Serializable;
 import java.util.ArrayList;
