@@ -1,6 +1,6 @@
 package ru.arink_group.deliveryapp.presentation.view;
 
-import ru.arink_group.deliveryapp.domain.Address;
+import ru.arink_group.deliveryapp.domain.dao.Address;
 
 /**
  * Created by kirillvs on 14.11.17.

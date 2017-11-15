@@ -1,4 +1,4 @@
-package ru.arink_group.deliveryapp.domain;
+package ru.arink_group.deliveryapp.domain.dao;
 
 /**
  * Created by kirillvs on 02.10.17.

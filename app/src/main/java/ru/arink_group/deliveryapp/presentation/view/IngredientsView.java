@@ -1,6 +1,6 @@
 package ru.arink_group.deliveryapp.presentation.view;
 
-import ru.arink_group.deliveryapp.domain.Product;
+import ru.arink_group.deliveryapp.domain.dao.Product;
 
 /**
  * Created by kirillvs on 17.10.17.

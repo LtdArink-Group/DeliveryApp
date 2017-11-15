@@ -7,7 +7,7 @@ import javax.inject.Inject;
 
 import io.reactivex.annotations.NonNull;
 import io.reactivex.observers.DisposableObserver;
-import ru.arink_group.deliveryapp.domain.Product;
+import ru.arink_group.deliveryapp.domain.dao.Product;
 import ru.arink_group.deliveryapp.domain.interactors.AddItemToBasket;
 import ru.arink_group.deliveryapp.domain.interactors.AddListItemsToBasket;
 import ru.arink_group.deliveryapp.domain.interactors.GetListItemsFromBasket;

@@ -10,9 +10,9 @@ import java.util.List;
 
 import javax.inject.Inject;
 
-import ru.arink_group.deliveryapp.domain.Ingredient;
-import ru.arink_group.deliveryapp.domain.Portion;
-import ru.arink_group.deliveryapp.domain.Product;
+import ru.arink_group.deliveryapp.domain.dao.Ingredient;
+import ru.arink_group.deliveryapp.domain.dao.Portion;
+import ru.arink_group.deliveryapp.domain.dao.Product;
 import ru.arink_group.deliveryapp.App;
 
 /**

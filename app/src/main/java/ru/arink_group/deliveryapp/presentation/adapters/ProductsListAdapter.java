@@ -24,7 +24,7 @@ import java.util.Map;
 
 import at.markushi.ui.CircleButton;
 import ru.arink_group.deliveryapp.R;
-import ru.arink_group.deliveryapp.domain.Product;
+import ru.arink_group.deliveryapp.domain.dao.Product;
 import ru.arink_group.deliveryapp.presentation.adapters.interfaces.OnIngredientClickListener;
 import ru.arink_group.deliveryapp.presentation.adapters.interfaces.OnItemClickListener;
 

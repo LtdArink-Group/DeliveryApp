@@ -1,17 +1,18 @@
-package ru.arink_group.deliveryapp.domain;
+package ru.arink_group.deliveryapp.domain.dao;
 
 import java.io.Serializable;
 
 /**
- * Created by kirillvs on 06.10.17.
+ * Created by kirillvs on 05.10.17.
  */
 
-public class Ingredient implements Serializable{
+public class Portion implements Serializable{
 
     private String name;
     private String description;
     private double price;
-    private int count;
+    private boolean isChecked;
+
 
     public String getName() {
         return name;
@@ -37,11 +38,11 @@ public class Ingredient implements Serializable{
         this.price = price;
     }
 
-    public int getCount() {
-        return count;
+    public boolean isChecked() {
+        return isChecked;
     }
 
-    public void setCount(int count) {
-        this.count = count;
+    public void setChecked(boolean checked) {
+        isChecked = checked;
     }
 }

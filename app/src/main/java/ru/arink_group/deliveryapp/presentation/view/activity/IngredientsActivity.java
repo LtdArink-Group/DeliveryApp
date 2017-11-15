@@ -12,7 +12,7 @@ import android.view.MenuItem;
 import android.view.View;
 
 import ru.arink_group.deliveryapp.R;
-import ru.arink_group.deliveryapp.domain.Product;
+import ru.arink_group.deliveryapp.domain.dao.Product;
 import ru.arink_group.deliveryapp.presentation.view.FabView;
 import ru.arink_group.deliveryapp.presentation.view.fragment.IngredientsFragment;
 import ru.arink_group.deliveryapp.presentation.view.fragment.ProductsFragment;

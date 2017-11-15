@@ -12,6 +12,7 @@ import ru.arink_group.deliveryapp.data.net.response.CategoriesObject
 import ru.arink_group.deliveryapp.data.net.response.ProductsObject
 import ru.arink_group.deliveryapp.domain.dto.AccountDTO
 import ru.arink_group.deliveryapp.domain.dto.AddressDTO
+import ru.arink_group.deliveryapp.domain.dto.CompanyDTO
 import ru.arink_group.deliveryapp.domain.dto.ProductDTO
 
 /**
@@ -48,6 +49,9 @@ interface BookingFoodApi {
 
     @GET("/api/accounts/{accountId}")
     fun getAccount(@Path("accountId") accountId: String): Observable<AccountDTO>
+
+    @GET("/api/companies/{companyId}")
+    fun getCompany(@Path("companyId") companyId: String) : Observable<CompanyDTO>
     
     /**
      * Companion object to create the BoolingFoodApi

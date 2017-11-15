@@ -7,12 +7,10 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
-import android.widget.Toast
 import at.markushi.ui.CircleButton
-import org.w3c.dom.Text
 import ru.arink_group.deliveryapp.R
-import ru.arink_group.deliveryapp.domain.Ingredient
-import ru.arink_group.deliveryapp.domain.Product
+import ru.arink_group.deliveryapp.domain.dao.Ingredient
+import ru.arink_group.deliveryapp.domain.dao.Product
 
 /**
  * Created by kirillvs on 25.10.17.

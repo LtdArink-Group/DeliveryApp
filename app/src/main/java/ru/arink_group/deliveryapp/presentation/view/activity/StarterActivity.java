@@ -1,5 +1,7 @@
 package ru.arink_group.deliveryapp.presentation.view.activity;
 
+import android.app.Activity;
+import android.content.SharedPreferences;
 import android.support.v7.app.ActionBar;
 import android.app.FragmentTransaction;
 import android.content.Intent;
@@ -9,11 +11,18 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Toast;
 
+import com.google.gson.Gson;
+
+import io.reactivex.observers.DisposableObserver;
 import ru.arink_group.deliveryapp.App;
 import ru.arink_group.deliveryapp.R;
+import ru.arink_group.deliveryapp.domain.dao.Company;
+import ru.arink_group.deliveryapp.domain.interactors.GetCompany;
 import ru.arink_group.deliveryapp.presentation.view.fragment.LoadFragment;
 
-public class MainActivity extends AppCompatActivity {
+public class StarterActivity extends AppCompatActivity {
+
+    GetCompany getCompany;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,16 +35,8 @@ public class MainActivity extends AppCompatActivity {
         fragmentTransaction.add(R.id.load_fragment, new LoadFragment());
         fragmentTransaction.commit();
 
-        final Handler handler = new Handler();
-        final Runnable r = new Runnable()
-        {
-            public void run()
-            {
-                startApp();
-            }
-        };
-
-        handler.postDelayed(r, 1000);
+        getCompany = new GetCompany();
+        getCompany.execute(new CompanyDisposableObserver(), null);
     }
 
     private void startApp() {
@@ -54,6 +55,31 @@ public class MainActivity extends AppCompatActivity {
         // status bar is hidden, so hide that too if necessary.
         ActionBar actionBar = getSupportActionBar();
         actionBar.hide();
-
     }
+
+    public class CompanyDisposableObserver extends DisposableObserver<Company> {
+
+        @Override
+        public void onNext(Company company) {
+            SharedPreferences sp = getSharedPreferences(App.APP_SHARED_PREF, Activity.MODE_PRIVATE);
+            SharedPreferences.Editor editor = sp.edit();
+            Gson gson = new Gson();
+            String companyJson = gson.toJson(company);
+            editor.putString(App.COMPANY_INFO, companyJson);
+            editor.apply();
+        }
+
+        @Override
+        public void onError(Throwable e) {
+            Toast.makeText(StarterActivity.this, e.getMessage(), Toast.LENGTH_SHORT).show();
+            startApp();
+        }
+
+        @Override
+        public void onComplete() {
+            startApp();
+        }
+    }
+
+
 }

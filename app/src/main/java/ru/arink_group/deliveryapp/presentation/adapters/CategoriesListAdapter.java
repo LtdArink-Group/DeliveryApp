@@ -11,7 +11,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import ru.arink_group.deliveryapp.R;
-import ru.arink_group.deliveryapp.domain.Category;
+import ru.arink_group.deliveryapp.domain.dao.Category;
 import ru.arink_group.deliveryapp.presentation.adapters.interfaces.OnCategoryClickListener;
 import ru.arink_group.deliveryapp.presentation.model.IconTransformer;
 

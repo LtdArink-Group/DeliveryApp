@@ -3,7 +3,6 @@ package ru.arink_group.deliveryapp.domain.repository;
 import java.util.List;
 
 import io.reactivex.Observable;
-import ru.arink_group.deliveryapp.domain.Category;
 import ru.arink_group.deliveryapp.domain.dto.CategoryDTO;
 
 /**

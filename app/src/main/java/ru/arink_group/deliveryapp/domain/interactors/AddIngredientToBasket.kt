@@ -1,7 +1,7 @@
 package ru.arink_group.deliveryapp.domain.interactors
 
 import io.reactivex.Observable
-import ru.arink_group.deliveryapp.domain.Ingredient
+import ru.arink_group.deliveryapp.domain.dao.Ingredient
 import ru.arink_group.deliveryapp.domain.repository.SelectedItemsRepository
 import ru.arink_group.deliveryapp.App
 import javax.inject.Inject

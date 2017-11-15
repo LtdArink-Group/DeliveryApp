@@ -2,7 +2,7 @@ package ru.arink_group.deliveryapp.domain.interactors
 
 import io.reactivex.Observable
 import ru.arink_group.deliveryapp.App
-import ru.arink_group.deliveryapp.domain.Address
+import ru.arink_group.deliveryapp.domain.dao.Address
 import ru.arink_group.deliveryapp.domain.dto.AddressDTO
 import ru.arink_group.deliveryapp.domain.dto.TransformerDTO
 import ru.arink_group.deliveryapp.domain.repository.AccountRepository
