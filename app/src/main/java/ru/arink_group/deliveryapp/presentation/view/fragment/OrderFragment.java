@@ -213,7 +213,10 @@ public class OrderFragment extends Fragment implements OrderView,
 
         this.summaryDiscount.setText(String.valueOf(discount));
 
-        if (summary < delivery.getFreeShipping()) {
+        if (selfExportSwitch.isChecked()) {
+            deliveryCost = 0.0;
+            this.summaryDelivery.setText(String.valueOf(deliveryCost));
+        } else if (summary < delivery.getFreeShipping()) {
             this.summaryDelivery.setText(String.valueOf(delivery.getCost()));
             deliveryCost = delivery.getCost();
         } else {
