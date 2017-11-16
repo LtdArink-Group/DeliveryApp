@@ -9,7 +9,9 @@ import ru.arink_group.deliveryapp.domain.dao.Address;
 import ru.arink_group.deliveryapp.domain.dao.Category;
 import ru.arink_group.deliveryapp.domain.dao.Company;
 import ru.arink_group.deliveryapp.domain.dao.ContactInfo;
+import ru.arink_group.deliveryapp.domain.dao.Delivery;
 import ru.arink_group.deliveryapp.domain.dao.Ingredient;
+import ru.arink_group.deliveryapp.domain.dao.Period;
 import ru.arink_group.deliveryapp.domain.dao.Portion;
 import ru.arink_group.deliveryapp.domain.dao.Product;
 
@@ -155,21 +157,36 @@ public class TransformerDTO {
     }
 
     public static ContactInfo transformContactInfo(ContactInfoDTO contactInfoDTO) {
-        return new ContactInfo(contactInfoDTO.getEmail(), contactInfoDTO.getPhone());
+        return new ContactInfo(
+                contactInfoDTO.getEmail(),
+                contactInfoDTO.getPhone(),
+                contactInfoDTO.getWeb(),
+                contactInfoDTO.getAddress()
+        );
+    }
+
+    public static Period transformPeriod(PeriodDTO periodDTO) {
+        return new Period(periodDTO.getStart(), periodDTO.getEnd());
+    }
+
+    public static Delivery transformDelivery(DeliveryDTO deliveryDTO) {
+        return new Delivery(
+                deliveryDTO.getCost(),
+                deliveryDTO.getFreeShipping(),
+                deliveryDTO.getPickupDiscount(),
+                transformPeriod(deliveryDTO.getPeriod())
+        );
     }
 
     public static Company transformCompany(CompanyDTO companyDTO) {
-        //TODO rework after adding discounts
-        Company company = new Company(
+        return new Company(
                 companyDTO.getId(),
                 companyDTO.getName(),
                 companyDTO.getCategories(),
                 companyDTO.getDescription(),
                 transformContactInfo(companyDTO.getContactInfo()),
-                companyDTO.getUrl(),
-                0.0,
-                0.0,
-                0.0);
-        return company;
+                transformDelivery(companyDTO.getDelivery()),
+                companyDTO.getUrl()
+        );
     }
 }

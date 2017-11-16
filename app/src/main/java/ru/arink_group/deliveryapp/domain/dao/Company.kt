@@ -11,8 +11,6 @@ data class Company(
         val categories: List<Int>,
         val description: String?,
         val contactInfo: ContactInfo,
-        val url: String,
-        val discountForSelfExport: Double = 0.0,
-        val discountForBuscketSum: Double = 0.0,
-        val sumForBuscketDiscount: Double = 0.0
+        val delivery: Delivery,
+        val url: String
 ) : Serializable

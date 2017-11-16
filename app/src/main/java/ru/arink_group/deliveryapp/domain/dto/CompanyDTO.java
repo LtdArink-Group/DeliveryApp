@@ -21,6 +21,9 @@ public class CompanyDTO {
     @SerializedName("contact_info")
     @Expose
     private ContactInfoDTO contactInfo;
+    @SerializedName("delivery")
+    @Expose
+    private DeliveryDTO delivery;
     @SerializedName("created_at")
     @Expose
     private String createdAt;
@@ -69,6 +72,14 @@ public class CompanyDTO {
 
     public void setContactInfo(ContactInfoDTO contactInfo) {
         this.contactInfo = contactInfo;
+    }
+
+    public DeliveryDTO getDelivery() {
+        return delivery;
+    }
+
+    public void setDelivery(DeliveryDTO delivery) {
+        this.delivery = delivery;
     }
 
     public String getCreatedAt() {

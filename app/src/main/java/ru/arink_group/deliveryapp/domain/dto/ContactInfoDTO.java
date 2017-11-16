@@ -12,6 +12,13 @@ public class ContactInfoDTO {
     @Expose
     private String phone;
 
+    @SerializedName("web")
+    @Expose
+    private String web;
+    @SerializedName("address")
+    @Expose
+    private String address;
+
     public String getEmail() {
         return email;
     }
@@ -27,5 +34,23 @@ public class ContactInfoDTO {
     public void setPhone(String phone) {
         this.phone = phone;
     }
+
+    public String getWeb() {
+        return web;
+    }
+
+    public void setWeb(String web) {
+        this.web = web;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
+
+
 
 }

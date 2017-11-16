@@ -1,6 +1,8 @@
 package ru.arink_group.deliveryapp.presentation.view.fragment;
 
 
+import android.app.DialogFragment;
+import android.app.TimePickerDialog;
 import android.os.Bundle;
 import android.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
@@ -14,10 +16,13 @@ import android.widget.Button;
 import android.widget.Spinner;
 import android.widget.Switch;
 import android.widget.TextView;
+import android.widget.TimePicker;
 import android.widget.Toast;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
+import java.util.TimeZone;
 
 import br.com.simplepass.loading_button_lib.customViews.CircularProgressButton;
 import br.com.simplepass.loading_button_lib.interfaces.OnAnimationEndListener;
@@ -26,9 +31,13 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import ru.arink_group.deliveryapp.R;
 import ru.arink_group.deliveryapp.domain.dao.Address;
+import ru.arink_group.deliveryapp.domain.dao.Delivery;
 import ru.arink_group.deliveryapp.domain.dao.Product;
+import ru.arink_group.deliveryapp.domain.interactors.GetCompanyFromShared;
 import ru.arink_group.deliveryapp.presentation.adapters.OrderAddressesListAdapter;
 import ru.arink_group.deliveryapp.presentation.adapters.OrdersListAdapter;
+import ru.arink_group.deliveryapp.presentation.model.DateTime;
+import ru.arink_group.deliveryapp.presentation.model.TimePickerFragment;
 import ru.arink_group.deliveryapp.presentation.presenter.OrderPresenterImpl;
 import ru.arink_group.deliveryapp.presentation.presenter.interfaces.OrderPresenter;
 import ru.arink_group.deliveryapp.presentation.view.FabView;
@@ -38,7 +47,11 @@ import ru.arink_group.deliveryapp.presentation.view.OrderView;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class OrderFragment extends Fragment implements OrderView, OrdersListAdapter.ProductChangeListener, View.OnClickListener {
+public class OrderFragment extends Fragment implements OrderView,
+        OrdersListAdapter.ProductChangeListener,
+        View.OnClickListener,
+        TimePickerDialog.OnTimeSetListener
+{
 
 
     private OrderPresenter orderPresenter;
@@ -84,6 +97,9 @@ public class OrderFragment extends Fragment implements OrderView, OrdersListAdap
 
     @BindString(R.string.error_address_empty)
     String errorAddressEmpty;
+
+    @BindView(R.id.start_date_picker)
+    Button startDateDialog;
 
     public OrderFragment() {
         // Required empty public constructor
@@ -141,7 +157,27 @@ public class OrderFragment extends Fragment implements OrderView, OrdersListAdap
 
         orderPresenter.getAddresses();
 
+        initTimePicker();
+
         return root;
+    }
+
+    private void initTimePicker() {
+//        Calendar c  = Calendar.getInstance();
+//        startDateDialog.setText(getFormatedTime(c.get(Calendar.HOUR_OF_DAY), Calendar.MINUTE));
+        startDateDialog.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                TimePickerFragment dp = new TimePickerFragment();
+                dp.setListener(OrderFragment.this);
+                dp.show(getFragmentManager(), "DeliveryTime");
+            }
+        });
+    }
+
+    private String getFormatedTime(int hour, int minute) {
+        return String.format("%1$s:%2$s", hour, minute);
+
     }
 
     @Override
@@ -157,27 +193,34 @@ public class OrderFragment extends Fragment implements OrderView, OrdersListAdap
     @Override
     public void updateTotals() {
         List<Product> products = ordersListAdapter.getOrdersList();
+
+        Delivery delivery = GetCompanyFromShared.INSTANCE.getCompany().getDelivery();
+
         double summary = 0.0;
 
         for (Product product : products) {
             summary += product.getTotalSelectedSum();
         }
 
-        // TODO rework discount logic and delivey
-
         double discount = 0.0;
+        double deliveryCost = 0.0;
 
         if (selfExportSwitch.isChecked()) {
-            discount = 125.0;
+            discount = delivery.getPickupDiscount();
         }
 
         this.summaryCost.setText(String.valueOf(summary));
 
         this.summaryDiscount.setText(String.valueOf(discount));
 
-        this.summaryDelivery.setText(freeString);
+        if (summary < delivery.getFreeShipping()) {
+            this.summaryDelivery.setText(String.valueOf(delivery.getCost()));
+            deliveryCost = delivery.getCost();
+        } else {
+            this.summaryDelivery.setText(freeString);
+        }
 
-        double allSummary = summary - discount;
+        double allSummary = summary - discount + deliveryCost;
         allSummary = allSummary >= 0.0 ? allSummary : 0.0;
 
         this.summary.setText(String.valueOf(allSummary));
@@ -283,5 +326,27 @@ public class OrderFragment extends Fragment implements OrderView, OrdersListAdap
         if (addressListSpinner.getSelectedItemPosition() != Spinner.INVALID_POSITION ) return true;
         Toast.makeText(getActivity(), errorAddressEmpty, Toast.LENGTH_SHORT).show();
         return false;
+    }
+
+    @Override
+    public void onTimeSet(TimePicker timePicker, int hour, int minute) {
+        DateTime start = new DateTime(GetCompanyFromShared.INSTANCE.getCompany().getDelivery().getPeriod().getStart());
+        DateTime end = new DateTime(GetCompanyFromShared.INSTANCE.getCompany().getDelivery().getPeriod().getEnd());
+
+        Calendar c = Calendar.getInstance();
+        DateTime current = new DateTime(c.get(Calendar.HOUR_OF_DAY), c.get(Calendar.MINUTE));
+
+        DateTime selectedTime = new DateTime(hour, minute);
+
+        if (selectedTime.isGreaterThen(end) || selectedTime.isLowerThen(start)) {
+            String delivery_error = getString(R.string.time_should_be_between, start, end);
+            Toast.makeText(getActivity(), delivery_error, Toast.LENGTH_SHORT).show();
+        } else if (selectedTime.isLowerThenNextHourOf(current)) {
+            Toast.makeText(getActivity(), R.string.error_cant_be_greater_then_hour, Toast.LENGTH_SHORT).show();
+        } else if(selectedTime.isLowerThen(current)) {
+            Toast.makeText(getActivity(), R.string.error_cant_be_less_then_current, Toast.LENGTH_SHORT).show();
+        } else {
+            startDateDialog.setText(selectedTime.toString());
+        }
     }
 }

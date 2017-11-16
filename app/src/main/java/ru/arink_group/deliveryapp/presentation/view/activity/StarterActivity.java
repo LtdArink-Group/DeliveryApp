@@ -18,6 +18,7 @@ import ru.arink_group.deliveryapp.App;
 import ru.arink_group.deliveryapp.R;
 import ru.arink_group.deliveryapp.domain.dao.Company;
 import ru.arink_group.deliveryapp.domain.interactors.GetCompany;
+import ru.arink_group.deliveryapp.domain.interactors.GetCompanyFromShared;
 import ru.arink_group.deliveryapp.presentation.view.fragment.LoadFragment;
 
 public class StarterActivity extends AppCompatActivity {
@@ -67,11 +68,13 @@ public class StarterActivity extends AppCompatActivity {
             String companyJson = gson.toJson(company);
             editor.putString(App.COMPANY_INFO, companyJson);
             editor.apply();
+            GetCompanyFromShared.INSTANCE.setCompany(company);
         }
 
         @Override
         public void onError(Throwable e) {
             Toast.makeText(StarterActivity.this, e.getMessage(), Toast.LENGTH_SHORT).show();
+            GetCompanyFromShared.INSTANCE.loadCompany(StarterActivity.this);
             startApp();
         }
 

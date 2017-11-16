@@ -44,9 +44,6 @@ public class App extends Application {
         SharedPreferences sharedPreferences = this.getSharedPreferences(PREF_UNIQ_ID, App.MODE_PRIVATE);
         unigueID = sharedPreferences.getString(PREF_UNIQ_ID, null);
 
-        // TODO if needed rework because work is not correct, too many delay
-//        GetCompanyFromShared.INSTANCE.loadCompany(this);
-
         if(unigueID == null) {
             unigueID = UUID.randomUUID().toString();
             SharedPreferences.Editor editor = sharedPreferences.edit();
