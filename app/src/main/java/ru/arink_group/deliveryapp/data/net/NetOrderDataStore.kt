@@ -1,0 +1,18 @@
+package ru.arink_group.deliveryapp.data.net
+
+import io.reactivex.Observable
+import ru.arink_group.deliveryapp.data.net.api.BookingFoodApi
+import ru.arink_group.deliveryapp.data.repository.datasource.OrderDataStore
+import ru.arink_group.deliveryapp.domain.dto.OrderDTO
+import java.util.*
+
+/**
+ * Created by kirillvs on 17.11.17.
+ */
+class NetOrderDataStore : OrderDataStore {
+    private val apiService = BookingFoodApi.create()
+
+    override fun sendOrderToServer(orderDTO: OrderDTO): Observable<Any> {
+        return apiService.sendOrder(orderDTO)
+    }
+}

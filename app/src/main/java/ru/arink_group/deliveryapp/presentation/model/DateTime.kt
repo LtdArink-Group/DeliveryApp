@@ -1,5 +1,10 @@
 package ru.arink_group.deliveryapp.presentation.model
 
+import java.text.SimpleDateFormat
+import java.util.*
+
+
+
 /**
  * Created by kirillvs on 16.11.17.
  */
@@ -45,5 +50,14 @@ class DateTime {
 
     override fun toString(): String {
         return "%02d:%02d".format(hour, minute)
+    }
+
+    fun toCurrentDateString(): String {
+        val c = Calendar.getInstance()
+        c.set(Calendar.HOUR_OF_DAY, hour)
+        c.set(Calendar.MINUTE, minute)
+        val sdf = SimpleDateFormat("YYYY-MM-dd HH:mm")
+
+        return sdf.format(c.time)
     }
 }

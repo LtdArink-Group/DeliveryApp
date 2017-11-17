@@ -6,8 +6,10 @@ import dagger.Module;
 import dagger.Provides;
 import ru.arink_group.deliveryapp.data.net.NetAccountDataStore;
 import ru.arink_group.deliveryapp.data.net.NetCompanyDataStore;
+import ru.arink_group.deliveryapp.data.net.NetOrderDataStore;
 import ru.arink_group.deliveryapp.data.repository.datasource.AccountDataStore;
 import ru.arink_group.deliveryapp.data.repository.datasource.CompanyDataStore;
+import ru.arink_group.deliveryapp.data.repository.datasource.OrderDataStore;
 import ru.arink_group.deliveryapp.data.repository.datasource.implementation.DatabaseSelectedItemsDataStore;
 import ru.arink_group.deliveryapp.data.repository.datasource.SelectedItemsDataStore;
 
@@ -34,5 +36,11 @@ public class StoreModule {
     @NonNull
     public CompanyDataStore companyDataStore() {
         return new NetCompanyDataStore();
+    }
+
+    @Provides
+    @NonNull
+    public OrderDataStore orderDataStore() {
+        return new NetOrderDataStore();
     }
 }

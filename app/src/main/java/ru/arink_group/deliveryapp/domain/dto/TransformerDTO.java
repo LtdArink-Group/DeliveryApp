@@ -14,6 +14,7 @@ import ru.arink_group.deliveryapp.domain.dao.Ingredient;
 import ru.arink_group.deliveryapp.domain.dao.Period;
 import ru.arink_group.deliveryapp.domain.dao.Portion;
 import ru.arink_group.deliveryapp.domain.dao.Product;
+import ru.arink_group.deliveryapp.presentation.model.DateTime;
 
 /**
  * Created by kirillvs on 20.10.17.
@@ -188,5 +189,48 @@ public class TransformerDTO {
                 transformDelivery(companyDTO.getDelivery()),
                 companyDTO.getUrl()
         );
+    }
+
+    public static OrderIngredientDTO createOrderIngredientDTO(Ingredient ingredient) {
+        OrderIngredientDTO orderIngredientDTO = new OrderIngredientDTO();
+        orderIngredientDTO.setName(ingredient.getName());
+        orderIngredientDTO.setQty(ingredient.getCount());
+        return orderIngredientDTO;
+    }
+
+    public static List<OrderIngredientDTO> createListOrderIngredientDTO(Ingredient[] ingredients) {
+        List<OrderIngredientDTO> orderIngredientsDTO = new ArrayList<>();
+        for (Ingredient ingredient : ingredients) {
+            orderIngredientsDTO.add(createOrderIngredientDTO(ingredient));
+        }
+        return orderIngredientsDTO;
+    }
+
+    public static OrderProductDTO createOrderProductDTO(Product product) {
+        OrderProductDTO orderProductDTO = new OrderProductDTO();
+        orderProductDTO.setProductId(product.getId());
+        orderProductDTO.setQty(product.getCount());
+        orderProductDTO.setMainOption(product.getSelectedPortion().getName());
+        orderProductDTO.setIngredients(createListOrderIngredientDTO(product.getSelectedIngredients()));
+        return orderProductDTO;
+    }
+
+    public static List<OrderProductDTO> createListOrderProductDTO(List<Product> products) {
+        List<OrderProductDTO> orderProductsDTO = new ArrayList<>();
+        for(Product product : products) {
+            orderProductsDTO.add(createOrderProductDTO(product));
+        }
+        return orderProductsDTO;
+    }
+
+    public static OrderDTO createOrderDTO(List<Product> products, Integer addressId, DateTime deliveryTime, Boolean selfPickup) {
+        OrderDTO orderDTO = new OrderDTO();
+        orderDTO.setAccountId(App.getUUID());
+        orderDTO.setCompanyId(Integer.valueOf(App.getCompanyId()));
+        orderDTO.setAddressId(addressId);
+        orderDTO.setPickup(selfPickup);
+        orderDTO.setOrderProducts(createListOrderProductDTO(products));
+        orderDTO.setDeliveryTime(deliveryTime.toCurrentDateString());
+        return orderDTO;
     }
 }

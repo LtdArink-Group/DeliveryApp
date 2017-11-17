@@ -10,10 +10,7 @@ import retrofit2.http.*
 import ru.arink_group.deliveryapp.App
 import ru.arink_group.deliveryapp.data.net.response.CategoriesObject
 import ru.arink_group.deliveryapp.data.net.response.ProductsObject
-import ru.arink_group.deliveryapp.domain.dto.AccountDTO
-import ru.arink_group.deliveryapp.domain.dto.AddressDTO
-import ru.arink_group.deliveryapp.domain.dto.CompanyDTO
-import ru.arink_group.deliveryapp.domain.dto.ProductDTO
+import ru.arink_group.deliveryapp.domain.dto.*
 
 /**
  * Created by kirillvs on 20.10.17.
@@ -52,7 +49,10 @@ interface BookingFoodApi {
 
     @GET("/api/companies/{companyId}")
     fun getCompany(@Path("companyId") companyId: String) : Observable<CompanyDTO>
-    
+
+    @POST("/api/orders")
+    fun sendOrder(@Body order: OrderDTO) : Observable<Any>
+
     /**
      * Companion object to create the BoolingFoodApi
      */
