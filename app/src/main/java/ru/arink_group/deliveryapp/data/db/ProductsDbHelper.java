@@ -115,7 +115,7 @@ public class ProductsDbHelper {
     public Boolean addItemToBasket(Product selectedProduct) {
         removeItemFromBasket(selectedProduct.getId());
 
-        if (selectedProduct.getCount() < 1) return null;
+        if (selectedProduct.getCount() < 1) return true;
 
         SQLiteDatabase writableDb = dbHelper.getWritableDatabase();
 
