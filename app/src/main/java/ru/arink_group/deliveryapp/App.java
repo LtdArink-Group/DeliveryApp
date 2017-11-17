@@ -5,7 +5,6 @@ import android.content.SharedPreferences;
 
 import java.util.UUID;
 
-import ru.arink_group.deliveryapp.domain.interactors.GetCompanyFromShared;
 import ru.arink_group.deliveryapp.presentation.di.component.AppComponent;
 import ru.arink_group.deliveryapp.presentation.di.component.DaggerAppComponent;
 import ru.arink_group.deliveryapp.presentation.di.module.AppModule;

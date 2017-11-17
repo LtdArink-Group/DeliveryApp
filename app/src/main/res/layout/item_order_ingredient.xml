@@ -43,7 +43,7 @@
                 android:layout_gravity="center_vertical"
                 android:id="@+id/order_ingredient_button_minus"
                 app:cb_color="@color/colorAccent"
-                android:src="@drawable/minus"
+                android:src="@drawable/ic_remove_white_24dp"
                 />
 
             <at.markushi.ui.CircleButton
@@ -52,7 +52,7 @@
                 android:layout_gravity="center_vertical"
                 android:id="@+id/order_ingredient_button_plus"
                 app:cb_color="@color/colorAccent"
-                android:src="@drawable/plus"
+                android:src="@drawable/ic_add_white_24dp"
                 />
         </LinearLayout>
 
