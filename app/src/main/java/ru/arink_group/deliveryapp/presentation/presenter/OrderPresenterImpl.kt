@@ -60,7 +60,16 @@ class OrderPresenterImpl(val orderView: OrderView): OrderPresenter {
     }
 
     override fun sendOrderToServer() {
-        sendOrderToServer.execute(SendOrderToServerDisposableObserver(), SendOrderToServer.Params(orderView.listProducts))
+        sendOrderToServer
+                .execute(
+                        SendOrderToServerDisposableObserver(),
+                        SendOrderToServer.Params(
+                                orderView.listProducts,
+                                orderView.selectedAddressId,
+                                orderView.selectedTime,
+                                orderView.isSelfPickup
+                        )
+                )
     }
 
     override fun getAddresses() {
@@ -127,6 +136,7 @@ class OrderPresenterImpl(val orderView: OrderView): OrderPresenter {
         }
 
         override fun onNext(t: Boolean) {
+            // --no-op
         }
 
     }

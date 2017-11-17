@@ -4,6 +4,7 @@ import java.util.List;
 
 import ru.arink_group.deliveryapp.domain.dao.Address;
 import ru.arink_group.deliveryapp.domain.dao.Product;
+import ru.arink_group.deliveryapp.presentation.model.DateTime;
 
 /**
  * Created by kirillvs on 24.10.17.
@@ -19,4 +20,7 @@ public interface OrderView {
     void showSendingOrderOk();
     void showPlaceholder();
     List<Product> getListProducts();
+    int getSelectedAddressId();
+    DateTime getSelectedTime();
+    boolean isSelfPickup();
 }

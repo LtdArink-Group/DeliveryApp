@@ -6,6 +6,7 @@ import dagger.Component;
 import ru.arink_group.deliveryapp.data.db.ProductsDbHelper;
 import ru.arink_group.deliveryapp.data.repository.AccountDataRepository;
 import ru.arink_group.deliveryapp.data.repository.CompanyDataRepository;
+import ru.arink_group.deliveryapp.data.repository.OrderDataRepository;
 import ru.arink_group.deliveryapp.data.repository.SelectedItemsDataRepository;
 import ru.arink_group.deliveryapp.data.repository.factory.AccountDataFactory;
 import ru.arink_group.deliveryapp.data.repository.factory.CompanyDataFactory;
@@ -22,6 +23,7 @@ import ru.arink_group.deliveryapp.domain.interactors.GetAccount;
 import ru.arink_group.deliveryapp.domain.interactors.GetCompany;
 import ru.arink_group.deliveryapp.domain.interactors.GetListItemsFromBasket;
 import ru.arink_group.deliveryapp.domain.interactors.RemoveItemFromBasket;
+import ru.arink_group.deliveryapp.domain.interactors.SendOrderToServer;
 import ru.arink_group.deliveryapp.domain.interactors.UpdateAccount;
 import ru.arink_group.deliveryapp.domain.interactors.UpdateAddress;
 import ru.arink_group.deliveryapp.domain.interactors.UpdateAddressPatch;
@@ -73,4 +75,6 @@ public interface AppComponent {
     void inject(CompanyDataRepository  companyDataRepository);
     void inject(CompanyDataFactory companyDataFactory);
     void inject(GetCompany getCompany);
+    void inject(OrderDataRepository orderDataRepository);
+    void inject(SendOrderToServer sendOrderToServer);
 }

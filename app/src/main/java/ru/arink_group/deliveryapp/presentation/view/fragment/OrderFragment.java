@@ -59,6 +59,8 @@ public class OrderFragment extends Fragment implements OrderView,
     private ArrayAdapter<String> addressesStringAdaptet;
     private List<Address> addresses;
 
+    private DateTime selectedTime;
+
     @BindView(R.id.summary_self_export_switch)
     Switch selfExportSwitch;
 
@@ -151,7 +153,6 @@ public class OrderFragment extends Fragment implements OrderView,
             }
         });
 
-//        addressesStringAdaptet = new ArrayAdapter<String>(getActivity(), R.layout.item_spinner_address, new ArrayList<String>());
         addressesStringAdaptet = new OrderAddressesListAdapter(getActivity(), R.layout.item_spinner_address, new ArrayList<String>());
         addressListSpinner.setAdapter(addressesStringAdaptet);
 
@@ -163,8 +164,6 @@ public class OrderFragment extends Fragment implements OrderView,
     }
 
     private void initTimePicker() {
-//        Calendar c  = Calendar.getInstance();
-//        startDateDialog.setText(getFormatedTime(c.get(Calendar.HOUR_OF_DAY), Calendar.MINUTE));
         startDateDialog.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -173,11 +172,6 @@ public class OrderFragment extends Fragment implements OrderView,
                 dp.show(getFragmentManager(), "DeliveryTime");
             }
         });
-    }
-
-    private String getFormatedTime(int hour, int minute) {
-        return String.format("%1$s:%2$s", hour, minute);
-
     }
 
     @Override
@@ -317,12 +311,19 @@ public class OrderFragment extends Fragment implements OrderView,
     public void onClick(View v) {
         sendButton.startAnimation();
         if(v.getId() == sendButton.getId()) {
-            if (verifyOrder()) {
+            if (verifyOrder() && verifyDeliveryTime()) {
                 orderPresenter.sendOrderToServer();
             } else {
                 this.showErrorMessage(errorAddressEmpty);
             }
         }
+    }
+
+    private boolean verifyDeliveryTime() {
+        String time = getString(R.string.summary_delivery_time);
+        boolean valid = !time.equalsIgnoreCase(String.valueOf(startDateDialog.getText()));
+        if (!valid) Toast.makeText(getActivity(), R.string.error_delivery_time_empty, Toast.LENGTH_SHORT).show();
+        return valid;
     }
 
     private boolean verifyOrder() {
@@ -339,7 +340,7 @@ public class OrderFragment extends Fragment implements OrderView,
         Calendar c = Calendar.getInstance();
         DateTime current = new DateTime(c.get(Calendar.HOUR_OF_DAY), c.get(Calendar.MINUTE));
 
-        DateTime selectedTime = new DateTime(hour, minute);
+        selectedTime = new DateTime(hour, minute);
 
         if (selectedTime.isGreaterThen(end) || selectedTime.isLowerThen(start)) {
             String delivery_error = getString(R.string.time_should_be_between, start, end);
@@ -352,4 +353,21 @@ public class OrderFragment extends Fragment implements OrderView,
             startDateDialog.setText(selectedTime.toString());
         }
     }
+
+    @Override
+    public int getSelectedAddressId() {
+        int pos = addressListSpinner.getSelectedItemPosition();
+        return addresses.get(pos).getId();
+    }
+
+    @Override
+    public DateTime getSelectedTime() {
+        return selectedTime;
+    }
+
+    @Override
+    public boolean isSelfPickup() {
+        return selfExportSwitch.isChecked();
+    }
+
 }
