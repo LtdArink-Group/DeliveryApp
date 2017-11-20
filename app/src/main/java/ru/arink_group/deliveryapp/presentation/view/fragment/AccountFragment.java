@@ -29,6 +29,7 @@ import ru.arink_group.deliveryapp.presentation.presenter.AccountPresenterImpl;
 import ru.arink_group.deliveryapp.presentation.presenter.interfaces.AccountPresenter;
 import ru.arink_group.deliveryapp.presentation.view.AccountView;
 import ru.arink_group.deliveryapp.presentation.view.FabView;
+import ru.arink_group.deliveryapp.presentation.view.MenuView;
 import ru.arink_group.deliveryapp.presentation.view.activity.AddressActivity;
 
 /**
@@ -36,11 +37,11 @@ import ru.arink_group.deliveryapp.presentation.view.activity.AddressActivity;
  */
 public class AccountFragment extends Fragment implements AccountView, OnAddressListener {
 
-
     private AccountPresenter accountPresenter;
     private Account account;
     private AddressesListAdapter addressesListAdapter;
     private FloatingActionButton fab;
+    private MenuView menuView;
 
     @BindView(R.id.addresses_recycler_view)
     RecyclerView recyclerView;
@@ -83,8 +84,8 @@ public class AccountFragment extends Fragment implements AccountView, OnAddressL
 
         ButterKnife.bind(this, rootView);
 
-        FabView menuView = (FabView) getActivity();
-        menuView.showOrderFab();
+        final FabView fabView = (FabView) getActivity();
+        fabView.showOrderFab();
 
         accountPresenter = new AccountPresenterImpl(this);
         accountPresenter.getAccount();
@@ -98,7 +99,6 @@ public class AccountFragment extends Fragment implements AccountView, OnAddressL
         recyclerView.setLayoutManager(linearLayoutManager);
         recyclerView.setAdapter(addressesListAdapter);
 
-        final FabView fabView = (FabView) getActivity();
         fab = fabView.getFab();
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -157,8 +157,8 @@ public class AccountFragment extends Fragment implements AccountView, OnAddressL
             }
         });
 
-
-
+        menuView = (MenuView) getActivity();
+        loadingStarted();
         return rootView;
     }
 
@@ -190,6 +190,16 @@ public class AccountFragment extends Fragment implements AccountView, OnAddressL
     public void startNewAddressAfterCreateAccount() {
         Intent intent = new Intent(getActivity(), AddressActivity.class);
         getActivity().startActivity(intent);
+    }
+
+    @Override
+    public void loadingStarted() {
+        menuView.loadingStart();
+    }
+
+    @Override
+    public void loadingFinished() {
+        menuView.loadingFinish();
     }
 
     private void updateAccountModel() {

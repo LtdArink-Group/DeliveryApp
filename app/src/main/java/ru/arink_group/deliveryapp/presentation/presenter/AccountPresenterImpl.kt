@@ -67,6 +67,7 @@ class AccountPresenterImpl(val accountView: AccountView): AccountPresenter {
         }
 
         override fun onComplete() {
+            accountView.loadingFinished()
         }
 
         override fun onError(e: Throwable) {

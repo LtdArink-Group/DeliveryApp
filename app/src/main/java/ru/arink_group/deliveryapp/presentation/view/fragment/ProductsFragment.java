@@ -23,6 +23,7 @@ import ru.arink_group.deliveryapp.presentation.presenter.ProductsPresenterImpl;
 import ru.arink_group.deliveryapp.presentation.view.FabView;
 import ru.arink_group.deliveryapp.presentation.view.PlaceholderView;
 import ru.arink_group.deliveryapp.presentation.view.ProductsView;
+import ru.arink_group.deliveryapp.presentation.view.ProgressView;
 import ru.arink_group.deliveryapp.presentation.view.activity.IngredientsActivity;
 
 /**
@@ -32,6 +33,7 @@ public class ProductsFragment extends Fragment implements ProductsView, OnItemCl
 
     private ProductsPresenter productsPresenter;
     private ProductsListAdapter productsListAdapter;
+    private ProgressView progressView;
 
     public static final String PRODUCT_ID = "product_id";
     public static final String PRODUCT = "product";
@@ -85,6 +87,9 @@ public class ProductsFragment extends Fragment implements ProductsView, OnItemCl
             }
         });
 
+        progressView = (ProgressView) getActivity();
+        loadingStart();
+
         return rootView;
     }
 
@@ -133,5 +138,15 @@ public class ProductsFragment extends Fragment implements ProductsView, OnItemCl
         intent.putExtra(CategoriesFragment.CATEGORY, categoryId);
         intent.putExtra(CategoriesFragment.CATEGORY_NAME, categoryName);
         getActivity().startActivity(intent);
+    }
+
+    @Override
+    public void loadingStart() {
+        progressView.loadingStart();
+    }
+
+    @Override
+    public void loadingFinish() {
+        progressView.loadingFinish();
     }
 }

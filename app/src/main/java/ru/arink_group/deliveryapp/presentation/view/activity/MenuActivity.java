@@ -2,10 +2,9 @@ package ru.arink_group.deliveryapp.presentation.view.activity;
 
 import android.app.Fragment;
 import android.app.FragmentTransaction;
+import android.app.ProgressDialog;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
-import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
@@ -14,11 +13,10 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.FrameLayout;
-import android.widget.LinearLayout;
-import android.widget.Toast;
+import android.widget.ProgressBar;
 
-import ru.arink_group.deliveryapp.App;
 import ru.arink_group.deliveryapp.R;
 import ru.arink_group.deliveryapp.presentation.presenter.interfaces.MenuPresenter;
 import ru.arink_group.deliveryapp.presentation.presenter.MenuPresenterImpl;
@@ -36,6 +34,8 @@ public class MenuActivity extends AppCompatActivity
 
     private MenuPresenter menuPresenter;
     private FloatingActionButton fab;
+    private ProgressBar progressBar;
+    private FrameLayout content;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,6 +60,10 @@ public class MenuActivity extends AppCompatActivity
         navigationView.getMenu().getItem(0).setChecked(true);
 
         menuPresenter = new MenuPresenterImpl(this);
+
+        progressBar = findViewById(R.id.progress);
+        content = findViewById(R.id.menu_fragment);
+
 
         starterFragment();
 
@@ -148,9 +152,21 @@ public class MenuActivity extends AppCompatActivity
     }
 
     @Override
-    public void contentLoaded() {
-//        menuPresenter.onItemMenuSelect(R.id.carte);
+    public void loadingStart() {
+        content.setVisibility(View.GONE);
+        progressBar.setVisibility(View.VISIBLE);
     }
+
+    @Override
+    public void loadingFinish() {
+        progressBar.setVisibility(View.GONE);
+        content.setVisibility(View.VISIBLE);
+    }
+
+//    @Override
+//    public void contentLoaded() {
+////        menuPresenter.onItemMenuSelect(R.id.carte);
+//    }
 
     @Override
     public void showOrderFab() {

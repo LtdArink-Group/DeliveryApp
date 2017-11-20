@@ -94,6 +94,7 @@ public class ProductsPresenterImpl implements ProductsPresenter {
 
         @Override
         public void onComplete() {
+            productsView.loadingFinish();
         }
     }
 

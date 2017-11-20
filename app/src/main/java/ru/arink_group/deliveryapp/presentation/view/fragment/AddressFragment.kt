@@ -16,6 +16,7 @@ import ru.arink_group.deliveryapp.domain.dao.Address
 import ru.arink_group.deliveryapp.presentation.presenter.AddressPresenterImpl
 import ru.arink_group.deliveryapp.presentation.presenter.interfaces.AddressPresenter
 import ru.arink_group.deliveryapp.presentation.view.AddressView
+import ru.arink_group.deliveryapp.presentation.view.ProgressView
 import ru.arink_group.deliveryapp.presentation.view.activity.AddressActivity
 import ru.arink_group.deliveryapp.presentation.view.activity.MenuActivity
 
@@ -49,6 +50,8 @@ class AddressFragment : Fragment(),  AddressView, View.OnClickListener{
 
     lateinit var errorCantBeBlankString: String
 
+    lateinit var progressView : ProgressView
+
     override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
         // Inflate the layout for this fragment
@@ -67,6 +70,8 @@ class AddressFragment : Fragment(),  AddressView, View.OnClickListener{
         setViewFileds()
 
         addAddressButton.setOnClickListener(this)
+
+        progressView =  activity as ProgressView
 
         return root
     }
@@ -153,6 +158,14 @@ class AddressFragment : Fragment(),  AddressView, View.OnClickListener{
         val intent = Intent(activity, MenuActivity::class.java)
         intent.putExtra(MenuActivity.IS_ACCOUNT_START, true)
         activity.startActivity(intent)
+    }
+
+    override fun loadingStart() {
+        progressView.loadingStart()
+    }
+
+    override fun loadingFinish() {
+        progressView.loadingFinish()
     }
 
 }// Required empty public constructor

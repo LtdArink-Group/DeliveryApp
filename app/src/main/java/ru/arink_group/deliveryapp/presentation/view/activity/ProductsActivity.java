@@ -9,17 +9,22 @@ import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
+import android.widget.FrameLayout;
+import android.widget.ProgressBar;
 
 import ru.arink_group.deliveryapp.R;
 import ru.arink_group.deliveryapp.presentation.view.FabView;
 import ru.arink_group.deliveryapp.presentation.view.PlaceholderView;
+import ru.arink_group.deliveryapp.presentation.view.ProgressView;
 import ru.arink_group.deliveryapp.presentation.view.fragment.CategoriesFragment;
 import ru.arink_group.deliveryapp.presentation.view.fragment.EmptyListFragment;
 import ru.arink_group.deliveryapp.presentation.view.fragment.ProductsFragment;
 
-public class ProductsActivity extends AppCompatActivity implements FabView, PlaceholderView {
+public class ProductsActivity extends AppCompatActivity implements FabView, PlaceholderView, ProgressView {
 
     private FloatingActionButton fab;
+    private ProgressBar progressBar;
+    private FrameLayout content;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,6 +58,9 @@ public class ProductsActivity extends AppCompatActivity implements FabView, Plac
         pf.setArguments(bundle);
         fragmentTransaction.add(R.id.fragment_container, pf);
         fragmentTransaction.commit();
+
+        progressBar = findViewById(R.id.products_progress);
+        content = findViewById(R.id.fragment_container);
     }
 
     @Override
@@ -86,5 +94,17 @@ public class ProductsActivity extends AppCompatActivity implements FabView, Plac
     @Override
     public void showContent() {
         // no-op
+    }
+
+    @Override
+    public void loadingStart() {
+        content.setVisibility(View.GONE);
+        progressBar.setVisibility(View.VISIBLE);
+    }
+
+    @Override
+    public void loadingFinish() {
+        progressBar.setVisibility(View.GONE);
+        content.setVisibility(View.VISIBLE);
     }
 }

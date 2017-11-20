@@ -33,6 +33,7 @@ public class CategoriesFragment extends Fragment implements CategoriesView, OnCa
     private List<Category> categories;
     private CategoriesListAdapter categoriesAdapter;
     private CategoriesPresenter categoriesPresenter;
+    private MenuView mv;
 
     public CategoriesFragment() {
         // Required empty public constructor
@@ -61,8 +62,7 @@ public class CategoriesFragment extends Fragment implements CategoriesView, OnCa
 
     @Override
     public void loadCompleted() {
-        MenuView mv = (MenuActivity) getActivity();
-        mv.contentLoaded();
+        mv.loadingFinish();
     }
 
     @Override
@@ -86,6 +86,10 @@ public class CategoriesFragment extends Fragment implements CategoriesView, OnCa
 
         categoriesPresenter.getCategoriesList();
         categoriesAdapter.setListener(this);
+
+        mv = (MenuActivity) getActivity();
+        mv.loadingStart();
+
 
         final FabView fabView = (FabView) getActivity();
         fabView.showOrderFab();

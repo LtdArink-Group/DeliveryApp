@@ -8,7 +8,7 @@ import ru.arink_group.deliveryapp.domain.dao.Product;
  * Created by kirillvs on 03.10.17.
  */
 
-public interface ProductsView {
+public interface ProductsView extends ProgressView{
 
     void setProductsList(List<Product> products);
 

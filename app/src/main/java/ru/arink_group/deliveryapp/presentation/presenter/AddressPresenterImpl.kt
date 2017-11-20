@@ -30,6 +30,7 @@ class AddressPresenterImpl(val addressView: AddressView): AddressPresenter{
     }
 
     override fun updateAddress(address: Address) {
+        addressView.loadingStart()
         if (address.id != null) {
 //            updateAddress.execute(UpdateAddressDisposable(), UpdateAddress.Params(address))
             updateAddressPatch.execute(UpdateAddressPatchDisposable(), UpdateAddressPatch.Params(address))
@@ -47,6 +48,7 @@ class AddressPresenterImpl(val addressView: AddressView): AddressPresenter{
         }
 
         override fun onNext(t: Address) {
+            addressView.loadingFinish()
             addressView.goToAccount()
         }
     }
