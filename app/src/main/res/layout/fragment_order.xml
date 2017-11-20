@@ -194,6 +194,7 @@
             android:layout_marginRight="@dimen/big_margin">
 
             <br.com.simplepass.loading_button_lib.customViews.CircularProgressButton
+                android:padding="@dimen/small_margin"
                 android:id="@+id/send_order_button"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"

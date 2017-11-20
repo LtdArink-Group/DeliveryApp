@@ -22,6 +22,7 @@ import ru.arink_group.deliveryapp.domain.interactors.DeleteAddress;
 import ru.arink_group.deliveryapp.domain.interactors.GetAccount;
 import ru.arink_group.deliveryapp.domain.interactors.GetCompany;
 import ru.arink_group.deliveryapp.domain.interactors.GetListItemsFromBasket;
+import ru.arink_group.deliveryapp.domain.interactors.GetOrders;
 import ru.arink_group.deliveryapp.domain.interactors.RemoveItemFromBasket;
 import ru.arink_group.deliveryapp.domain.interactors.SendOrderToServer;
 import ru.arink_group.deliveryapp.domain.interactors.UpdateAccount;
@@ -77,4 +78,5 @@ public interface AppComponent {
     void inject(GetCompany getCompany);
     void inject(OrderDataRepository orderDataRepository);
     void inject(SendOrderToServer sendOrderToServer);
+    void inject(GetOrders getOrders);
 }

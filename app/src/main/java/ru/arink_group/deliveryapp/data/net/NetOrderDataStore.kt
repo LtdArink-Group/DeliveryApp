@@ -1,6 +1,7 @@
 package ru.arink_group.deliveryapp.data.net
 
 import io.reactivex.Observable
+import ru.arink_group.deliveryapp.App
 import ru.arink_group.deliveryapp.data.net.api.BookingFoodApi
 import ru.arink_group.deliveryapp.data.repository.datasource.OrderDataStore
 import ru.arink_group.deliveryapp.domain.dto.OrderDTO
@@ -14,5 +15,9 @@ class NetOrderDataStore : OrderDataStore {
 
     override fun sendOrderToServer(orderDTO: OrderDTO): Observable<Any> {
         return apiService.sendOrder(orderDTO)
+    }
+
+    override fun getOrders(): Observable<MutableList<OrderDTO>> {
+        return apiService.getOrders(App.getUUID()).map { it.orders }
     }
 }

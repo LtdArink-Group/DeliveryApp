@@ -14,7 +14,7 @@ class NetCategoryDataStore : CategoryDataStore {
     private val apiService = BookingFoodApi.create()
 
     override fun categoriesDataList(): Observable<List<CategoryDTO>> {
-        return apiService.categories(App.getCompanyId()).map { it.categories } // TODO Where to keep company id?
+        return apiService.categories(App.getCompanyId()).map { it.categories }
     }
 
 }

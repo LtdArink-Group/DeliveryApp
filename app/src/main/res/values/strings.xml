@@ -17,7 +17,7 @@
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="title_activity_products">ProductsActivity</string>
     <string name="categories">Меню</string>
-    <string name="orders_history">История заказов</string>
+    <string name="orders_history">Мои заказы</string>
     <string name="order">Корзина</string>
     <string name="account">Аккаунт</string>
     <string name="company_name">Chixx</string>
