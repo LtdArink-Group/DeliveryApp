@@ -12,10 +12,12 @@ import android.view.View;
 
 import ru.arink_group.deliveryapp.R;
 import ru.arink_group.deliveryapp.presentation.view.FabView;
+import ru.arink_group.deliveryapp.presentation.view.PlaceholderView;
 import ru.arink_group.deliveryapp.presentation.view.fragment.CategoriesFragment;
+import ru.arink_group.deliveryapp.presentation.view.fragment.EmptyListFragment;
 import ru.arink_group.deliveryapp.presentation.view.fragment.ProductsFragment;
 
-public class ProductsActivity extends AppCompatActivity implements FabView {
+public class ProductsActivity extends AppCompatActivity implements FabView, PlaceholderView {
 
     private FloatingActionButton fab;
 
@@ -51,7 +53,6 @@ public class ProductsActivity extends AppCompatActivity implements FabView {
         pf.setArguments(bundle);
         fragmentTransaction.add(R.id.fragment_container, pf);
         fragmentTransaction.commit();
-
     }
 
     @Override
@@ -71,6 +72,19 @@ public class ProductsActivity extends AppCompatActivity implements FabView {
 
     @Override
     public void changeFragment(Fragment fragment) {
+        // no-op
+    }
+
+    @Override
+    public void showPlaceHolder() {
+        FragmentTransaction ft = getFragmentManager().beginTransaction();
+        EmptyListFragment emptyListFragment = new EmptyListFragment();
+        ft.replace(R.id.fragment_container, emptyListFragment);
+        ft.commit();
+    }
+
+    @Override
+    public void showContent() {
         // no-op
     }
 }

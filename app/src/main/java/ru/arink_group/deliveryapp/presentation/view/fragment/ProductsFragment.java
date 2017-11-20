@@ -21,6 +21,7 @@ import ru.arink_group.deliveryapp.presentation.adapters.ProductsListAdapter;
 import ru.arink_group.deliveryapp.presentation.presenter.interfaces.ProductsPresenter;
 import ru.arink_group.deliveryapp.presentation.presenter.ProductsPresenterImpl;
 import ru.arink_group.deliveryapp.presentation.view.FabView;
+import ru.arink_group.deliveryapp.presentation.view.PlaceholderView;
 import ru.arink_group.deliveryapp.presentation.view.ProductsView;
 import ru.arink_group.deliveryapp.presentation.view.activity.IngredientsActivity;
 
@@ -102,6 +103,12 @@ public class ProductsFragment extends Fragment implements ProductsView, OnItemCl
     public void showErrorMessage(String message) {
         Toast toast = Toast.makeText(getActivity(), message, Toast.LENGTH_LONG);
         toast.show();
+    }
+
+    @Override
+    public void showPlaceholder() {
+        PlaceholderView activity = (PlaceholderView) getActivity();
+        activity.showPlaceHolder();
     }
 
     @Override

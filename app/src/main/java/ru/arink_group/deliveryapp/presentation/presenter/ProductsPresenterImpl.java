@@ -79,8 +79,12 @@ public class ProductsPresenterImpl implements ProductsPresenter {
 
         @Override
         public void onNext(@NonNull List<Product> products) {
-            productsView.setProductsList(products);
-            ProductsPresenterImpl.this.updateProductsFromBasket();
+            if (products.size() > 0) {
+                productsView.setProductsList(products);
+                ProductsPresenterImpl.this.updateProductsFromBasket();
+            } else {
+                productsView.showPlaceholder();
+            }
         }
 
         @Override

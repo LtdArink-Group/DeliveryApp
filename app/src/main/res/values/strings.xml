@@ -73,4 +73,5 @@
     <string name="address_button_submit">Применить</string>
     <string name="summary_delivery_time">Время доставки</string>
     <string name="time_should_be_between">Время доставки должно быть между %1$s и %2$s</string>
+    <string name="empty_list_text">К сожалению тут пока ничего нет :(</string>
 </resources>

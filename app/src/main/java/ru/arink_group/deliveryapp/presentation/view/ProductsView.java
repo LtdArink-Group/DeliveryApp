@@ -16,4 +16,6 @@ public interface ProductsView {
 
     void showErrorMessage(String message);
 
+    void showPlaceholder();
+
 }
