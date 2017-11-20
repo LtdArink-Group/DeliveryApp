@@ -74,6 +74,7 @@ class AccountPresenterImpl(val accountView: AccountView): AccountPresenter {
             if (e.message!!.contains("404")) {
                 val account = Account(App.getUUID())
                 accountView.updateAccount(account)
+                accountView.loadingFinished()
             } else {
                 accountView.showErrorMessage(e.message)
             }
