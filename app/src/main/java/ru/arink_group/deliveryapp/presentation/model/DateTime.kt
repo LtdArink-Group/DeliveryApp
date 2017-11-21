@@ -18,9 +18,9 @@ class DateTime {
     }
 
     constructor(time: String) {
-        val tms = time.split(":").map { it.toInt() }
-        hour = tms[0]
-        minute = tms[1]
+        val tms = time.split(" ")[0].split(":")
+        hour = tms[0].toInt()
+        minute = tms[1].toInt()
     }
 
     fun isGreaterThen(secondTime: DateTime): Boolean {
