@@ -7,6 +7,7 @@ import java.io.Serializable
  */
 data class OrderProduct(
      val id: String,
+     val productTitle: String,
      val totalCost: Double,
      val productId: Int,
      val mainOption: String,

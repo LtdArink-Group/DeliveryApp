@@ -11,6 +11,9 @@ public class OrderProductDTO {
     @SerializedName("id")
     @Expose
     private String id;
+    @SerializedName("product_title")
+    @Expose
+    private String productTitle;
     @SerializedName("total_cost")
     @Expose
     private Double totalCost;
@@ -77,4 +80,13 @@ public class OrderProductDTO {
     public void setTotalCost(Double totalCost) {
         this.totalCost = totalCost;
     }
+
+    public String getProductTitle() {
+        return productTitle;
+    }
+
+    public void setProductTitle(String productTitle) {
+        this.productTitle = productTitle;
+    }
+
 }

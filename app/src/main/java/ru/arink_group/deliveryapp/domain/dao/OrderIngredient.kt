@@ -7,5 +7,6 @@ import java.io.Serializable
  */
 data class OrderIngredient(
         val qty: Int,
+        val totalCost: Double,
         val name: String
 ) : Serializable

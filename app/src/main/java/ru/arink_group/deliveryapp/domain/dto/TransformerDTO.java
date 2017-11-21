@@ -238,7 +238,7 @@ public class TransformerDTO {
     }
 
     public static OrderIngredient transformOrderIngredient(OrderIngredientDTO orderIngredientDTO) {
-        return new OrderIngredient(orderIngredientDTO.getQty(), orderIngredientDTO.getName());
+        return new OrderIngredient(orderIngredientDTO.getQty(), orderIngredientDTO.getTotalCost(), orderIngredientDTO.getName());
     }
 
     public static List<OrderIngredient> transformListOrderIngredients(List<OrderIngredientDTO> orderIngredientsDTO) {
@@ -252,6 +252,7 @@ public class TransformerDTO {
     public static OrderProduct transformOrderProduct(OrderProductDTO orderProductDTO) {
         return new OrderProduct(
                 orderProductDTO.getId(),
+                orderProductDTO.getProductTitle(),
                 orderProductDTO.getTotalCost(),
                 orderProductDTO.getProductId(),
                 orderProductDTO.getMainOption(),
