@@ -78,7 +78,7 @@ class OrderPresenterImpl(val orderView: OrderView): OrderPresenter {
 
     inner class AccountDisposableObserver: DisposableObserver<Account>() {
         override fun onError(e: Throwable) {
-            orderView.showCreateAccountButton()
+            orderView.showCreateAccountButton() // TODO errors handle rework
         }
 
         override fun onComplete() {
@@ -104,6 +104,7 @@ class OrderPresenterImpl(val orderView: OrderView): OrderPresenter {
                 orderView.showPlaceholder()
             } else {
                 orderView.setProducts(t)
+                getAddresses()
             }
         }
 

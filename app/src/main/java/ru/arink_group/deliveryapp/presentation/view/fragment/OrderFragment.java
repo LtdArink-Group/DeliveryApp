@@ -5,6 +5,7 @@ import android.app.DialogFragment;
 import android.app.TimePickerDialog;
 import android.os.Bundle;
 import android.app.Fragment;
+import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -158,11 +159,14 @@ public class OrderFragment extends Fragment implements OrderView,
         addressesStringAdaptet = new OrderAddressesListAdapter(getActivity(), R.layout.item_spinner_address, new ArrayList<String>());
         addressListSpinner.setAdapter(addressesStringAdaptet);
 
-        orderPresenter.getAddresses();
-
         initTimePicker();
 
         return root;
+    }
+
+    @Override
+    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
     }
 
     private void initTimePicker() {
