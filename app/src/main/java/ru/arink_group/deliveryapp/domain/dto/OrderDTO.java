@@ -20,6 +20,9 @@ public class OrderDTO {
     @SerializedName("delivery_cost")
     @Expose
     private Double deliveryCost;
+    @SerializedName("address_info")
+    @Expose
+    private OrderAddressInfoDTO addressInfo;
 
     // for orders creation
 
@@ -120,5 +123,13 @@ public class OrderDTO {
 
     public void setDeliveryCost(Double deliveryCost) {
         this.deliveryCost = deliveryCost;
+    }
+
+    public OrderAddressInfoDTO getAddressInfo() {
+        return addressInfo;
+    }
+
+    public void setAddressInfo(OrderAddressInfoDTO addressInfo) {
+        this.addressInfo = addressInfo;
     }
 }

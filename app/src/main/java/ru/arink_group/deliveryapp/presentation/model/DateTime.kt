@@ -23,6 +23,13 @@ class DateTime {
         minute = tms[1].toInt()
     }
 
+    constructor(timeDate: Date) {
+        val c = Calendar.getInstance()
+        c.time = timeDate
+        hour = c.get(Calendar.HOUR_OF_DAY)
+        minute = c.get(Calendar.MINUTE)
+    }
+
     fun isGreaterThen(secondTime: DateTime): Boolean {
         return when {
             hour > secondTime.hour -> true
@@ -56,8 +63,25 @@ class DateTime {
         val c = Calendar.getInstance()
         c.set(Calendar.HOUR_OF_DAY, hour)
         c.set(Calendar.MINUTE, minute)
+//        val sdf = SimpleDateFormat("yyyy-MM-dd HH:mm")
+        val sdf = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSXXX")
+
+        return sdf.format(c.time)
+    }
+
+    fun toTimeWithDate(): String {
+        val c = Calendar.getInstance()
+        c.set(Calendar.HOUR_OF_DAY, hour)
+        c.set(Calendar.MINUTE, minute)
         val sdf = SimpleDateFormat("yyyy-MM-dd HH:mm")
 
         return sdf.format(c.time)
+    }
+
+    fun getTimeInMillis(): Long {
+        val c = Calendar.getInstance()
+        c.set(Calendar.HOUR_OF_DAY, hour)
+        c.set(Calendar.MINUTE, minute)
+        return c.timeInMillis
     }
 }

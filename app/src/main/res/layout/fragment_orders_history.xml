@@ -2,15 +2,51 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <RelativeLayout
+    <android.support.v4.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent">
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerInParent="true"
-            android:src="@drawable/emptylist2"/>
-    </RelativeLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <TextView
+                android:gravity="center"
+                android:padding="@dimen/medium_margin"
+                android:textAppearance="?android:textAppearanceLarge"
+                android:background="@color/colorSecondaryLight"
+                android:textColor="@color/colorOnSecondaryText"
+                android:text="@string/order_history_active"
+                android:layout_margin="@dimen/small_margin"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/order_history_active_recycler"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+
+            <TextView
+                android:gravity="center"
+                android:padding="@dimen/medium_margin"
+                android:textAppearance="?android:textAppearanceLarge"
+                android:background="@color/colorSecondaryLight"
+                android:textColor="@color/colorOnSecondaryText"
+                android:text="@string/order_history_completed"
+                android:layout_margin="@dimen/small_margin"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/order_history_completed_recycler"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+
+        </LinearLayout>
+
+    </android.support.v4.widget.NestedScrollView>
+
 
 
 </FrameLayout>

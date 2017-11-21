@@ -77,4 +77,6 @@
     <string name="time_should_be_between">Время доставки должно быть между %1$s и %2$s</string>
     <string name="empty_list_text">К сожалению тут пока ничего нет :(</string>
     <string name="addtitional">Дополнительно</string>
+    <string name="order_history_active">Активные заказы</string>
+    <string name="order_history_completed">Предыдущие заказы</string>
 </resources>

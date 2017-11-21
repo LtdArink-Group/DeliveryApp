@@ -1,6 +1,9 @@
 package ru.arink_group.deliveryapp.domain.dto;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import ru.arink_group.deliveryapp.App;
@@ -12,6 +15,7 @@ import ru.arink_group.deliveryapp.domain.dao.ContactInfo;
 import ru.arink_group.deliveryapp.domain.dao.Delivery;
 import ru.arink_group.deliveryapp.domain.dao.Ingredient;
 import ru.arink_group.deliveryapp.domain.dao.Order;
+import ru.arink_group.deliveryapp.domain.dao.OrderAddressInfo;
 import ru.arink_group.deliveryapp.domain.dao.OrderIngredient;
 import ru.arink_group.deliveryapp.domain.dao.OrderProduct;
 import ru.arink_group.deliveryapp.domain.dao.Period;
@@ -269,6 +273,20 @@ public class TransformerDTO {
         return orderProducts;
     }
 
+    public static OrderAddressInfo transformOrderAddressInfo(OrderAddressInfoDTO orderAddressInfoDTO) {
+        return new OrderAddressInfo(
+                orderAddressInfoDTO.getId(),
+                orderAddressInfoDTO.getCity(),
+                orderAddressInfoDTO.getCode(),
+                orderAddressInfoDTO.getFloor(),
+                orderAddressInfoDTO.getHouse(),
+                orderAddressInfoDTO.getTitle(),
+                orderAddressInfoDTO.getOffice(),
+                orderAddressInfoDTO.getStreet(),
+                orderAddressInfoDTO.getEntrance()
+        );
+    }
+
     public static Order transformOrder(OrderDTO orderDTO) {
         return new Order(
                 orderDTO.getId(),
@@ -277,10 +295,10 @@ public class TransformerDTO {
                 orderDTO.getDeliveryCost(),
                 orderDTO.getCompanyId(),
                 orderDTO.getAccountId(),
-                orderDTO.getAddressId(),
                 orderDTO.getDeliveryTime(),
                 orderDTO.getPickup(),
-                transformListOrderProduct(orderDTO.getOrderProducts())
+                transformListOrderProduct(orderDTO.getOrderProducts()),
+                transformOrderAddressInfo(orderDTO.getAddressInfo())
         );
     }
 

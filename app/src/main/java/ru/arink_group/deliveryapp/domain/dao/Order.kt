@@ -12,8 +12,8 @@ data class Order(
     val deliveryCost: Double,
     val companyId: Int,
     val accountId: String,
-    val addressId: Int,
     val deliveryTime: String,
     val pickup: Boolean,
-    val products: List<OrderProduct>
+    val products: List<OrderProduct>,
+    val addressInfo: OrderAddressInfo?
 ): Serializable

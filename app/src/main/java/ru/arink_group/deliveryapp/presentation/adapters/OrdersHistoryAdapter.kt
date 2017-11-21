@@ -1,0 +1,89 @@
+package ru.arink_group.deliveryapp.presentation.adapters
+
+import android.content.Context
+import android.os.CountDownTimer
+import android.support.v7.widget.RecyclerView
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
+import android.widget.TextView
+import ru.arink_group.deliveryapp.R
+import ru.arink_group.deliveryapp.domain.dao.Order
+import ru.arink_group.deliveryapp.presentation.adapters.interfaces.OnOrdersHistoryClickListener
+import ru.arink_group.deliveryapp.presentation.model.DateTime
+import ru.arink_group.deliveryapp.presentation.model.Statuses
+import java.text.SimpleDateFormat
+import java.util.*
+
+/**
+ * Created by kirillvs on 21.11.17.
+ */
+class OrdersHistoryAdapter: RecyclerView.Adapter<OrdersHistoryAdapter.ViewHolder>() {
+
+    lateinit var onClickListener: OnOrdersHistoryClickListener
+
+    var orders: List<Order> = emptyList()
+        set(value) {
+            field = value
+            notifyDataSetChanged()
+        }
+
+    override fun getItemCount(): Int = orders.size
+
+    override fun onCreateViewHolder(parent: ViewGroup?, viewType: Int): ViewHolder {
+        val itemView = LayoutInflater.from(parent?.context).inflate(R.layout.item_order_history, parent, false)
+        return ViewHolder(itemView, parent!!.context)
+    }
+
+    override fun onBindViewHolder(holder: ViewHolder, position: Int) {
+        val order = orders[position]
+        val view = holder.view
+
+        val statusView = view.findViewById<TextView>(R.id.order_history_status)
+        val addressView = view.findViewById<TextView>(R.id.order_history_address)
+        val contentView = view.findViewById<TextView>(R.id.order_history_data_and_cost)
+        val counterView = view.findViewById<TextView>(R.id.order_history_counter)
+
+        val pattern = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSXXX")
+        val date = pattern.parse(order.deliveryTime)
+        val dateTime = DateTime(date)
+
+        statusView.text = order.status
+
+        if (order.status == Statuses.NEW) {
+            val currentCal = Calendar.getInstance()
+            val diff = dateTime.getTimeInMillis() - currentCal.timeInMillis
+            if (diff > 0) {
+                object: CountDownTimer(diff, 1000) {
+
+                    override fun onFinish() {
+                        counterView.text = "Готово"
+                    }
+
+                    override fun onTick(millisUntilFinished: Long) {
+                        val hours   = (millisUntilFinished / (1000*60*60)) % 24
+                        val minutes = (millisUntilFinished / (1000*60)) % 60
+                        val seconds = (millisUntilFinished / 1000) % 60
+                        counterView.text = "$hours:$minutes:$seconds"
+                    }
+                }.start()
+                counterView.visibility = View.VISIBLE
+            }
+        }
+
+        val addressInfo = order.addressInfo
+        if (addressInfo != null) {
+            val addressString = "${addressInfo.street}, ${addressInfo.house} (${addressInfo.title})"
+            addressView.text = addressString
+        } else {
+            addressView.setText(R.string.self_export)
+        }
+
+        val content = "${dateTime.toTimeWithDate()} - ${order.totalCost + order.deliveryCost} Р"
+        contentView.text = content
+
+        view.setOnClickListener { onClickListener.onOrderHistoryItemClick(order) }
+    }
+
+    class ViewHolder(val view: View, val context: Context): RecyclerView.ViewHolder(view)
+}

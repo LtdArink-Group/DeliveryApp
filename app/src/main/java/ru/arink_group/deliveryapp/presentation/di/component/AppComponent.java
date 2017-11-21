@@ -38,6 +38,7 @@ import ru.arink_group.deliveryapp.presentation.presenter.AddressPresenterImpl;
 import ru.arink_group.deliveryapp.presentation.presenter.CategoriesPresenterImpl;
 import ru.arink_group.deliveryapp.presentation.presenter.IngredientsPresenterImpl;
 import ru.arink_group.deliveryapp.presentation.presenter.OrderPresenterImpl;
+import ru.arink_group.deliveryapp.presentation.presenter.OrdersHistoryPresenterImpl;
 import ru.arink_group.deliveryapp.presentation.presenter.ProductsPresenterImpl;
 
 /**
@@ -79,4 +80,5 @@ public interface AppComponent {
     void inject(OrderDataRepository orderDataRepository);
     void inject(SendOrderToServer sendOrderToServer);
     void inject(GetOrders getOrders);
+    void inject(OrdersHistoryPresenterImpl ordersHistoryPresenter);
 }
