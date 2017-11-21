@@ -42,8 +42,6 @@ public class MenuActivity extends AppCompatActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_menu);
 
-        setTitle(R.string.categories);
-
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
@@ -74,12 +72,9 @@ public class MenuActivity extends AppCompatActivity
         FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
         if(getIntent().getBooleanExtra(IS_ORDER_START, false)) {
             fragmentTransaction.add(R.id.menu_fragment, new OrderFragment());
-            setTitle(R.string.order);
-
         } else if(getIntent().getBooleanExtra(IS_ACCOUNT_START, false)){
             AccountFragment accountFragment = new AccountFragment();
             fragmentTransaction.add(R.id.menu_fragment, accountFragment);
-            setTitle(R.string.account);
         } else {
             fragmentTransaction.add(R.id.menu_fragment, new CategoriesFragment());
         }

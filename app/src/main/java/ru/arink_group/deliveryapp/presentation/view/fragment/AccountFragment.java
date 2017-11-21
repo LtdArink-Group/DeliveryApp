@@ -7,6 +7,7 @@ import android.app.Fragment;
 import android.os.Handler;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.TextInputEditText;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -20,6 +21,7 @@ import br.com.simplepass.loading_button_lib.interfaces.OnAnimationEndListener;
 import butterknife.BindString;
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.Unbinder;
 import ru.arink_group.deliveryapp.R;
 import ru.arink_group.deliveryapp.domain.dao.Account;
 import ru.arink_group.deliveryapp.domain.dao.Address;
@@ -36,6 +38,8 @@ import ru.arink_group.deliveryapp.presentation.view.activity.AddressActivity;
  * A simple {@link Fragment} subclass.
  */
 public class AccountFragment extends Fragment implements AccountView, OnAddressListener {
+
+    private Unbinder unbinder;
 
     private AccountPresenter accountPresenter;
     private Account account;
@@ -70,6 +74,9 @@ public class AccountFragment extends Fragment implements AccountView, OnAddressL
     @BindString(R.string.send_fail)
     String sendFail;
 
+    @BindString(R.string.account)
+    String accountTitle;
+
     public AccountFragment() {
         // Required empty public constructor
     }
@@ -82,7 +89,7 @@ public class AccountFragment extends Fragment implements AccountView, OnAddressL
 
         View rootView = inflater.inflate(R.layout.fragment_account, container, false);
 
-        ButterKnife.bind(this, rootView);
+        unbinder = ButterKnife.bind(this, rootView);
 
         final FabView fabView = (FabView) getActivity();
         fabView.showOrderFab();
@@ -156,6 +163,9 @@ public class AccountFragment extends Fragment implements AccountView, OnAddressL
                 }
             }
         });
+
+        AppCompatActivity titleActivity = (AppCompatActivity) getActivity();
+        titleActivity.getSupportActionBar().setTitle(R.string.account);
 
         menuView = (MenuView) getActivity();
         loadingStarted();
@@ -235,7 +245,8 @@ public class AccountFragment extends Fragment implements AccountView, OnAddressL
     @Override
     public void onDestroyView() {
         super.onDestroyView();
-        fab.setImageResource(R.drawable.cart);
+        unbinder.unbind();
+        fab.setImageResource(R.drawable.cart); // TODO rework it's not good
     }
 
     @Override

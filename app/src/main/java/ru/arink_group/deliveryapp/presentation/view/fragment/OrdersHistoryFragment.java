@@ -3,10 +3,13 @@ package ru.arink_group.deliveryapp.presentation.view.fragment;
 
 import android.os.Bundle;
 import android.app.Fragment;
+import android.support.v7.app.AppCompatActivity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import butterknife.ButterKnife;
+import butterknife.Unbinder;
 import ru.arink_group.deliveryapp.R;
 import ru.arink_group.deliveryapp.presentation.view.FabView;
 import ru.arink_group.deliveryapp.presentation.view.MenuView;
@@ -18,11 +21,7 @@ import com.google.android.gms.plus.PlusOneButton;
  */
 public class OrdersHistoryFragment extends Fragment {
 
-    // The request code must be 0 or greater.
-    private static final int PLUS_ONE_REQUEST_CODE = 0;
-    // The URL to +1.  Must be a valid URL.
-    private final String PLUS_ONE_URL = "http://developer.android.com";
-    private PlusOneButton mPlusOneButton;
+    private Unbinder unbinder;
 
 
     public OrdersHistoryFragment() {
@@ -36,6 +35,7 @@ public class OrdersHistoryFragment extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_orders_history, container, false);
 
+        unbinder = ButterKnife.bind(this, view);
 
         final FabView fabView = (FabView) getActivity();
         fabView.showOrderFab();
@@ -48,6 +48,9 @@ public class OrdersHistoryFragment extends Fragment {
             }
         });
 
+        AppCompatActivity titleActivity = (AppCompatActivity) getActivity();
+        titleActivity.getSupportActionBar().setTitle(R.string.orders_history);
+
         return view;
     }
 
@@ -56,5 +59,9 @@ public class OrdersHistoryFragment extends Fragment {
         super.onResume();
     }
 
-
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        unbinder.unbind();
+    }
 }

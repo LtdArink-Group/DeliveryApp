@@ -29,6 +29,7 @@ import br.com.simplepass.loading_button_lib.interfaces.OnAnimationEndListener;
 import butterknife.BindString;
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.Unbinder;
 import ru.arink_group.deliveryapp.R;
 import ru.arink_group.deliveryapp.domain.dao.Address;
 import ru.arink_group.deliveryapp.domain.dao.Delivery;
@@ -53,6 +54,7 @@ public class OrderFragment extends Fragment implements OrderView,
         TimePickerDialog.OnTimeSetListener
 {
 
+    private Unbinder unbinder;
 
     private OrderPresenter orderPresenter;
     private OrdersListAdapter ordersListAdapter;
@@ -113,7 +115,7 @@ public class OrderFragment extends Fragment implements OrderView,
                              Bundle savedInstanceState) {
         View root = inflater.inflate(R.layout.fragment_order, container, false);
 
-        ButterKnife.bind(this, root);
+        unbinder = ButterKnife.bind(this, root);
 
         this.orderPresenter = new OrderPresenterImpl(this);
 
@@ -140,7 +142,7 @@ public class OrderFragment extends Fragment implements OrderView,
         sendButton.setOnClickListener(this);
 
         AppCompatActivity activity = (AppCompatActivity) getActivity();
-        activity.getSupportActionBar().setTitle(titleString);
+        activity.getSupportActionBar().setTitle(R.string.order);
 
         final FabView menuView = (FabView) getActivity();
         menuView.hideOrderFab();
@@ -305,6 +307,12 @@ public class OrderFragment extends Fragment implements OrderView,
     public void onDestroy() {
         super.onDestroy();
         orderPresenter.destroy();
+    }
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        unbinder.unbind();
     }
 
     @Override
