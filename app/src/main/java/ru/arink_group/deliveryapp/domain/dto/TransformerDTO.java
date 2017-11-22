@@ -169,7 +169,8 @@ public class TransformerDTO {
                 contactInfoDTO.getEmail(),
                 contactInfoDTO.getPhone(),
                 contactInfoDTO.getWeb(),
-                contactInfoDTO.getAddress()
+                contactInfoDTO.getAddress(),
+                contactInfoDTO.getGeotag()
         );
     }
 
@@ -274,6 +275,7 @@ public class TransformerDTO {
     }
 
     public static OrderAddressInfo transformOrderAddressInfo(OrderAddressInfoDTO orderAddressInfoDTO) {
+        if (orderAddressInfoDTO.getId() == null) return null;
         return new OrderAddressInfo(
                 orderAddressInfoDTO.getId(),
                 orderAddressInfoDTO.getCity(),

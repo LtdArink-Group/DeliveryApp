@@ -20,7 +20,7 @@ import ru.arink_group.deliveryapp.presentation.view.ProductsView;
  * Created by kirillvs on 03.10.17.
  */
 
-public class ProductsPresenterImpl implements ProductsPresenter {
+public class ProductsPresenterImpl extends BasePresenter implements ProductsPresenter {
 
     ProductsView productsView;
 
@@ -89,7 +89,7 @@ public class ProductsPresenterImpl implements ProductsPresenter {
 
         @Override
         public void onError(@NonNull Throwable e) {
-            productsView.showErrorMessage(e.getMessage());
+            productsView.showErrorMessage(handleGetNetError(e));
         }
 
         @Override
@@ -107,7 +107,7 @@ public class ProductsPresenterImpl implements ProductsPresenter {
 
         @Override
         public void onError(@NonNull Throwable e) {
-            productsView.showErrorMessage(e.getMessage());
+            productsView.showErrorMessage(handleInternalError(e));
         }
 
         @Override
@@ -125,7 +125,7 @@ public class ProductsPresenterImpl implements ProductsPresenter {
 
         @Override
         public void onError(@NonNull Throwable e) {
-            productsView.showErrorMessage(e.getMessage());
+            productsView.showErrorMessage(handleInternalError(e));
         }
 
         @Override
@@ -143,7 +143,7 @@ public class ProductsPresenterImpl implements ProductsPresenter {
 
         @Override
         public void onError(@NonNull Throwable e) {
-            productsView.showErrorMessage(e.getMessage());
+            productsView.showErrorMessage(handleInternalError(e));
         }
 
         @Override

@@ -63,8 +63,8 @@ class DateTime {
         val c = Calendar.getInstance()
         c.set(Calendar.HOUR_OF_DAY, hour)
         c.set(Calendar.MINUTE, minute)
-//        val sdf = SimpleDateFormat("yyyy-MM-dd HH:mm")
-        val sdf = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSXXX")
+        val sdf = SimpleDateFormat("yyyy-MM-dd HH:mm")
+//        val sdf = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSXXX")
 
         return sdf.format(c.time)
     }

@@ -62,7 +62,7 @@
     <string name="error_cant_be_blank">Не может быть пустым!</string>
     <string name="empty_cart">Ваша корзина пуста :(</string>
     <string name="error_address_empty">Необходимо выбрать адрес</string>
-    <string name="error_delivery_time_empty">Необходимо выбрать время доставки</string>
+    <string name="error_delivery_time_empty">Необходимо выбрать время заказа</string>
     <string name="error_cant_be_greater_then_hour">Время заказа не менее часа</string>
     <string name="error_cant_be_less_then_current">Заказы в прошлое не принимаются :)</string>
 
@@ -73,10 +73,14 @@
     <string name="address_button">Добавить адрес</string>
     <string name="delete_address">Удалить адрес</string>
     <string name="address_button_submit">Применить</string>
-    <string name="summary_delivery_time">Время доставки</string>
-    <string name="time_should_be_between">Время доставки должно быть между %1$s и %2$s</string>
+    <string name="summary_delivery_time">Время заказа</string>
+    <string name="time_should_be_between">Время заказа должно быть между %1$s и %2$s</string>
     <string name="empty_list_text">К сожалению тут пока ничего нет :(</string>
     <string name="addtitional">Дополнительно</string>
     <string name="order_history_active">Активные заказы</string>
     <string name="order_history_completed">Предыдущие заказы</string>
+
+    <!--FORM-->
+    <string name="form_percent">%1s %%</string>
+    <string name="form_rubles">%1s р</string>
 </resources>

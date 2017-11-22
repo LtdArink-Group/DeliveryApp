@@ -10,7 +10,7 @@ import ru.arink_group.deliveryapp.presentation.model.DateTime;
  * Created by kirillvs on 24.10.17.
  */
 
-public interface OrderView {
+public interface OrderView extends ProgressView {
     void setProducts(List<Product> products);
     void updateProductState(Product product);
     void updateTotals();
@@ -20,7 +20,9 @@ public interface OrderView {
     void showSendingOrderOk();
     void showPlaceholder();
     List<Product> getListProducts();
-    int getSelectedAddressId();
+    Integer getSelectedAddressId();
     DateTime getSelectedTime();
     boolean isSelfPickup();
+    void loadingAddressStart();
+    void loadingAddressFinish();
 }

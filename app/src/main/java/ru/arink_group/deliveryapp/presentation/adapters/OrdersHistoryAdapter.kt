@@ -2,6 +2,9 @@ package ru.arink_group.deliveryapp.presentation.adapters
 
 import android.content.Context
 import android.os.CountDownTimer
+import android.support.v4.content.ContextCompat
+import android.support.v4.content.res.ResourcesCompat
+import android.support.v7.content.res.AppCompatResources
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
@@ -18,7 +21,7 @@ import java.util.*
 /**
  * Created by kirillvs on 21.11.17.
  */
-class OrdersHistoryAdapter: RecyclerView.Adapter<OrdersHistoryAdapter.ViewHolder>() {
+class OrdersHistoryAdapter(val isActive: Boolean = true): RecyclerView.Adapter<OrdersHistoryAdapter.ViewHolder>() {
 
     lateinit var onClickListener: OnOrdersHistoryClickListener
 
@@ -38,19 +41,24 @@ class OrdersHistoryAdapter: RecyclerView.Adapter<OrdersHistoryAdapter.ViewHolder
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val order = orders[position]
         val view = holder.view
+        val context = holder.context
 
         val statusView = view.findViewById<TextView>(R.id.order_history_status)
         val addressView = view.findViewById<TextView>(R.id.order_history_address)
         val contentView = view.findViewById<TextView>(R.id.order_history_data_and_cost)
         val counterView = view.findViewById<TextView>(R.id.order_history_counter)
 
-        val pattern = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSXXX")
+        val pattern = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS")
         val date = pattern.parse(order.deliveryTime)
         val dateTime = DateTime(date)
 
         statusView.text = order.status
+        if (order.status == Statuses.CANCELLED) {
+            val cancelledColor = ContextCompat.getColor(context, R.color.colorstatusCancelled)
+            statusView.setTextColor(cancelledColor)
+        }
 
-        if (order.status == Statuses.NEW) {
+        if (isActive) {
             val currentCal = Calendar.getInstance()
             val diff = dateTime.getTimeInMillis() - currentCal.timeInMillis
             if (diff > 0) {

@@ -30,9 +30,6 @@ import com.google.android.gms.plus.PlusOneButton;
 
 import java.util.List;
 
-/**
- * A fragment with a Google +1 button.
- */
 public class OrdersHistoryFragment extends Fragment implements OrdersHistoryView, OnOrdersHistoryClickListener {
 
     private Unbinder unbinder;
@@ -65,15 +62,7 @@ public class OrdersHistoryFragment extends Fragment implements OrdersHistoryView
         unbinder = ButterKnife.bind(this, view);
 
         final FabView fabView = (FabView) getActivity();
-        fabView.showOrderFab();
-
-        fabView.getFab().setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                OrderFragment orderFragment = new OrderFragment();
-                fabView.changeFragment(orderFragment);
-            }
-        });
+        fabView.hideOrderFab();
 
         AppCompatActivity titleActivity = (AppCompatActivity) getActivity();
         titleActivity.getSupportActionBar().setTitle(R.string.orders_history);
@@ -98,7 +87,7 @@ public class OrdersHistoryFragment extends Fragment implements OrdersHistoryView
         activeRecyclerView.setAdapter(activeAdapter);
         activeAdapter.setOnClickListener(this);
 
-        completedAdapter = new OrdersHistoryAdapter();
+        completedAdapter = new OrdersHistoryAdapter(false);
         LinearLayoutManager completedllm = new LinearLayoutManager(getActivity());
         completedRecyclerView.setHasFixedSize(true);
         completedRecyclerView.setLayoutManager(completedllm);

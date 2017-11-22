@@ -13,7 +13,7 @@ import javax.inject.Inject
 /**
  * Created by kirillvs on 14.11.17.
  */
-class AddressPresenterImpl(val addressView: AddressView): AddressPresenter{
+class AddressPresenterImpl(val addressView: AddressView): BasePresenter(), AddressPresenter{
 
     @Inject
     lateinit var addAddress: AddAddress
@@ -32,7 +32,6 @@ class AddressPresenterImpl(val addressView: AddressView): AddressPresenter{
     override fun updateAddress(address: Address) {
         addressView.loadingStart()
         if (address.id != null) {
-//            updateAddress.execute(UpdateAddressDisposable(), UpdateAddress.Params(address))
             updateAddressPatch.execute(UpdateAddressPatchDisposable(), UpdateAddressPatch.Params(address))
         } else {
             addAddress.execute(AddAddressDisposable(), AddAddress.Params(address))
@@ -41,7 +40,7 @@ class AddressPresenterImpl(val addressView: AddressView): AddressPresenter{
 
     inner class AddAddressDisposable: DisposableObserver<Address>() {
         override fun onError(e: Throwable) {
-            addressView.showErrorMessage(e.message)
+            addressView.showErrorMessage(handlePostNetError(e))
         }
 
         override fun onComplete() {
@@ -62,7 +61,7 @@ class AddressPresenterImpl(val addressView: AddressView): AddressPresenter{
         }
 
         override fun onError(e: Throwable) {
-            addressView.showErrorMessage(e.message)
+            addressView.showErrorMessage(handlePostNetError(e))
         }
     }
 
@@ -75,8 +74,7 @@ class AddressPresenterImpl(val addressView: AddressView): AddressPresenter{
         }
 
         override fun onError(e: Throwable) {
-            addressView.showErrorMessage("from address update ${e.message} ${e.stackTrace}")
-            throw e
+            addressView.showErrorMessage(handlePostNetError(e))
         }
     }
 

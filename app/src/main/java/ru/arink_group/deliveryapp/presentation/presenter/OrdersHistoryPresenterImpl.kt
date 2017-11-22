@@ -12,7 +12,7 @@ import javax.inject.Inject
 /**
  * Created by kirillvs on 21.11.17.
  */
-class OrdersHistoryPresenterImpl(val view: OrdersHistoryView): OrdersHistoryPresenter {
+class OrdersHistoryPresenterImpl(val view: OrdersHistoryView): BasePresenter(), OrdersHistoryPresenter {
 
     @Inject
     lateinit var getOrders: GetOrders
@@ -38,10 +38,11 @@ class OrdersHistoryPresenterImpl(val view: OrdersHistoryView): OrdersHistoryPres
 
     inner class GetOrdersDisposable: DisposableObserver<List<Order>>() {
         override fun onError(e: Throwable) {
-            if (e.message!!.contains("404")) {
+            val error = handleGetNetError(e)
+            if (error == "404") {
                 view.showPlaceHolder()
             } else {
-                view.showErrorMessage(e.message)
+                view.showErrorMessage(error)
             }
         }
 
@@ -50,9 +51,13 @@ class OrdersHistoryPresenterImpl(val view: OrdersHistoryView): OrdersHistoryPres
         }
 
         override fun onNext(orders: List<Order>) {
-            val activeOrders = orders.filter { it.status == Statuses.NEW }
-            val completedOrders = orders.filter { it.status != Statuses.NEW }
-            view.setOrders(activeOrders, completedOrders)
+            if (orders.isEmpty()) {
+                view.showPlaceHolder()
+            } else {
+                val activeOrders = orders.filter { it.isActive() }
+                val completedOrders = orders.filter { !it.isActive() }
+                view.setOrders(activeOrders, completedOrders)
+            }
         }
     }
 }

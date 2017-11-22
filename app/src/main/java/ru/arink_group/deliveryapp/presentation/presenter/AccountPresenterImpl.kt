@@ -11,7 +11,7 @@ import javax.inject.Inject
 /**
  * Created by kirillvs on 31.10.17.
  */
-class AccountPresenterImpl(val accountView: AccountView): AccountPresenter {
+class AccountPresenterImpl(val accountView: AccountView): BasePresenter(), AccountPresenter {
 
     @Inject
     lateinit var getAccount: GetAccount
@@ -71,12 +71,13 @@ class AccountPresenterImpl(val accountView: AccountView): AccountPresenter {
         }
 
         override fun onError(e: Throwable) {
-            if (e.message!!.contains("404")) {
+            val error = handleGetNetError(e)
+            if (error == "404") {
                 val account = Account(App.getUUID())
                 accountView.updateAccount(account)
                 accountView.loadingFinished()
             } else {
-                accountView.showErrorMessage(e.message)
+                accountView.showErrorMessage(error)
             }
 
         }
@@ -87,7 +88,7 @@ class AccountPresenterImpl(val accountView: AccountView): AccountPresenter {
         }
 
         override fun onError(e: Throwable) {
-            accountView.showErrorMessage(e.message)
+            accountView.showErrorMessage(handlePostNetError(e))
         }
 
         override fun onNext(t: Account) {
@@ -101,7 +102,7 @@ class AccountPresenterImpl(val accountView: AccountView): AccountPresenter {
         }
 
         override fun onError(e: Throwable) {
-            accountView.showErrorMessage(e.message)
+            accountView.showErrorMessage(handlePostNetError(e))
         }
 
         override fun onNext(t: Account) {
@@ -112,7 +113,7 @@ class AccountPresenterImpl(val accountView: AccountView): AccountPresenter {
 
     inner class UpdateAccountDisposable: DisposableObserver<Account>() {
         override fun onError(e: Throwable) {
-            accountView.showErrorMessage(e.message)
+            accountView.showErrorMessage(handlePostNetError(e))
         }
 
         override fun onNext(t: Account) {
@@ -128,7 +129,7 @@ class AccountPresenterImpl(val accountView: AccountView): AccountPresenter {
         }
 
         override fun onError(e: Throwable) {
-            accountView.showErrorMessage(e.message)
+            accountView.showErrorMessage(handleGetNetError(e))
         }
 
         override fun onNext(t: Unit) {

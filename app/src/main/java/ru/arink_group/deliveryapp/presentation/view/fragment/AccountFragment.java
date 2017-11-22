@@ -181,8 +181,7 @@ public class AccountFragment extends Fragment implements AccountView, OnAddressL
                 sendButton.setBackgroundColor(getResources().getColor(android.R.color.holo_red_dark));
             }
         });
-
-//        Toast.makeText(getActivity(), message, Toast.LENGTH_SHORT).show();
+        Toast.makeText(getActivity(), message, Toast.LENGTH_SHORT).show();
     }
 
     @Override
