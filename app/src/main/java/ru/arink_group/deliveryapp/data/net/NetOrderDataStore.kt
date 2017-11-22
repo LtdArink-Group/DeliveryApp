@@ -11,6 +11,7 @@ import java.util.*
  * Created by kirillvs on 17.11.17.
  */
 class NetOrderDataStore : OrderDataStore {
+
     private val apiService = BookingFoodApi.create()
 
     override fun sendOrderToServer(orderDTO: OrderDTO): Observable<Any> {
@@ -19,5 +20,9 @@ class NetOrderDataStore : OrderDataStore {
 
     override fun getOrders(): Observable<MutableList<OrderDTO>> {
         return apiService.getOrders(App.getUUID()).map { it.orders }
+    }
+
+    override fun cancelOrder(orderId: String): Observable<Any> {
+        return apiService.cancelOrder(orderId)
     }
 }

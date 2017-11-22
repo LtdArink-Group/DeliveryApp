@@ -16,6 +16,7 @@ import ru.arink_group.deliveryapp.domain.interactors.AddIngredientToBasket;
 import ru.arink_group.deliveryapp.domain.interactors.AddItemToBasket;
 import ru.arink_group.deliveryapp.domain.interactors.AddItemToBasketOrNull;
 import ru.arink_group.deliveryapp.domain.interactors.AddListItemsToBasket;
+import ru.arink_group.deliveryapp.domain.interactors.CancelOrder;
 import ru.arink_group.deliveryapp.domain.interactors.ClearItemsFromBasket;
 import ru.arink_group.deliveryapp.domain.interactors.CreateAccount;
 import ru.arink_group.deliveryapp.domain.interactors.DeleteAddress;
@@ -40,6 +41,7 @@ import ru.arink_group.deliveryapp.presentation.presenter.IngredientsPresenterImp
 import ru.arink_group.deliveryapp.presentation.presenter.OrderPresenterImpl;
 import ru.arink_group.deliveryapp.presentation.presenter.OrdersHistoryPresenterImpl;
 import ru.arink_group.deliveryapp.presentation.presenter.ProductsPresenterImpl;
+import ru.arink_group.deliveryapp.presentation.presenter.RetryOrderPresenterImpl;
 
 /**
  * Created by kirillvs on 06.10.17.
@@ -81,4 +83,6 @@ public interface AppComponent {
     void inject(SendOrderToServer sendOrderToServer);
     void inject(GetOrders getOrders);
     void inject(OrdersHistoryPresenterImpl ordersHistoryPresenter);
+    void inject(RetryOrderPresenterImpl retryOrderPresenter);
+    void inject(CancelOrder cancelOrder);
 }

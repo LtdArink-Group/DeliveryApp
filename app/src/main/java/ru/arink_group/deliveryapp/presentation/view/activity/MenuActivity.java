@@ -25,12 +25,14 @@ import ru.arink_group.deliveryapp.presentation.view.MenuView;
 import ru.arink_group.deliveryapp.presentation.view.fragment.AccountFragment;
 import ru.arink_group.deliveryapp.presentation.view.fragment.CategoriesFragment;
 import ru.arink_group.deliveryapp.presentation.view.fragment.OrderFragment;
+import ru.arink_group.deliveryapp.presentation.view.fragment.OrdersHistoryFragment;
 
 public class MenuActivity extends AppCompatActivity
         implements MenuView, NavigationView.OnNavigationItemSelectedListener, FabView {
 
     public static final String IS_ORDER_START = "is order start";
     public static final String IS_ACCOUNT_START = "is account start";
+    public static final String IS_HISTORY_START = "is history start";
 
     private MenuPresenter menuPresenter;
     private FloatingActionButton fab;
@@ -75,6 +77,9 @@ public class MenuActivity extends AppCompatActivity
         } else if(getIntent().getBooleanExtra(IS_ACCOUNT_START, false)){
             AccountFragment accountFragment = new AccountFragment();
             fragmentTransaction.add(R.id.menu_fragment, accountFragment);
+        } else if(getIntent().getBooleanExtra(IS_HISTORY_START, false)){
+            OrdersHistoryFragment orderHistoryFragment = new OrdersHistoryFragment();
+            fragmentTransaction.add(R.id.menu_fragment, orderHistoryFragment);
         } else {
             fragmentTransaction.add(R.id.menu_fragment, new CategoriesFragment());
         }

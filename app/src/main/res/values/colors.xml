@@ -14,8 +14,10 @@
     <color name="colorPrimaryText">#FF000000</color>
     <color name="colorSecondaryText">#FF000000</color>
     <color name="colorTransparentElement">#00000000</color>
-    <color name="colorButtonIdle">#ee7c0d</color>
+    <color name="colorButtonIdle">#95b824</color>
     <color name="colorButtonSuccess">#95b824</color>
-    <color name="colorButtonFail">#944900</color>
+    <color name="colorButtonFail">#ee7c0d</color>
     <color name="colorstatusCancelled">#ee7c0d</color>
+    <color name="colorButtonRetry">#95b824</color>
+    <color name="colorButtonCancell">#ee7c0d</color>
 </resources>

@@ -40,10 +40,14 @@
             android:parentActivityName=".presentation.view.activity.ProductsActivity"
             android:screenOrientation="nosensor"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".presentation.view.activity.AddressActivity"
+        <activity
+            android:name=".presentation.view.activity.AddressActivity"
             android:noHistory="true"
-            android:screenOrientation="nosensor"
-            />
+            android:screenOrientation="nosensor" />
+        <activity android:name=".presentation.view.activity.RetryOrderActivity"
+            android:noHistory="true"
+            android:screenOrientation="nosensor" />
+
     </application>
 
 </manifest>

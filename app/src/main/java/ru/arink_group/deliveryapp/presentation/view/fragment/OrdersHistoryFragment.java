@@ -1,6 +1,7 @@
 package ru.arink_group.deliveryapp.presentation.view.fragment;
 
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
@@ -25,12 +26,15 @@ import ru.arink_group.deliveryapp.presentation.view.MenuView;
 import ru.arink_group.deliveryapp.presentation.view.OrdersHistoryView;
 import ru.arink_group.deliveryapp.presentation.view.PlaceholderView;
 import ru.arink_group.deliveryapp.presentation.view.ProgressView;
+import ru.arink_group.deliveryapp.presentation.view.activity.RetryOrderActivity;
 
 import com.google.android.gms.plus.PlusOneButton;
 
 import java.util.List;
 
 public class OrdersHistoryFragment extends Fragment implements OrdersHistoryView, OnOrdersHistoryClickListener {
+
+    public static final String RETRY_ORDER = "RETRY ORDER";
 
     private Unbinder unbinder;
 
@@ -141,7 +145,12 @@ public class OrdersHistoryFragment extends Fragment implements OrdersHistoryView
 
     @Override
     public void onOrderHistoryItemClick(Order order) {
-        Toast.makeText(getActivity(), String.valueOf(order.getTotalCost()), Toast.LENGTH_SHORT).show();
-        // TODO
+        startRetryOrder(order);
+    }
+
+    private void startRetryOrder(Order order) {
+        Intent intent = new Intent(getActivity(), RetryOrderActivity.class);
+        intent.putExtra(RETRY_ORDER, order);
+        getActivity().startActivity(intent);
     }
 }

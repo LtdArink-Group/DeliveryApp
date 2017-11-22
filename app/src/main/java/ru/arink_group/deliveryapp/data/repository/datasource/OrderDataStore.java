@@ -12,4 +12,5 @@ import ru.arink_group.deliveryapp.domain.dto.OrderDTO;
 public interface OrderDataStore {
     Observable<Object> sendOrderToServer(OrderDTO orderDTO);
     Observable<List<OrderDTO>> getOrders();
+    Observable<Object> cancelOrder(String orderId);
 }

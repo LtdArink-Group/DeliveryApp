@@ -31,6 +31,7 @@
             android:layout_height="wrap_content"
             android:textAppearance="?android:textAppearanceLarge"
             android:textColor="@color/colorAccent"
+            android:textStyle="bold"
             android:visibility="gone"/>
 
         <RelativeLayout

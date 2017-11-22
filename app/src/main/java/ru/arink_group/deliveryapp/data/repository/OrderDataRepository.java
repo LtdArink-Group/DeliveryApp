@@ -33,4 +33,9 @@ public class OrderDataRepository implements OrderRepository {
     public Observable<List<OrderDTO>> getOrders() {
         return orderDataStore.getOrders();
     }
+
+    @Override
+    public Observable<Object> cancelOrder(String orderId) {
+        return orderDataStore.cancelOrder(orderId);
+    }
 }

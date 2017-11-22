@@ -57,6 +57,9 @@ interface BookingFoodApi {
     @GET("/api/orders")
     fun getOrders(@Query("account_id") accountId: String) : Observable<OrdersObject>
 
+    @POST("/api/orders/{orderId}/cancel")
+    fun cancelOrder(@Path("orderId") orderId: String) : Observable<Any>
+
     /**
      * Companion object to create the BoolingFoodApi
      */

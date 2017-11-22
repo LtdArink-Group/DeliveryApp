@@ -13,6 +13,7 @@
 
     <string name="title_ingredients">Ингредиенты</string>
     <string name="title_address">Адрес</string>
+    <string name="title_retry_order">Заказ (информация)</string>
 
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="title_activity_products">ProductsActivity</string>
@@ -55,7 +56,13 @@
     <string name="account_idle">Отправить</string>
     <string name="account_progress">Отправляем</string>
     <string name="send_ok">Успешно</string>
-    <string name="send_fail">X</string>
+    <string name="send_fail">Повторить</string>
+    <string name="order_retry">Повторить</string>
+    <string name="order_cancell">Отменить</string>
+    <string name="summary_cost_with_discount">Сумма заказа со скидкой</string>
+    <string name="num">Кол-во</string>
+    <string name="costSummary">Стоимость</string>
+
 
     <!--Errors-->
     <string name="error_must_be_at_leat_one_address">Минимум один адрес!</string>

@@ -11,6 +11,7 @@ import ru.arink_group.deliveryapp.domain.interactors.AddIngredientToBasket;
 import ru.arink_group.deliveryapp.domain.interactors.AddItemToBasket;
 import ru.arink_group.deliveryapp.domain.interactors.AddItemToBasketOrNull;
 import ru.arink_group.deliveryapp.domain.interactors.AddListItemsToBasket;
+import ru.arink_group.deliveryapp.domain.interactors.CancelOrder;
 import ru.arink_group.deliveryapp.domain.interactors.ClearItemsFromBasket;
 import ru.arink_group.deliveryapp.domain.interactors.CreateAccount;
 import ru.arink_group.deliveryapp.domain.interactors.DeleteAddress;
@@ -145,5 +146,11 @@ public class InteractorsModule {
     @NonNull
     public GetOrders getOrders() {
         return new GetOrders();
+    }
+
+    @Provides
+    @NonNull
+    public CancelOrder cancelOrder() {
+        return new CancelOrder();
     }
 }

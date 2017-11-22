@@ -176,6 +176,7 @@
                 android:layout_height="wrap_content"
                 android:layout_alignParentEnd="true"
                 android:layout_centerVertical="true"
+                android:visibility="gone"
                 android:id="@+id/summary_address_list_spinner"
                 />
 
