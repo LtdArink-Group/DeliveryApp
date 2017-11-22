@@ -9,10 +9,11 @@ import ru.arink_group.deliveryapp.presentation.presenter.interfaces.OrderPresent
 import ru.arink_group.deliveryapp.presentation.view.OrderView
 import javax.inject.Inject
 
+
 /**
  * Created by kirillvs on 24.10.17.
  */
-class OrderPresenterImpl(val orderView: OrderView): OrderPresenter {
+class OrderPresenterImpl(val orderView: OrderView): BasePresenter(), OrderPresenter {
     @Inject
     lateinit var getListItemsFromBasket:GetListItemsFromBasket
 
@@ -52,6 +53,7 @@ class OrderPresenterImpl(val orderView: OrderView): OrderPresenter {
     }
 
     override fun getProductsFromBasket() {
+        orderView.loadingStart()
         getListItemsFromBasket.execute(ProductsDisposableObserver(), GetListItemsFromBasket.Params())
     }
 
@@ -78,10 +80,17 @@ class OrderPresenterImpl(val orderView: OrderView): OrderPresenter {
 
     inner class AccountDisposableObserver: DisposableObserver<Account>() {
         override fun onError(e: Throwable) {
-            orderView.showCreateAccountButton()
+            val error = handleGetNetError(e)
+            if (error == "404") {
+                orderView.showCreateAccountButton()
+                orderView.loadingAddressFinish()
+            } else {
+                orderView.showErrorMessage(error)
+            }
         }
 
         override fun onComplete() {
+            orderView.loadingAddressFinish()
         }
 
         override fun onNext(t: Account) {
@@ -92,11 +101,12 @@ class OrderPresenterImpl(val orderView: OrderView): OrderPresenter {
     inner class ProductsDisposableObserver: DisposableObserver<List<Product>>() {
 
         override fun onError(e: Throwable) {
-            orderView.showErrorMessage(e.message)
+            orderView.showErrorMessage(handleGetNetError(e))
         }
 
         override fun onComplete() {
             orderView.updateTotals()
+            orderView.loadingFinish()
         }
 
         override fun onNext(t: List<Product>) {
@@ -104,6 +114,7 @@ class OrderPresenterImpl(val orderView: OrderView): OrderPresenter {
                 orderView.showPlaceholder()
             } else {
                 orderView.setProducts(t)
+                getAddresses()
             }
         }
 
@@ -116,7 +127,7 @@ class OrderPresenterImpl(val orderView: OrderView): OrderPresenter {
         }
 
         override fun onError(e: Throwable) {
-            orderView.showErrorMessage(e.message)
+            orderView.showErrorMessage(handleInternalError(e))
         }
 
         override fun onNext(t: Product) {
@@ -127,7 +138,7 @@ class OrderPresenterImpl(val orderView: OrderView): OrderPresenter {
 
     inner class SendOrderToServerDisposableObserver: DisposableObserver<Boolean>() {
         override fun onError(e: Throwable) {
-            orderView.showErrorMessage(e.message)
+            orderView.showErrorMessage(handlePostNetError(e))
         }
 
         override fun onComplete() {
@@ -147,7 +158,7 @@ class OrderPresenterImpl(val orderView: OrderView): OrderPresenter {
         }
 
         override fun onError(e: Throwable) {
-            orderView.showErrorMessage(e.message)
+            orderView.showErrorMessage(handleInternalError(e))
         }
 
         override fun onNext(t: Boolean) {

@@ -1,5 +1,7 @@
 package ru.arink_group.deliveryapp.data.repository.datasource;
 
+import java.util.List;
+
 import io.reactivex.Observable;
 import ru.arink_group.deliveryapp.domain.dto.OrderDTO;
 
@@ -9,4 +11,5 @@ import ru.arink_group.deliveryapp.domain.dto.OrderDTO;
 
 public interface OrderDataStore {
     Observable<Object> sendOrderToServer(OrderDTO orderDTO);
+    Observable<List<OrderDTO>> getOrders();
 }

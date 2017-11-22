@@ -36,10 +36,12 @@
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".presentation.view.activity.IngredientsActivity"
+            android:noHistory="true"
             android:parentActivityName=".presentation.view.activity.ProductsActivity"
             android:screenOrientation="nosensor"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".presentation.view.activity.AddressActivity"
+            android:noHistory="true"
             android:screenOrientation="nosensor"
             />
     </application>

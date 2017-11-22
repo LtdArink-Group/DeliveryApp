@@ -9,5 +9,6 @@ data class ContactInfo(
         val email: String,
         val phone: String,
         val web: String?,
-        val address: String?
+        val address: String?,
+        val geotag: String?
 ) : Serializable

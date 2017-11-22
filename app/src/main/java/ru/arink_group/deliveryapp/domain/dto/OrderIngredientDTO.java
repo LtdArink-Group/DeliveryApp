@@ -8,6 +8,9 @@ public class OrderIngredientDTO {
     @SerializedName("qty")
     @Expose
     private Integer qty;
+    @SerializedName("total_cost")
+    @Expose
+    private Double totalCost;
     @SerializedName("name")
     @Expose
     private String name;
@@ -28,4 +31,11 @@ public class OrderIngredientDTO {
         this.name = name;
     }
 
+    public Double getTotalCost() {
+        return totalCost;
+    }
+
+    public void setTotalCost(Double totalCost) {
+        this.totalCost = totalCost;
+    }
 }

@@ -26,7 +26,7 @@ class SendOrderToServer: UseCase<Boolean, SendOrderToServer.Params>() {
     }
 
 
-    class Params(val products:List<Product>, val addressId: Int, val deliveryTime: DateTime, pickup: Boolean) {
+    class Params(val products:List<Product>, val addressId: Int?, val deliveryTime: DateTime, pickup: Boolean) {
         val order: OrderDTO = TransformerDTO.createOrderDTO(products, addressId, deliveryTime, pickup)
     }
 }

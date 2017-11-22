@@ -13,7 +13,7 @@ import javax.inject.Inject
  * Created by kirillvs on 17.10.17.
  */
 
-class IngredientsPresenterImpl(internal val ingredientsView: IngredientsView) : IngredientsPresenter {
+class IngredientsPresenterImpl(internal val ingredientsView: IngredientsView) : BasePresenter(), IngredientsPresenter {
 
     @Inject
     lateinit var addIngredientToBasket: AddIngredientToBasket
@@ -53,7 +53,7 @@ class IngredientsPresenterImpl(internal val ingredientsView: IngredientsView) : 
         }
 
         override fun onError(e: Throwable) {
-            ingredientsView.showErrorMessage(e.message)
+            ingredientsView.showErrorMessage(handleInternalError(e))
         }
 
     }

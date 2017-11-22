@@ -16,7 +16,7 @@ import ru.arink_group.deliveryapp.presentation.view.CategoriesView;
  * Created by kirillvs on 02.10.17.
  */
 
-public class CategoriesPresenterImpl implements CategoriesPresenter {
+public class CategoriesPresenterImpl extends BasePresenter implements CategoriesPresenter {
 
     private CategoriesView categoriesView;
     @Inject GetCategoriesList getCategoriesListUseCase;
@@ -66,7 +66,7 @@ public class CategoriesPresenterImpl implements CategoriesPresenter {
 
         @Override
         public void onError(@NonNull Throwable e) {
-            categoriesView.showErrorMessage(e.getMessage());
+            categoriesView.showErrorMessage(handleGetNetError(e));
         }
 
         @Override

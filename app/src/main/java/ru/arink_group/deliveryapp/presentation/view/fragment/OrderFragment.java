@@ -5,6 +5,7 @@ import android.app.DialogFragment;
 import android.app.TimePickerDialog;
 import android.os.Bundle;
 import android.app.Fragment;
+import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -13,6 +14,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.ProgressBar;
 import android.widget.Spinner;
 import android.widget.Switch;
 import android.widget.TextView;
@@ -29,6 +31,7 @@ import br.com.simplepass.loading_button_lib.interfaces.OnAnimationEndListener;
 import butterknife.BindString;
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.Unbinder;
 import ru.arink_group.deliveryapp.R;
 import ru.arink_group.deliveryapp.domain.dao.Address;
 import ru.arink_group.deliveryapp.domain.dao.Delivery;
@@ -43,6 +46,7 @@ import ru.arink_group.deliveryapp.presentation.presenter.interfaces.OrderPresent
 import ru.arink_group.deliveryapp.presentation.view.FabView;
 import ru.arink_group.deliveryapp.presentation.view.MenuView;
 import ru.arink_group.deliveryapp.presentation.view.OrderView;
+import ru.arink_group.deliveryapp.presentation.view.ProgressView;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -53,11 +57,14 @@ public class OrderFragment extends Fragment implements OrderView,
         TimePickerDialog.OnTimeSetListener
 {
 
+    private Unbinder unbinder;
 
     private OrderPresenter orderPresenter;
     private OrdersListAdapter ordersListAdapter;
     private ArrayAdapter<String> addressesStringAdaptet;
     private List<Address> addresses;
+    private MenuView menuView;
+
 
     private DateTime selectedTime;
 
@@ -82,8 +89,11 @@ public class OrderFragment extends Fragment implements OrderView,
     @BindView(R.id.summary_address_list_spinner)
     Spinner addressListSpinner;
 
-    @BindView((R.id.summary_create_address_button))
+    @BindView(R.id.summary_create_address_button)
     Button summaryCreateAddressButton;
+
+    @BindView(R.id.summary_address_progress)
+    ProgressBar progressBar;
 
     @BindString(R.string.free)
     String freeString;
@@ -113,7 +123,9 @@ public class OrderFragment extends Fragment implements OrderView,
                              Bundle savedInstanceState) {
         View root = inflater.inflate(R.layout.fragment_order, container, false);
 
-        ButterKnife.bind(this, root);
+        menuView = (MenuView) getActivity();
+
+        unbinder = ButterKnife.bind(this, root);
 
         this.orderPresenter = new OrderPresenterImpl(this);
 
@@ -140,10 +152,10 @@ public class OrderFragment extends Fragment implements OrderView,
         sendButton.setOnClickListener(this);
 
         AppCompatActivity activity = (AppCompatActivity) getActivity();
-        activity.getSupportActionBar().setTitle(titleString);
+        activity.getSupportActionBar().setTitle(R.string.order);
 
-        final FabView menuView = (FabView) getActivity();
-        menuView.hideOrderFab();
+        final FabView fabView = (FabView) getActivity();
+        fabView.hideOrderFab();
 
         summaryCreateAddressButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -156,11 +168,14 @@ public class OrderFragment extends Fragment implements OrderView,
         addressesStringAdaptet = new OrderAddressesListAdapter(getActivity(), R.layout.item_spinner_address, new ArrayList<String>());
         addressListSpinner.setAdapter(addressesStringAdaptet);
 
-        orderPresenter.getAddresses();
-
         initTimePicker();
 
         return root;
+    }
+
+    @Override
+    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
     }
 
     private void initTimePicker() {
@@ -200,18 +215,22 @@ public class OrderFragment extends Fragment implements OrderView,
         double deliveryCost = 0.0;
 
         if (selfExportSwitch.isChecked()) {
-            discount = delivery.getPickupDiscount();
+            discount = summary * delivery.getPickupDiscount() / 100;
         }
 
-        this.summaryCost.setText(String.valueOf(summary));
+        String summaryCostForm = getString(R.string.form_rubles, String.valueOf(summary));
+        this.summaryCost.setText(summaryCostForm);
 
-        this.summaryDiscount.setText(String.valueOf(discount));
+        String discountForm = getString(R.string.form_rubles, String.valueOf(discount));
+        this.summaryDiscount.setText(discountForm);
 
         if (selfExportSwitch.isChecked()) {
             deliveryCost = 0.0;
-            this.summaryDelivery.setText(String.valueOf(deliveryCost));
+            String summaryDeliveryForm = getString(R.string.form_rubles, String.valueOf(deliveryCost));
+            this.summaryDelivery.setText(summaryDeliveryForm);
         } else if (summary < delivery.getFreeShipping()) {
-            this.summaryDelivery.setText(String.valueOf(delivery.getCost()));
+            String summaryDeliveryForm = getString(R.string.form_rubles, String.valueOf(delivery.getCost()));
+            this.summaryDelivery.setText(summaryDeliveryForm);
             deliveryCost = delivery.getCost();
         } else {
             this.summaryDelivery.setText(freeString);
@@ -220,7 +239,8 @@ public class OrderFragment extends Fragment implements OrderView,
         double allSummary = summary - discount + deliveryCost;
         allSummary = allSummary >= 0.0 ? allSummary : 0.0;
 
-        this.summary.setText(String.valueOf(allSummary));
+        String summaryForm = getString(R.string.form_rubles, String.valueOf(allSummary));
+        this.summary.setText(summaryForm);
     }
 
     @Override
@@ -232,6 +252,8 @@ public class OrderFragment extends Fragment implements OrderView,
                 addressesString.add(i, this.concatAddressName(addresses.get(i)));
             }
             addressesStringAdaptet.addAll(addressesString);
+            addressListSpinner.setVisibility(View.VISIBLE);
+            summaryCreateAddressButton.setVisibility(View.GONE);
         } else {
             addressListSpinner.setVisibility(View.GONE);
             summaryCreateAddressButton.setVisibility(View.VISIBLE);
@@ -261,11 +283,10 @@ public class OrderFragment extends Fragment implements OrderView,
             @Override
             public void onAnimationEnd() {
                 sendButton.setText(orderSendFailString);
-                sendButton.setBackgroundColor(getResources().getColor(android.R.color.holo_red_dark));
+                sendButton.setBackgroundColor(getResources().getColor(R.color.colorButtonFail));
             }
         });
-
-//        Toast.makeText(getActivity(), e, Toast.LENGTH_SHORT).show();
+        if (e != null) Toast.makeText(getActivity(), e, Toast.LENGTH_SHORT).show();
     }
 
     @Override
@@ -274,17 +295,21 @@ public class OrderFragment extends Fragment implements OrderView,
             @Override
             public void onAnimationEnd() {
                 sendButton.setText(orderSendOkString);
-                sendButton.setBackgroundColor(getResources().getColor(R.color.green));
+                sendButton.setBackgroundColor(getResources().getColor(R.color.colorButtonSuccess));
             }
         });
+        disableUi();
+    }
+
+    private void disableUi() {
         sendButton.setOnClickListener(null);
-//        Toast.makeText(getActivity(), orderSendOkString, Toast.LENGTH_SHORT).show();
+        selfExportSwitch.setEnabled(false);
+        startDateDialog.setEnabled(false);
+        addressListSpinner.setEnabled(false);
     }
 
     @Override
     public void showPlaceholder() {
-        MenuView menuView = (MenuView) getActivity();
-
         EmptyOrderFragment emptyOrderFragment = new EmptyOrderFragment();
 
         menuView.changeFragmentToPlaceHolder(emptyOrderFragment);
@@ -308,13 +333,19 @@ public class OrderFragment extends Fragment implements OrderView,
     }
 
     @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        unbinder.unbind();
+    }
+
+    @Override
     public void onClick(View v) {
         sendButton.startAnimation();
         if(v.getId() == sendButton.getId()) {
             if (verifyOrder() && verifyDeliveryTime()) {
                 orderPresenter.sendOrderToServer();
             } else {
-                this.showErrorMessage(errorAddressEmpty);
+                showErrorMessage(null);
             }
         }
     }
@@ -327,7 +358,7 @@ public class OrderFragment extends Fragment implements OrderView,
     }
 
     private boolean verifyOrder() {
-        if (addressListSpinner.getSelectedItemPosition() != Spinner.INVALID_POSITION ) return true;
+        if (addressListSpinner.getSelectedItemPosition() != Spinner.INVALID_POSITION || selfExportSwitch.isChecked()) return true;
         Toast.makeText(getActivity(), errorAddressEmpty, Toast.LENGTH_SHORT).show();
         return false;
     }
@@ -355,9 +386,13 @@ public class OrderFragment extends Fragment implements OrderView,
     }
 
     @Override
-    public int getSelectedAddressId() {
-        int pos = addressListSpinner.getSelectedItemPosition();
-        return addresses.get(pos).getId();
+    public Integer getSelectedAddressId() {
+        if (selfExportSwitch.isChecked()) {
+            return null;
+        } else {
+            int pos = addressListSpinner.getSelectedItemPosition();
+            return addresses.get(pos).getId();
+        }
     }
 
     @Override
@@ -370,4 +405,26 @@ public class OrderFragment extends Fragment implements OrderView,
         return selfExportSwitch.isChecked();
     }
 
+    @Override
+    public void loadingAddressStart() {
+        progressBar.setVisibility(View.VISIBLE);
+        addressListSpinner.setVisibility(View.GONE);
+    }
+
+    @Override
+    public void loadingAddressFinish() {
+        progressBar.setVisibility(View.GONE);
+        addressListSpinner.setVisibility(View.VISIBLE);
+    }
+
+    @Override
+    public void loadingStart() {
+        menuView.loadingStart();
+    }
+
+    @Override
+    public void loadingFinish() {
+        MenuView menuView = (MenuView) getActivity();
+        menuView.loadingFinish();
+    }
 }

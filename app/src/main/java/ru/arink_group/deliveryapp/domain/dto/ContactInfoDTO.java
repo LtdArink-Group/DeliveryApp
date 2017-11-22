@@ -11,6 +11,9 @@ public class ContactInfoDTO {
     @SerializedName("phone")
     @Expose
     private String phone;
+    @SerializedName("geotag")
+    @Expose
+    private String geotag;
 
     @SerializedName("web")
     @Expose
@@ -51,6 +54,11 @@ public class ContactInfoDTO {
         this.address = address;
     }
 
+    public String getGeotag() {
+        return geotag;
+    }
 
-
+    public void setGeotag(String geotag) {
+        this.geotag = geotag;
+    }
 }

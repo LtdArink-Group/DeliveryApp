@@ -1,5 +1,7 @@
 package ru.arink_group.deliveryapp.data.repository;
 
+import java.util.List;
+
 import javax.inject.Inject;
 
 import io.reactivex.Observable;
@@ -25,5 +27,10 @@ public class OrderDataRepository implements OrderRepository {
     @Override
     public Observable<Object> sendOrder(OrderDTO orderDTO) {
         return orderDataStore.sendOrderToServer(orderDTO);
+    }
+
+    @Override
+    public Observable<List<OrderDTO>> getOrders() {
+        return orderDataStore.getOrders();
     }
 }

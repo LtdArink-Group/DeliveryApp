@@ -9,6 +9,7 @@ import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.http.*
 import ru.arink_group.deliveryapp.App
 import ru.arink_group.deliveryapp.data.net.response.CategoriesObject
+import ru.arink_group.deliveryapp.data.net.response.OrdersObject
 import ru.arink_group.deliveryapp.data.net.response.ProductsObject
 import ru.arink_group.deliveryapp.domain.dto.*
 
@@ -52,6 +53,9 @@ interface BookingFoodApi {
 
     @POST("/api/orders")
     fun sendOrder(@Body order: OrderDTO) : Observable<Any>
+
+    @GET("/api/orders")
+    fun getOrders(@Query("account_id") accountId: String) : Observable<OrdersObject>
 
     /**
      * Companion object to create the BoolingFoodApi

@@ -28,7 +28,7 @@ public class App extends Application {
     }
 
     public static String getCompanyId() {
-        return "1";
+        return "3";
     }
 
     public static String getUUID() {

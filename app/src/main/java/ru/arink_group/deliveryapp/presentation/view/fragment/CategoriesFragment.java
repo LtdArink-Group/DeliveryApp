@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.app.Fragment;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -13,6 +14,9 @@ import android.widget.Toast;
 
 import java.util.List;
 
+import butterknife.BindString;
+import butterknife.ButterKnife;
+import butterknife.Unbinder;
 import ru.arink_group.deliveryapp.R;
 import ru.arink_group.deliveryapp.domain.dao.Category;
 import ru.arink_group.deliveryapp.presentation.adapters.CategoriesListAdapter;
@@ -30,10 +34,15 @@ public class CategoriesFragment extends Fragment implements CategoriesView, OnCa
     public static final String CATEGORY = "categoryId";
     public static final String CATEGORY_NAME = "categoryName";
 
+    private Unbinder unbinder;
+
     private List<Category> categories;
     private CategoriesListAdapter categoriesAdapter;
     private CategoriesPresenter categoriesPresenter;
     private MenuView mv;
+
+    @BindString(R.string.categories)
+    String categoriesTitle;
 
     public CategoriesFragment() {
         // Required empty public constructor
@@ -74,6 +83,9 @@ public class CategoriesFragment extends Fragment implements CategoriesView, OnCa
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_categories, container, false);
+
+        unbinder = ButterKnife.bind(this, rootView);
+
         RecyclerView mRecyclerView = rootView.findViewById(R.id.categories_recycler_view);
 
         mRecyclerView.setHasFixedSize(true);
@@ -115,6 +127,9 @@ public class CategoriesFragment extends Fragment implements CategoriesView, OnCa
             }
         });
 
+        AppCompatActivity titleActivity = (AppCompatActivity) getActivity();
+        titleActivity.getSupportActionBar().setTitle(R.string.categories);
+
         return rootView;
     }
 
@@ -134,6 +149,12 @@ public class CategoriesFragment extends Fragment implements CategoriesView, OnCa
     public void onDestroy() {
         super.onDestroy();
         categoriesPresenter.destroy();
+    }
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        unbinder.unbind();
     }
 
     @Override

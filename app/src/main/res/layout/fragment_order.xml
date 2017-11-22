@@ -165,17 +165,23 @@
                 android:layout_centerVertical="true"
                 android:text="@string/summary_address_list"/>
 
+            <ProgressBar
+                android:id="@+id/summary_address_progress"
+                android:layout_alignParentEnd="true"
+                android:layout_width="24dp"
+                android:layout_height="24dp" />
+
             <Spinner
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_alignParentRight="true"
+                android:layout_alignParentEnd="true"
                 android:layout_centerVertical="true"
                 android:id="@+id/summary_address_list_spinner"
                 />
 
             <Button
                 style="@style/AppTheme.MyButton"
-                android:layout_alignParentRight="true"
+                android:layout_alignParentEnd="true"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:id="@+id/summary_create_address_button"
@@ -194,10 +200,11 @@
             android:layout_marginRight="@dimen/big_margin">
 
             <br.com.simplepass.loading_button_lib.customViews.CircularProgressButton
+                android:padding="@dimen/small_margin"
                 android:id="@+id/send_order_button"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:background="@color/colorAccent"
+                android:background="@color/colorButtonIdle"
                 android:textColor="@color/colorOnPrimaryText"
                 app:spinning_bar_color="@color/colorOnPrimaryText"
                 android:text="@string/to_order"

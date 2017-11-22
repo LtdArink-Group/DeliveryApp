@@ -6,6 +6,20 @@ import com.google.gson.annotations.SerializedName;
 
 public class OrderProductDTO {
 
+    // for orders receiving
+
+    @SerializedName("id")
+    @Expose
+    private String id;
+    @SerializedName("product_title")
+    @Expose
+    private String productTitle;
+    @SerializedName("total_cost")
+    @Expose
+    private Double totalCost;
+
+    // for orders creation
+
     @SerializedName("product_id")
     @Expose
     private Integer productId;
@@ -49,6 +63,30 @@ public class OrderProductDTO {
 
     public void setIngredients(List<OrderIngredientDTO> ingredients) {
         this.ingredients = ingredients;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public Double getTotalCost() {
+        return totalCost;
+    }
+
+    public void setTotalCost(Double totalCost) {
+        this.totalCost = totalCost;
+    }
+
+    public String getProductTitle() {
+        return productTitle;
+    }
+
+    public void setProductTitle(String productTitle) {
+        this.productTitle = productTitle;
     }
 
 }

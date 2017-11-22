@@ -1,6 +1,9 @@
 package ru.arink_group.deliveryapp.domain.dto;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import ru.arink_group.deliveryapp.App;
@@ -11,6 +14,10 @@ import ru.arink_group.deliveryapp.domain.dao.Company;
 import ru.arink_group.deliveryapp.domain.dao.ContactInfo;
 import ru.arink_group.deliveryapp.domain.dao.Delivery;
 import ru.arink_group.deliveryapp.domain.dao.Ingredient;
+import ru.arink_group.deliveryapp.domain.dao.Order;
+import ru.arink_group.deliveryapp.domain.dao.OrderAddressInfo;
+import ru.arink_group.deliveryapp.domain.dao.OrderIngredient;
+import ru.arink_group.deliveryapp.domain.dao.OrderProduct;
 import ru.arink_group.deliveryapp.domain.dao.Period;
 import ru.arink_group.deliveryapp.domain.dao.Portion;
 import ru.arink_group.deliveryapp.domain.dao.Product;
@@ -162,7 +169,8 @@ public class TransformerDTO {
                 contactInfoDTO.getEmail(),
                 contactInfoDTO.getPhone(),
                 contactInfoDTO.getWeb(),
-                contactInfoDTO.getAddress()
+                contactInfoDTO.getAddress(),
+                contactInfoDTO.getGeotag()
         );
     }
 
@@ -232,5 +240,75 @@ public class TransformerDTO {
         orderDTO.setOrderProducts(createListOrderProductDTO(products));
         orderDTO.setDeliveryTime(deliveryTime.toCurrentDateString());
         return orderDTO;
+    }
+
+    public static OrderIngredient transformOrderIngredient(OrderIngredientDTO orderIngredientDTO) {
+        return new OrderIngredient(orderIngredientDTO.getQty(), orderIngredientDTO.getTotalCost(), orderIngredientDTO.getName());
+    }
+
+    public static List<OrderIngredient> transformListOrderIngredients(List<OrderIngredientDTO> orderIngredientsDTO) {
+        List<OrderIngredient> orderIngredients = new ArrayList<>();
+        for (OrderIngredientDTO orderIngredientDTO : orderIngredientsDTO) {
+            orderIngredients.add(transformOrderIngredient(orderIngredientDTO));
+        }
+        return orderIngredients;
+    }
+
+    public static OrderProduct transformOrderProduct(OrderProductDTO orderProductDTO) {
+        return new OrderProduct(
+                orderProductDTO.getId(),
+                orderProductDTO.getProductTitle(),
+                orderProductDTO.getTotalCost(),
+                orderProductDTO.getProductId(),
+                orderProductDTO.getMainOption(),
+                orderProductDTO.getQty(),
+                transformListOrderIngredients(orderProductDTO.getIngredients())
+        );
+    }
+
+    public static List<OrderProduct> transformListOrderProduct(List<OrderProductDTO> orderProductsDTO) {
+        List<OrderProduct> orderProducts = new ArrayList<>();
+        for (OrderProductDTO orderProductDTO : orderProductsDTO) {
+            orderProducts.add(transformOrderProduct(orderProductDTO));
+        }
+        return orderProducts;
+    }
+
+    public static OrderAddressInfo transformOrderAddressInfo(OrderAddressInfoDTO orderAddressInfoDTO) {
+        if (orderAddressInfoDTO.getId() == null) return null;
+        return new OrderAddressInfo(
+                orderAddressInfoDTO.getId(),
+                orderAddressInfoDTO.getCity(),
+                orderAddressInfoDTO.getCode(),
+                orderAddressInfoDTO.getFloor(),
+                orderAddressInfoDTO.getHouse(),
+                orderAddressInfoDTO.getTitle(),
+                orderAddressInfoDTO.getOffice(),
+                orderAddressInfoDTO.getStreet(),
+                orderAddressInfoDTO.getEntrance()
+        );
+    }
+
+    public static Order transformOrder(OrderDTO orderDTO) {
+        return new Order(
+                orderDTO.getId(),
+                orderDTO.getStatus(),
+                orderDTO.getTotalCost(),
+                orderDTO.getDeliveryCost(),
+                orderDTO.getCompanyId(),
+                orderDTO.getAccountId(),
+                orderDTO.getDeliveryTime(),
+                orderDTO.getPickup(),
+                transformListOrderProduct(orderDTO.getOrderProducts()),
+                transformOrderAddressInfo(orderDTO.getAddressInfo())
+        );
+    }
+
+    public static List<Order> transformListOrder(List<OrderDTO> ordersDTO) {
+        List<Order> orders = new ArrayList<>();
+        for (OrderDTO orderDTO : ordersDTO) {
+            orders.add(transformOrder(orderDTO));
+        }
+        return orders;
     }
 }

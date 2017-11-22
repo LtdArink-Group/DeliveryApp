@@ -3,26 +3,49 @@ package ru.arink_group.deliveryapp.presentation.view.fragment;
 
 import android.os.Bundle;
 import android.app.Fragment;
+import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
+import butterknife.Unbinder;
 import ru.arink_group.deliveryapp.R;
+import ru.arink_group.deliveryapp.domain.dao.Order;
+import ru.arink_group.deliveryapp.presentation.adapters.OrdersHistoryAdapter;
+import ru.arink_group.deliveryapp.presentation.adapters.interfaces.OnOrdersHistoryClickListener;
+import ru.arink_group.deliveryapp.presentation.presenter.OrdersHistoryPresenterImpl;
+import ru.arink_group.deliveryapp.presentation.presenter.interfaces.OrdersHistoryPresenter;
 import ru.arink_group.deliveryapp.presentation.view.FabView;
 import ru.arink_group.deliveryapp.presentation.view.MenuView;
+import ru.arink_group.deliveryapp.presentation.view.OrdersHistoryView;
+import ru.arink_group.deliveryapp.presentation.view.PlaceholderView;
+import ru.arink_group.deliveryapp.presentation.view.ProgressView;
 
 import com.google.android.gms.plus.PlusOneButton;
 
-/**
- * A fragment with a Google +1 button.
- */
-public class OrdersHistoryFragment extends Fragment {
+import java.util.List;
 
-    // The request code must be 0 or greater.
-    private static final int PLUS_ONE_REQUEST_CODE = 0;
-    // The URL to +1.  Must be a valid URL.
-    private final String PLUS_ONE_URL = "http://developer.android.com";
-    private PlusOneButton mPlusOneButton;
+public class OrdersHistoryFragment extends Fragment implements OrdersHistoryView, OnOrdersHistoryClickListener {
+
+    private Unbinder unbinder;
+
+    ProgressView progressView;
+    OrdersHistoryPresenter presenter;
+    MenuView menuView;
+
+    private OrdersHistoryAdapter activeAdapter;
+    private OrdersHistoryAdapter completedAdapter;
+
+    @BindView(R.id.order_history_active_recycler)
+    RecyclerView activeRecyclerView;
+
+    @BindView(R.id.order_history_completed_recycler)
+    RecyclerView completedRecyclerView;
 
 
     public OrdersHistoryFragment() {
@@ -36,19 +59,40 @@ public class OrdersHistoryFragment extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_orders_history, container, false);
 
+        unbinder = ButterKnife.bind(this, view);
 
         final FabView fabView = (FabView) getActivity();
-        fabView.showOrderFab();
+        fabView.hideOrderFab();
 
-        fabView.getFab().setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                OrderFragment orderFragment = new OrderFragment();
-                fabView.changeFragment(orderFragment);
-            }
-        });
+        AppCompatActivity titleActivity = (AppCompatActivity) getActivity();
+        titleActivity.getSupportActionBar().setTitle(R.string.orders_history);
+
+        progressView = (ProgressView) getActivity();
+        menuView = (MenuView) getActivity();
+
+        presenter = new OrdersHistoryPresenterImpl(this);
+
+        initRecyclers();
+
+        presenter.getOrders();
 
         return view;
+    }
+
+    public void initRecyclers() {
+        activeAdapter = new OrdersHistoryAdapter();
+        LinearLayoutManager activellm = new LinearLayoutManager(getActivity());
+        activeRecyclerView.setHasFixedSize(true);
+        activeRecyclerView.setLayoutManager(activellm);
+        activeRecyclerView.setAdapter(activeAdapter);
+        activeAdapter.setOnClickListener(this);
+
+        completedAdapter = new OrdersHistoryAdapter(false);
+        LinearLayoutManager completedllm = new LinearLayoutManager(getActivity());
+        completedRecyclerView.setHasFixedSize(true);
+        completedRecyclerView.setLayoutManager(completedllm);
+        completedRecyclerView.setAdapter(completedAdapter);
+        completedAdapter.setOnClickListener(this);
     }
 
     @Override
@@ -56,5 +100,48 @@ public class OrdersHistoryFragment extends Fragment {
         super.onResume();
     }
 
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        unbinder.unbind();
+        presenter.destroy();
+    }
 
+    @Override
+    public void loadingStart() {
+        progressView.loadingStart();
+    }
+
+    @Override
+    public void loadingFinish() {
+        progressView.loadingFinish();
+    }
+
+    @Override
+    public void setOrders(List<Order> activeOrders, List<Order> completedOrders) {
+        activeAdapter.setOrders(activeOrders);
+        completedAdapter.setOrders(completedOrders);
+    }
+
+    @Override
+    public void showErrorMessage(String e) {
+        Toast.makeText(getActivity(), e, Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void showPlaceHolder() {
+        Fragment fragment = new EmptyListFragment();
+        menuView.changeFragmentToPlaceHolder(fragment);
+    }
+
+    @Override
+    public void showContent() {
+
+    }
+
+    @Override
+    public void onOrderHistoryItemClick(Order order) {
+        Toast.makeText(getActivity(), String.valueOf(order.getTotalCost()), Toast.LENGTH_SHORT).show();
+        // TODO
+    }
 }
