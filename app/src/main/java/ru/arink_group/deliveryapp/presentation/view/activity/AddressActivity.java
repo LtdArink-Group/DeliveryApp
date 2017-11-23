@@ -1,12 +1,14 @@
 package ru.arink_group.deliveryapp.presentation.view.activity;
 
 import android.app.FragmentTransaction;
+import android.content.Context;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.FrameLayout;
 import android.widget.ProgressBar;
 
@@ -49,6 +51,14 @@ public class AddressActivity extends AppCompatActivity implements ProgressView{
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
+        InputMethodManager inputManager = (InputMethodManager)
+                getSystemService(Context.INPUT_METHOD_SERVICE);
+
+        if (inputManager != null) {
+            inputManager.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(),
+                    InputMethodManager.HIDE_NOT_ALWAYS);
+        }
+
         if(item.getItemId() == R.id.ok_button) {
             addressFragment.onClick(null);
         } else {
