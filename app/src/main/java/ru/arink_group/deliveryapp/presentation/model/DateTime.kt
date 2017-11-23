@@ -61,13 +61,14 @@ class DateTime {
 
     fun toCurrentDateString(): String {
         val sdf = SimpleDateFormat("yyyy-MM-dd HH:mm")
-//        val sdf = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSXXX")
+//        val sdf = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS")
 
         return sdf.format(cal.time)
     }
 
     fun toTimeWithDate(): String {
         val sdf = SimpleDateFormat("yyyy-MM-dd HH:mm")
+//        val sdf = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS")
 
         return sdf.format(cal.time)
     }

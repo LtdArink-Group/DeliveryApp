@@ -2,11 +2,9 @@ package ru.arink_group.deliveryapp.presentation.view.fragment
 
 
 import android.app.AlertDialog
-import android.app.Dialog
 import android.os.Bundle
 import android.app.Fragment
 import android.app.TimePickerDialog
-import android.content.DialogInterface
 import android.content.Intent
 import android.support.v4.content.ContextCompat
 import android.support.v7.widget.LinearLayoutManager
@@ -16,7 +14,6 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.*
 import br.com.simplepass.loading_button_lib.customViews.CircularProgressButton
-import br.com.simplepass.loading_button_lib.interfaces.OnAnimationEndListener
 
 import ru.arink_group.deliveryapp.R
 import ru.arink_group.deliveryapp.domain.dao.Address
@@ -48,6 +45,8 @@ class RetryOrderFragment : Fragment(), RetryOrderView, TimePickerDialog.OnTimeSe
     lateinit var address: TextView
     lateinit var progress: ProgressBar
     lateinit var addressesAdapter: ArrayAdapter<String>
+    var addressesList: List<Address> = emptyList()
+    lateinit var selectedTime: DateTime
 
     val presenter: RetryOrderPresenter = RetryOrderPresenterImpl(this)
 
@@ -58,9 +57,9 @@ class RetryOrderFragment : Fragment(), RetryOrderView, TimePickerDialog.OnTimeSe
 
         order = arguments.getSerializable(RETRY_ORDER) as Order
 
+        initActionFields(root)
         initRecycler(root)
         initOrderFields(root)
-        initActionFields(root)
 
         return root
     }
@@ -106,7 +105,31 @@ class RetryOrderFragment : Fragment(), RetryOrderView, TimePickerDialog.OnTimeSe
             actionButton.setText(R.string.order_retry)
             val color = ContextCompat.getColor(activity, R.color.colorButtonRetry)
             actionButton.setBackgroundColor(color)
+            actionButton.setOnClickListener {
+                sendOrder()
+            }
         }
+    }
+
+    private fun sendOrder() {
+        if (verifyViews()) {
+            presenter.sendOrderToServer()
+        }
+    }
+
+    private fun verifyViews() : Boolean {
+        var flag: Boolean
+
+        flag = verifyDeliveryTime()
+
+        return flag
+    }
+
+    private fun verifyDeliveryTime(): Boolean {
+        val time = getString(R.string.summary_delivery_time)
+        val valid = !time.equals(timePicker.text.toString(), ignoreCase = true)
+        if (!valid) Toast.makeText(activity, R.string.error_delivery_time_empty, Toast.LENGTH_SHORT).show()
+        return valid
     }
 
     private fun cancelOrder() {
@@ -183,7 +206,7 @@ class RetryOrderFragment : Fragment(), RetryOrderView, TimePickerDialog.OnTimeSe
         val c = Calendar.getInstance()
         val current = DateTime(c.get(Calendar.HOUR_OF_DAY), c.get(Calendar.MINUTE))
 
-        val selectedTime = DateTime(hour, minute)
+        selectedTime = DateTime(hour, minute)
 
         if (selectedTime.isGreaterThen(end) || selectedTime.isLowerThen(start)) {
             val deliveryError = getString(R.string.time_should_be_between, start, end)
@@ -228,6 +251,7 @@ class RetryOrderFragment : Fragment(), RetryOrderView, TimePickerDialog.OnTimeSe
     }
 
     override fun updateAddresses(addresses: MutableList<Address>) {
+        addressesList = addresses
         val addressesString = ArrayList<String>()
         for (i in addresses.indices) {
             addressesString.add(i, this.concatAddressName(addresses[i]))
@@ -256,9 +280,7 @@ class RetryOrderFragment : Fragment(), RetryOrderView, TimePickerDialog.OnTimeSe
         progress.visibility = View.GONE
     }
 
-    override fun getVerifyedOrder(): Order {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
-    }
+    override fun getVerifyedOrder(): Order = order
 
     override fun redirectToHistory() {
         val intent = Intent(activity, MenuActivity::class.java)
@@ -266,5 +288,16 @@ class RetryOrderFragment : Fragment(), RetryOrderView, TimePickerDialog.OnTimeSe
         activity.startActivity(intent)
 
     }
+
+    override fun getAddressId(): Int? {
+        return if (order.pickup) {
+            null
+        } else {
+            val pos = addresses.getSelectedItemPosition()
+            addressesList[pos].id
+        }
+    }
+
+    override fun getDeliveryTime(): DateTime = selectedTime
 
 }// Required empty public constructor

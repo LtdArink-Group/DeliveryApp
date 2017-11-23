@@ -4,7 +4,9 @@ import io.reactivex.observers.DisposableObserver
 import ru.arink_group.deliveryapp.App
 import ru.arink_group.deliveryapp.domain.dao.Account
 import ru.arink_group.deliveryapp.domain.interactors.CancelOrder
+import ru.arink_group.deliveryapp.domain.interactors.ClearItemsFromBasket
 import ru.arink_group.deliveryapp.domain.interactors.GetAccount
+import ru.arink_group.deliveryapp.domain.interactors.SendOrderToServer
 import ru.arink_group.deliveryapp.presentation.model.ErrorsTranslator
 import ru.arink_group.deliveryapp.presentation.presenter.interfaces.RetryOrderPresenter
 import ru.arink_group.deliveryapp.presentation.view.RetryOrderView
@@ -21,6 +23,9 @@ class RetryOrderPresenterImpl(val view: RetryOrderView): BasePresenter(), RetryO
     @Inject
     lateinit var cancelOrder: CancelOrder
 
+    @Inject
+    lateinit var sendOrderToServer: SendOrderToServer
+
     init {
         App.getComponent().inject(this)
     }
@@ -33,6 +38,18 @@ class RetryOrderPresenterImpl(val view: RetryOrderView): BasePresenter(), RetryO
     override fun cancelOrder(orderId: String) {
         view.startButtonAnimation()
         cancelOrder.execute(CancelOrderObserver(), CancelOrder.Param(orderId))
+    }
+
+    override fun sendOrderToServer() {
+        sendOrderToServer
+                .execute(
+                        SendOrderToServerDisposableObserver(),
+                        SendOrderToServer.Params(
+                                view.verifyedOrder,
+                                view.addressId,
+                                view.deliveryTime
+                        )
+                )
     }
 
     inner class AccountDisposableObserver: DisposableObserver<Account>() {
@@ -67,5 +84,21 @@ class RetryOrderPresenterImpl(val view: RetryOrderView): BasePresenter(), RetryO
             view.redirectToHistory()
         }
     }
+
+    inner class SendOrderToServerDisposableObserver: DisposableObserver<Boolean>() {
+        override fun onError(e: Throwable) {
+            view.stopButtonAnimationWithError(handlePostNetError(e))
+        }
+
+        override fun onComplete() {
+            view.redirectToHistory()
+        }
+
+        override fun onNext(t: Boolean) {
+            // --no-op
+        }
+
+    }
+
 
 }

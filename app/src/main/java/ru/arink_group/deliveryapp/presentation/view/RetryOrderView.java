@@ -4,6 +4,7 @@ import java.util.List;
 
 import ru.arink_group.deliveryapp.domain.dao.Address;
 import ru.arink_group.deliveryapp.domain.dao.Order;
+import ru.arink_group.deliveryapp.presentation.model.DateTime;
 
 /**
  * Created by kirillvs on 22.11.17.
@@ -22,4 +23,6 @@ public interface RetryOrderView {
     void loadingAddressFinish();
 
     Order getVerifyedOrder();
+    Integer getAddressId();
+    DateTime getDeliveryTime();
 }

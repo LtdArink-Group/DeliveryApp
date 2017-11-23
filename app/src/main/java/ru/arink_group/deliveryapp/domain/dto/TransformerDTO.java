@@ -311,4 +311,48 @@ public class TransformerDTO {
         }
         return orders;
     }
+
+    public static OrderIngredientDTO trahsformOrderIngredientDTO(OrderIngredient ingredient) {
+        OrderIngredientDTO orderIngredientDTO = new OrderIngredientDTO();
+        orderIngredientDTO.setName(ingredient.getName());
+        orderIngredientDTO.setQty(ingredient.getQty());
+        return orderIngredientDTO;
+    }
+
+    public static List<OrderIngredientDTO> trahsformListOrderIngredientDTO(List<OrderIngredient> ingredients) {
+        List<OrderIngredientDTO> orderIngredientsDTO = new ArrayList<>();
+        for (OrderIngredient ingredient : ingredients) {
+            orderIngredientsDTO.add(trahsformOrderIngredientDTO(ingredient));
+        }
+        return orderIngredientsDTO;
+    }
+
+    public static OrderProductDTO trahsformOrderProductDTO(OrderProduct product) {
+        OrderProductDTO orderProductDTO = new OrderProductDTO();
+        orderProductDTO.setProductId(product.getProductId());
+        orderProductDTO.setQty(product.getQty());
+        orderProductDTO.setMainOption(product.getMainOption());
+        orderProductDTO.setIngredients(trahsformListOrderIngredientDTO(product.getIngredients()));
+        return orderProductDTO;
+    }
+
+    public static List<OrderProductDTO> trahsformListOrderProductDTO(List<OrderProduct> products) {
+        List<OrderProductDTO> orderProductsDTO = new ArrayList<>();
+        for(OrderProduct product : products) {
+            orderProductsDTO.add(trahsformOrderProductDTO(product));
+        }
+        return orderProductsDTO;
+    }
+
+    public static OrderDTO trahsformOrderDTO(Order order, Integer addressId, DateTime deliveryTime) {
+        OrderDTO orderDTO = new OrderDTO();
+        orderDTO.setAccountId(App.getUUID());
+        orderDTO.setCompanyId(Integer.valueOf(App.getCompanyId()));
+        orderDTO.setAddressId(addressId);
+        orderDTO.setPickup(order.getPickup());
+        orderDTO.setOrderProducts(trahsformListOrderProductDTO(order.getProducts()));
+        orderDTO.setDeliveryTime(deliveryTime.toCurrentDateString());
+        return orderDTO;
+    }
+
 }

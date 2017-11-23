@@ -2,6 +2,7 @@ package ru.arink_group.deliveryapp.domain.interactors
 
 import io.reactivex.Observable
 import ru.arink_group.deliveryapp.App
+import ru.arink_group.deliveryapp.domain.dao.Order
 import ru.arink_group.deliveryapp.domain.dao.Product
 import ru.arink_group.deliveryapp.domain.dto.OrderDTO
 import ru.arink_group.deliveryapp.domain.dto.TransformerDTO
@@ -26,7 +27,13 @@ class SendOrderToServer: UseCase<Boolean, SendOrderToServer.Params>() {
     }
 
 
-    class Params(val products:List<Product>, val addressId: Int?, val deliveryTime: DateTime, pickup: Boolean) {
-        val order: OrderDTO = TransformerDTO.createOrderDTO(products, addressId, deliveryTime, pickup)
+    class Params {
+        val order: OrderDTO
+        constructor(products:List<Product>, addressId: Int?, deliveryTime: DateTime, pickup: Boolean) {
+            order = TransformerDTO.createOrderDTO(products, addressId, deliveryTime, pickup)
+        }
+        constructor(orderToSent: Order, addressId: Int?, deliveryTime: DateTime) {
+            order = TransformerDTO.trahsformOrderDTO(orderToSent, addressId, deliveryTime)
+        }
     }
 }
