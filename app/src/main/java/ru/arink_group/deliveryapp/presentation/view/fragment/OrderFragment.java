@@ -14,6 +14,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.CompoundButton;
 import android.widget.ProgressBar;
 import android.widget.Spinner;
 import android.widget.Switch;
@@ -129,9 +130,9 @@ public class OrderFragment extends Fragment implements OrderView,
 
         this.orderPresenter = new OrderPresenterImpl(this);
 
-        selfExportSwitch.setOnClickListener(new View.OnClickListener() {
+        selfExportSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
-            public void onClick(View v) {
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 OrderFragment.this.updateTotals();
             }
         });
