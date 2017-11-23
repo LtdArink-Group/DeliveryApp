@@ -9,6 +9,8 @@
     <dimen name="small_margin">4dp</dimen>
     <dimen name="medium_margin">8dp</dimen>
     <dimen name="big_margin">16dp</dimen>
+    <dimen name="radio_button_height">30dp</dimen>
+    <dimen name="radio_button_radius">30dp</dimen>
 
     <!-- Text sizes -->
     <item name="item_address_spinner_truncate" format="integer" type="integer">20</item>

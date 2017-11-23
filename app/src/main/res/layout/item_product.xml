@@ -78,7 +78,7 @@
                     android:layout_gravity="center"
                     android:background="@drawable/rounder_border"
                     android:orientation="horizontal"
-                    android:layout_height="wrap_content"/>
+                    android:layout_height="@dimen/radio_button_height"/>
 
                 <RelativeLayout
                     android:layout_width="match_parent"

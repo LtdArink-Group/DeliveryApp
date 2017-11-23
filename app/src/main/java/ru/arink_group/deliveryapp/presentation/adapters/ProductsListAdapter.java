@@ -113,6 +113,7 @@ public class ProductsListAdapter extends RecyclerView.Adapter<ProductsListAdapte
         for(int i = 0; i < product.getPortions().length; i++) {
             RadioButton rb = new RadioButton(holder.context);
             rb.setWidth(holder.context.getResources().getDimensionPixelSize(R.dimen.ingredient_radiobutton_witdh));
+            rb.setHeight(holder.context.getResources().getDimensionPixelSize(R.dimen.radio_button_height));
             rb.setButtonDrawable(android.R.color.transparent);
             rb.setText(product.getPortions()[i].getName());
             rb.setGravity(Gravity.CENTER);

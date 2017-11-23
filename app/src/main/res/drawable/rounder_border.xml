@@ -16,7 +16,7 @@
 
 
     <!-- Here is the corner radius -->
-    <corners android:radius="10dp" >
+    <corners android:radius="@dimen/radio_button_radius" >
     </corners>
 
 </shape>
