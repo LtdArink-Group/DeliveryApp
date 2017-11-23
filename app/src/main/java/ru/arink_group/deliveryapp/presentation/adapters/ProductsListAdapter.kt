@@ -2,6 +2,7 @@ package ru.arink_group.deliveryapp.presentation.adapters
 
 import android.content.Context
 import android.content.res.ColorStateList
+import android.support.text.emoji.EmojiCompat
 import android.support.v4.content.ContextCompat
 import android.support.v7.widget.RecyclerView
 import android.view.Gravity
@@ -95,7 +96,7 @@ class ProductsListAdapter : RecyclerView.Adapter<ProductsListAdapter.ViewHolder>
         descriptionView.text = product.brief
 
         val priceView = view.findViewById<TextView>(R.id.product_price)
-        priceView.text = "\u20BD " + product.selectedPortion.price.toString()
+        priceView.text = EmojiCompat.get().process("\u20BD ${product.selectedPortion.price}")
 
         val states = arrayOf(intArrayOf(android.R.attr.state_checked), // checked
                 intArrayOf(-android.R.attr.state_checked))// unchecked

@@ -1,6 +1,7 @@
 package ru.arink_group.deliveryapp.presentation.adapters
 
 import android.content.Context
+import android.support.text.emoji.EmojiCompat
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
@@ -32,7 +33,7 @@ class RetryOrderIngredientsListAdapter(val ingredientsList: List<OrderIngredient
         val numString = holder.context.getString(R.string.num)
         val costString = holder.context.getString(R.string.costSummary)
 
-        nameView.setText(orderIngredient.name)
+        nameView.setText(EmojiCompat.get().process(orderIngredient.name))
         summaryView.setText("$numString: ${orderIngredient.qty}, $costString: ${orderIngredient.totalCost} ${holder.context.resources.getString(R.string.currency)}")
     }
 

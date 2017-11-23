@@ -2,6 +2,8 @@ package ru.arink_group.deliveryapp;
 
 import android.app.Application;
 import android.content.SharedPreferences;
+import android.support.text.emoji.EmojiCompat;
+import android.support.text.emoji.bundled.BundledEmojiCompatConfig;
 
 import java.util.UUID;
 
@@ -50,6 +52,8 @@ public class App extends Application {
             editor.apply();
         }
 
+        EmojiCompat.Config config = new BundledEmojiCompatConfig(this);
+        EmojiCompat.init(config);
     }
 
     protected AppComponent buildComponent() {

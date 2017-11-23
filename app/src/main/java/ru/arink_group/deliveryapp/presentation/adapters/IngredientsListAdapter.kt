@@ -1,6 +1,7 @@
 package ru.arink_group.deliveryapp.presentation.adapters
 
 import android.content.Context
+import android.support.text.emoji.EmojiCompat
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
@@ -23,7 +24,7 @@ class IngredientsListAdapter(internal val ingredientsList: Array<Ingredient>): R
         val context = holder.context
 
         val ingredientName = v.findViewById<TextView>(R.id.ingredient_name)
-        ingredientName.text = ingredientsList.get(position).name
+        ingredientName.text = EmojiCompat.get().process(ingredientsList.get(position).name)
 
         val ingredientCost = v.findViewById<TextView>(R.id.ingredient_cost)
         ingredientCost.text = "${context.resources.getString(R.string.cost)}: ${ingredientsList.get(position).price} ${context.resources.getString(R.string.currency)}"

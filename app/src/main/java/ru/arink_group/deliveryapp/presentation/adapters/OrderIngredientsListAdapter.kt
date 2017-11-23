@@ -1,6 +1,7 @@
 package ru.arink_group.deliveryapp.presentation.adapters
 
 import android.content.Context
+import android.support.text.emoji.EmojiCompat
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
@@ -32,8 +33,8 @@ class OrderIngredientsListAdapter(val ingredientsList: Array<Ingredient>): Recyc
         val buttonMinus = view.findViewById<CircleButton>(R.id.order_ingredient_button_minus)
         val buttonPlus = view.findViewById<CircleButton>(R.id.order_ingredient_button_plus)
 
-        nameView.setText(orderIngredient.name)
-        summaryView.setText("${orderIngredient.count} x ${orderIngredient.price} ${holder.context.resources.getString(R.string.currency)} = ${orderIngredient.price * orderIngredient.count.toDouble()} ${holder.context.resources.getString(R.string.currency)}")
+        nameView.text = EmojiCompat.get().process(orderIngredient.name)
+        summaryView.text = EmojiCompat.get().process("${orderIngredient.count} x ${orderIngredient.price} ${holder.context.resources.getString(R.string.currency)} = ${orderIngredient.price * orderIngredient.count.toDouble()} ${holder.context.resources.getString(R.string.currency)}")
 
         buttonMinus.setOnClickListener {
             if (orderIngredient.count < 1) return@setOnClickListener

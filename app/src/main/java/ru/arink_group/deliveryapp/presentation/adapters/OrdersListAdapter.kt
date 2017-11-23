@@ -1,6 +1,7 @@
 package ru.arink_group.deliveryapp.presentation.adapters
 
 import android.content.Context
+import android.support.text.emoji.EmojiCompat
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
@@ -70,9 +71,9 @@ class OrdersListAdapter: RecyclerView.Adapter<OrdersListAdapter.ViewHolder>() {
 
         val summaryAll = summaryProduct + summaryIngredients
 
-        nameView.setText("${orderProduct.name} (${orderProduct.selectedPortion.name})")
-        summaryView.setText("${orderProduct.count} x ${orderProduct.selectedPortion.price} $currencyString = $summaryProduct $currencyString")
-        summaryAllView.setText("${summaryString}: $summaryAll $currencyString")
+        nameView.text = "${orderProduct.name} (${orderProduct.selectedPortion.name})"
+        summaryView.text = EmojiCompat.get().process("${orderProduct.count} x ${orderProduct.selectedPortion.price} $currencyString = $summaryProduct $currencyString")
+        summaryAllView.text = EmojiCompat.get().process("${summaryString}: $summaryAll $currencyString")
 
         val buttonPlus = view.findViewById<CircleButton>(R.id.order_button_plus)
         val buttonMinus = view.findViewById<CircleButton>(R.id.order_button_minus)
