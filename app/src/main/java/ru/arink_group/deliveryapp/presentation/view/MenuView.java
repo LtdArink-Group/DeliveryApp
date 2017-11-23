@@ -10,4 +10,5 @@ public interface MenuView extends ProgressView{
 
     void changeFragment(Fragment frag);
     void changeFragmentToPlaceHolder(Fragment frag);
+    void goToAboutCompany();
 }

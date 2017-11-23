@@ -35,16 +35,15 @@ public class MenuPresenterImpl implements MenuPresenter {
             fragment = new OrderFragment();
         } else if (itemId == R.id.account) {
             fragment = new AccountFragment();
-        } else if (itemId == R.id.nav_share) {
-            fragment = new CategoriesFragment(); // TODO change fragment
-        } else if (itemId == R.id.nav_send) {
+        } else if (itemId == R.id.about_company) {
+            menuView.goToAboutCompany();
+            return;
+        } else if (itemId == R.id.rewievers) {
             fragment = new CategoriesFragment(); // TODO change fragment
         } else {
             fragment = new CategoriesFragment();
         }
-
         menuView.changeFragment(fragment);
-
     }
 
     @Override

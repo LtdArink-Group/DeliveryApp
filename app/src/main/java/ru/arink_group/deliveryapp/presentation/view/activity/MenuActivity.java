@@ -3,6 +3,7 @@ package ru.arink_group.deliveryapp.presentation.view.activity;
 import android.app.Fragment;
 import android.app.FragmentTransaction;
 import android.app.ProgressDialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
@@ -149,6 +150,12 @@ public class MenuActivity extends AppCompatActivity
         fragmentTransaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
         fragmentTransaction.replace(R.id.menu_fragment, fragment);
         fragmentTransaction.commit();
+    }
+
+    @Override
+    public void goToAboutCompany() {
+        Intent intent = new Intent(this, AboutCompanyActivity.class);
+        startActivity(intent);
     }
 
     @Override

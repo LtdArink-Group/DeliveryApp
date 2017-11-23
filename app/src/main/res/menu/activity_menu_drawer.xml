@@ -23,11 +23,11 @@
     <item android:title="@string/addtitional">
         <menu>
             <item
-                android:id="@+id/nav_share"
-                android:icon="@drawable/ic_menu_share"
+                android:id="@+id/about_company"
+                android:icon="@drawable/ic_company_black_24dp"
                 android:title="@string/about_company" />
             <item
-                android:id="@+id/nav_send"
+                android:id="@+id/rewievers"
                 android:icon="@drawable/ic_menu_send"
                 android:title="@string/rewies"
                 android:visible="false"/>

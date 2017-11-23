@@ -3,6 +3,8 @@ package ru.arink_group.deliveryapp.domain.dto;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
+import java.util.List;
+
 public class ContactInfoDTO {
 
     @SerializedName("email")
@@ -11,9 +13,9 @@ public class ContactInfoDTO {
     @SerializedName("phone")
     @Expose
     private String phone;
-    @SerializedName("geotag")
+    @SerializedName("geoteg")
     @Expose
-    private String geotag;
+    private List<String> geotag;
 
     @SerializedName("web")
     @Expose
@@ -54,11 +56,11 @@ public class ContactInfoDTO {
         this.address = address;
     }
 
-    public String getGeotag() {
+    public List<String> getGeotag() {
         return geotag;
     }
 
-    public void setGeotag(String geotag) {
+    public void setGeotag(List<String> geotag) {
         this.geotag = geotag;
     }
 }
