@@ -12,6 +12,7 @@ public class Product implements Serializable {
 
     private int id;
     private String name;
+    private String brief;
     private String description;
     private String imageUrl;
     private Portion[] portions;
@@ -169,4 +170,11 @@ public class Product implements Serializable {
         this.count = count;
     }
 
+    public String getBrief() {
+        return brief;
+    }
+
+    public void setBrief(String brief) {
+        this.brief = brief;
+    }
 }

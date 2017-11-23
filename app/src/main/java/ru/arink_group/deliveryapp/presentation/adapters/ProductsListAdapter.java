@@ -90,7 +90,7 @@ public class ProductsListAdapter extends RecyclerView.Adapter<ProductsListAdapte
         nameView.setText(product.getName());
 
         TextView descriptionView = holder.view.findViewById(R.id.product_description);
-        descriptionView.setText(product.getDescription());
+        descriptionView.setText(product.getBrief());
 
         final TextView priceView = holder.view.findViewById(R.id.product_price);
         priceView.setText("\u20BD " + String.valueOf(product.getSelectedPortion().getPrice()));

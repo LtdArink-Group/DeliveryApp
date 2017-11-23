@@ -40,6 +40,8 @@ public class MenuActivity extends AppCompatActivity
     private ProgressBar progressBar;
     private FrameLayout content;
 
+    private NavigationView navigationView;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -56,7 +58,7 @@ public class MenuActivity extends AppCompatActivity
         drawer.setDrawerListener(toggle);
         toggle.syncState();
 
-        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
+        navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
         navigationView.getMenu().getItem(0).setChecked(true);
 
@@ -75,15 +77,20 @@ public class MenuActivity extends AppCompatActivity
         FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
         if(getIntent().getBooleanExtra(IS_ORDER_START, false)) {
             fragmentTransaction.add(R.id.menu_fragment, new OrderFragment());
+            navigationView.getMenu().getItem(2).setChecked(true);
         } else if(getIntent().getBooleanExtra(IS_ACCOUNT_START, false)){
             AccountFragment accountFragment = new AccountFragment();
             fragmentTransaction.add(R.id.menu_fragment, accountFragment);
+            navigationView.getMenu().getItem(3).setChecked(true);
         } else if(getIntent().getBooleanExtra(IS_HISTORY_START, false)){
             OrdersHistoryFragment orderHistoryFragment = new OrdersHistoryFragment();
             fragmentTransaction.add(R.id.menu_fragment, orderHistoryFragment);
+            navigationView.getMenu().getItem(1).setChecked(true);
         } else {
             fragmentTransaction.add(R.id.menu_fragment, new CategoriesFragment());
+            navigationView.getMenu().getItem(0).setChecked(true);
         }
+//        fragmentTransaction.addToBackStack(null);
         fragmentTransaction.commit();
     }
 
@@ -103,7 +110,6 @@ public class MenuActivity extends AppCompatActivity
         getMenuInflater().inflate(R.menu.menu, menu);
         return true;
     }
-
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
@@ -137,6 +143,15 @@ public class MenuActivity extends AppCompatActivity
 
     @Override
     public void changeFragment(Fragment fragment) {
+        if (fragment instanceof OrderFragment) {
+            navigationView.getMenu().getItem(2).setChecked(true);
+        } else if (fragment instanceof OrdersHistoryFragment) {
+            navigationView.getMenu().getItem(1).setChecked(true);
+        } else if (fragment instanceof AccountFragment) {
+            navigationView.getMenu().getItem(3).setChecked(true);
+        } else {
+            navigationView.getMenu().getItem(0).setChecked(true);
+        }
         FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
         fragmentTransaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
         fragmentTransaction.replace(R.id.menu_fragment, fragment);

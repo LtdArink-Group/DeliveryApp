@@ -17,6 +17,9 @@ public class ProductDTO {
     @SerializedName("title")
     @Expose
     private String title;
+    @SerializedName("brief")
+    @Expose
+    private String brief;
     @SerializedName("description")
     @Expose
     private String description;
@@ -94,4 +97,11 @@ public class ProductDTO {
         this.additionalInfo = additionalInfo;
     }
 
+    public String getBrief() {
+        return brief;
+    }
+
+    public void setBrief(String brief) {
+        this.brief = brief;
+    }
 }

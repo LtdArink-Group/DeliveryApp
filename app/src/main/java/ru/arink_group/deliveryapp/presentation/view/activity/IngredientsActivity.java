@@ -10,6 +10,7 @@ import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Toast;
 
 import ru.arink_group.deliveryapp.R;
 import ru.arink_group.deliveryapp.domain.dao.Product;
@@ -64,6 +65,16 @@ public class IngredientsActivity extends AppCompatActivity implements FabView {
         ft.commit();
 
     }
+
+    @Override
+    public void onBackPressed() {
+        Intent upIntent = NavUtils.getParentActivityIntent(this);
+        upIntent.putExtra(CATEGORY, categoryId);
+        upIntent.putExtra(CATEGORY_NAME, categoryName);
+
+        NavUtils.navigateUpTo(this, upIntent);
+    }
+
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {

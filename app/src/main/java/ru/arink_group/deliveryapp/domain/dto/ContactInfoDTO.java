@@ -13,7 +13,7 @@ public class ContactInfoDTO {
     @SerializedName("phone")
     @Expose
     private String phone;
-    @SerializedName("geoteg")
+    @SerializedName("geotag")
     @Expose
     private List<String> geotag;
 

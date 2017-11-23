@@ -52,6 +52,7 @@ public class TransformerDTO {
         Product product = new Product();
         product.setId(productDTO.getId());
         product.setName(productDTO.getTitle());
+        product.setBrief(productDTO.getBrief());
         product.setDescription(productDTO.getDescription());
         product.setCount(0);
         product.setImageUrl(productDTO.getPhoto());
