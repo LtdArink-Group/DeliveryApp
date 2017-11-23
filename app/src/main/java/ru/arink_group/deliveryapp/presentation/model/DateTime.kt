@@ -11,39 +11,43 @@ import java.util.*
 class DateTime {
     val hour: Int
     val minute: Int
+    val cal : Calendar
 
     constructor(h: Int, m: Int) {
         hour = h
         minute = m
+        cal = Calendar.getInstance()
+        cal.set(Calendar.HOUR_OF_DAY, hour)
+        cal.set(Calendar.MINUTE, minute)
+
     }
 
     constructor(time: String) {
         val tms = time.split(" ")[0].split(":")
         hour = tms[0].toInt()
         minute = tms[1].toInt()
+        cal = Calendar.getInstance()
+        cal.set(Calendar.HOUR_OF_DAY, hour)
+        cal.set(Calendar.MINUTE, minute)
     }
 
     constructor(timeDate: Date) {
-        val c = Calendar.getInstance()
-        c.time = timeDate
-        hour = c.get(Calendar.HOUR_OF_DAY)
-        minute = c.get(Calendar.MINUTE)
+        cal = Calendar.getInstance()
+        cal.time = timeDate
+        hour = cal.get(Calendar.HOUR_OF_DAY)
+        minute = cal.get(Calendar.MINUTE)
     }
 
-    fun isGreaterThen(secondTime: DateTime): Boolean {
-        return when {
-            hour > secondTime.hour -> true
-            hour == secondTime.hour && minute > secondTime.minute -> true
-            else -> false
-        }
+    fun isGreaterThen(secondTime: DateTime): Boolean = when {
+        hour > secondTime.hour -> true
+        hour == secondTime.hour && minute > secondTime.minute -> true
+        else -> false
     }
 
-    fun isLowerThen(secondTime: DateTime): Boolean {
-        return when {
-            hour < secondTime.hour -> true
-            hour == secondTime.hour && minute < secondTime.minute -> true
-            else -> false
-        }
+    fun isLowerThen(secondTime: DateTime): Boolean = when {
+        hour < secondTime.hour -> true
+        hour == secondTime.hour && minute < secondTime.minute -> true
+        else -> false
     }
 
     fun isLowerThenNextHourOf(secondTime: DateTime): Boolean {
@@ -51,37 +55,22 @@ class DateTime {
                 ((hour + 1) == secondTime.nextHour() && minute <= secondTime.minute)
     }
 
-    private fun nextHour(): Int {
-        return hour + 1
-    }
+    private fun nextHour(): Int = hour + 1
 
-    override fun toString(): String {
-        return "%02d:%02d".format(hour, minute)
-    }
+    override fun toString(): String = "%02d:%02d".format(hour, minute)
 
     fun toCurrentDateString(): String {
-        val c = Calendar.getInstance()
-        c.set(Calendar.HOUR_OF_DAY, hour)
-        c.set(Calendar.MINUTE, minute)
         val sdf = SimpleDateFormat("yyyy-MM-dd HH:mm")
 //        val sdf = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSXXX")
 
-        return sdf.format(c.time)
+        return sdf.format(cal.time)
     }
 
     fun toTimeWithDate(): String {
-        val c = Calendar.getInstance()
-        c.set(Calendar.HOUR_OF_DAY, hour)
-        c.set(Calendar.MINUTE, minute)
         val sdf = SimpleDateFormat("yyyy-MM-dd HH:mm")
 
-        return sdf.format(c.time)
+        return sdf.format(cal.time)
     }
 
-    fun getTimeInMillis(): Long {
-        val c = Calendar.getInstance()
-        c.set(Calendar.HOUR_OF_DAY, hour)
-        c.set(Calendar.MINUTE, minute)
-        return c.timeInMillis
-    }
+    fun getTimeInMillis(): Long = cal.timeInMillis
 }

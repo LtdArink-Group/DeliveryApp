@@ -1,9 +1,12 @@
 package ru.arink_group.deliveryapp.presentation.view.fragment
 
 
+import android.app.AlertDialog
+import android.app.Dialog
 import android.os.Bundle
 import android.app.Fragment
 import android.app.TimePickerDialog
+import android.content.DialogInterface
 import android.content.Intent
 import android.support.v4.content.ContextCompat
 import android.support.v7.widget.LinearLayoutManager
@@ -93,7 +96,7 @@ class RetryOrderFragment : Fragment(), RetryOrderView, TimePickerDialog.OnTimeSe
         if (order.isActive() && order.status == Statuses.NEW) {
             actionButton.setText(R.string.order_cancell)
             actionButton.setOnClickListener {
-                presenter.cancelOrder(order.id)
+                cancelOrder()
             }
             val color = ContextCompat.getColor(activity, R.color.colorButtonCancell)
             actionButton.setBackgroundColor(color)
@@ -104,6 +107,14 @@ class RetryOrderFragment : Fragment(), RetryOrderView, TimePickerDialog.OnTimeSe
             val color = ContextCompat.getColor(activity, R.color.colorButtonRetry)
             actionButton.setBackgroundColor(color)
         }
+    }
+
+    private fun cancelOrder() {
+        AlertDialog.Builder(activity)
+                .setMessage(R.string.confirm_cancel)
+                .setPositiveButton(R.string.yes) { _, _ -> presenter.cancelOrder(order.id) }
+                .setNegativeButton(R.string.no, null)
+                .show()
     }
 
     private fun initActionFields(view: View) {

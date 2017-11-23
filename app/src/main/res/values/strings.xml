@@ -87,6 +87,10 @@
     <string name="order_history_active">Активные заказы</string>
     <string name="order_history_completed">Предыдущие заказы</string>
 
+    <string name="confirm_cancel">Отменить заказ?</string>
+    <string name="yes">Да</string>
+    <string name="no">Нет</string>
+
     <!--FORM-->
     <string name="form_percent">%1s %%</string>
     <string name="form_rubles">%1s р</string>
