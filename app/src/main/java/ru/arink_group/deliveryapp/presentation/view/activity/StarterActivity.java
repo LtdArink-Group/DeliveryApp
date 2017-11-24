@@ -19,6 +19,7 @@ import ru.arink_group.deliveryapp.R;
 import ru.arink_group.deliveryapp.domain.dao.Company;
 import ru.arink_group.deliveryapp.domain.interactors.GetCompany;
 import ru.arink_group.deliveryapp.domain.interactors.GetCompanyFromShared;
+import ru.arink_group.deliveryapp.presentation.model.ErrorsTranslator;
 import ru.arink_group.deliveryapp.presentation.view.fragment.LoadFragment;
 
 public class StarterActivity extends AppCompatActivity {
@@ -55,7 +56,9 @@ public class StarterActivity extends AppCompatActivity {
         // Remember that you should never show the action bar if the
         // status bar is hidden, so hide that too if necessary.
         ActionBar actionBar = getSupportActionBar();
-        actionBar.hide();
+        if (actionBar != null) {
+            actionBar.hide();
+        }
     }
 
     public class CompanyDisposableObserver extends DisposableObserver<Company> {
@@ -73,7 +76,7 @@ public class StarterActivity extends AppCompatActivity {
 
         @Override
         public void onError(Throwable e) {
-            Toast.makeText(StarterActivity.this, e.getMessage(), Toast.LENGTH_SHORT).show();
+            Toast.makeText(StarterActivity.this, ErrorsTranslator.translate("connection"), Toast.LENGTH_SHORT).show();
             GetCompanyFromShared.INSTANCE.loadCompany(StarterActivity.this);
             startApp();
         }

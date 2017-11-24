@@ -415,7 +415,6 @@ public class OrderFragment extends Fragment implements OrderView,
     @Override
     public void loadingAddressFinish() {
         progressBar.setVisibility(View.GONE);
-        addressListSpinner.setVisibility(View.VISIBLE);
     }
 
     @Override
