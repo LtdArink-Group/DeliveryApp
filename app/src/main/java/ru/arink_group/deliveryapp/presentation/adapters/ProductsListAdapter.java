@@ -25,6 +25,7 @@ import java.util.Map;
 import at.markushi.ui.CircleButton;
 import ru.arink_group.deliveryapp.R;
 import ru.arink_group.deliveryapp.domain.dao.Product;
+import ru.arink_group.deliveryapp.presentation.adapters.interfaces.OnDescriptionClickListener;
 import ru.arink_group.deliveryapp.presentation.adapters.interfaces.OnIngredientClickListener;
 import ru.arink_group.deliveryapp.presentation.adapters.interfaces.OnItemClickListener;
 
@@ -36,6 +37,7 @@ public class ProductsListAdapter extends RecyclerView.Adapter<ProductsListAdapte
 
     private List<Product> products = new ArrayList<>();
     private OnItemClickListener<Product> listener;
+    private OnDescriptionClickListener descriptionListener;
     private OnIngredientClickListener ingredientListener;
     private List<TextView> productCounts = new ArrayList<>();
     private List<Map<String, RadioButton>> radioButtons = new ArrayList<>();
@@ -73,6 +75,10 @@ public class ProductsListAdapter extends RecyclerView.Adapter<ProductsListAdapte
     }
     public void setIngredientListener(OnIngredientClickListener listener) {
         this.ingredientListener = listener;
+    }
+
+    public void setOnDescriptionListener(OnDescriptionClickListener descriptionListener) {
+        this.descriptionListener = descriptionListener;
     }
 
 
@@ -155,6 +161,12 @@ public class ProductsListAdapter extends RecyclerView.Adapter<ProductsListAdapte
 
         ImageView productImage = holder.view.findViewById(R.id.product_Image);
         Picasso.with(holder.context).load(product.getImageUrl()).into(productImage);
+        productImage.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                descriptionListener.onDescriptionClick(product.getName(), product.getDescription(), product.getImageUrl());
+            }
+        });
 
         final TextView countPortion = holder.view.findViewById(R.id.count_portion);
         countPortion.setText(String.valueOf(product.getCount()));

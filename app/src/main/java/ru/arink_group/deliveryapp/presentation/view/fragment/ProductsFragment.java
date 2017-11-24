@@ -1,6 +1,7 @@
 package ru.arink_group.deliveryapp.presentation.view.fragment;
 
 
+import android.app.Dialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.app.Fragment;
@@ -15,9 +16,11 @@ import java.util.List;
 
 import ru.arink_group.deliveryapp.R;
 import ru.arink_group.deliveryapp.domain.dao.Product;
+import ru.arink_group.deliveryapp.presentation.adapters.interfaces.OnDescriptionClickListener;
 import ru.arink_group.deliveryapp.presentation.adapters.interfaces.OnIngredientClickListener;
 import ru.arink_group.deliveryapp.presentation.adapters.interfaces.OnItemClickListener;
 import ru.arink_group.deliveryapp.presentation.adapters.ProductsListAdapter;
+import ru.arink_group.deliveryapp.presentation.model.DetailDialog;
 import ru.arink_group.deliveryapp.presentation.presenter.interfaces.ProductsPresenter;
 import ru.arink_group.deliveryapp.presentation.presenter.ProductsPresenterImpl;
 import ru.arink_group.deliveryapp.presentation.view.FabView;
@@ -29,7 +32,10 @@ import ru.arink_group.deliveryapp.presentation.view.activity.IngredientsActivity
 /**
  * A simple {@link Fragment} subclass.
  */
-public class ProductsFragment extends Fragment implements ProductsView, OnItemClickListener<Product>, OnIngredientClickListener {
+public class ProductsFragment extends Fragment implements ProductsView,
+        OnItemClickListener<Product>,
+        OnIngredientClickListener,
+        OnDescriptionClickListener {
 
     private ProductsPresenter productsPresenter;
     private ProductsListAdapter productsListAdapter;
@@ -69,6 +75,7 @@ public class ProductsFragment extends Fragment implements ProductsView, OnItemCl
 
         productsListAdapter.setListener(this);
         productsListAdapter.setIngredientListener(this);
+        productsListAdapter.setOnDescriptionListener(this);
 
         productsPresenter.getProducts(categoryId);
 
@@ -148,5 +155,11 @@ public class ProductsFragment extends Fragment implements ProductsView, OnItemCl
     @Override
     public void loadingFinish() {
         progressView.loadingFinish();
+    }
+
+    @Override
+    public void onDescriptionClick(String title, String description, String imgUrl) {
+        DetailDialog dialog = new DetailDialog(getActivity(), R.style.DetailDialog, title, description, imgUrl);
+        dialog.show();
     }
 }
