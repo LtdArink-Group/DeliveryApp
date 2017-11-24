@@ -10,6 +10,7 @@
     <color name="colorMenuElement">#FF000000</color>
     <color name="colorOnPrimaryText">#f7f6f6</color>
     <color name="colorOnSecondaryText">#f7f6f6</color>
+    <color name="colorOnAccentText">#f7f6f6</color>
     <color name="colorCheckedText">#f7f6f6</color>
     <color name="colorPrimaryText">#FF000000</color>
     <color name="colorSecondaryText">#FF000000</color>
