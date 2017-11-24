@@ -2,6 +2,7 @@ package ru.arink_group.deliveryapp.presentation.view.fragment;
 
 import android.content.Context;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
@@ -10,6 +11,8 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.RelativeLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.List;
@@ -19,6 +22,9 @@ import butterknife.ButterKnife;
 import butterknife.Unbinder;
 import ru.arink_group.deliveryapp.R;
 import ru.arink_group.deliveryapp.domain.dao.Category;
+import ru.arink_group.deliveryapp.domain.dao.Delivery;
+import ru.arink_group.deliveryapp.domain.dao.Product;
+import ru.arink_group.deliveryapp.domain.interactors.GetCompanyFromShared;
 import ru.arink_group.deliveryapp.presentation.adapters.CategoriesListAdapter;
 import ru.arink_group.deliveryapp.presentation.adapters.interfaces.OnCategoryClickListener;
 import ru.arink_group.deliveryapp.presentation.presenter.interfaces.CategoriesPresenter;
@@ -41,7 +47,13 @@ public class CategoriesFragment extends Fragment implements CategoriesView, OnCa
     private CategoriesPresenter categoriesPresenter;
     private MenuView mv;
 
-    @BindString(R.string.categories)
+    private TextView dashSummaryCost;
+    private TextView dashDeliveryCost;
+
+    private RelativeLayout callButton;
+
+
+            @BindString(R.string.categories)
     String categoriesTitle;
 
     public CategoriesFragment() {
@@ -102,6 +114,23 @@ public class CategoriesFragment extends Fragment implements CategoriesView, OnCa
         mv = (MenuActivity) getActivity();
         mv.loadingStart();
 
+        dashSummaryCost = rootView.findViewById(R.id.dash_order_cost);
+        dashDeliveryCost = rootView.findViewById(R.id.dash_del_cost);
+        callButton = rootView.findViewById(R.id.dash_button_call_us);
+
+        callButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                String phoneNumb = GetCompanyFromShared.INSTANCE.getCompanyOrDefault().getContactInfo().getPhone();
+                try {
+                    Intent intent = new Intent(Intent.ACTION_CALL, Uri.parse("tel:" + phoneNumb));
+                    startActivity(intent);
+                } catch (SecurityException e) {
+                    Toast.makeText(getActivity(), R.string.error_cant_call, Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
 
         final FabView fabView = (FabView) getActivity();
         fabView.showOrderFab();
@@ -130,7 +159,32 @@ public class CategoriesFragment extends Fragment implements CategoriesView, OnCa
         AppCompatActivity titleActivity = (AppCompatActivity) getActivity();
         titleActivity.getSupportActionBar().setTitle(R.string.categories);
 
+        categoriesPresenter.updateTotals();
+
         return rootView;
+    }
+
+    @Override
+    public void calculateAndUpdateTotals(List<Product> products) {
+
+        double summary = 0.0;
+
+        Delivery delivery = GetCompanyFromShared.INSTANCE.getCompanyOrDefault().getDelivery();
+
+        for (Product product : products) {
+            summary += product.getTotalSelectedSum();
+        }
+
+        String summaryCostForm = getString(R.string.form_rubles, String.valueOf(summary));
+        dashSummaryCost.setText(summaryCostForm);
+
+        if (summary < delivery.getFreeShipping()) {
+            String summaryDeliveryForm = getString(R.string.form_rubles, String.valueOf(delivery.getCost()));
+            dashDeliveryCost.setText(summaryDeliveryForm);
+        } else {
+            dashDeliveryCost.setText(R.string.free);
+        }
+
     }
 
 

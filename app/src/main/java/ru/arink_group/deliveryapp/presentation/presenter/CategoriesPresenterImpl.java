@@ -7,8 +7,11 @@ import javax.inject.Inject;
 import io.reactivex.annotations.NonNull;
 import io.reactivex.observers.DisposableObserver;
 import ru.arink_group.deliveryapp.domain.dao.Category;
+import ru.arink_group.deliveryapp.domain.dao.Product;
 import ru.arink_group.deliveryapp.domain.interactors.GetCategoriesList;
 import ru.arink_group.deliveryapp.App;
+import ru.arink_group.deliveryapp.domain.interactors.GetListItemsFromBasket;
+import ru.arink_group.deliveryapp.presentation.model.ErrorsTranslator;
 import ru.arink_group.deliveryapp.presentation.presenter.interfaces.CategoriesPresenter;
 import ru.arink_group.deliveryapp.presentation.view.CategoriesView;
 
@@ -20,6 +23,9 @@ public class CategoriesPresenterImpl extends BasePresenter implements Categories
 
     private CategoriesView categoriesView;
     @Inject GetCategoriesList getCategoriesListUseCase;
+
+    @Inject
+    GetListItemsFromBasket getListItemsFromBasket;
 
     public CategoriesPresenterImpl(CategoriesView categoriesView) {
         this.categoriesView = categoriesView;
@@ -40,6 +46,11 @@ public class CategoriesPresenterImpl extends BasePresenter implements Categories
     public void getCategoriesList() {
         getCategoriesListUseCase.execute(new CategoryListObserver(), null);
 
+    }
+
+    @Override
+    public void updateTotals() {
+        getListItemsFromBasket.execute(new GetProductsObserver(), new GetListItemsFromBasket.Params());
     }
 
     @Override
@@ -72,6 +83,24 @@ public class CategoriesPresenterImpl extends BasePresenter implements Categories
         @Override
         public void onComplete() {
             categoriesView.loadCompleted();
+        }
+    }
+
+    private final class GetProductsObserver extends DisposableObserver<List<Product>> {
+
+        @Override
+        public void onNext(List<Product> products) {
+            categoriesView.calculateAndUpdateTotals(products);
+        }
+
+        @Override
+        public void onError(Throwable e) {
+            categoriesView.showErrorMessage(handleInternalError(e));
+        }
+
+        @Override
+        public void onComplete() {
+
         }
     }
 

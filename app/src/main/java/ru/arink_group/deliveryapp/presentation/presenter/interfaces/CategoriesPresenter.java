@@ -9,4 +9,5 @@ public interface CategoriesPresenter extends Presenter {
     void onItemSelected(int sectionId, String name);
     void onCartPressed(); //no need now
     void getCategoriesList();
+    void updateTotals();
 }
