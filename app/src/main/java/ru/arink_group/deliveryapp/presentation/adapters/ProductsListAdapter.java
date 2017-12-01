@@ -39,8 +39,6 @@ public class ProductsListAdapter extends RecyclerView.Adapter<ProductsListAdapte
     private OnItemClickListener<Product> listener;
     private OnDescriptionClickListener descriptionListener;
     private OnIngredientClickListener ingredientListener;
-    private List<TextView> productCounts = new ArrayList<>();
-    private List<Map<String, RadioButton>> radioButtons = new ArrayList<>();
 
     public void setProducts(List<Product> products) {
         this.products = products;
@@ -59,15 +57,13 @@ public class ProductsListAdapter extends RecyclerView.Adapter<ProductsListAdapte
                 }
             }
         }
+        if (sps.size() > 0) notifyDataSetChanged();
     }
 
     private void updateProduct(Product product, Product selectedProduct, int pos) {
         product.setCount(selectedProduct.getCount());
         product.setSelectedPortion(selectedProduct.getSelectedPortion());
         product.setSelectedIngredients(selectedProduct.getSelectedIngredients());
-        if(productCounts.size() - 1 < pos) return;
-        productCounts.get(pos).setText(String.valueOf(product.getCount()));
-        radioButtons.get(pos).get(product.getSelectedPortion().getName()).toggle();
     }
 
     public void setListener(OnItemClickListener<Product> listener) {
@@ -86,6 +82,25 @@ public class ProductsListAdapter extends RecyclerView.Adapter<ProductsListAdapte
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_product, parent, false);
         return new ViewHolder(v, parent.getContext());
+    }
+
+    @Override
+    public void onViewRecycled(ViewHolder holder) {
+        super.onViewRecycled(holder);
+        final RadioGroup rg = holder.view.findViewById(R.id.portion_list_group);
+        clearRadioGroup(rg);
+    }
+
+    private void clearRadioGroup(RadioGroup rg) {
+        int count = rg.getChildCount();
+        if(count>0) {
+            for (int i=count-1;i>=0;i--) {
+                View o = rg.getChildAt(i);
+                if (o instanceof RadioButton) {
+                    rg.removeViewAt(i);
+                }
+            }
+        }
     }
 
     @Override
@@ -112,9 +127,7 @@ public class ProductsListAdapter extends RecyclerView.Adapter<ProductsListAdapte
         };
 
         final RadioGroup rg = holder.view.findViewById(R.id.portion_list_group);
-        if(rg.getChildCount() > 0) return; // TODO костыль, тк дублируются радиобатоны, если оставить так,тогда надо передалать реренддеринг элемента при обновлении
         Map<String, RadioButton> bthGroup = new HashMap<>();
-        radioButtons.add(position, bthGroup);
         int selectedPortionIndex = product.getSelectedPortionIndex();
         for(int i = 0; i < product.getPortions().length; i++) {
             RadioButton rb = new RadioButton(holder.context);
@@ -170,7 +183,6 @@ public class ProductsListAdapter extends RecyclerView.Adapter<ProductsListAdapte
 
         final TextView countPortion = holder.view.findViewById(R.id.count_portion);
         countPortion.setText(String.valueOf(product.getCount()));
-        productCounts.add(position, countPortion);
 
         CircleButton minus = holder.view.findViewById(R.id.button_minus);
         minus.setOnClickListener(new View.OnClickListener() {
