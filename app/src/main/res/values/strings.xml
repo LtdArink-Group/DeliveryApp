@@ -96,8 +96,9 @@
     <string name="form_percent">%1s %%</string>
     <string name="form_rubles">%1s р</string>
     <string name="title_activity_about_company">О компании</string>
-    <string name="dash_delivery_cost">Стоимость\nдоставки</string>
-    <string name="dash_order_cost">Сумма\nзаказа</string>
-    <string name="dash_call_us">Позвонить\nнам</string>
-    <string name="ok">Ok</string>
+    <string name="dash_delivery_cost">Доставка</string>
+    <string name="dash_order_cost">Сумма заказа</string>
+    <string name="dash_call_us">Позвонить нам</string>
+    <string name="ok">OK</string>
+    <string name="empty" />
 </resources>
