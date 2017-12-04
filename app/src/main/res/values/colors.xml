@@ -1,13 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#95b824</color>
-    <color name="colorPrimaryLight">#c1d486</color>
-    <color name="colorPrimaryDark">#95b824</color>
+    <color name="colorPrimary">#404040</color>
+    <color name="colorPrimaryLight">#404040</color>
+    <color name="colorPrimaryDark">#404040</color>
     <color name="colorAccent">#ee7c0d</color>
-    <color name="colorSecondaryDark">#944900</color>
-    <color name="colorSecondaryLight">#ee7c0d</color>
+    <color name="colorSecondary">#404040</color>
+    <color name="colorSecondaryDark">#404040</color>
+    <color name="colorSecondaryLight">#404040</color>
+    <!--<color name="colorPrimary">#95b824</color>-->
+    <!--<color name="colorPrimaryLight">#c1d486</color>-->
+    <!--<color name="colorPrimaryDark">#95b824</color>-->
+    <!--<color name="colorAccent">#ee7c0d</color>-->
+    <!--<color name="colorSecondary">#ee7c0d</color>-->
+    <!--<color name="colorSecondaryDark">#944900</color>-->
+    <!--<color name="colorSecondaryLight">#ee7c0d</color>-->
     <color name="colorElement">#FF000000</color>
     <color name="colorMenuElement">#FF000000</color>
+    <!--<color name="colorOnPrimaryText">#ee7c0d</color>-->
+    <!--<color name="colorOnSecondaryText">#ee7c0d</color>-->
+    <!--<color name="colorOnAccentText">#f7f6f6</color>-->
+    <!--<color name="colorCheckedText">#ee7c0d</color>-->
     <color name="colorOnPrimaryText">#f7f6f6</color>
     <color name="colorOnSecondaryText">#f7f6f6</color>
     <color name="colorOnAccentText">#f7f6f6</color>

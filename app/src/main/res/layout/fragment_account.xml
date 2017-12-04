@@ -23,8 +23,8 @@
                 android:padding="@dimen/medium_margin"
                 android:textAppearance="?android:textAppearanceLarge"
                 android:text="@string/account_main"
-                android:background="@color/colorAccent"
-                android:textColor="@color/colorOnPrimaryText"/>
+                android:background="@color/colorSecondary"
+                android:textColor="@color/colorOnSecondaryText"/>
 
             <android.support.design.widget.TextInputLayout
                 android:layout_width="match_parent"
@@ -80,8 +80,8 @@
                 android:padding="@dimen/medium_margin"
                 android:textAppearance="?android:textAppearanceLarge"
                 android:text="@string/account_addresses"
-                android:background="@color/colorAccent"
-                android:textColor="@color/colorOnPrimaryText"/>
+                android:background="@color/colorSecondary"
+                android:textColor="@color/colorOnSecondaryText"/>
 
             <Button
                 style="@style/AppTheme.MyButton"
@@ -103,8 +103,8 @@
                 android:layout_width="@dimen/btn_width"
                 android:layout_height="wrap_content"
                 android:background="@color/colorAccent"
-                android:textColor="@color/colorOnPrimaryText"
-                app:spinning_bar_color="@color/colorOnPrimaryText"
+                android:textColor="@color/colorOnAccentText"
+                app:spinning_bar_color="@color/colorOnAccentText"
                 android:text="@string/account_idle"
                 android:padding="@dimen/medium_margin"
                 android:layout_margin="@dimen/big_margin"

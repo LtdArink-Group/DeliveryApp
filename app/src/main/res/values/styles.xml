@@ -6,7 +6,6 @@
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
-
     </style>
 
     <style name="AppTheme.NoActionBar">
@@ -19,13 +18,13 @@
     <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
 
     <style name="AppTheme.MyButton" parent="Widget.AppCompat.Button.Borderless.Colored">
-        <item name="colorButtonNormal">@color/colorCheckedText</item>
+        <item name="colorButtonNormal">@color/colorOnAccentText</item>
         <item name="android:textColor">@color/colorAccent</item>
     </style>
 
     <style name="AppTheme.MyBorderButton" parent="Widget.AppCompat.Button.Colored">
         <item name="colorButtonNormal">@color/colorAccent</item>
-        <item name="android:textColor">@color/colorCheckedText</item>
+        <item name="android:textColor">@color/colorOnAccentText</item>
     </style>
 
     <style name="DetailDialog" parent="android:Theme.Dialog">

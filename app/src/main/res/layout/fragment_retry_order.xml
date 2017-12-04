@@ -10,6 +10,7 @@
         android:layout_height="match_parent">
 
         <LinearLayout
+            android:paddingBottom="@dimen/big_margin"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical">
@@ -182,8 +183,8 @@
                     android:layout_width="@dimen/btn_width"
                     android:layout_height="wrap_content"
                     android:background="@color/colorButtonIdle"
-                    android:textColor="@color/colorOnPrimaryText"
-                    app:spinning_bar_color="@color/colorOnPrimaryText"
+                    android:textColor="@color/colorOnAccentText"
+                    app:spinning_bar_color="@color/colorOnAccentText"
                     android:text="@string/to_order"
                     android:layout_centerInParent="true"
                     app:spinning_bar_padding="0dp"
