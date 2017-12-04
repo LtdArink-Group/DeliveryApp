@@ -37,7 +37,7 @@
     <string name="to_order">Заказать</string>
     <string name="free">Бесплатно</string>
     <string name="order_send_ok">Успешно</string>
-    <string name="order_send_fail">X</string>
+    <string name="order_send_fail">Повторить</string>
     <string name="account_main">Основные сведения</string>
     <string name="account_name">Имя</string>
     <string name="account_email">Email</string>
@@ -52,9 +52,9 @@
     <string name="address_entrance">Подъезд (Необязательно)</string>
     <string name="address_code">Код домофона (Необязательно)</string>
     <string name="account_complete">Отправлено</string>
-    <string name="account_error">Ошибка</string>
-    <string name="account_idle">Отправить</string>
-    <string name="account_progress">Отправляем</string>
+    <string name="account_error">Повторить</string>
+    <string name="account_idle">Сохранить</string>
+    <string name="account_progress">Сохраняем</string>
     <string name="send_ok">Успешно</string>
     <string name="send_fail">Повторить</string>
     <string name="order_retry">Повторить</string>

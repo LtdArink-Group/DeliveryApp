@@ -4,6 +4,7 @@
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
+    android:paddingBottom="@dimen/big_margin"
     tools:context="ru.arink_group.deliveryapp.presentation.view.fragment.OrderFragment">
 
     <LinearLayout
@@ -203,7 +204,7 @@
             <br.com.simplepass.loading_button_lib.customViews.CircularProgressButton
                 android:padding="@dimen/small_margin"
                 android:id="@+id/send_order_button"
-                android:layout_width="wrap_content"
+                android:layout_width="@dimen/btn_width"
                 android:layout_height="wrap_content"
                 android:background="@color/colorButtonIdle"
                 android:textColor="@color/colorOnPrimaryText"

@@ -100,7 +100,7 @@
             <br.com.simplepass.loading_button_lib.customViews.CircularProgressButton
                 android:id="@+id/send_account_button"
                 android:layout_gravity="center_horizontal"
-                android:layout_width="wrap_content"
+                android:layout_width="@dimen/btn_width"
                 android:layout_height="wrap_content"
                 android:background="@color/colorAccent"
                 android:textColor="@color/colorOnPrimaryText"
