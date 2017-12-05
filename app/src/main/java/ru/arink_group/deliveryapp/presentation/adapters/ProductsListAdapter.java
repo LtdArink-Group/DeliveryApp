@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.res.ColorStateList;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.RecyclerView;
+import android.text.TextUtils;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -127,13 +128,14 @@ public class ProductsListAdapter extends RecyclerView.Adapter<ProductsListAdapte
         };
 
         final RadioGroup rg = holder.view.findViewById(R.id.portion_list_group);
-        Map<String, RadioButton> bthGroup = new HashMap<>();
         int selectedPortionIndex = product.getSelectedPortionIndex();
         for(int i = 0; i < product.getPortions().length; i++) {
             RadioButton rb = new RadioButton(holder.context);
             rb.setWidth(holder.context.getResources().getDimensionPixelSize(R.dimen.ingredient_radiobutton_witdh));
             rb.setButtonDrawable(android.R.color.transparent);
             rb.setText(product.getPortions()[i].getName());
+            rb.setMaxLines(1);
+            rb.setEllipsize(TextUtils.TruncateAt.END);
             rb.setGravity(Gravity.CENTER);
             if(product.getPortions().length == 1){
                 rb.setBackground(ContextCompat.getDrawable(holder.context, R.drawable.bg_item_ingredient_single));
@@ -159,7 +161,6 @@ public class ProductsListAdapter extends RecyclerView.Adapter<ProductsListAdapte
             if(i == selectedPortionIndex) {
                 rg.check(rb.getId());
             }
-            bthGroup.put(product.getPortions()[i].getName(), rb);
         }
 
         ImageButton ib = holder.view.findViewById(R.id.ingredient_button);
