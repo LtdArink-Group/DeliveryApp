@@ -173,7 +173,7 @@ public class ProductsListAdapter extends RecyclerView.Adapter<ProductsListAdapte
         if (product.getIngredients() != null && product.getIngredients().length == 0) ib.setVisibility(View.GONE);
 
         ImageView productImage = holder.view.findViewById(R.id.product_Image);
-        Picasso.with(holder.context).load(product.getImageUrl()).into(productImage);
+        Picasso.with(holder.context).load(product.getImageUrl()).placeholder(R.drawable.blur_image).into(productImage);
         productImage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
