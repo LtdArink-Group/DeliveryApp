@@ -27,7 +27,7 @@
     <string name="company_mail">info@chixx.ru</string>
     <string name="company_phone">+7 (962) 287-90-11</string>
     <string name="cost">Цена</string>
-    <string name="currency">₽</string>
+    <string name="currency">р</string>
     <string name="summary">Итого</string>
     <string name="self_export">Самовывоз</string>
     <string name="summary_cost">Сумма заказа</string>

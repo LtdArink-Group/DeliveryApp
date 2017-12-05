@@ -53,8 +53,11 @@ public class CategoriesFragment extends Fragment implements CategoriesView, OnCa
     private RelativeLayout callButton;
 
 
-            @BindString(R.string.categories)
+    @BindString(R.string.categories)
     String categoriesTitle;
+
+    @BindString(R.string.currency)
+    String currency;
 
     public CategoriesFragment() {
         // Required empty public constructor

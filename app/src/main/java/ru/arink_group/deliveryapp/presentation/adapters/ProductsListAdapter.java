@@ -115,7 +115,7 @@ public class ProductsListAdapter extends RecyclerView.Adapter<ProductsListAdapte
         descriptionView.setText(product.getBrief());
 
         final TextView priceView = holder.view.findViewById(R.id.product_price);
-        priceView.setText("\u20BD " + String.valueOf(product.getSelectedPortion().getPrice()));
+        priceView.setText(holder.context.getResources().getString(R.string.currency) + " " + String.valueOf(product.getSelectedPortion().getPrice()));
 
         int[][] states = new int[][] {
                 new int[] {android.R.attr.state_checked}, // checked
@@ -154,7 +154,7 @@ public class ProductsListAdapter extends RecyclerView.Adapter<ProductsListAdapte
                 public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                     if (isChecked) {
                         product.setSelectedPortionByName(String.valueOf(buttonView.getText()));
-                        priceView.setText(holder.context.getResources().getString(R.string.currency) + String.valueOf(product.getSelectedPortion().getPrice()));
+                        priceView.setText(holder.context.getResources().getString(R.string.currency) + " " + String.valueOf(product.getSelectedPortion().getPrice()));
                     }
                 }
             });
