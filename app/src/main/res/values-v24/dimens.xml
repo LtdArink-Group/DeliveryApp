@@ -1,4 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <dimen name="description_image">300dp</dimen>
+    <dimen name="margin_for_emoji">0dp</dimen>
 </resources>

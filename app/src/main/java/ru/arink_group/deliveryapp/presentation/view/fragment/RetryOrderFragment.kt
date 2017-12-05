@@ -9,6 +9,7 @@ import android.content.Intent
 import android.support.v4.content.ContextCompat
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
+import android.support.v7.widget.SwitchCompat
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -74,7 +75,7 @@ class RetryOrderFragment : Fragment(), RetryOrderView, TimePickerDialog.OnTimeSe
     }
 
     private fun initOrderFields(view: View) {
-        val selfExport = view.findViewById<Switch>(R.id.summary_self_export_switch)
+        val selfExport = view.findViewById<SwitchCompat>(R.id.summary_self_export_switch)
         val summaryCostWithDiscount = view.findViewById<TextView>(R.id.summary_cost_with_discount)
         val deliveryCost = view.findViewById<TextView>(R.id.summary_delivery)
         val summaryCost = view.findViewById<TextView>(R.id.summary)

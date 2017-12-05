@@ -16,14 +16,15 @@
             android:id="@+id/ingredient_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:paddingLeft="3dp"
+            android:layout_marginLeft="3dp"
             android:textColor="@color/colorPrimaryText"/>
 
         <TextView
             android:id="@+id/ingredient_cost"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:paddingLeft="3dp"
+            android:layout_marginLeft="3dp"
+            android:paddingLeft="@dimen/margin_for_emoji"
             android:textColor="@color/colorPrimaryText"/>
 
     </LinearLayout>

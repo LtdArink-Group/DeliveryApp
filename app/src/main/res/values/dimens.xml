@@ -14,6 +14,7 @@
     <dimen name="product_card_view_height">450dp</dimen>
     <dimen name="description_image">150dp</dimen>
     <dimen name="btn_width">120dp</dimen>
+    <dimen name="margin_for_emoji">11dp</dimen>
     <!-- Text sizes -->
     <item name="item_address_spinner_truncate" format="integer" type="integer">20</item>
 </resources>

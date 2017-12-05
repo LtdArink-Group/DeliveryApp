@@ -9,6 +9,7 @@ import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.SwitchCompat;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -70,7 +71,7 @@ public class OrderFragment extends Fragment implements OrderView,
     private DateTime selectedTime;
 
     @BindView(R.id.summary_self_export_switch)
-    Switch selfExportSwitch;
+    SwitchCompat selfExportSwitch;
 
     @BindView(R.id.summary_cost)
     TextView summaryCost;

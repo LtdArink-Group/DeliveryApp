@@ -20,12 +20,13 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:id="@+id/order_ingredient_item_name"
-                android:textAppearance="?android:textAppearanceMedium"
-                android:textColor="@color/colorPrimaryText"/>
+                android:textAppearance="?android:textAppearanceSmall"/>
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:textAppearance="?android:textAppearanceSmall"
+                android:paddingLeft="@dimen/margin_for_emoji"
                 android:id="@+id/order_ingredient_item_summary"/>
 
         </LinearLayout>

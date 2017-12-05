@@ -61,9 +61,7 @@ class RetryOrdersListAdapter(val ordersList: List<OrderProduct>) : RecyclerView.
 
     }
 
-    override fun getItemCount(): Int {
-        return ordersList.size
-    }
+    override fun getItemCount(): Int = ordersList.size
 
     class ViewHolder(val view:View, val context:Context): RecyclerView.ViewHolder(view)
 }
