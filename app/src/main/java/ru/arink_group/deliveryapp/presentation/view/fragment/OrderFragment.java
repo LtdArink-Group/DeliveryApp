@@ -218,6 +218,8 @@ public class OrderFragment extends Fragment implements OrderView,
         double discount = 0.0;
         double deliveryCost = 0.0;
 
+        if (selfExportSwitch == null) return;
+
         if (selfExportSwitch.isChecked()) {
             discount = summary * delivery.getPickupDiscount() / 100;
         }

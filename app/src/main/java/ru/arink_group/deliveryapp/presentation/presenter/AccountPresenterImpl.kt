@@ -85,6 +85,7 @@ class AccountPresenterImpl(val accountView: AccountView): BasePresenter(), Accou
 
     inner class CreateAccountDisposable: DisposableObserver<Account>() {
         override fun onComplete() {
+            newAccount = false
         }
 
         override fun onError(e: Throwable) {
