@@ -1,11 +1,14 @@
 package ru.arink_group.deliveryapp.presentation.view.activity
 
+import android.content.Intent
+import android.net.Uri
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import android.widget.LinearLayout
 import android.widget.RelativeLayout
 import android.widget.TextView
+import android.widget.Toast
 
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
@@ -50,6 +53,12 @@ class AboutCompanyActivity : AppCompatActivity(), OnMapReadyCallback {
         fillOrHide(R.id.about_company_web_layout, contactWebText, company.contactInfo.web)
         fillOrHide(R.id.about_company_address_layout, contactAddressText, company.contactInfo.address)
 
+        contactEmailText.setOnClickListener { mailUs(company.contactInfo.email) }
+        contactPhoneText.setOnClickListener { callUs(company.contactInfo.phone) }
+        if(company.contactInfo.web != null) {
+            contactWebText.setOnClickListener { goWeb(company.contactInfo.web) }
+        }
+
         aboutCompanyText.text = company.description
     }
 
@@ -58,6 +67,36 @@ class AboutCompanyActivity : AppCompatActivity(), OnMapReadyCallback {
             textView.text = text
         } else {
             findViewById<RelativeLayout>(layoutRes).visibility = View.GONE
+        }
+    }
+
+    private fun callUs(phoneNumber: String) {
+        try {
+            val intent = Intent(Intent.ACTION_CALL, Uri.parse("tel:" + phoneNumber))
+            startActivity(intent)
+        } catch (e: SecurityException) {
+            Toast.makeText(this, R.string.error_cant_call, Toast.LENGTH_SHORT).show()
+        }
+    }
+
+    private fun mailUs(mail: String) {
+        try {
+            val mailIntent = Intent(Intent.ACTION_SEND)
+            mailIntent.type = "message/rfc822"
+            mailIntent.putExtra(Intent.EXTRA_EMAIL, mail)
+            startActivity(Intent.createChooser(mailIntent,"Send Email"))
+        } catch (e: SecurityException) {
+            Toast.makeText(this, R.string.error_cant_mail, Toast.LENGTH_SHORT).show()
+        }
+    }
+
+    private fun goWeb(address: String) {
+        try {
+            val web = Intent(Intent.ACTION_VIEW)
+            web.data = Uri.parse(address)
+            startActivity(web)
+        } catch (e: Exception) {
+            Toast.makeText(this, R.string.error_something_goes_wrong, Toast.LENGTH_SHORT).show()
         }
     }
 
