@@ -144,6 +144,7 @@ class OrderPresenterImpl(val orderView: OrderView): BasePresenter(), OrderPresen
         override fun onComplete() {
             clearItemsFromBasket.execute(ClearItemsFromBasketDisposableObserver(), ClearItemsFromBasket.Params())
             orderView.showSendingOrderOk()
+            orderView.redirectToHistory()
         }
 
         override fun onNext(t: Boolean) {

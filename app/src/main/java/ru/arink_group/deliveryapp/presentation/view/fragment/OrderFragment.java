@@ -3,6 +3,7 @@ package ru.arink_group.deliveryapp.presentation.view.fragment;
 
 import android.app.DialogFragment;
 import android.app.TimePickerDialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.app.Fragment;
 import android.support.annotation.Nullable;
@@ -49,6 +50,7 @@ import ru.arink_group.deliveryapp.presentation.view.FabView;
 import ru.arink_group.deliveryapp.presentation.view.MenuView;
 import ru.arink_group.deliveryapp.presentation.view.OrderView;
 import ru.arink_group.deliveryapp.presentation.view.ProgressView;
+import ru.arink_group.deliveryapp.presentation.view.activity.MenuActivity;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -416,6 +418,13 @@ public class OrderFragment extends Fragment implements OrderView,
     @Override
     public void loadingAddressFinish() {
         progressBar.setVisibility(View.GONE);
+    }
+
+    @Override
+    public void redirectToHistory() {
+        Intent intent = new Intent(getActivity(), MenuActivity.class);
+        intent.putExtra(MenuActivity.IS_HISTORY_START, true);
+        getActivity().startActivity(intent);
     }
 
     @Override

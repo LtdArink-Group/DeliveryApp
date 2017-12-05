@@ -25,4 +25,5 @@ public interface OrderView extends ProgressView {
     boolean isSelfPickup();
     void loadingAddressStart();
     void loadingAddressFinish();
+    void redirectToHistory();
 }

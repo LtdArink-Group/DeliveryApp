@@ -67,10 +67,11 @@ class DateTime {
     }
 
     fun toTimeWithDate(): String {
-        val sdf = SimpleDateFormat("yyyy-MM-dd HH:mm")
+        val sdf = SimpleDateFormat("dd-MM-yyyy HH:mm")
 //        val sdf = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS")
 
         return sdf.format(cal.time)
+//        return cal.time.toString()
     }
 
     fun getTimeInMillis(): Long = cal.timeInMillis

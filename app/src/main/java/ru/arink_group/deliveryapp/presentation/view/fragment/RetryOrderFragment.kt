@@ -287,7 +287,6 @@ class RetryOrderFragment : Fragment(), RetryOrderView, TimePickerDialog.OnTimeSe
         val intent = Intent(activity, MenuActivity::class.java)
         intent.putExtra(MenuActivity.IS_HISTORY_START, true)
         activity.startActivity(intent)
-
     }
 
     override fun getAddressId(): Int? {
