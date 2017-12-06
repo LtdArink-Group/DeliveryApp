@@ -207,7 +207,7 @@ public class OrderFragment extends Fragment implements OrderView,
     public void updateTotals() {
         List<Product> products = ordersListAdapter.getOrdersList();
 
-        Delivery delivery = GetCompanyFromShared.INSTANCE.getCompany().getDelivery();
+        Delivery delivery = GetCompanyFromShared.INSTANCE.getCompanyOrDefault().getDelivery();
 
         double summary = 0.0;
 

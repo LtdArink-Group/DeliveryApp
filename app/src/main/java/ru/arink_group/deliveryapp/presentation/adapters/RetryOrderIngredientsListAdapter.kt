@@ -5,6 +5,7 @@ import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.LinearLayout
 import android.widget.TextView
 import at.markushi.ui.CircleButton
 import ru.arink_group.deliveryapp.R
@@ -25,9 +26,11 @@ class RetryOrderIngredientsListAdapter(val ingredientsList: List<OrderIngredient
 
         val buttonMinus = view.findViewById<CircleButton>(R.id.order_ingredient_button_minus)
         val buttonPlus = view.findViewById<CircleButton>(R.id.order_ingredient_button_plus)
+        val btnGroup = view.findViewById<LinearLayout>(R.id.order_ingredients_button_group)
 
         buttonMinus.visibility = View.GONE
         buttonPlus.visibility = View.GONE
+        btnGroup.visibility = View.GONE
 
         val numString = holder.context.getString(R.string.num)
         val costString = holder.context.getString(R.string.costSummary)

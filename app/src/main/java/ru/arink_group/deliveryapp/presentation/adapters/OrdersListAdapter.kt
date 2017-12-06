@@ -6,8 +6,10 @@ import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import android.widget.TextView
 import at.markushi.ui.CircleButton
+import com.squareup.picasso.Picasso
 import ru.arink_group.deliveryapp.R
 import ru.arink_group.deliveryapp.domain.dao.Ingredient
 import ru.arink_group.deliveryapp.domain.dao.Product
@@ -57,6 +59,9 @@ class OrdersListAdapter: RecyclerView.Adapter<OrdersListAdapter.ViewHolder>() {
         val nameView = view.findViewById<TextView>(R.id.order_item_name)
         val summaryView = view.findViewById<TextView>(R.id.order_item_summary)
         val summaryAllView = view.findViewById<TextView>(R.id.all_summary)
+        val productImage = view.findViewById<ImageView>(R.id.order_product_Image)
+
+        Picasso.with(holder.context).load(orderProduct.imageUrl).placeholder(R.drawable.blur_image).into(productImage)
 
         val recyclerIngredient = view.findViewById<RecyclerView>(R.id.order_ingredient_recycler_view)
         val ingredientsAdapter = OrderIngredientsListAdapter(orderProduct.selectedIngredients)

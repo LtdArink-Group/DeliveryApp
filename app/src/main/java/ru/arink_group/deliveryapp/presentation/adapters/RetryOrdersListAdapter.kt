@@ -6,8 +6,11 @@ import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
+import android.widget.LinearLayout
 import android.widget.TextView
 import at.markushi.ui.CircleButton
+import com.squareup.picasso.Picasso
 import ru.arink_group.deliveryapp.R
 import ru.arink_group.deliveryapp.domain.dao.Ingredient
 import ru.arink_group.deliveryapp.domain.dao.OrderIngredient
@@ -36,6 +39,11 @@ class RetryOrdersListAdapter(val ordersList: List<OrderProduct>) : RecyclerView.
         val nameView = view.findViewById<TextView>(R.id.order_item_name)
         val summaryView = view.findViewById<TextView>(R.id.order_item_summary)
         val summaryAllView = view.findViewById<TextView>(R.id.all_summary)
+        val productImage = view.findViewById<ImageView>(R.id.order_product_Image)
+        val btnGroup = view.findViewById<LinearLayout>(R.id.order_button_group)
+
+        productImage.visibility = View.GONE
+        btnGroup.visibility = View.GONE
 
         val recyclerIngredient = view.findViewById<RecyclerView>(R.id.order_ingredient_recycler_view)
         val ingredientsAdapter = RetryOrderIngredientsListAdapter(orderProduct.ingredients)
