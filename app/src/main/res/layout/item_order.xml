@@ -108,7 +108,7 @@
                 android:id="@+id/all_summary"
                 android:textAppearance="?android:textAppearanceMedium"
                 android:padding="8dp"
-                android:text="Итого: "/>
+                android:text="@string/summary_string"/>
 
         </LinearLayout>
 
