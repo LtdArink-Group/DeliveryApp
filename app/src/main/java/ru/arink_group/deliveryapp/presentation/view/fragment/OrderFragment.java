@@ -141,6 +141,7 @@ public class OrderFragment extends Fragment implements OrderView,
         });
 
         RecyclerView orderRecyclerView = root.findViewById(R.id.order_recycler_view);
+        orderRecyclerView.setHasFixedSize(true);
 
         this.ordersListAdapter = new OrdersListAdapter();
         this.ordersListAdapter.setProductChangeListener(this);

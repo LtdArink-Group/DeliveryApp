@@ -32,7 +32,7 @@ class OrdersListAdapter: RecyclerView.Adapter<OrdersListAdapter.ViewHolder>() {
         if (product.count == 0) {
             ordersList.removeAt(position)
             if (ordersList.isEmpty()) productChangeListener.showPlaceholder()
-            notifyItemRemoved(position)
+            notifyDataSetChanged()
             return
         }
         ordersList[position] = product
