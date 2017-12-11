@@ -60,6 +60,7 @@ public class OrderFragment extends Fragment implements OrderView,
         View.OnClickListener,
         TimePickerDialog.OnTimeSetListener
 {
+    public static final String REDIRECT_TO_ORDER = "redirect to order";
 
     private Unbinder unbinder;
 
@@ -166,6 +167,9 @@ public class OrderFragment extends Fragment implements OrderView,
             @Override
             public void onClick(View v) {
                 AccountFragment accountFragment = new AccountFragment();
+                Bundle bundle = new Bundle();
+                bundle.putBoolean(REDIRECT_TO_ORDER, true);
+                accountFragment.setArguments(bundle);
                 menuView.changeFragment(accountFragment);
             }
         });
