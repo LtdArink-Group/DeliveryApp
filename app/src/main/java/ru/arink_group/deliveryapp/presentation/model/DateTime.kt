@@ -29,6 +29,7 @@ class DateTime {
         cal = Calendar.getInstance()
         cal.set(Calendar.HOUR_OF_DAY, hour)
         cal.set(Calendar.MINUTE, minute)
+        cal.timeZone =TimeZone.getTimeZone("GMT${time.split(" ")[1]}")
     }
 
     constructor(timeDate: Date) {
@@ -39,39 +40,32 @@ class DateTime {
     }
 
     fun isGreaterThen(secondTime: DateTime): Boolean = when {
-        hour > secondTime.hour -> true
-        hour == secondTime.hour && minute > secondTime.minute -> true
+        cal.compareTo(secondTime.cal) > 0 -> true
         else -> false
     }
 
     fun isLowerThen(secondTime: DateTime): Boolean = when {
-        hour < secondTime.hour -> true
-        hour == secondTime.hour && minute < secondTime.minute -> true
+        cal.compareTo(secondTime.cal) < 0 -> true
         else -> false
     }
 
     fun isLowerThenNextHourOf(secondTime: DateTime): Boolean {
-        return hour == secondTime.hour ||
-                ((hour + 1) == secondTime.nextHour() && minute <= secondTime.minute)
+        val secondCal = secondTime.cal.clone() as Calendar
+        secondCal.set(Calendar.HOUR_OF_DAY, secondTime.nextHour())
+        return cal.compareTo(secondCal) < 0
     }
 
     private fun nextHour(): Int = hour + 1
 
     override fun toString(): String = "%02d:%02d".format(hour, minute)
 
-    fun toCurrentDateString(): String {
-        val sdf = SimpleDateFormat("yyyy-MM-dd HH:mm")
-//        val sdf = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS")
-
-        return sdf.format(cal.time)
-    }
+    fun toCurrentDateString(): String = cal.time.toString()
 
     fun toTimeWithDate(): String {
         val sdf = SimpleDateFormat("dd-MM-yyyy HH:mm")
 //        val sdf = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS")
 
         return sdf.format(cal.time)
-//        return cal.time.toString()
     }
 
     fun getTimeInMillis(): Long = cal.timeInMillis

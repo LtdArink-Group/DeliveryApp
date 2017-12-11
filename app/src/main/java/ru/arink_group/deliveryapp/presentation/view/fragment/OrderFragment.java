@@ -383,12 +383,12 @@ public class OrderFragment extends Fragment implements OrderView,
         if (selectedTime.isGreaterThen(end) || selectedTime.isLowerThen(start)) {
             String delivery_error = getString(R.string.time_should_be_between, start, end);
             Toast.makeText(getActivity(), delivery_error, Toast.LENGTH_SHORT).show();
+        } else if(selectedTime.isLowerThen(current)) {
+            Toast.makeText(getActivity(), R.string.error_cant_be_less_then_current, Toast.LENGTH_SHORT).show();
         } else if (selectedTime.isLowerThenNextHourOf(current) && end.isLowerThenNextHourOf(current)) {
             Toast.makeText(getActivity(), R.string.error_cant_to_late, Toast.LENGTH_SHORT).show();
         } else if (selectedTime.isLowerThenNextHourOf(current)) {
             Toast.makeText(getActivity(), R.string.error_cant_be_greater_then_hour, Toast.LENGTH_SHORT).show();
-        } else if(selectedTime.isLowerThen(current)) {
-            Toast.makeText(getActivity(), R.string.error_cant_be_less_then_current, Toast.LENGTH_SHORT).show();
         } else {
             startDateDialog.setText(selectedTime.toString());
         }
