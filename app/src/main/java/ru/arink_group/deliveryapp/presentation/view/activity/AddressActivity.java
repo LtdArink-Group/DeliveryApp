@@ -17,6 +17,7 @@ import ru.arink_group.deliveryapp.R;
 import ru.arink_group.deliveryapp.domain.dao.Address;
 import ru.arink_group.deliveryapp.presentation.view.ProgressView;
 import ru.arink_group.deliveryapp.presentation.view.fragment.AddressFragment;
+import ru.arink_group.deliveryapp.presentation.view.fragment.OrderFragment;
 
 public class AddressActivity extends AppCompatActivity implements ProgressView{
 
@@ -26,6 +27,7 @@ public class AddressActivity extends AppCompatActivity implements ProgressView{
 
     private ProgressBar progressBar;
     private FrameLayout content;
+    private boolean startOrder;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,10 +39,12 @@ public class AddressActivity extends AppCompatActivity implements ProgressView{
 
         addressFragment = new AddressFragment();
         Intent params = getIntent();
+        startOrder = params.getBooleanExtra(OrderFragment.REDIRECT_TO_ORDER, false);
         Address address = (Address) params.getSerializableExtra(ADDRESS_SER);
         FragmentTransaction fm = getFragmentManager().beginTransaction();
         Bundle bundle = new Bundle();
         bundle.putSerializable(ADDRESS_SER, address);
+        bundle.putBoolean(OrderFragment.REDIRECT_TO_ORDER, startOrder);
         addressFragment.setArguments(bundle);
         fm.add(R.id.frame_address, addressFragment);
         fm.commit();

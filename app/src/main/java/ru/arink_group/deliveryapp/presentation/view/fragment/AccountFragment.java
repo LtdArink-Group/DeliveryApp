@@ -198,6 +198,8 @@ public class AccountFragment extends Fragment implements AccountView, OnAddressL
     @Override
     public void startNewAddressAfterCreateAccount() {
         Intent intent = new Intent(getActivity(), AddressActivity.class);
+        boolean startOrderAfterAddress = getArguments().getBoolean(OrderFragment.REDIRECT_TO_ORDER, false);
+        intent.putExtra(OrderFragment.REDIRECT_TO_ORDER, startOrderAfterAddress);
         getActivity().startActivity(intent);
     }
 

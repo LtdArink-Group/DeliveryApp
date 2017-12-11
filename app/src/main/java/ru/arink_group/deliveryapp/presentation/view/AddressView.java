@@ -11,5 +11,6 @@ public interface AddressView extends ProgressView{
     void showErrorMessage(String message);
     void updateAddress(Address address);
     void goToAccount();
-
+    void goToOrder();
+    boolean isStartOrder();
 }

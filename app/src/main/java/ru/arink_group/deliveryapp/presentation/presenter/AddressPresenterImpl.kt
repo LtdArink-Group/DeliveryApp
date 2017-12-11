@@ -48,7 +48,11 @@ class AddressPresenterImpl(val addressView: AddressView): BasePresenter(), Addre
 
         override fun onNext(t: Address) {
             addressView.loadingFinish()
-            addressView.goToAccount()
+            if (addressView.isStartOrder) {
+                addressView.goToOrder()
+            } else {
+                addressView.goToAccount()
+            }
         }
     }
 

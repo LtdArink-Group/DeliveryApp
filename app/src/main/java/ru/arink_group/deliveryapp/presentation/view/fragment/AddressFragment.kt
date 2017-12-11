@@ -52,6 +52,8 @@ class AddressFragment : Fragment(),  AddressView, View.OnClickListener{
 
     lateinit var progressView : ProgressView
 
+    private var startOrder: Boolean = false
+
     override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
         // Inflate the layout for this fragment
@@ -64,6 +66,8 @@ class AddressFragment : Fragment(),  AddressView, View.OnClickListener{
         } else {
             address = Address(null)
         }
+
+        startOrder = arguments.getBoolean(OrderFragment.REDIRECT_TO_ORDER, false)
 
         presenter = AddressPresenterImpl(this)
 
@@ -160,6 +164,12 @@ class AddressFragment : Fragment(),  AddressView, View.OnClickListener{
         activity.startActivity(intent)
     }
 
+    override fun goToOrder() {
+        val intent = Intent(activity, MenuActivity::class.java)
+        intent.putExtra(MenuActivity.IS_ORDER_START, true)
+        activity.startActivity(intent)
+    }
+
     override fun loadingStart() {
         progressView.loadingStart()
     }
@@ -167,5 +177,5 @@ class AddressFragment : Fragment(),  AddressView, View.OnClickListener{
     override fun loadingFinish() {
         progressView.loadingFinish()
     }
-
+    override fun isStartOrder(): Boolean = startOrder
 }// Required empty public constructor
