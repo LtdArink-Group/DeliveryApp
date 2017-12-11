@@ -16,6 +16,9 @@ public class ContactInfoDTO {
     @SerializedName("geotag")
     @Expose
     private List<String> geotag;
+    @SerializedName("geotag_cafe")
+    @Expose
+    private List<String> geotagCafe;
 
     @SerializedName("web")
     @Expose
@@ -62,5 +65,13 @@ public class ContactInfoDTO {
 
     public void setGeotag(List<String> geotag) {
         this.geotag = geotag;
+    }
+
+    public List<String> getGeotagCafe() {
+        return geotagCafe;
+    }
+
+    public void setGeotagCafe(List<String> geotagCafe) {
+        this.geotagCafe = geotagCafe;
     }
 }

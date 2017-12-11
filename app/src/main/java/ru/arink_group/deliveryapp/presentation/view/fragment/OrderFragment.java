@@ -372,8 +372,8 @@ public class OrderFragment extends Fragment implements OrderView,
 
     @Override
     public void onTimeSet(TimePicker timePicker, int hour, int minute) {
-        DateTime start = new DateTime(GetCompanyFromShared.INSTANCE.getCompany().getDelivery().getPeriod().getStart());
-        DateTime end = new DateTime(GetCompanyFromShared.INSTANCE.getCompany().getDelivery().getPeriod().getEnd());
+        DateTime start = new DateTime(GetCompanyFromShared.INSTANCE.getCompanyOrDefault().getDelivery().getPeriod().getStart());
+        DateTime end = new DateTime(GetCompanyFromShared.INSTANCE.getCompanyOrDefault().getDelivery().getPeriod().getEnd());
 
         Calendar c = Calendar.getInstance();
         DateTime current = new DateTime(c.get(Calendar.HOUR_OF_DAY), c.get(Calendar.MINUTE));

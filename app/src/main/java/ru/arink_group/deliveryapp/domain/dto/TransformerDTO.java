@@ -171,7 +171,8 @@ public class TransformerDTO {
                 contactInfoDTO.getPhone(),
                 contactInfoDTO.getWeb(),
                 contactInfoDTO.getAddress(),
-                contactInfoDTO.getGeotag()
+                contactInfoDTO.getGeotag(),
+                contactInfoDTO.getGeotagCafe()
         );
     }
 

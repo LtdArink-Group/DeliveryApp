@@ -114,15 +114,30 @@ class AboutCompanyActivity : AppCompatActivity(), OnMapReadyCallback {
 
         addressesGeotags().forEachIndexed({ index: Int, geotag: List<String> ->
             val position = LatLng(geotag[0].toDouble(), geotag[1].toDouble())
-            mMap.addMarker(MarkerOptions().position(position).title(company.name))
-            if (index == 0)
+            val marker = mMap.addMarker(MarkerOptions().position(position).title(getString(R.string.about_company_delivery_title)))
+            marker.showInfoWindow()
+            if (index == 0) {
                 mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(position, 15.0F))
+                marker.showInfoWindow()
+            }
+        })
+        addressesGeotagsCafe().forEachIndexed({ index: Int, geotag: List<String> ->
+            val position = LatLng(geotag[0].toDouble(), geotag[1].toDouble())
+            mMap.addMarker(MarkerOptions().position(position).title(getString(R.string.about_company_cafe_title)))
         })
     }
 
     private fun addressesGeotags() : List<List<String>> {
         val listtags = mutableListOf<List<String>>()
         company.contactInfo.geotag.forEach {
+            listtags.add(it.split(","))
+        }
+        return listtags
+    }
+
+    private fun addressesGeotagsCafe() : List<List<String>> {
+        val listtags = mutableListOf<List<String>>()
+        company.contactInfo.geotagCafe.forEach {
             listtags.add(it.split(","))
         }
         return listtags

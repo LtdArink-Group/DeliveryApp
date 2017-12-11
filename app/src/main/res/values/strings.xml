@@ -25,7 +25,7 @@
     <string name="rewies">Отзывы</string>
     <string name="company_name">Chixx</string>
     <string name="company_mail">info@chixx.ru</string>
-    <string name="company_phone">+7 (962) 287-90-11</string>
+    <string name="company_phone">+7 (4212) 77-60-25</string>
     <string name="cost">Цена</string>
     <string name="currency">р</string>
     <string name="summary">Итого</string>
@@ -62,6 +62,9 @@
     <string name="summary_cost_with_discount">Сумма заказа со скидкой</string>
     <string name="num">Кол-во</string>
     <string name="costSummary">Стоимость</string>
+
+    <string name="about_company_delivery_title">Chixx - доставка/забрать</string>
+    <string name="about_company_cafe_title">Chixx - Кафе</string>
 
 
     <!--Errors-->
