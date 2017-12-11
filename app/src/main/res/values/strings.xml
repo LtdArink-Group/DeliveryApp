@@ -70,11 +70,12 @@
     <!--Errors-->
     <string name="error_must_be_at_leat_one_address">Минимум один адрес!</string>
     <string name="error_cant_be_blank">Не может быть пустым!</string>
-    <string name="empty_cart">Ваша корзина пуста :(</string>
+    <string name="empty_cart">Ваша корзина пока еще пуста, но это легко исправить!</string>
     <string name="error_address_empty">Необходимо выбрать адрес</string>
     <string name="error_delivery_time_empty">Необходимо выбрать время заказа</string>
     <string name="error_cant_be_greater_then_hour">Время заказа не менее часа</string>
     <string name="error_cant_be_less_then_current">Заказы в прошлое не принимаются :)</string>
+    <string name="error_cant_to_late">К сожалению мы уже закрываемся и заказ выполнить не успеем, приходите завтра :)</string>
     <string name="error_cant_call">Приложению необходимо добавить разрешение звонить!</string>
     <string name="error_cant_mail">Приложению необходимо добавить разрешение отправить письмо!</string>
     <string name="error_something_goes_wrong">Что то пошло не так!</string>
@@ -96,6 +97,7 @@
     <string name="confirm_cancel">Отменить заказ?</string>
     <string name="yes">Да</string>
     <string name="no">Нет</string>
+    <string name="whant_to_quit">Вы действительно хотите выйти?</string>
 
     <!--FORM-->
     <string name="form_percent">%1s %%</string>
@@ -107,4 +109,5 @@
     <string name="ok">OK</string>
     <string name="empty" />
     <string name="summary_string">Итого:</string>
+    <string name="to_categories">Перейти к заказу!</string>
 </resources>

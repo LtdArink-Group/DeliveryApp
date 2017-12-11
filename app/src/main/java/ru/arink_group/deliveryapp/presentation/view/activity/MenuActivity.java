@@ -1,9 +1,11 @@
 package ru.arink_group.deliveryapp.presentation.view.activity;
 
+import android.app.AlertDialog;
 import android.app.Fragment;
 import android.app.FragmentTransaction;
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
@@ -19,6 +21,7 @@ import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.FrameLayout;
 import android.widget.ProgressBar;
+import android.widget.Toast;
 
 import ru.arink_group.deliveryapp.R;
 import ru.arink_group.deliveryapp.presentation.presenter.interfaces.MenuPresenter;
@@ -104,7 +107,6 @@ public class MenuActivity extends AppCompatActivity
             fragmentTransaction.add(R.id.menu_fragment, new CategoriesFragment());
             navigationView.getMenu().getItem(0).setChecked(true);
         }
-//        fragmentTransaction.addToBackStack(null);
         fragmentTransaction.commit();
     }
 
@@ -114,7 +116,16 @@ public class MenuActivity extends AppCompatActivity
         if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START);
         } else {
-            super.onBackPressed();
+            new AlertDialog.Builder(this)
+                    .setMessage(R.string.whant_to_quit)
+                    .setPositiveButton(R.string.yes, new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            MenuActivity.super.onBackPressed();
+                        }
+                    })
+                    .setNegativeButton(R.string.no, null).show();
+
         }
     }
 
