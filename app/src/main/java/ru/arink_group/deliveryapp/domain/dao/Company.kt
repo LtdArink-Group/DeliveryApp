@@ -12,5 +12,6 @@ data class Company(
         val description: String?,
         val contactInfo: ContactInfo,
         val delivery: Delivery,
-        val url: String
+        val url: String,
+        val workingDays: List<CompanyWorkingDay>
 ) : Serializable

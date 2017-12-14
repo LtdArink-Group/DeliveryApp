@@ -11,6 +11,7 @@ import ru.arink_group.deliveryapp.domain.dao.Account;
 import ru.arink_group.deliveryapp.domain.dao.Address;
 import ru.arink_group.deliveryapp.domain.dao.Category;
 import ru.arink_group.deliveryapp.domain.dao.Company;
+import ru.arink_group.deliveryapp.domain.dao.CompanyWorkingDay;
 import ru.arink_group.deliveryapp.domain.dao.ContactInfo;
 import ru.arink_group.deliveryapp.domain.dao.Delivery;
 import ru.arink_group.deliveryapp.domain.dao.Ingredient;
@@ -189,6 +190,19 @@ public class TransformerDTO {
         );
     }
 
+    public static CompanyWorkingDay transformCompanyWorkingDay(CompanyWorkingDayDTO companyWorkingDayDTO) {
+        return new CompanyWorkingDay(companyWorkingDayDTO.getDayOfWeek(), companyWorkingDayDTO.getStartWork(), companyWorkingDayDTO.getEndWork());
+    }
+
+    public static List<CompanyWorkingDay> transformListCompanyWorkingDayDTOS(List<CompanyWorkingDayDTO> companyWorkingDayDTOS) {
+        List<CompanyWorkingDay> companyWorkingDays = new ArrayList<>();
+        if(companyWorkingDayDTOS == null) return companyWorkingDays; //TODO delete after backend implementation
+        for(CompanyWorkingDayDTO companyWorkingDayDTO : companyWorkingDayDTOS) {
+            companyWorkingDays.add(transformCompanyWorkingDay(companyWorkingDayDTO));
+        }
+        return companyWorkingDays;
+    }
+
     public static Company transformCompany(CompanyDTO companyDTO) {
         return new Company(
                 companyDTO.getId(),
@@ -197,7 +211,8 @@ public class TransformerDTO {
                 companyDTO.getDescription(),
                 transformContactInfo(companyDTO.getContactInfo()),
                 transformDelivery(companyDTO.getDelivery()),
-                companyDTO.getUrl()
+                companyDTO.getUrl(),
+                transformListCompanyWorkingDayDTOS(companyDTO.getWorkingDays())
         );
     }
 

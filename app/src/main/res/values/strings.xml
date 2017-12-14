@@ -110,4 +110,13 @@
     <string name="empty" />
     <string name="summary_string">Итого:</string>
     <string name="to_categories">Перейти к заказу!</string>
+
+    <string name="mon">Пн</string>
+    <string name="tue">Вт</string>
+    <string name="wed">Ср</string>
+    <string name="thu">Чт</string>
+    <string name="fri">Пт</string>
+    <string name="sat">Сб</string>
+    <string name="sun">Вс</string>
+    <string name="rest">Выходной</string>
 </resources>
