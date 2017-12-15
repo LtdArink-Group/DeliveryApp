@@ -317,6 +317,7 @@ public class TransformerDTO {
                 orderDTO.getDeliveryTime(),
                 orderDTO.getPickup(),
                 transformListOrderProduct(orderDTO.getOrderProducts()),
+                orderDTO.getNum(),
                 transformOrderAddressInfo(orderDTO.getAddressInfo())
         );
     }

@@ -23,12 +23,14 @@ class CompanyWorkingDay(
         else -> Calendar.MONDAY
     }
 
+    fun isRest(): Boolean = startTime == null || endTime == null
+
     fun startTimeClass(): DateTime? {
         return if (startTime == null) {
             null
         } else {
             val tmp = startTime.split("+")
-            DateTime(tmp[0], tmp[1])
+            DateTime(tmp[0].trim(), tmp[1])
         }
     }
     fun endTimeClass(): DateTime? {
@@ -36,7 +38,7 @@ class CompanyWorkingDay(
             null
         } else {
             val tmp = endTime.split("+")
-            DateTime(tmp[0], tmp[1])
+            DateTime(tmp[0].trim(), tmp[1])
         }
     }
 }

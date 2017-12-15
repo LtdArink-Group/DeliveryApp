@@ -43,6 +43,7 @@ class OrdersHistoryAdapter(val isActive: Boolean = true): RecyclerView.Adapter<O
         val view = holder.view
         val context = holder.context
 
+        val orderNumView = view.findViewById<TextView>(R.id.order_num)
         val statusView = view.findViewById<TextView>(R.id.order_history_status)
         val addressView = view.findViewById<TextView>(R.id.order_history_address)
         val contentView = view.findViewById<TextView>(R.id.order_history_data_and_cost)
@@ -51,6 +52,8 @@ class OrdersHistoryAdapter(val isActive: Boolean = true): RecyclerView.Adapter<O
         val pattern = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS")
         val date = pattern.parse(order.deliveryTime)
         val dateTime = DateTime(date)
+
+        orderNumView.text = "№ ${order.num}"
 
         statusView.text = order.status
         if (order.status == Statuses.CANCELLED) {

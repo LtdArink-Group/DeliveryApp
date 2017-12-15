@@ -128,8 +128,9 @@ class RetryOrderFragment : Fragment(), RetryOrderView, TimePickerDialog.OnTimeSe
 
     private fun verifyDeliveryTime(): Boolean {
         val time = getString(R.string.summary_delivery_time)
-        val valid = !time.equals(timePicker.text.toString(), ignoreCase = true)
-        if (!valid) Toast.makeText(activity, R.string.error_delivery_time_empty, Toast.LENGTH_SHORT).show()
+        val valid = !time.equals(timePicker.text.toString(), ignoreCase = true) && !GetCompanyFromShared.getCompanyOrDefault().getCurrentDayOrFirst().isRest()
+        if (time.equals(timePicker.text.toString(), ignoreCase = true)) Toast.makeText(activity, R.string.error_delivery_time_empty, Toast.LENGTH_SHORT).show()
+        if (GetCompanyFromShared.getCompanyOrDefault().getCurrentDayOrFirst().isRest()) Toast.makeText(activity, R.string.error_cant_order_is_rest, Toast.LENGTH_SHORT).show()
         return valid
     }
 
@@ -201,15 +202,17 @@ class RetryOrderFragment : Fragment(), RetryOrderView, TimePickerDialog.OnTimeSe
     }
 
     override fun onTimeSet(view: TimePicker, hour: Int, minute: Int) {
-        val start = DateTime(GetCompanyFromShared.company!!.delivery.period.start)
-        val end = DateTime(GetCompanyFromShared.company!!.delivery.period.end)
+        val start = GetCompanyFromShared.getCompanyOrDefault().getCurrentDayOrFirst().startTimeClass()
+        val end = GetCompanyFromShared.getCompanyOrDefault().getCurrentDayOrFirst().endTimeClass()
 
         val c = Calendar.getInstance()
         val current = DateTime(c.get(Calendar.HOUR_OF_DAY), c.get(Calendar.MINUTE))
 
         selectedTime = DateTime(hour, minute)
 
-        if (selectedTime.isGreaterThen(end) || selectedTime.isLowerThen(start)) {
+        if (start ==null || end == null) {
+            Toast.makeText(activity, R.string.error_cant_order_is_rest, Toast.LENGTH_SHORT).show()
+        } else if (selectedTime.isGreaterThen(end) || selectedTime.isLowerThen(start)) {
             val deliveryError = getString(R.string.time_should_be_between, start, end)
             Toast.makeText(activity, deliveryError, Toast.LENGTH_SHORT).show()
         } else if (selectedTime.isLowerThenNextHourOf(current)) {
