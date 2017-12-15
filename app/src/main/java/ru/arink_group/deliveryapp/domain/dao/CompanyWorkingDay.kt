@@ -9,8 +9,8 @@ import java.util.*
  */
 class CompanyWorkingDay(
         dayOfWeek: String,
-        val startTime: String,
-        val endTime: String
+        private val startTime: String?,
+        private val endTime: String?
 ) : Serializable {
     val dayOfWeek: Int = when(dayOfWeek) {
         "mon" -> Calendar.MONDAY
@@ -24,17 +24,19 @@ class CompanyWorkingDay(
     }
 
     fun startTimeClass(): DateTime? {
-        return if (startTime.isEmpty()) {
+        return if (startTime == null) {
             null
         } else {
-            DateTime(startTime)
+            val tmp = startTime.split("+")
+            DateTime(tmp[0], tmp[1])
         }
     }
     fun endTimeClass(): DateTime? {
-        return if (endTime.isEmpty()) {
+        return if (endTime == null) {
             null
         } else {
-            DateTime(endTime)
+            val tmp = endTime.split("+")
+            DateTime(tmp[0], tmp[1])
         }
     }
 }

@@ -32,6 +32,16 @@ class DateTime {
         cal.timeZone =TimeZone.getTimeZone("GMT${time.split(" ")[1]}")
     }
 
+    constructor(time: String, zone: String) {
+        val tms = time.split(":")
+        hour = tms[0].toInt()
+        minute = tms[1].toInt()
+        cal = Calendar.getInstance()
+        cal.set(Calendar.HOUR_OF_DAY, hour)
+        cal.set(Calendar.MINUTE, minute)
+        cal.timeZone =TimeZone.getTimeZone("GMT+$zone")
+    }
+
     constructor(timeDate: Date) {
         cal = Calendar.getInstance()
         cal.time = timeDate

@@ -27,7 +27,7 @@ class WorkingDateTime(val workingDays: List<CompanyWorkingDay>, val context: Con
         val groupdDays = combineDays(parseList(workingDays))
 
         var result = ""
-        groupdDays.forEach({(k, v) -> result = result + "$v - $k" })
+        groupdDays.forEach({(k, v) -> result += "${v.joinToString()} - $k\n" })
         return result
     }
 
@@ -41,8 +41,8 @@ class WorkingDateTime(val workingDays: List<CompanyWorkingDay>, val context: Con
             Calendar.SATURDAY -> sat
             else -> sun
         }
-        if(day.startTimeClass() == null || day.endTimeClass() == null) return "$dw - $rest"
-        return "$dw ${day.startTimeClass()}-${day.endTimeClass()}"
+        return if (day.startTimeClass() == null || day.endTimeClass() == null) return "$dw $rest"
+        else "$dw ${day.startTimeClass()}-${day.endTimeClass()}"
     }
 
     private fun parseList(days:List<CompanyWorkingDay>) : List<String> {
@@ -55,13 +55,18 @@ class WorkingDateTime(val workingDays: List<CompanyWorkingDay>, val context: Con
 
     private fun valueOrDefault(map: HashMap<String, String>, key: String) : String = if (map[key] == null) "" else map[key]!!
 
-    private fun combineDays(days: List<String>): java.util.HashMap<String, String> {
-        val groups = java.util.HashMap<String, String>()
+    private fun combineDays(days: List<String>): java.util.HashMap<String, ArrayList<String>> {
+        val groups = java.util.HashMap<String, ArrayList<String>>()
         days.forEach {
             val dt = it.split(" ")
             val day = dt[0]
             val time = dt[1]
-            groups.put(time, valueOrDefault(groups, time) + ", $day")
+            if (groups[time] != null)
+                groups[time]!!.add(day)
+            else {
+                groups[time] = ArrayList()
+                groups[time]!!.add(day)
+            }
         }
         return groups
     }

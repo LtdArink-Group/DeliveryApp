@@ -38,7 +38,7 @@ class WorkingDateTimeTest {
         `when`(mContext.getString(R.string.rest)).thenReturn("Выходной")
 
 
-        val mon = CompanyWorkingDay("mon", "", "")
+        val mon = CompanyWorkingDay("mon", null, null)
         val tue = CompanyWorkingDay("tue", "12:00:00+10", "21:00:00+10")
         val wed = CompanyWorkingDay("wed", "12:00:00+10", "21:00:00+10")
         val thu = CompanyWorkingDay("thu", "12:00:00+10", "21:00:00+10")
@@ -52,9 +52,9 @@ class WorkingDateTimeTest {
     @Test
     fun toWorkWeekString() {
         assertThat(subject.toWorkWeekString(),
-                `is`("Вт-Пт 12:00-21:00\n" +
-                "Вс 14:00-23:00\n" +
-                "Пн - Выходной"))
+                `is`("Вт, Ср, Чт, Пт, Сб - 12:00-21:00\n" +
+                "Вс - 14:00-23:00\n" +
+                "Пн - Выходной\n"))
     }
 
 }
