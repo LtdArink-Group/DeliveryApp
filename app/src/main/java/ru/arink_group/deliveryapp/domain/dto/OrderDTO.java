@@ -23,6 +23,9 @@ public class OrderDTO {
     @SerializedName("address_info")
     @Expose
     private OrderAddressInfoDTO addressInfo;
+    @SerializedName("num")
+    @Expose
+    private int num;
 
     // for orders creation
 
@@ -131,5 +134,13 @@ public class OrderDTO {
 
     public void setAddressInfo(OrderAddressInfoDTO addressInfo) {
         this.addressInfo = addressInfo;
+    }
+
+    public int getNum() {
+        return num;
+    }
+
+    public void setNum(int num) {
+        this.num = num;
     }
 }

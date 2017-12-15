@@ -19,6 +19,7 @@ class Order(
     val deliveryTime: String,
     val pickup: Boolean,
     val products: List<OrderProduct>,
+    val num: Int,
     val addressInfo: OrderAddressInfo?
 ): Serializable {
     fun isActive(): Boolean {

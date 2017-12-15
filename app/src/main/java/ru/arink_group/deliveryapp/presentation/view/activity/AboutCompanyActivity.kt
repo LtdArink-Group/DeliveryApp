@@ -20,6 +20,7 @@ import ru.arink_group.deliveryapp.R
 import ru.arink_group.deliveryapp.domain.dao.Company
 import ru.arink_group.deliveryapp.domain.interactors.GetCompanyFromShared
 import ru.arink_group.deliveryapp.presentation.model.DateTime
+import ru.arink_group.deliveryapp.presentation.model.WorkingDateTime
 
 class AboutCompanyActivity : AppCompatActivity(), OnMapReadyCallback {
 
@@ -45,10 +46,10 @@ class AboutCompanyActivity : AppCompatActivity(), OnMapReadyCallback {
         val contactWebText = findViewById<TextView>(R.id.web_text)
         val contactAddressText = findViewById<TextView>(R.id.address_text)
 
-        val contactTime = "${DateTime(company.delivery.period.start)} - ${DateTime(company.delivery.period.end)}"
+        val contactWeekTime = WorkingDateTime(company.workingDays, this)
 
         fillOrHide(R.id.about_company_phone_layout, contactPhoneText, company.contactInfo.phone)
-        fillOrHide(R.id.about_company_clock_layout, contactClockText, contactTime)
+        fillOrHide(R.id.about_company_clock_layout, contactClockText, contactWeekTime.toWorkWeekString())
         fillOrHide(R.id.about_company_email_layout, contactEmailText, company.contactInfo.email)
         fillOrHide(R.id.about_company_web_layout, contactWebText, company.contactInfo.web)
         fillOrHide(R.id.about_company_address_layout, contactAddressText, company.contactInfo.address)
@@ -63,7 +64,7 @@ class AboutCompanyActivity : AppCompatActivity(), OnMapReadyCallback {
     }
 
     private fun fillOrHide(layoutRes: Int, textView: TextView, text: String?) {
-        if (text != null) {
+        if (text != null && text.isNotEmpty()) {
             textView.text = text
         } else {
             findViewById<RelativeLayout>(layoutRes).visibility = View.GONE
