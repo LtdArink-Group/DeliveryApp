@@ -7,10 +7,7 @@ import android.widget.Toast
 import com.google.gson.Gson
 import io.reactivex.observers.DisposableObserver
 import ru.arink_group.deliveryapp.App
-import ru.arink_group.deliveryapp.domain.dao.Company
-import ru.arink_group.deliveryapp.domain.dao.ContactInfo
-import ru.arink_group.deliveryapp.domain.dao.Delivery
-import ru.arink_group.deliveryapp.domain.dao.Period
+import ru.arink_group.deliveryapp.domain.dao.*
 
 /**
  * Created by kirillvs on 15.11.17.
@@ -25,8 +22,18 @@ object GetCompanyFromShared {
             ContactInfo("info@chixx.ru", "+7 (4212) 77-60-25", null, null, listOf("48.483257,135.094393"), listOf("48.469463,135.071622")),
             Delivery(150.toDouble(), 800.toDouble(), 10.toDouble(), Period("12:00 +10", "19:30 +10")),
             "",
-            emptyList()
+            listOf(
+                    CompanyWorkingDay("sun","13:00:00+10", "21:00:00+10"),
+                    CompanyWorkingDay("mon",null, null),
+                    CompanyWorkingDay("tue","12:00:00+10", "21:00:00+10"),
+                    CompanyWorkingDay("wed","12:00:00+10", "21:00:00+10"),
+                    CompanyWorkingDay("thu","12:00:00+10", "21:00:00+10"),
+                    CompanyWorkingDay("fri","12:00:00+10", "21:00:00+10"),
+                    CompanyWorkingDay("sat","12:00:00+10", "21:00:00+10")
+            )
     )
+
+
 
     var company: Company? = null
 

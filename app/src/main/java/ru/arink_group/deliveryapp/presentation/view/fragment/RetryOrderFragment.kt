@@ -210,17 +210,19 @@ class RetryOrderFragment : Fragment(), RetryOrderView, TimePickerDialog.OnTimeSe
 
         selectedTime = DateTime(hour, minute)
 
-        if (start ==null || end == null) {
+        if (start == null || end == null) {
             Toast.makeText(activity, R.string.error_cant_order_is_rest, Toast.LENGTH_SHORT).show()
         } else if (selectedTime.isGreaterThen(end) || selectedTime.isLowerThen(start)) {
-            val deliveryError = getString(R.string.time_should_be_between, start, end)
-            Toast.makeText(activity, deliveryError, Toast.LENGTH_SHORT).show()
-        } else if (selectedTime.isLowerThenNextHourOf(current)) {
-            Toast.makeText(activity, R.string.error_cant_be_greater_then_hour, Toast.LENGTH_SHORT).show()
+            val delivery_error = getString(R.string.time_should_be_between, start, end)
+            Toast.makeText(activity, delivery_error, Toast.LENGTH_SHORT).show()
         } else if (selectedTime.isLowerThen(current)) {
             Toast.makeText(activity, R.string.error_cant_be_less_then_current, Toast.LENGTH_SHORT).show()
+        } else if (selectedTime.isLowerThenNextHourOf(current) && end.isLowerThenNextHourOf(current)) {
+            Toast.makeText(activity, R.string.error_cant_to_late, Toast.LENGTH_SHORT).show()
+        } else if (selectedTime.isLowerThenNextHourOf(current)) {
+            Toast.makeText(activity, R.string.error_cant_be_greater_then_hour, Toast.LENGTH_SHORT).show()
         } else {
-            timePicker.setText(selectedTime.toString())
+            timePicker.text = selectedTime.toString()
         }
     }
 
