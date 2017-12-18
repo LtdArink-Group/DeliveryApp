@@ -116,15 +116,17 @@ public class MenuActivity extends AppCompatActivity
         if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START);
         } else {
-            new AlertDialog.Builder(this)
-                    .setMessage(R.string.whant_to_quit)
-                    .setPositiveButton(R.string.yes, new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialog, int which) {
-                            MenuActivity.super.onBackPressed();
-                        }
-                    })
-                    .setNegativeButton(R.string.no, null).show();
+            if (isTaskRoot())
+                new AlertDialog.Builder(this)
+                        .setMessage(R.string.whant_to_quit)
+                        .setPositiveButton(R.string.yes, new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                MenuActivity.super.onBackPressed();
+                            }
+                        })
+                        .setNegativeButton(R.string.no, null).show();
+            else super.onBackPressed();
 
         }
     }

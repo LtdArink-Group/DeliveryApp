@@ -29,6 +29,8 @@ public class IconTransformer {
                 return R.drawable.icon_drinks_3x;
             case "icon_set":
                 return R.drawable.icon_set_3x;
+            case "icon_kebab":
+                return R.drawable.icon_kebab_3x;
             default:
                 return R.drawable.ic_menu_gallery;
         }

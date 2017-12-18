@@ -35,7 +35,7 @@ public class CompanyDTO {
     private String url;
     @SerializedName("schedules")
     @Expose
-    private List<CompanyWorkingDayDTO> workingDays = null;
+    private List<CompanyWorkingDayDTO> workingDays;
 
     public Integer getId() {
         return id;

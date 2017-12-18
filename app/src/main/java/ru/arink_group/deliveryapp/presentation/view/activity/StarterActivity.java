@@ -13,6 +13,7 @@ import android.widget.Toast;
 
 import com.google.gson.Gson;
 
+import java.net.ConnectException;
 import java.util.concurrent.ExecutionException;
 
 import io.reactivex.observers.DisposableObserver;
@@ -78,7 +79,11 @@ public class StarterActivity extends AppCompatActivity {
 
         @Override
         public void onError(Throwable e) {
-            Toast.makeText(StarterActivity.this, ErrorsTranslator.translate("connection"), Toast.LENGTH_SHORT).show();
+            if (e instanceof ConnectException)
+                Toast.makeText(StarterActivity.this, ErrorsTranslator.translate("connection"), Toast.LENGTH_SHORT).show();
+            else
+                Toast.makeText(StarterActivity.this, ErrorsTranslator.translate("internal"), Toast.LENGTH_SHORT).show();
+
             e.printStackTrace();
             GetCompanyFromShared.INSTANCE.loadCompany(StarterActivity.this);
             startApp();
