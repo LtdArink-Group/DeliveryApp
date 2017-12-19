@@ -76,7 +76,7 @@ interface BookingFoodApi {
             val retrofit = Retrofit.Builder()
                     .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
                     .addConverterFactory(GsonConverterFactory.create())
-                    .baseUrl("http://23.101.67.216:8080/")
+                    .baseUrl("http://manage.newbill.info/")
                     .build()
 
             return retrofit.create(BookingFoodApi::class.java);
