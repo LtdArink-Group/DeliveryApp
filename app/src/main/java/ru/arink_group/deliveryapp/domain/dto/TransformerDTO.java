@@ -1,9 +1,6 @@
 package ru.arink_group.deliveryapp.domain.dto;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 import ru.arink_group.deliveryapp.App;
@@ -22,7 +19,7 @@ import ru.arink_group.deliveryapp.domain.dao.OrderProduct;
 import ru.arink_group.deliveryapp.domain.dao.Period;
 import ru.arink_group.deliveryapp.domain.dao.Portion;
 import ru.arink_group.deliveryapp.domain.dao.Product;
-import ru.arink_group.deliveryapp.presentation.model.DateTime;
+import ru.arink_group.deliveryapp.presentation.shared.DateTime;
 
 /**
  * Created by kirillvs on 20.10.17.

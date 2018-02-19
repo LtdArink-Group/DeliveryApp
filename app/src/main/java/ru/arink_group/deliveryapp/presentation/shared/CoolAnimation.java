@@ -1,4 +1,4 @@
-package ru.arink_group.deliveryapp.presentation.model;
+package ru.arink_group.deliveryapp.presentation.shared;
 
 import android.view.View;
 import android.view.ViewGroup;

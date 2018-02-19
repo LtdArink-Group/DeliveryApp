@@ -22,9 +22,9 @@ import ru.arink_group.deliveryapp.domain.dao.Order
 import ru.arink_group.deliveryapp.domain.interactors.GetCompanyFromShared
 import ru.arink_group.deliveryapp.presentation.adapters.OrderAddressesListAdapter
 import ru.arink_group.deliveryapp.presentation.adapters.RetryOrdersListAdapter
-import ru.arink_group.deliveryapp.presentation.model.DateTime
-import ru.arink_group.deliveryapp.presentation.model.Statuses
-import ru.arink_group.deliveryapp.presentation.model.TimePickerFragment
+import ru.arink_group.deliveryapp.presentation.shared.DateTime
+import ru.arink_group.deliveryapp.presentation.shared.Statuses
+import ru.arink_group.deliveryapp.presentation.shared.TimePickerFragment
 import ru.arink_group.deliveryapp.presentation.presenter.RetryOrderPresenterImpl
 import ru.arink_group.deliveryapp.presentation.presenter.interfaces.RetryOrderPresenter
 import ru.arink_group.deliveryapp.presentation.view.RetryOrderView

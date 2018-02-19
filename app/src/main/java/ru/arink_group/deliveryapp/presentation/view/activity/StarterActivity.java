@@ -5,7 +5,6 @@ import android.content.SharedPreferences;
 import android.support.v7.app.ActionBar;
 import android.app.FragmentTransaction;
 import android.content.Intent;
-import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -14,7 +13,6 @@ import android.widget.Toast;
 import com.google.gson.Gson;
 
 import java.net.ConnectException;
-import java.util.concurrent.ExecutionException;
 
 import io.reactivex.observers.DisposableObserver;
 import ru.arink_group.deliveryapp.App;
@@ -22,7 +20,7 @@ import ru.arink_group.deliveryapp.R;
 import ru.arink_group.deliveryapp.domain.dao.Company;
 import ru.arink_group.deliveryapp.domain.interactors.GetCompany;
 import ru.arink_group.deliveryapp.domain.interactors.GetCompanyFromShared;
-import ru.arink_group.deliveryapp.presentation.model.ErrorsTranslator;
+import ru.arink_group.deliveryapp.presentation.shared.ErrorsTranslator;
 import ru.arink_group.deliveryapp.presentation.view.fragment.LoadFragment;
 
 public class StarterActivity extends AppCompatActivity {

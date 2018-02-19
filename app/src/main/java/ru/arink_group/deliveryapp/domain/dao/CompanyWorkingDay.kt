@@ -1,6 +1,6 @@
 package ru.arink_group.deliveryapp.domain.dao
 
-import ru.arink_group.deliveryapp.presentation.model.DateTime
+import ru.arink_group.deliveryapp.presentation.shared.DateTime
 import java.io.Serializable
 import java.util.*
 

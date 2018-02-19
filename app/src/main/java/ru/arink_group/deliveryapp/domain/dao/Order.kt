@@ -1,7 +1,7 @@
 package ru.arink_group.deliveryapp.domain.dao
 
-import ru.arink_group.deliveryapp.presentation.model.DateTime
-import ru.arink_group.deliveryapp.presentation.model.Statuses
+import ru.arink_group.deliveryapp.presentation.shared.DateTime
+import ru.arink_group.deliveryapp.presentation.shared.Statuses
 import java.io.Serializable
 import java.text.SimpleDateFormat
 import java.util.*

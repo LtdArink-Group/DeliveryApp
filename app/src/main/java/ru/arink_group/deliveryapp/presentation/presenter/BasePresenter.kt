@@ -3,7 +3,7 @@ package ru.arink_group.deliveryapp.presentation.presenter
 import com.jakewharton.retrofit2.adapter.rxjava2.HttpException
 import okhttp3.ResponseBody
 import org.json.JSONObject
-import ru.arink_group.deliveryapp.presentation.model.ErrorsTranslator
+import ru.arink_group.deliveryapp.presentation.shared.ErrorsTranslator
 
 /**
  * Created by kirillvs on 22.11.17.

@@ -1,4 +1,4 @@
-package ru.arink_group.deliveryapp.presentation.model;
+package ru.arink_group.deliveryapp.presentation.shared;
 
 /**
  * Created by kirillvs on 21.11.17.

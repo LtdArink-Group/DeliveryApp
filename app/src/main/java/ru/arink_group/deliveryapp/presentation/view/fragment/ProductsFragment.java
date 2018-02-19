@@ -19,7 +19,7 @@ import ru.arink_group.deliveryapp.presentation.adapters.interfaces.OnDescription
 import ru.arink_group.deliveryapp.presentation.adapters.interfaces.OnIngredientClickListener;
 import ru.arink_group.deliveryapp.presentation.adapters.interfaces.OnItemClickListener;
 import ru.arink_group.deliveryapp.presentation.adapters.ProductsListAdapter;
-import ru.arink_group.deliveryapp.presentation.model.DetailDialog;
+import ru.arink_group.deliveryapp.presentation.shared.DetailDialog;
 import ru.arink_group.deliveryapp.presentation.presenter.interfaces.ProductsPresenter;
 import ru.arink_group.deliveryapp.presentation.presenter.ProductsPresenterImpl;
 import ru.arink_group.deliveryapp.presentation.view.FabView;

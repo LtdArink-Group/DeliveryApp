@@ -1,4 +1,4 @@
-package ru.arink_group.deliveryapp.presentation.model;
+package ru.arink_group.deliveryapp.presentation.shared;
 
 import ru.arink_group.deliveryapp.R;
 

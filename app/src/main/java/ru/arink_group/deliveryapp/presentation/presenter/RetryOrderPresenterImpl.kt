@@ -6,7 +6,7 @@ import ru.arink_group.deliveryapp.domain.dao.Account
 import ru.arink_group.deliveryapp.domain.interactors.CancelOrder
 import ru.arink_group.deliveryapp.domain.interactors.GetAccount
 import ru.arink_group.deliveryapp.domain.interactors.SendOrderToServer
-import ru.arink_group.deliveryapp.presentation.model.ErrorsTranslator
+import ru.arink_group.deliveryapp.presentation.shared.ErrorsTranslator
 import ru.arink_group.deliveryapp.presentation.presenter.interfaces.RetryOrderPresenter
 import ru.arink_group.deliveryapp.presentation.view.RetryOrderView
 import javax.inject.Inject
