@@ -8,6 +8,7 @@ import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.http.*
 import ru.arink_group.deliveryapp.App
+import ru.arink_group.deliveryapp.BuildConfig
 import ru.arink_group.deliveryapp.data.net.response.CategoriesObject
 import ru.arink_group.deliveryapp.data.net.response.OrdersObject
 import ru.arink_group.deliveryapp.data.net.response.ProductsObject
@@ -65,18 +66,12 @@ interface BookingFoodApi {
      */
     companion object Factory {
         fun create(): BookingFoodApi {
-//            val client = OkHttpClient().newBuilder().addInterceptor {
-//                chain: Interceptor.Chain ->
-//                var request = chain.request()
-//                val url = request.url().newBuilder().addQueryParameter("uuid", App.getUUID()).build()
-//                request = request.newBuilder().url(url).build()
-//                return@addInterceptor chain.proceed(request)
-//            }.build()
+            val url = BuildConfig.SERVER_URL
 
             val retrofit = Retrofit.Builder()
                     .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
                     .addConverterFactory(GsonConverterFactory.create())
-                    .baseUrl("http://manage.newbill.info/")
+                    .baseUrl(url)
                     .build()
 
             return retrofit.create(BookingFoodApi::class.java);

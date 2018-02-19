@@ -1,4 +1,4 @@
-package ru.arink_group.deliveryapp.presentation.presenter
+package ru.arink_group.deliveryapp.presentation.shared
 
 import com.jakewharton.retrofit2.adapter.rxjava2.HttpException
 import okhttp3.ResponseBody

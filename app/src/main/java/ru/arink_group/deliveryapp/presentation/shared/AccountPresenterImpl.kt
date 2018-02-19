@@ -1,10 +1,10 @@
-package ru.arink_group.deliveryapp.presentation.presenter
+package ru.arink_group.deliveryapp.presentation.shared
 
 import io.reactivex.observers.DisposableObserver
 import ru.arink_group.deliveryapp.App
 import ru.arink_group.deliveryapp.domain.dao.Account
 import ru.arink_group.deliveryapp.domain.interactors.*
-import ru.arink_group.deliveryapp.presentation.presenter.interfaces.AccountPresenter
+import ru.arink_group.deliveryapp.presentation.shared.interfaces.AccountPresenter
 import ru.arink_group.deliveryapp.presentation.view.AccountView
 import javax.inject.Inject
 

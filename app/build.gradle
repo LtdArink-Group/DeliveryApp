@@ -19,6 +19,46 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
+
+    flavorDimensions "default"
+
+    productFlavors {
+
+        finalProduction {
+            dimension "default"
+            resValue "string", "app_name", "ChiXX"
+            buildConfigField "String", "SERVER_URL", '"http://manage.newbill.info/"'
+        }
+
+        demoProduction {
+            dimension "default"
+            applicationIdSuffix ".demo"
+            resValue "string", "app_name", "ChiXX Demo"
+            buildConfigField "String", "SERVER_URL", '"http://manage.newbill.info/"'
+        }
+
+        demoStaging {
+            dimension "default"
+            applicationIdSuffix ".demo_staging"
+            resValue "string", "app_name", "ChiXX Demo Staging"
+            buildConfigField "String", "SERVER_URL", '"http://23.101.67.216:8080/"'
+        }
+
+        demoLocal {
+            dimension "default"
+            applicationIdSuffix ".demo_local"
+            resValue "string", "app_name", "ChiXX Demo Local"
+            buildConfigField "String", "SERVER_URL", '"http://localhost:3000/"'
+        }
+
+
+        mock {
+            dimension "default"
+            applicationIdSuffix ".test_local"
+            resValue "string", "app_name", "ChiXX Mock"
+            buildConfigField "String", "SERVER_URL", '"http://localhost:3000/"'
+        }
+    }
 }
 
 dependencies {

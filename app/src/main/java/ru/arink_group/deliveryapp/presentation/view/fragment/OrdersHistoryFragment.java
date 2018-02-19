@@ -19,16 +19,13 @@ import ru.arink_group.deliveryapp.R;
 import ru.arink_group.deliveryapp.domain.dao.Order;
 import ru.arink_group.deliveryapp.presentation.adapters.OrdersHistoryAdapter;
 import ru.arink_group.deliveryapp.presentation.adapters.interfaces.OnOrdersHistoryClickListener;
-import ru.arink_group.deliveryapp.presentation.presenter.OrdersHistoryPresenterImpl;
-import ru.arink_group.deliveryapp.presentation.presenter.interfaces.OrdersHistoryPresenter;
+import ru.arink_group.deliveryapp.presentation.shared.OrdersHistoryPresenterImpl;
+import ru.arink_group.deliveryapp.presentation.shared.interfaces.OrdersHistoryPresenter;
 import ru.arink_group.deliveryapp.presentation.view.FabView;
 import ru.arink_group.deliveryapp.presentation.view.MenuView;
 import ru.arink_group.deliveryapp.presentation.view.OrdersHistoryView;
-import ru.arink_group.deliveryapp.presentation.view.PlaceholderView;
 import ru.arink_group.deliveryapp.presentation.view.ProgressView;
 import ru.arink_group.deliveryapp.presentation.view.activity.RetryOrderActivity;
-
-import com.google.android.gms.plus.PlusOneButton;
 
 import java.util.List;
 

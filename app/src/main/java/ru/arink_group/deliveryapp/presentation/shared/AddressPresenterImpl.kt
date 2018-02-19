@@ -1,4 +1,4 @@
-package ru.arink_group.deliveryapp.presentation.presenter
+package ru.arink_group.deliveryapp.presentation.shared
 
 import io.reactivex.observers.DisposableObserver
 import ru.arink_group.deliveryapp.App
@@ -6,7 +6,7 @@ import ru.arink_group.deliveryapp.domain.dao.Address
 import ru.arink_group.deliveryapp.domain.interactors.AddAddress
 import ru.arink_group.deliveryapp.domain.interactors.UpdateAddress
 import ru.arink_group.deliveryapp.domain.interactors.UpdateAddressPatch
-import ru.arink_group.deliveryapp.presentation.presenter.interfaces.AddressPresenter
+import ru.arink_group.deliveryapp.presentation.shared.interfaces.AddressPresenter
 import ru.arink_group.deliveryapp.presentation.view.AddressView
 import javax.inject.Inject
 

@@ -34,14 +34,14 @@ import ru.arink_group.deliveryapp.presentation.di.module.FactoriesModule;
 import ru.arink_group.deliveryapp.presentation.di.module.InteractorsModule;
 import ru.arink_group.deliveryapp.presentation.di.module.RepositoriesModule;
 import ru.arink_group.deliveryapp.presentation.di.module.StoreModule;
-import ru.arink_group.deliveryapp.presentation.presenter.AccountPresenterImpl;
-import ru.arink_group.deliveryapp.presentation.presenter.AddressPresenterImpl;
-import ru.arink_group.deliveryapp.presentation.presenter.CategoriesPresenterImpl;
-import ru.arink_group.deliveryapp.presentation.presenter.IngredientsPresenterImpl;
-import ru.arink_group.deliveryapp.presentation.presenter.OrderPresenterImpl;
-import ru.arink_group.deliveryapp.presentation.presenter.OrdersHistoryPresenterImpl;
-import ru.arink_group.deliveryapp.presentation.presenter.ProductsPresenterImpl;
-import ru.arink_group.deliveryapp.presentation.presenter.RetryOrderPresenterImpl;
+import ru.arink_group.deliveryapp.presentation.shared.AccountPresenterImpl;
+import ru.arink_group.deliveryapp.presentation.shared.AddressPresenterImpl;
+import ru.arink_group.deliveryapp.presentation.shared.CategoriesPresenterImpl;
+import ru.arink_group.deliveryapp.presentation.shared.IngredientsPresenterImpl;
+import ru.arink_group.deliveryapp.presentation.shared.OrderPresenterImpl;
+import ru.arink_group.deliveryapp.presentation.shared.OrdersHistoryPresenterImpl;
+import ru.arink_group.deliveryapp.presentation.shared.ProductsPresenterImpl;
+import ru.arink_group.deliveryapp.presentation.shared.RetryOrderPresenterImpl;
 
 /**
  * Created by kirillvs on 06.10.17.

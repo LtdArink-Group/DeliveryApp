@@ -1,4 +1,4 @@
-package ru.arink_group.deliveryapp.presentation.presenter.interfaces;
+package ru.arink_group.deliveryapp.presentation.shared.interfaces;
 
 import ru.arink_group.deliveryapp.domain.dao.Address;
 

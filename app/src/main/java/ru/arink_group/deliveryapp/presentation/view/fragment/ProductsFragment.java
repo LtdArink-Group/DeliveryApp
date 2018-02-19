@@ -1,7 +1,6 @@
 package ru.arink_group.deliveryapp.presentation.view.fragment;
 
 
-import android.app.Dialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.app.Fragment;
@@ -21,8 +20,8 @@ import ru.arink_group.deliveryapp.presentation.adapters.interfaces.OnIngredientC
 import ru.arink_group.deliveryapp.presentation.adapters.interfaces.OnItemClickListener;
 import ru.arink_group.deliveryapp.presentation.adapters.ProductsListAdapter;
 import ru.arink_group.deliveryapp.presentation.model.DetailDialog;
-import ru.arink_group.deliveryapp.presentation.presenter.interfaces.ProductsPresenter;
-import ru.arink_group.deliveryapp.presentation.presenter.ProductsPresenterImpl;
+import ru.arink_group.deliveryapp.presentation.shared.interfaces.ProductsPresenter;
+import ru.arink_group.deliveryapp.presentation.shared.ProductsPresenterImpl;
 import ru.arink_group.deliveryapp.presentation.view.FabView;
 import ru.arink_group.deliveryapp.presentation.view.PlaceholderView;
 import ru.arink_group.deliveryapp.presentation.view.ProductsView;
