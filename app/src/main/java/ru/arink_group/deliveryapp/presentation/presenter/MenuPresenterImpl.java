@@ -1,9 +1,9 @@
-package ru.arink_group.deliveryapp.presentation.shared;
+package ru.arink_group.deliveryapp.presentation.presenter;
 
 import android.app.Fragment;
 
 import ru.arink_group.deliveryapp.R;
-import ru.arink_group.deliveryapp.presentation.shared.interfaces.MenuPresenter;
+import ru.arink_group.deliveryapp.presentation.presenter.interfaces.MenuPresenter;
 import ru.arink_group.deliveryapp.presentation.view.MenuView;
 import ru.arink_group.deliveryapp.presentation.view.fragment.AccountFragment;
 import ru.arink_group.deliveryapp.presentation.view.fragment.OrderFragment;

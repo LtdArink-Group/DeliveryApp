@@ -1,4 +1,4 @@
-package ru.arink_group.deliveryapp.presentation.shared
+package ru.arink_group.deliveryapp.presentation.presenter
 
 import io.reactivex.observers.DisposableObserver
 import ru.arink_group.deliveryapp.App
@@ -7,7 +7,7 @@ import ru.arink_group.deliveryapp.domain.interactors.CancelOrder
 import ru.arink_group.deliveryapp.domain.interactors.GetAccount
 import ru.arink_group.deliveryapp.domain.interactors.SendOrderToServer
 import ru.arink_group.deliveryapp.presentation.model.ErrorsTranslator
-import ru.arink_group.deliveryapp.presentation.shared.interfaces.RetryOrderPresenter
+import ru.arink_group.deliveryapp.presentation.presenter.interfaces.RetryOrderPresenter
 import ru.arink_group.deliveryapp.presentation.view.RetryOrderView
 import javax.inject.Inject
 

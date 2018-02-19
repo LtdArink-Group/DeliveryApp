@@ -1,4 +1,4 @@
-package ru.arink_group.deliveryapp.presentation.shared;
+package ru.arink_group.deliveryapp.presentation.presenter;
 
 import java.util.List;
 
@@ -11,7 +11,7 @@ import ru.arink_group.deliveryapp.domain.dao.Product;
 import ru.arink_group.deliveryapp.domain.interactors.GetCategoriesList;
 import ru.arink_group.deliveryapp.App;
 import ru.arink_group.deliveryapp.domain.interactors.GetListItemsFromBasket;
-import ru.arink_group.deliveryapp.presentation.shared.interfaces.CategoriesPresenter;
+import ru.arink_group.deliveryapp.presentation.presenter.interfaces.CategoriesPresenter;
 import ru.arink_group.deliveryapp.presentation.view.CategoriesView;
 
 /**

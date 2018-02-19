@@ -22,8 +22,8 @@ import android.widget.FrameLayout;
 import android.widget.ProgressBar;
 
 import ru.arink_group.deliveryapp.R;
-import ru.arink_group.deliveryapp.presentation.shared.interfaces.MenuPresenter;
-import ru.arink_group.deliveryapp.presentation.shared.MenuPresenterImpl;
+import ru.arink_group.deliveryapp.presentation.presenter.interfaces.MenuPresenter;
+import ru.arink_group.deliveryapp.presentation.presenter.MenuPresenterImpl;
 import ru.arink_group.deliveryapp.presentation.view.FabView;
 import ru.arink_group.deliveryapp.presentation.view.MenuView;
 import ru.arink_group.deliveryapp.presentation.view.fragment.AccountFragment;

@@ -15,8 +15,8 @@ import ru.arink_group.deliveryapp.domain.dao.Ingredient;
 import ru.arink_group.deliveryapp.domain.dao.Product;
 import ru.arink_group.deliveryapp.presentation.adapters.IngredientsListAdapter;
 import ru.arink_group.deliveryapp.presentation.adapters.interfaces.OnIngredientButtonClickListener;
-import ru.arink_group.deliveryapp.presentation.shared.IngredientsPresenterImpl;
-import ru.arink_group.deliveryapp.presentation.shared.interfaces.IngredientsPresenter;
+import ru.arink_group.deliveryapp.presentation.presenter.IngredientsPresenterImpl;
+import ru.arink_group.deliveryapp.presentation.presenter.interfaces.IngredientsPresenter;
 import ru.arink_group.deliveryapp.presentation.view.FabView;
 import ru.arink_group.deliveryapp.presentation.view.IngredientsView;
 

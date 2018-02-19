@@ -25,8 +25,8 @@ import ru.arink_group.deliveryapp.presentation.adapters.RetryOrdersListAdapter
 import ru.arink_group.deliveryapp.presentation.model.DateTime
 import ru.arink_group.deliveryapp.presentation.model.Statuses
 import ru.arink_group.deliveryapp.presentation.model.TimePickerFragment
-import ru.arink_group.deliveryapp.presentation.shared.RetryOrderPresenterImpl
-import ru.arink_group.deliveryapp.presentation.shared.interfaces.RetryOrderPresenter
+import ru.arink_group.deliveryapp.presentation.presenter.RetryOrderPresenterImpl
+import ru.arink_group.deliveryapp.presentation.presenter.interfaces.RetryOrderPresenter
 import ru.arink_group.deliveryapp.presentation.view.RetryOrderView
 import ru.arink_group.deliveryapp.presentation.view.activity.MenuActivity
 import ru.arink_group.deliveryapp.presentation.view.fragment.OrdersHistoryFragment.RETRY_ORDER

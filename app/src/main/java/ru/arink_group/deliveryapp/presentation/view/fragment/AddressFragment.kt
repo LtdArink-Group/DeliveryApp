@@ -13,8 +13,8 @@ import android.widget.Toast
 
 import ru.arink_group.deliveryapp.R
 import ru.arink_group.deliveryapp.domain.dao.Address
-import ru.arink_group.deliveryapp.presentation.shared.AddressPresenterImpl
-import ru.arink_group.deliveryapp.presentation.shared.interfaces.AddressPresenter
+import ru.arink_group.deliveryapp.presentation.presenter.AddressPresenterImpl
+import ru.arink_group.deliveryapp.presentation.presenter.interfaces.AddressPresenter
 import ru.arink_group.deliveryapp.presentation.view.AddressView
 import ru.arink_group.deliveryapp.presentation.view.ProgressView
 import ru.arink_group.deliveryapp.presentation.view.activity.AddressActivity

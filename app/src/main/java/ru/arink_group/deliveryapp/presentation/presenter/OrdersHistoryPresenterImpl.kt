@@ -1,10 +1,10 @@
-package ru.arink_group.deliveryapp.presentation.shared
+package ru.arink_group.deliveryapp.presentation.presenter
 
 import io.reactivex.observers.DisposableObserver
 import ru.arink_group.deliveryapp.App
 import ru.arink_group.deliveryapp.domain.dao.Order
 import ru.arink_group.deliveryapp.domain.interactors.GetOrders
-import ru.arink_group.deliveryapp.presentation.shared.interfaces.OrdersHistoryPresenter
+import ru.arink_group.deliveryapp.presentation.presenter.interfaces.OrdersHistoryPresenter
 import ru.arink_group.deliveryapp.presentation.view.OrdersHistoryView
 import javax.inject.Inject
 

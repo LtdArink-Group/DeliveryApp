@@ -41,8 +41,8 @@ import ru.arink_group.deliveryapp.presentation.adapters.OrderAddressesListAdapte
 import ru.arink_group.deliveryapp.presentation.adapters.OrdersListAdapter;
 import ru.arink_group.deliveryapp.presentation.model.DateTime;
 import ru.arink_group.deliveryapp.presentation.model.TimePickerFragment;
-import ru.arink_group.deliveryapp.presentation.shared.OrderPresenterImpl;
-import ru.arink_group.deliveryapp.presentation.shared.interfaces.OrderPresenter;
+import ru.arink_group.deliveryapp.presentation.presenter.OrderPresenterImpl;
+import ru.arink_group.deliveryapp.presentation.presenter.interfaces.OrderPresenter;
 import ru.arink_group.deliveryapp.presentation.view.FabView;
 import ru.arink_group.deliveryapp.presentation.view.MenuView;
 import ru.arink_group.deliveryapp.presentation.view.OrderView;
