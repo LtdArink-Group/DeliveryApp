@@ -1,7 +1,6 @@
 package ru.arink_group.deliveryapp.presentation.view.fragment;
 
 
-import android.app.DialogFragment;
 import android.app.TimePickerDialog;
 import android.content.Intent;
 import android.os.Bundle;
@@ -19,7 +18,6 @@ import android.widget.Button;
 import android.widget.CompoundButton;
 import android.widget.ProgressBar;
 import android.widget.Spinner;
-import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.TimePicker;
 import android.widget.Toast;
@@ -27,7 +25,6 @@ import android.widget.Toast;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
-import java.util.TimeZone;
 
 import br.com.simplepass.loading_button_lib.customViews.CircularProgressButton;
 import br.com.simplepass.loading_button_lib.interfaces.OnAnimationEndListener;
@@ -42,14 +39,13 @@ import ru.arink_group.deliveryapp.domain.dao.Product;
 import ru.arink_group.deliveryapp.domain.interactors.GetCompanyFromShared;
 import ru.arink_group.deliveryapp.presentation.adapters.OrderAddressesListAdapter;
 import ru.arink_group.deliveryapp.presentation.adapters.OrdersListAdapter;
-import ru.arink_group.deliveryapp.presentation.model.DateTime;
-import ru.arink_group.deliveryapp.presentation.model.TimePickerFragment;
+import ru.arink_group.deliveryapp.presentation.shared.DateTime;
+import ru.arink_group.deliveryapp.presentation.shared.TimePickerFragment;
 import ru.arink_group.deliveryapp.presentation.presenter.OrderPresenterImpl;
 import ru.arink_group.deliveryapp.presentation.presenter.interfaces.OrderPresenter;
 import ru.arink_group.deliveryapp.presentation.view.FabView;
 import ru.arink_group.deliveryapp.presentation.view.MenuView;
 import ru.arink_group.deliveryapp.presentation.view.OrderView;
-import ru.arink_group.deliveryapp.presentation.view.ProgressView;
 import ru.arink_group.deliveryapp.presentation.view.activity.MenuActivity;
 
 /**

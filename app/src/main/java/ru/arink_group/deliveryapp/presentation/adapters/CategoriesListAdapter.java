@@ -13,7 +13,7 @@ import java.util.List;
 import ru.arink_group.deliveryapp.R;
 import ru.arink_group.deliveryapp.domain.dao.Category;
 import ru.arink_group.deliveryapp.presentation.adapters.interfaces.OnCategoryClickListener;
-import ru.arink_group.deliveryapp.presentation.model.IconTransformer;
+import ru.arink_group.deliveryapp.presentation.shared.IconTransformer;
 
 /**
  * Created by kirillvs on 02.10.17.

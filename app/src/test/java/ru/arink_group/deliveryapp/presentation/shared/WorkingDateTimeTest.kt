@@ -1,4 +1,4 @@
-package ru.arink_group.deliveryapp.presentation.model
+package ru.arink_group.deliveryapp.presentation.shared
 
 import android.content.Context
 import org.hamcrest.CoreMatchers.`is`
@@ -6,7 +6,6 @@ import org.junit.Test
 
 import org.junit.Assert.*
 import org.junit.Before
-import org.junit.BeforeClass
 import org.junit.runner.RunWith
 import org.mockito.Mock
 import org.mockito.Mockito.`when`

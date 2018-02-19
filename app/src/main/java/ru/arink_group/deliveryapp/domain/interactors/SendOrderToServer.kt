@@ -7,7 +7,7 @@ import ru.arink_group.deliveryapp.domain.dao.Product
 import ru.arink_group.deliveryapp.domain.dto.OrderDTO
 import ru.arink_group.deliveryapp.domain.dto.TransformerDTO
 import ru.arink_group.deliveryapp.domain.repository.OrderRepository
-import ru.arink_group.deliveryapp.presentation.model.DateTime
+import ru.arink_group.deliveryapp.presentation.shared.DateTime
 import javax.inject.Inject
 
 /**

@@ -4,7 +4,6 @@ import io.reactivex.observers.DisposableObserver
 import ru.arink_group.deliveryapp.App
 import ru.arink_group.deliveryapp.domain.dao.Order
 import ru.arink_group.deliveryapp.domain.interactors.GetOrders
-import ru.arink_group.deliveryapp.presentation.model.Statuses
 import ru.arink_group.deliveryapp.presentation.presenter.interfaces.OrdersHistoryPresenter
 import ru.arink_group.deliveryapp.presentation.view.OrdersHistoryView
 import javax.inject.Inject

@@ -11,7 +11,6 @@ import ru.arink_group.deliveryapp.domain.dao.Product;
 import ru.arink_group.deliveryapp.domain.interactors.GetCategoriesList;
 import ru.arink_group.deliveryapp.App;
 import ru.arink_group.deliveryapp.domain.interactors.GetListItemsFromBasket;
-import ru.arink_group.deliveryapp.presentation.model.ErrorsTranslator;
 import ru.arink_group.deliveryapp.presentation.presenter.interfaces.CategoriesPresenter;
 import ru.arink_group.deliveryapp.presentation.view.CategoriesView;
 

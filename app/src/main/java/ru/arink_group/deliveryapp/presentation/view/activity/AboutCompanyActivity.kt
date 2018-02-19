@@ -5,7 +5,6 @@ import android.net.Uri
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
-import android.widget.LinearLayout
 import android.widget.RelativeLayout
 import android.widget.TextView
 import android.widget.Toast
@@ -19,8 +18,7 @@ import com.google.android.gms.maps.model.MarkerOptions
 import ru.arink_group.deliveryapp.R
 import ru.arink_group.deliveryapp.domain.dao.Company
 import ru.arink_group.deliveryapp.domain.interactors.GetCompanyFromShared
-import ru.arink_group.deliveryapp.presentation.model.DateTime
-import ru.arink_group.deliveryapp.presentation.model.WorkingDateTime
+import ru.arink_group.deliveryapp.presentation.shared.WorkingDateTime
 
 class AboutCompanyActivity : AppCompatActivity(), OnMapReadyCallback {
 

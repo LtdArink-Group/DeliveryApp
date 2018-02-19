@@ -4,7 +4,7 @@ import java.util.List;
 
 import ru.arink_group.deliveryapp.domain.dao.Address;
 import ru.arink_group.deliveryapp.domain.dao.Product;
-import ru.arink_group.deliveryapp.presentation.model.DateTime;
+import ru.arink_group.deliveryapp.presentation.shared.DateTime;
 
 /**
  * Created by kirillvs on 24.10.17.

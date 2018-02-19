@@ -24,11 +24,8 @@ import ru.arink_group.deliveryapp.presentation.presenter.interfaces.OrdersHistor
 import ru.arink_group.deliveryapp.presentation.view.FabView;
 import ru.arink_group.deliveryapp.presentation.view.MenuView;
 import ru.arink_group.deliveryapp.presentation.view.OrdersHistoryView;
-import ru.arink_group.deliveryapp.presentation.view.PlaceholderView;
 import ru.arink_group.deliveryapp.presentation.view.ProgressView;
 import ru.arink_group.deliveryapp.presentation.view.activity.RetryOrderActivity;
-
-import com.google.android.gms.plus.PlusOneButton;
 
 import java.util.List;
 

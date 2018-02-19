@@ -1,13 +1,9 @@
-package ru.arink_group.deliveryapp.presentation.model
+package ru.arink_group.deliveryapp.presentation.shared
 
-import android.app.DatePickerDialog
 import android.app.Dialog
 import android.app.DialogFragment
 import android.app.TimePickerDialog
 import android.os.Bundle
-import android.widget.DatePicker
-import android.widget.TimePicker
-import android.widget.Toast
 import java.util.*
 
 /**

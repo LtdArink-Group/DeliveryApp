@@ -3,8 +3,6 @@ package ru.arink_group.deliveryapp.presentation.adapters
 import android.content.Context
 import android.os.CountDownTimer
 import android.support.v4.content.ContextCompat
-import android.support.v4.content.res.ResourcesCompat
-import android.support.v7.content.res.AppCompatResources
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
@@ -13,8 +11,8 @@ import android.widget.TextView
 import ru.arink_group.deliveryapp.R
 import ru.arink_group.deliveryapp.domain.dao.Order
 import ru.arink_group.deliveryapp.presentation.adapters.interfaces.OnOrdersHistoryClickListener
-import ru.arink_group.deliveryapp.presentation.model.DateTime
-import ru.arink_group.deliveryapp.presentation.model.Statuses
+import ru.arink_group.deliveryapp.presentation.shared.DateTime
+import ru.arink_group.deliveryapp.presentation.shared.Statuses
 import java.text.SimpleDateFormat
 import java.util.*
 
