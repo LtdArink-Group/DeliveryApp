@@ -84,6 +84,9 @@ public class OrderFragment extends Fragment implements OrderView,
     @BindView(R.id.summary)
     TextView summary;
 
+    @BindView(R.id.summary_address_list)
+    TextView summaryAddressListView;
+
     @BindView(R.id.send_order_button)
     CircularProgressButton sendButton;
 
@@ -223,6 +226,12 @@ public class OrderFragment extends Fragment implements OrderView,
 
         if (selfExportSwitch.isChecked()) {
             discount = summary * delivery.getPickupDiscount() / 100;
+            summaryAddressListView.setText(R.string.summary_address_list_pickup);
+            orderPresenter.getAddresses(true);
+        } else {
+            summaryAddressListView.setText(R.string.summary_address_list);
+            orderPresenter.getAddresses(false);
+
         }
 
         String summaryCostForm = getString(R.string.form_rubles, String.valueOf(summary));
@@ -258,12 +267,14 @@ public class OrderFragment extends Fragment implements OrderView,
             for (int i = 0; i < addresses.size(); i++) {
                 addressesString.add(i, this.concatAddressName(addresses.get(i)));
             }
+            addressesStringAdaptet.clear();
             addressesStringAdaptet.addAll(addressesString);
             addressListSpinner.setVisibility(View.VISIBLE);
             summaryCreateAddressButton.setVisibility(View.GONE);
         } else {
+            if(isSelfPickup())
+                summaryCreateAddressButton.setVisibility(View.VISIBLE);
             addressListSpinner.setVisibility(View.GONE);
-            summaryCreateAddressButton.setVisibility(View.VISIBLE);
         }
     }
 
@@ -399,12 +410,8 @@ public class OrderFragment extends Fragment implements OrderView,
 
     @Override
     public Integer getSelectedAddressId() {
-        if (selfExportSwitch.isChecked()) {
-            return null;
-        } else {
-            int pos = addressListSpinner.getSelectedItemPosition();
-            return addresses.get(pos).getId();
-        }
+        int pos = addressListSpinner.getSelectedItemPosition();
+        return addresses.get(pos).getId();
     }
 
     @Override

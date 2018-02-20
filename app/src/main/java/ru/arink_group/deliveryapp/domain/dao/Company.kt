@@ -10,6 +10,7 @@ class Company(
         val id: Int,
         val name: String,
         val categories: List<Int>,
+        val addresses: List<Address>,
         val description: String?,
         val contactInfo: ContactInfo,
         val delivery: Delivery,

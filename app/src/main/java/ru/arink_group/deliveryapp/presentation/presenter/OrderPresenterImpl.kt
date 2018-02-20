@@ -74,8 +74,13 @@ class OrderPresenterImpl(val orderView: OrderView): BasePresenter(), OrderPresen
                 )
     }
 
-    override fun getAddresses() {
-        getAccount.execute(AccountDisposableObserver(), GetAccount.Params())
+    override fun getAddresses(isCompanyAddreses: Boolean) {
+        if(isCompanyAddreses) {
+            orderView.loadingAddressFinish()
+            orderView.updateAddresses(GetCompanyFromShared.getCompanyOrDefault().addresses)
+        } else {
+            getAccount.execute(AccountDisposableObserver(), GetAccount.Params())
+        }
     }
 
     inner class AccountDisposableObserver: DisposableObserver<Account>() {
@@ -105,7 +110,6 @@ class OrderPresenterImpl(val orderView: OrderView): BasePresenter(), OrderPresen
         }
 
         override fun onComplete() {
-            orderView.updateTotals()
             orderView.loadingFinish()
         }
 
@@ -114,7 +118,8 @@ class OrderPresenterImpl(val orderView: OrderView): BasePresenter(), OrderPresen
                 orderView.showPlaceholder()
             } else {
                 orderView.setProducts(t)
-                getAddresses()
+                getAddresses(false)
+                orderView.updateTotals()
             }
         }
 

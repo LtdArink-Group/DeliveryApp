@@ -29,6 +29,7 @@
     <string name="currency">р</string>
     <string name="summary">Итого</string>
     <string name="self_export">Самовывоз</string>
+    <string name="company_export">Доставка</string>
     <string name="summary_cost">Сумма заказа</string>
     <string name="discount">Скидка</string>
     <string name="delivery_cost">Доставка</string>
@@ -81,6 +82,7 @@
     <string name="error_cant_order_is_rest">К сожалению сегодня выходной,попробуйте завтра!</string>
 
     <string name="summary_address_list">Адрес доставки</string>
+    <string name="summary_address_list_pickup">Адрес самовывоза</string>
     <string name="summary_create_account">Добавить адрес</string>
     <string name="account_addresses">Ваши адреса</string>
     <string name="account_address">Создать адрес</string>

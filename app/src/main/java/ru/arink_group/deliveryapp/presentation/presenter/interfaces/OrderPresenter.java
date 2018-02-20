@@ -8,7 +8,7 @@ import ru.arink_group.deliveryapp.domain.dao.Product;
 
 public interface OrderPresenter extends Presenter {
     void getProductsFromBasket();
-    void getAddresses();
+    void getAddresses(boolean companyAddres);
     void getTotals();
     void updateProduct(Product product);
     void sendOrderToServer();
