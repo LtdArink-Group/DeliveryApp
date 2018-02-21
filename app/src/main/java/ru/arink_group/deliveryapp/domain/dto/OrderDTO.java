@@ -44,6 +44,9 @@ public class OrderDTO {
     @SerializedName("pickup")
     @Expose
     private Boolean pickup;
+    @SerializedName("device")
+    @Expose
+    private String device;
     @SerializedName("order_products")
     @Expose
     private List<OrderProductDTO> orderProducts = null;
@@ -142,5 +145,13 @@ public class OrderDTO {
 
     public void setNum(int num) {
         this.num = num;
+    }
+
+    public String getDevice() {
+        return device;
+    }
+
+    public void setDevice(String device) {
+        this.device = device;
     }
 }

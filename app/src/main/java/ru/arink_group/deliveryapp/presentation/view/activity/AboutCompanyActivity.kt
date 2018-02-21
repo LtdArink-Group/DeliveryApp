@@ -116,7 +116,7 @@ class AboutCompanyActivity : AppCompatActivity(), OnMapReadyCallback {
             val marker = mMap.addMarker(MarkerOptions().position(position).title(getString(R.string.about_company_delivery_title)))
             marker.showInfoWindow()
             if (index == 0) {
-                mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(position, 15.0F))
+                mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(position, 13.0F))
                 marker.showInfoWindow()
             }
         })
