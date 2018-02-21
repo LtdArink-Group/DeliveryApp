@@ -54,6 +54,11 @@
                 android:orientation="vertical">
 
                 <TextView
+                    android:id="@+id/order_history_type"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+
+                <TextView
                     android:id="@+id/order_history_address"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content" />

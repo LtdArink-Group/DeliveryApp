@@ -5,6 +5,7 @@ import ru.arink_group.deliveryapp.App
 import ru.arink_group.deliveryapp.domain.dao.Account
 import ru.arink_group.deliveryapp.domain.interactors.CancelOrder
 import ru.arink_group.deliveryapp.domain.interactors.GetAccount
+import ru.arink_group.deliveryapp.domain.interactors.GetCompanyFromShared
 import ru.arink_group.deliveryapp.domain.interactors.SendOrderToServer
 import ru.arink_group.deliveryapp.presentation.shared.ErrorsTranslator
 import ru.arink_group.deliveryapp.presentation.presenter.interfaces.RetryOrderPresenter
@@ -30,8 +31,13 @@ class RetryOrderPresenterImpl(val view: RetryOrderView): BasePresenter(), RetryO
     }
 
 
-    override fun getAddresses() {
-        getAccount.execute(AccountDisposableObserver(), GetAccount.Params())
+    override fun getAddresses(isCompanyAddress: Boolean) {
+        if(isCompanyAddress) {
+            view.loadingAddressFinish()
+            view.updateAddresses(GetCompanyFromShared.getCompanyOrDefault().addresses)
+        } else {
+            getAccount.execute(AccountDisposableObserver(), GetAccount.Params())
+        }
     }
 
     override fun cancelOrder(orderId: String) {

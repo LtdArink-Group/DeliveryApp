@@ -5,7 +5,7 @@ package ru.arink_group.deliveryapp.presentation.presenter.interfaces;
  */
 
 public interface RetryOrderPresenter {
-    void getAddresses();
+    void getAddresses(boolean isCompanyAddress);
     void cancelOrder(String orderId);
     void sendOrderToServer();
 }

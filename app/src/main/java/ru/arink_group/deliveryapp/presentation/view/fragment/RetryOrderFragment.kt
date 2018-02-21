@@ -153,11 +153,7 @@ class RetryOrderFragment : Fragment(), RetryOrderView, TimePickerDialog.OnTimeSe
             initAddress(view)
         } else {
             initTimePicker()
-            if (order.pickup) {
-                hideAddressSpiner(view)
-            } else {
-                initAddressSpinner()
-            }
+            initAddressSpinner()
         }
 
     }
@@ -166,10 +162,8 @@ class RetryOrderFragment : Fragment(), RetryOrderView, TimePickerDialog.OnTimeSe
         progress.visibility = View.GONE
         view.findViewById<TextView>(R.id.summary_address_list).visibility = View.GONE
         val addressInfo = order.addressInfo
-        if (!order.pickup) {
-            address.visibility = View.VISIBLE
-            view.findViewById<TextView>(R.id.summary_address_list).visibility = View.VISIBLE
-        }
+        address.visibility = View.VISIBLE
+        view.findViewById<TextView>(R.id.summary_address_list).visibility = View.VISIBLE
         address.text = "${addressInfo?.street}, ${addressInfo?.house} (${addressInfo?.title})"
     }
 
@@ -190,7 +184,8 @@ class RetryOrderFragment : Fragment(), RetryOrderView, TimePickerDialog.OnTimeSe
     private fun initAddressSpinner() {
         addressesAdapter = OrderAddressesListAdapter(activity, R.layout.item_spinner_address, ArrayList())
         addresses.adapter = addressesAdapter
-        presenter.getAddresses()
+        val isCompanyAddresses = order.pickup
+        presenter.getAddresses(isCompanyAddresses)
     }
 
     private fun initTimePicker() {
@@ -295,12 +290,8 @@ class RetryOrderFragment : Fragment(), RetryOrderView, TimePickerDialog.OnTimeSe
     }
 
     override fun getAddressId(): Int? {
-        return if (order.pickup) {
-            null
-        } else {
-            val pos = addresses.getSelectedItemPosition()
-            addressesList[pos].id
-        }
+        val pos = addresses.getSelectedItemPosition()
+        return addressesList[pos].id
     }
 
     override fun getDeliveryTime(): DateTime = selectedTime

@@ -43,6 +43,7 @@ class OrdersHistoryAdapter(val isActive: Boolean = true): RecyclerView.Adapter<O
 
         val orderNumView = view.findViewById<TextView>(R.id.order_num)
         val statusView = view.findViewById<TextView>(R.id.order_history_status)
+        val addressTypeView = view.findViewById<TextView>(R.id.order_history_type)
         val addressView = view.findViewById<TextView>(R.id.order_history_address)
         val contentView = view.findViewById<TextView>(R.id.order_history_data_and_cost)
         val counterView = view.findViewById<TextView>(R.id.order_history_counter)
@@ -84,8 +85,12 @@ class OrdersHistoryAdapter(val isActive: Boolean = true): RecyclerView.Adapter<O
         if (addressInfo != null) {
             val addressString = "${addressInfo.street}, ${addressInfo.house} (${addressInfo.title})"
             addressView.text = addressString
+        }
+
+        if(order.pickup) {
+            addressTypeView.setText(R.string.self_export)
         } else {
-            addressView.setText(R.string.self_export)
+            addressTypeView.setText(R.string.company_export)
         }
 
         val content = "${dateTime.toTimeWithDate()} - ${order.totalCost + order.deliveryCost} Р"

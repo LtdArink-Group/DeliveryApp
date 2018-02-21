@@ -15,6 +15,9 @@ public class CompanyDTO {
     @SerializedName("categories")
     @Expose
     private List<Integer> categories = null;
+    @SerializedName("addresses")
+    @Expose
+    private List<AddressDTO> addresses = null;
     @SerializedName("description")
     @Expose
     private String description;
@@ -115,5 +118,13 @@ public class CompanyDTO {
 
     public void setWorkingDays(List<CompanyWorkingDayDTO> workingDays) {
         this.workingDays = workingDays;
+    }
+
+    public List<AddressDTO> getAddresses() {
+        return addresses;
+    }
+
+    public void setAddresses(List<AddressDTO> addresses) {
+        this.addresses = addresses;
     }
 }

@@ -205,6 +205,7 @@ public class TransformerDTO {
                 companyDTO.getId(),
                 companyDTO.getName(),
                 companyDTO.getCategories(),
+                transformListAddresses(companyDTO.getAddresses()),
                 companyDTO.getDescription(),
                 transformContactInfo(companyDTO.getContactInfo()),
                 transformDelivery(companyDTO.getDelivery()),
