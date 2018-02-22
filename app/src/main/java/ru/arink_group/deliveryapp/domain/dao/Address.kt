@@ -11,8 +11,8 @@ data class Address(
         var city: String = "Хабаровск",
         var street: String = "",
         var house: String = "",
-        var office: String = "",
-        var floor: String = "",
-        var entrance: String = "",
-        var code: String = ""
+        var office: String? = "",
+        var floor: String? = "",
+        var entrance: String? = "",
+        var code: String? = ""
 ) : Serializable
