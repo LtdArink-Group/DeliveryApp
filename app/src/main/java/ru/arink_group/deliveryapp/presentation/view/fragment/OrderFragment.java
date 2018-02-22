@@ -272,7 +272,7 @@ public class OrderFragment extends Fragment implements OrderView,
             addressListSpinner.setVisibility(View.VISIBLE);
             summaryCreateAddressButton.setVisibility(View.GONE);
         } else {
-            if(isSelfPickup())
+            if(!isSelfPickup())
                 summaryCreateAddressButton.setVisibility(View.VISIBLE);
             addressListSpinner.setVisibility(View.GONE);
         }
