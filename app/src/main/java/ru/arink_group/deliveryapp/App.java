@@ -19,6 +19,8 @@ public class App extends Application {
     private static String unigueID = null;
     private static final String PREF_UNIQ_ID = "PREF_UNIQ_ID";
 
+    public static final String DEVICE_NAME = "android";
+
     public static final String APP_SHARED_PREF = "BOOKING FOOD SHARED PREF";
     public static final String COMPANY_INFO = "COMPANY INFO";
 

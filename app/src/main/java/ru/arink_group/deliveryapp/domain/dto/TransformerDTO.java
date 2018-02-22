@@ -252,6 +252,7 @@ public class TransformerDTO {
         orderDTO.setCompanyId(Integer.valueOf(App.getCompanyId()));
         orderDTO.setAddressId(addressId);
         orderDTO.setPickup(selfPickup);
+        orderDTO.setDevice(App.DEVICE_NAME);
         orderDTO.setOrderProducts(createListOrderProductDTO(products));
         orderDTO.setDeliveryTime(deliveryTime.toCurrentDateString());
         return orderDTO;
@@ -366,6 +367,7 @@ public class TransformerDTO {
         orderDTO.setCompanyId(Integer.valueOf(App.getCompanyId()));
         orderDTO.setAddressId(addressId);
         orderDTO.setPickup(order.getPickup());
+        orderDTO.setDevice(App.DEVICE_NAME);
         orderDTO.setOrderProducts(trahsformListOrderProductDTO(order.getProducts()));
         orderDTO.setDeliveryTime(deliveryTime.toCurrentDateString());
         return orderDTO;
