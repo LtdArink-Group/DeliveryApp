@@ -128,7 +128,6 @@ class OrderPresenterImpl(val orderView: OrderView): BasePresenter(), OrderPresen
     inner class UpdateProductDisposableObserver: DisposableObserver<Product>() {
 
         override fun onComplete() {
-            orderView.updateTotals()
         }
 
         override fun onError(e: Throwable) {
