@@ -1,5 +1,7 @@
 package ru.arink_group.deliveryapp.presentation.view;
 
+import android.content.Context;
+
 import ru.arink_group.deliveryapp.domain.dao.Account;
 
 /**
@@ -12,4 +14,5 @@ public interface AccountView {
     void startNewAddressAfterCreateAccount();
     void loadingStarted();
     void loadingFinished();
+    Context getContext();
 }

@@ -373,4 +373,12 @@ public class TransformerDTO {
         return orderDTO;
     }
 
+    public static DeviceDTO transformDeviceDTO(String registrationToken) {
+        DeviceDTO deviceDTO = new DeviceDTO();
+        deviceDTO.setCompanyId(App.getCompanyId());
+        deviceDTO.setDeviceType("android");
+        deviceDTO.setRegistrationToken(registrationToken);
+        return deviceDTO;
+    }
+
 }

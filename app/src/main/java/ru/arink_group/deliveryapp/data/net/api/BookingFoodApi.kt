@@ -61,6 +61,9 @@ interface BookingFoodApi {
     @POST("/api/orders/{orderId}/cancel")
     fun cancelOrder(@Path("orderId") orderId: String) : Observable<Any>
 
+    @POST("/api/accounts/{accountId}/register_device")
+    fun registerDevice(@Path("accountId") accountId: String, @Body device: DeviceDTO) : Observable<Void?>
+
     /**
      * Companion object to create the BoolingFoodApi
      */

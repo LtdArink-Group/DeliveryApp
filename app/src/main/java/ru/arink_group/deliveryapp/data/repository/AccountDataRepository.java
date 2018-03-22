@@ -6,6 +6,7 @@ import io.reactivex.Observable;
 import ru.arink_group.deliveryapp.data.repository.factory.AccountDataFactory;
 import ru.arink_group.deliveryapp.domain.dto.AccountDTO;
 import ru.arink_group.deliveryapp.domain.dto.AddressDTO;
+import ru.arink_group.deliveryapp.domain.dto.DeviceDTO;
 import ru.arink_group.deliveryapp.domain.repository.AccountRepository;
 import ru.arink_group.deliveryapp.App;
 
@@ -50,6 +51,11 @@ public class AccountDataRepository implements AccountRepository {
     @Override
     public Observable<Void> deleteAddress(String addressId) {
         return accountDataFactory.create().deleteAddress(addressId);
+    }
+
+    @Override
+    public Observable<Void> registerDevice(DeviceDTO deviceDTO) {
+        return accountDataFactory.create().registerDevice(deviceDTO);
     }
 
     @Override

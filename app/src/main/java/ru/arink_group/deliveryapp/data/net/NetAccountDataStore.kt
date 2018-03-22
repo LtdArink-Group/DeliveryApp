@@ -6,6 +6,7 @@ import ru.arink_group.deliveryapp.data.net.api.BookingFoodApi
 import ru.arink_group.deliveryapp.data.repository.datasource.AccountDataStore
 import ru.arink_group.deliveryapp.domain.dto.AccountDTO
 import ru.arink_group.deliveryapp.domain.dto.AddressDTO
+import ru.arink_group.deliveryapp.domain.dto.DeviceDTO
 
 /**
  * Created by kirillvs on 30.10.17.
@@ -36,6 +37,10 @@ class NetAccountDataStore: AccountDataStore {
 
     override fun deleteAddress(addressId: String): Observable<Void> {
         return apiService.deleteAddress(addressId, App.getUUID())
+    }
+
+    override fun registerDevice(deviceDTO: DeviceDTO): Observable<Void?> {
+        return apiService.registerDevice(App.getUUID(), deviceDTO)
     }
 
     override fun getAccount(): Observable<AccountDTO> {

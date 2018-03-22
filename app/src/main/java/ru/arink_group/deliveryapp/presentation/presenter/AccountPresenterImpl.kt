@@ -1,5 +1,7 @@
 package ru.arink_group.deliveryapp.presentation.presenter
 
+import android.app.Activity
+import com.google.firebase.iid.FirebaseInstanceId
 import io.reactivex.observers.DisposableObserver
 import ru.arink_group.deliveryapp.App
 import ru.arink_group.deliveryapp.domain.dao.Account
@@ -93,7 +95,25 @@ class AccountPresenterImpl(val accountView: AccountView): BasePresenter(), Accou
         }
 
         override fun onNext(t: Account) {
+            val sp = accountView.context.getSharedPreferences(App.APP_SHARED_PREF, Activity.MODE_PRIVATE)
+            val registrationKey = sp.getString(App.CLOUD_REGISTRATION_KEY, "")
+
+            val registerDevice = RegisterDevice()
+            registerDevice.execute(RefreshTokenObserver(), RegisterDevice.Params(registrationKey))
+
             accountView.updateAccount(t)
+        }
+
+    }
+
+    inner class RefreshTokenObserver : DisposableObserver<Void>() {
+        override fun onNext(t: Void) {
+        }
+
+        override fun onComplete() {
+        }
+
+        override fun onError(e: Throwable) {
         }
 
     }
