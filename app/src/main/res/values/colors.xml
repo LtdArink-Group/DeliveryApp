@@ -53,22 +53,50 @@
 <!--</resources>-->
 
 <!--dark-light grey-->
+<!--<resources>-->
+    <!--<color name="colorPrimary">#404040</color>-->
+    <!--<color name="colorPrimaryLight">#404040</color>-->
+    <!--<color name="colorPrimaryDark">#404040</color>-->
+    <!--<color name="colorAccent">#ee7c0d</color>-->
+    <!--<color name="colorSecondary">#565656</color>-->
+    <!--<color name="colorSecondaryDark">#565656</color>-->
+    <!--<color name="colorSecondaryLight">#797979</color>-->
+    <!--<color name="colorElement">#FF000000</color>-->
+    <!--<color name="colorMenuElement">#FF000000</color>-->
+    <!--<color name="colorOnPrimaryText">#f7f6f6</color>-->
+    <!--<color name="colorOnSecondaryText">#f7f6f6</color>-->
+    <!--<color name="colorOnAccentText">#f7f6f6</color>-->
+    <!--<color name="colorCheckedText">#f7f6f6</color>-->
+    <!--<color name="colorPrimaryText">#FF000000</color>-->
+    <!--<color name="colorSecondaryText">#FF000000</color>-->
+    <!--<color name="colorTransparentElement">#00000000</color>-->
+    <!--<color name="colorButtonIdle">#95b824</color>-->
+    <!--<color name="colorButtonSuccess">#95b824</color>-->
+    <!--<color name="colorButtonFail">#ee7c0d</color>-->
+    <!--<color name="colorstatusCancelled">#ee7c0d</color>-->
+    <!--<color name="colorButtonRetry">#95b824</color>-->
+    <!--<color name="colorButtonCancell">#ee7c0d</color>-->
+<!--</resources>-->
+
+<!--Burgx-->
 <resources>
-    <color name="colorPrimary">#404040</color>
-    <color name="colorPrimaryLight">#404040</color>
-    <color name="colorPrimaryDark">#404040</color>
-    <color name="colorAccent">#ee7c0d</color>
-    <color name="colorSecondary">#565656</color>
-    <color name="colorSecondaryDark">#565656</color>
-    <color name="colorSecondaryLight">#797979</color>
-    <color name="colorElement">#FF000000</color>
-    <color name="colorMenuElement">#FF000000</color>
-    <color name="colorOnPrimaryText">#f7f6f6</color>
+    <color name="colorPrimary">#f7f6f6</color>
+    <color name="colorPrimaryLight">#f7f6f6</color>
+    <color name="colorPrimaryDark">#f7f6f6</color>
+    <color name="colorAccent">#8db82b</color>
+    <color name="colorAccentSecond">#dc002f</color>
+    <color name="colorSecondary">#dc002f</color>
+    <color name="colorSecondaryDark">#dc002f</color>
+    <color name="colorSecondaryLight">#dc002f</color>
+    <color name="colorElement">#404040</color>
+    <color name="colorMenuElement">#404040</color>
+    <color name="colorOnPrimaryText">#404040</color>
     <color name="colorOnSecondaryText">#f7f6f6</color>
     <color name="colorOnAccentText">#f7f6f6</color>
+    <color name="colorAccentSecondText">#f7f6f6</color>
     <color name="colorCheckedText">#f7f6f6</color>
-    <color name="colorPrimaryText">#FF000000</color>
-    <color name="colorSecondaryText">#FF000000</color>
+    <color name="colorPrimaryText">#404040</color>
+    <color name="colorSecondaryText">#404040</color>
     <color name="colorTransparentElement">#00000000</color>
     <color name="colorButtonIdle">#95b824</color>
     <color name="colorButtonSuccess">#95b824</color>
