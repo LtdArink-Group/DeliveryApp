@@ -27,15 +27,19 @@
                 android:background="@color/colorSecondary">
 
                 <TextView
-                    android:id="@+id/product_name"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
                     android:layout_alignParentLeft="true"
                     android:layout_centerVertical="true"
                     android:paddingLeft="8dp"
+                    android:id="@+id/product_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
                     android:layout_margin="4dp"
                     android:textColor="@color/colorOnSecondaryText"
+                    android:ems="@integer/product_name_ems"
+                    android:ellipsize="end"
+                    android:maxLines="1"
                     android:textAppearance="?android:textAppearanceLarge"/>
+
 
                 <TextView
                     android:id="@+id/product_price"
