@@ -69,8 +69,7 @@ class OrderPresenterImpl(val orderView: OrderView): BasePresenter(), OrderPresen
                                 orderView.listProducts,
                                 orderView.selectedAddressId,
                                 orderView.selectedTime,
-                                orderView.isSelfPickup,
-                                orderView.note
+                                orderView.isSelfPickup
                         )
                 )
     }
@@ -83,7 +82,6 @@ class OrderPresenterImpl(val orderView: OrderView): BasePresenter(), OrderPresen
             getAccount.execute(AccountDisposableObserver(), GetAccount.Params())
         }
     }
-
 
     inner class AccountDisposableObserver: DisposableObserver<Account>() {
         override fun onError(e: Throwable) {
@@ -172,5 +170,4 @@ class OrderPresenterImpl(val orderView: OrderView): BasePresenter(), OrderPresen
         }
 
     }
-
 }

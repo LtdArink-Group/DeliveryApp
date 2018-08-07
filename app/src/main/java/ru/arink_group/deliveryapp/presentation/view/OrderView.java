@@ -26,5 +26,4 @@ public interface OrderView extends ProgressView {
     void loadingAddressStart();
     void loadingAddressFinish();
     void redirectToHistory();
-    String getNote();
 }

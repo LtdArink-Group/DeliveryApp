@@ -1,12 +1,8 @@
 package ru.arink_group.deliveryapp.domain.dto;
 
-import android.view.ViewDebug;
-
 import java.util.List;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
-
-import io.reactivex.annotations.Nullable;
 
 public class OrderDTO {
 
@@ -54,9 +50,6 @@ public class OrderDTO {
     @SerializedName("order_products")
     @Expose
     private List<OrderProductDTO> orderProducts = null;
-    @SerializedName("note")
-    @Expose
-    private String note;
 
     public Integer getCompanyId() {
         return companyId;
@@ -161,9 +154,4 @@ public class OrderDTO {
     public void setDevice(String device) {
         this.device = device;
     }
-
-    public String getNote() {return note;}
-
-    public void setNote(String value) {this.note=value;}
-
 }

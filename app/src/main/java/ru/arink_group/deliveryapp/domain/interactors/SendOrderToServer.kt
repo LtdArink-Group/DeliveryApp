@@ -29,11 +29,11 @@ class SendOrderToServer: UseCase<Boolean, SendOrderToServer.Params>() {
 
     class Params {
         val order: OrderDTO
-        constructor(products:List<Product>, addressId: Int?, deliveryTime: DateTime, pickup: Boolean, note: String) {
-            order = TransformerDTO.createOrderDTO(products, addressId, deliveryTime, pickup, note)
+        constructor(products:List<Product>, addressId: Int?, deliveryTime: DateTime, pickup: Boolean) {
+            order = TransformerDTO.createOrderDTO(products, addressId, deliveryTime, pickup)
         }
-        constructor(orderToSent: Order, addressId: Int?, deliveryTime: DateTime, note: String) {
-            order = TransformerDTO.trahsformOrderDTO(orderToSent, addressId, deliveryTime, note)
+        constructor(orderToSent: Order, addressId: Int?, deliveryTime: DateTime) {
+            order = TransformerDTO.trahsformOrderDTO(orderToSent, addressId, deliveryTime)
         }
     }
 }

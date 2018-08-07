@@ -1,7 +1,5 @@
 package ru.arink_group.deliveryapp.domain.dto;
 
-import android.support.annotation.Nullable;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -248,7 +246,7 @@ public class TransformerDTO {
         return orderProductsDTO;
     }
 
-    public static OrderDTO createOrderDTO(List<Product> products, Integer addressId, DateTime deliveryTime, Boolean selfPickup, String note) {
+    public static OrderDTO createOrderDTO(List<Product> products, Integer addressId, DateTime deliveryTime, Boolean selfPickup) {
         OrderDTO orderDTO = new OrderDTO();
         orderDTO.setAccountId(App.getUUID());
         orderDTO.setCompanyId(Integer.valueOf(App.getCompanyId()));
@@ -257,7 +255,6 @@ public class TransformerDTO {
         orderDTO.setDevice(App.DEVICE_NAME);
         orderDTO.setOrderProducts(createListOrderProductDTO(products));
         orderDTO.setDeliveryTime(deliveryTime.toCurrentDateString());
-        orderDTO.setNote(note);
         return orderDTO;
     }
 
@@ -317,7 +314,6 @@ public class TransformerDTO {
                 orderDTO.getCompanyId(),
                 orderDTO.getAccountId(),
                 orderDTO.getDeliveryTime(),
-                orderDTO.getNote(),
                 orderDTO.getPickup(),
                 transformListOrderProduct(orderDTO.getOrderProducts()),
                 orderDTO.getNum(),
@@ -365,7 +361,7 @@ public class TransformerDTO {
         return orderProductsDTO;
     }
 
-    public static OrderDTO trahsformOrderDTO(Order order, Integer addressId, DateTime deliveryTime, String note) {
+    public static OrderDTO trahsformOrderDTO(Order order, Integer addressId, DateTime deliveryTime) {
         OrderDTO orderDTO = new OrderDTO();
         orderDTO.setAccountId(App.getUUID());
         orderDTO.setCompanyId(Integer.valueOf(App.getCompanyId()));
@@ -374,7 +370,6 @@ public class TransformerDTO {
         orderDTO.setDevice(App.DEVICE_NAME);
         orderDTO.setOrderProducts(trahsformListOrderProductDTO(order.getProducts()));
         orderDTO.setDeliveryTime(deliveryTime.toCurrentDateString());
-        orderDTO.setNote(note);
         return orderDTO;
     }
 

@@ -52,8 +52,7 @@ class RetryOrderPresenterImpl(val view: RetryOrderView): BasePresenter(), RetryO
                         SendOrderToServer.Params(
                                 view.verifyedOrder,
                                 view.addressId,
-                                view.deliveryTime,
-                                view.note
+                                view.deliveryTime
                         )
                 )
     }
