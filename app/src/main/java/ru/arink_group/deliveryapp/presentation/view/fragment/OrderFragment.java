@@ -1,7 +1,6 @@
 package ru.arink_group.deliveryapp.presentation.view.fragment;
 
 
-import android.app.Dialog;
 import android.app.TimePickerDialog;
 import android.content.Intent;
 import android.os.Bundle;
@@ -17,7 +16,6 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CompoundButton;
-import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -56,8 +54,8 @@ import ru.arink_group.deliveryapp.presentation.view.activity.MenuActivity;
 public class OrderFragment extends Fragment implements OrderView,
         OrdersListAdapter.ProductChangeListener,
         View.OnClickListener,
-        TimePickerDialog.OnTimeSetListener,
-        TimePicker.OnTimeChangedListener {
+        TimePickerDialog.OnTimeSetListener
+{
     public static final String REDIRECT_TO_ORDER = "redirect to order";
 
     private Unbinder unbinder;
@@ -69,13 +67,14 @@ public class OrderFragment extends Fragment implements OrderView,
     private MenuView menuView;
 
 
-    private DateTime selectedTime=new DateTime(-1,-1);
+    private DateTime selectedTime;
 
     @BindView(R.id.summary_self_export_switch)
     SwitchCompat selfExportSwitch;
 
     @BindView(R.id.summary_cost)
     TextView summaryCost;
+
     @BindView(R.id.summary_discount)
     TextView summaryDiscount;
 
@@ -115,17 +114,13 @@ public class OrderFragment extends Fragment implements OrderView,
     @BindString(R.string.error_address_empty)
     String errorAddressEmpty;
 
-
     @BindView(R.id.start_date_picker)
     Button startDateDialog;
-
-    @BindView(R.id.note)
-    EditText note;
-
 
     public OrderFragment() {
         // Required empty public constructor
     }
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -161,8 +156,6 @@ public class OrderFragment extends Fragment implements OrderView,
 
         sendButton.setOnClickListener(this);
 
-        note.setOnClickListener(this);
-
         AppCompatActivity activity = (AppCompatActivity) getActivity();
         activity.getSupportActionBar().setTitle(R.string.order);
 
@@ -182,7 +175,6 @@ public class OrderFragment extends Fragment implements OrderView,
 
         addressesStringAdaptet = new OrderAddressesListAdapter(getActivity(), R.layout.item_spinner_address, new ArrayList<String>());
         addressListSpinner.setAdapter(addressesStringAdaptet);
-
 
         initTimePicker();
 
@@ -204,7 +196,6 @@ public class OrderFragment extends Fragment implements OrderView,
             }
         });
     }
-
 
     @Override
     public void setProducts(List<Product> products) {
@@ -261,7 +252,6 @@ public class OrderFragment extends Fragment implements OrderView,
             this.summaryDelivery.setText(freeString);
         }
 
-
         double allSummary = summary - discount + deliveryCost;
         allSummary = allSummary >= 0.0 ? allSummary : 0.0;
 
@@ -282,12 +272,11 @@ public class OrderFragment extends Fragment implements OrderView,
             addressListSpinner.setVisibility(View.VISIBLE);
             summaryCreateAddressButton.setVisibility(View.GONE);
         } else {
-            if (!isSelfPickup())
+            if(!isSelfPickup())
                 summaryCreateAddressButton.setVisibility(View.VISIBLE);
             addressListSpinner.setVisibility(View.GONE);
         }
     }
-
 
     @Override
     public void showCreateAccountButton() {
@@ -369,30 +358,26 @@ public class OrderFragment extends Fragment implements OrderView,
 
     @Override
     public void onClick(View v) {
-
-        if (v.getId() == sendButton.getId()) {
-            sendButton.startAnimation();
-            if (verifyOrder() && verifyDeliveryTime())
+        sendButton.startAnimation();
+        if(v.getId() == sendButton.getId()) {
+            if (verifyOrder() && verifyDeliveryTime()) {
                 orderPresenter.sendOrderToServer();
-        } else if(!(v.getId()==note.getId())) {
-            showErrorMessage(null);
+            } else {
+                showErrorMessage(null);
+            }
         }
     }
 
     private boolean verifyDeliveryTime() {
-
         String time = getString(R.string.summary_delivery_time);
-        boolean valid = !time.equalsIgnoreCase(String.valueOf(startDateDialog.getText())) && !GetCompanyFromShared.INSTANCE.getCompanyOrDefault().getCurrentDayOrFirst().isRest();
-        if (time.equalsIgnoreCase(String.valueOf(startDateDialog.getText())))
-            Toast.makeText(getActivity(), R.string.error_delivery_time_empty, Toast.LENGTH_SHORT).show();
-        if (GetCompanyFromShared.INSTANCE.getCompanyOrDefault().getCurrentDayOrFirst().isRest())
-            Toast.makeText(getActivity(), R.string.error_cant_order_is_rest, Toast.LENGTH_SHORT).show();
+        boolean valid = !time.equalsIgnoreCase(String.valueOf(startDateDialog.getText())) && !GetCompanyFromShared.INSTANCE.getCompanyOrDefault().getCurrentDayOrFirst().isRest() ;
+        if (time.equalsIgnoreCase(String.valueOf(startDateDialog.getText()))) Toast.makeText(getActivity(), R.string.error_delivery_time_empty, Toast.LENGTH_SHORT).show();
+        if (GetCompanyFromShared.INSTANCE.getCompanyOrDefault().getCurrentDayOrFirst().isRest()) Toast.makeText(getActivity(), R.string.error_cant_order_is_rest, Toast.LENGTH_SHORT).show();
         return valid;
     }
 
     private boolean verifyOrder() {
-        if (addressListSpinner.getSelectedItemPosition() != Spinner.INVALID_POSITION || selfExportSwitch.isChecked())
-            return true;
+        if (addressListSpinner.getSelectedItemPosition() != Spinner.INVALID_POSITION || selfExportSwitch.isChecked()) return true;
         Toast.makeText(getActivity(), errorAddressEmpty, Toast.LENGTH_SHORT).show();
         return false;
     }
@@ -405,7 +390,6 @@ public class OrderFragment extends Fragment implements OrderView,
         Calendar c = Calendar.getInstance();
         DateTime current = new DateTime(c.get(Calendar.HOUR_OF_DAY), c.get(Calendar.MINUTE));
 
-
         selectedTime = new DateTime(hour, minute);
 
         if (start == null || end == null) {
@@ -413,7 +397,7 @@ public class OrderFragment extends Fragment implements OrderView,
         } else if (selectedTime.isGreaterThen(end) || selectedTime.isLowerThen(start)) {
             String delivery_error = getString(R.string.time_should_be_between, start, end);
             Toast.makeText(getActivity(), delivery_error, Toast.LENGTH_SHORT).show();
-        } else if (selectedTime.isLowerThen(current)) {
+        } else if(selectedTime.isLowerThen(current)) {
             Toast.makeText(getActivity(), R.string.error_cant_be_less_then_current, Toast.LENGTH_SHORT).show();
         } else if (selectedTime.isLowerThenNextHourOf(current) && end.isLowerThenNextHourOf(current)) {
             Toast.makeText(getActivity(), R.string.error_cant_to_late, Toast.LENGTH_SHORT).show();
@@ -440,7 +424,6 @@ public class OrderFragment extends Fragment implements OrderView,
         return selfExportSwitch.isChecked();
     }
 
-
     @Override
     public void loadingAddressStart() {
         progressBar.setVisibility(View.VISIBLE);
@@ -460,11 +443,6 @@ public class OrderFragment extends Fragment implements OrderView,
     }
 
     @Override
-    public String getNote() {
-        return (note.getText().toString().equals("Комментарий ...")) ? null : note.getText().toString();
-    }
-
-    @Override
     public void loadingStart() {
         menuView.loadingStart();
     }
@@ -473,38 +451,5 @@ public class OrderFragment extends Fragment implements OrderView,
     public void loadingFinish() {
         MenuView menuView = (MenuView) getActivity();
         menuView.loadingFinish();
-    }
-
-    @Override
-    public void onTimeChanged(TimePicker view, int hourOfDay, int minute) {
-        if (hourOfDay == -1 && minute == -1) {
-            selectedTime = new DateTime(-1,-1);
-            startDateDialog.setText(R.string.soon);
-        }
-        else {
-            DateTime start = GetCompanyFromShared.INSTANCE.getCompanyOrDefault().getCurrentDayOrFirst().startTimeClass();
-            DateTime end = GetCompanyFromShared.INSTANCE.getCompanyOrDefault().getCurrentDayOrFirst().endTimeClass();
-
-            Calendar c = Calendar.getInstance();
-            DateTime current = new DateTime(c.get(Calendar.HOUR_OF_DAY), c.get(Calendar.MINUTE));
-
-
-            selectedTime = new DateTime(hourOfDay, minute);
-
-            if (start == null || end == null) {
-                Toast.makeText(getActivity(), R.string.error_cant_order_is_rest, Toast.LENGTH_SHORT).show();
-            } else if (selectedTime.isGreaterThen(end) || selectedTime.isLowerThen(start)) {
-                String delivery_error = getString(R.string.time_should_be_between, start, end);
-                Toast.makeText(getActivity(), delivery_error, Toast.LENGTH_SHORT).show();
-            } else if (selectedTime.isLowerThen(current)) {
-                Toast.makeText(getActivity(), R.string.error_cant_be_less_then_current, Toast.LENGTH_SHORT).show();
-            } else if (selectedTime.isLowerThenNextHourOf(current) && end.isLowerThenNextHourOf(current)) {
-                Toast.makeText(getActivity(), R.string.error_cant_to_late, Toast.LENGTH_SHORT).show();
-            } else if (selectedTime.isLowerThenNextHourOf(current)) {
-                Toast.makeText(getActivity(), R.string.error_cant_be_greater_then_hour, Toast.LENGTH_SHORT).show();
-            } else {
-                startDateDialog.setText(selectedTime.toString());
-            }
-        }
     }
 }

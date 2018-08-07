@@ -30,7 +30,6 @@ public class DetailDialog extends Dialog implements
     private String imgUrl;
 
 
-
     public DetailDialog(Activity a, int themeRes, String title, String description, String url) {
         super(a, themeRes);
         this.title = title;

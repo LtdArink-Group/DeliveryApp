@@ -28,7 +28,6 @@ import ru.arink_group.deliveryapp.presentation.view.FabView;
 import ru.arink_group.deliveryapp.presentation.view.MenuView;
 import ru.arink_group.deliveryapp.presentation.view.fragment.AccountFragment;
 import ru.arink_group.deliveryapp.presentation.view.fragment.CategoriesFragment;
-import ru.arink_group.deliveryapp.presentation.view.fragment.NewsFragment;
 import ru.arink_group.deliveryapp.presentation.view.fragment.OrderFragment;
 import ru.arink_group.deliveryapp.presentation.view.fragment.OrdersHistoryFragment;
 
@@ -38,7 +37,6 @@ public class MenuActivity extends AppCompatActivity
     public static final String IS_ORDER_START = "is order start";
     public static final String IS_ACCOUNT_START = "is account start";
     public static final String IS_HISTORY_START = "is history start";
-    public static final String IS_NEWS_START = "is news start";
 
     private MenuPresenter menuPresenter;
     private FloatingActionButton fab;
@@ -103,12 +101,7 @@ public class MenuActivity extends AppCompatActivity
             OrdersHistoryFragment orderHistoryFragment = new OrdersHistoryFragment();
             fragmentTransaction.add(R.id.menu_fragment, orderHistoryFragment);
             navigationView.getMenu().getItem(1).setChecked(true);
-        } else if (getIntent().getBooleanExtra(IS_NEWS_START,false)){
-            NewsFragment newsFragment=new NewsFragment();
-            fragmentTransaction.add(R.id.menu_fragment,newsFragment);
-            navigationView.getMenu().getItem(4).setChecked(true);
-        }
-        else {
+        } else {
             fragmentTransaction.add(R.id.menu_fragment, new CategoriesFragment());
             navigationView.getMenu().getItem(0).setChecked(true);
         }
@@ -179,8 +172,6 @@ public class MenuActivity extends AppCompatActivity
         } else if (fragment instanceof OrdersHistoryFragment) {
             navigationView.getMenu().getItem(1).setChecked(true);
         } else if (fragment instanceof AccountFragment) {
-            navigationView.getMenu().getItem(4).setChecked(true);
-        } else if (fragment instanceof NewsFragment) {
             navigationView.getMenu().getItem(3).setChecked(true);
         } else {
             navigationView.getMenu().getItem(0).setChecked(true);

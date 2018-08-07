@@ -100,9 +100,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentRight="true"
-                android:id="@+id/summary_delivery"
-                />
-
+                android:id="@+id/summary_delivery"/>
 
         </RelativeLayout>
 
@@ -149,7 +147,7 @@
                 android:layout_height="wrap_content"
                 android:layout_alignParentRight="true"
                 android:id="@+id/start_date_picker"
-                android:text="@string/soon"/>
+                android:text="@string/summary_delivery_time"/>
 
         </RelativeLayout>
 
@@ -199,26 +197,9 @@
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="16dp"
-            android:layout_marginRight="16dp"
-            android:layout_marginTop="4dp"
-            >
-            <EditText
-                android:id="@+id/note"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:hint="@string/note"
-                />
-
-        </RelativeLayout>
-
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/small_margin"
             android:layout_marginLeft="@dimen/big_margin"
-            android:layout_marginRight="@dimen/big_margin"
-            android:layout_marginBottom="16dp">
+            android:layout_marginRight="@dimen/big_margin">
 
             <br.com.simplepass.loading_button_lib.customViews.CircularProgressButton
                 android:padding="@dimen/small_margin"
