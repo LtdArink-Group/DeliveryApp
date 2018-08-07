@@ -15,6 +15,11 @@
             android:icon="@drawable/ic_menu_cart"
             android:title="@string/order" />
         <item
+            android:id="@+id/news"
+            android:icon="@drawable/ic_notifications_black_24dp"
+            android:title="Новости"
+            />
+        <item
             android:id="@+id/account"
             android:icon="@drawable/ic_menu_profile"
             android:title="@string/account" />

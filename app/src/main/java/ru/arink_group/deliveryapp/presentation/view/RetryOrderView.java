@@ -25,4 +25,6 @@ public interface RetryOrderView {
     Order getVerifyedOrder();
     Integer getAddressId();
     DateTime getDeliveryTime();
+    String getNote();
+
 }

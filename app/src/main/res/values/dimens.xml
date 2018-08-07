@@ -15,7 +15,10 @@
     <dimen name="description_image">150dp</dimen>
     <dimen name="btn_width">120dp</dimen>
     <dimen name="margin_for_emoji">11dp</dimen>
+    <dimen name="news_icon_width">100dp</dimen>
+    <dimen name="news_icon_height">100dp</dimen>
     <!-- Text sizes -->
     <item name="item_address_spinner_truncate" format="integer" type="integer">20</item>
     <item name="product_name_ems" format="integer" type="integer">11</item>
+    <item name="news_icon_text_size" format="integer" type="integer">4</item>
 </resources>
