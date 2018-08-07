@@ -9,6 +9,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import ru.arink_group.deliveryapp.R
+import ru.arink_group.deliveryapp.R.string.soon
 import ru.arink_group.deliveryapp.domain.dao.Order
 import ru.arink_group.deliveryapp.presentation.adapters.interfaces.OnOrdersHistoryClickListener
 import ru.arink_group.deliveryapp.presentation.shared.DateTime
@@ -19,7 +20,7 @@ import java.util.*
 /**
  * Created by kirillvs on 21.11.17.
  */
-class OrdersHistoryAdapter(val isActive: Boolean = true): RecyclerView.Adapter<OrdersHistoryAdapter.ViewHolder>() {
+class OrdersHistoryAdapter(val isActive: Boolean = true) : RecyclerView.Adapter<OrdersHistoryAdapter.ViewHolder>() {
 
     lateinit var onClickListener: OnOrdersHistoryClickListener
 
@@ -63,21 +64,27 @@ class OrdersHistoryAdapter(val isActive: Boolean = true): RecyclerView.Adapter<O
         if (isActive) {
             val currentCal = Calendar.getInstance()
             val diff = dateTime.getTimeInMillis() - currentCal.timeInMillis
-            if (diff > 0) {
-                object: CountDownTimer(diff, 1000) {
 
-                    override fun onFinish() {
-                        counterView.text = "Готово"
-                    }
-
-                    override fun onTick(millisUntilFinished: Long) {
-                        val hours   = (millisUntilFinished / (1000*60*60)) % 24
-                        val minutes = (millisUntilFinished / (1000*60)) % 60
-                        val seconds = (millisUntilFinished / 1000) % 60
-                        counterView.text = "$hours:$minutes:$seconds"
-                    }
-                }.start()
+            if (dateTime.minute == 59 && dateTime.hour == 22) {
+                counterView.setText(R.string.soon)
                 counterView.visibility = View.VISIBLE
+            } else {
+                if (diff > 0) {
+                    object : CountDownTimer(diff, 1000) {
+
+                        override fun onFinish() {
+                            counterView.text = "Готово"
+                        }
+
+                        override fun onTick(millisUntilFinished: Long) {
+                            val hours = (millisUntilFinished / (1000 * 60 * 60)) % 24
+                            val minutes = (millisUntilFinished / (1000 * 60)) % 60
+                            val seconds = (millisUntilFinished / 1000) % 60
+                            counterView.text = "$hours:$minutes:$seconds"
+                        }
+                    }.start()
+                    counterView.visibility = View.VISIBLE
+                }
             }
         }
 
@@ -87,17 +94,20 @@ class OrdersHistoryAdapter(val isActive: Boolean = true): RecyclerView.Adapter<O
             addressView.text = addressString
         }
 
-        if(order.pickup) {
+        if (order.pickup) {
             addressTypeView.setText(R.string.self_export)
         } else {
             addressTypeView.setText(R.string.company_export)
         }
-
-        val content = "${dateTime.toTimeWithDate()} - ${order.totalCost + order.deliveryCost} Р"
+        val content: String
+        if ((counterView.text == "На ближайшее время"))
+            content = "На ближайшее время - ${order.totalCost + order.deliveryCost} Р"
+        else
+            content = "${dateTime.toTimeWithDate()} - ${order.totalCost + order.deliveryCost} Р"
         contentView.text = content
 
         view.setOnClickListener { onClickListener.onOrderHistoryItemClick(order) }
     }
 
-    class ViewHolder(val view: View, val context: Context): RecyclerView.ViewHolder(view)
+    class ViewHolder(val view: View, val context: Context) : RecyclerView.ViewHolder(view)
 }

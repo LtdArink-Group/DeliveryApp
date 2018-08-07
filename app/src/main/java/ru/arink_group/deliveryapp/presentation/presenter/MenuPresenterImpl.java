@@ -6,6 +6,7 @@ import ru.arink_group.deliveryapp.R;
 import ru.arink_group.deliveryapp.presentation.presenter.interfaces.MenuPresenter;
 import ru.arink_group.deliveryapp.presentation.view.MenuView;
 import ru.arink_group.deliveryapp.presentation.view.fragment.AccountFragment;
+import ru.arink_group.deliveryapp.presentation.view.fragment.NewsFragment;
 import ru.arink_group.deliveryapp.presentation.view.fragment.OrderFragment;
 import ru.arink_group.deliveryapp.presentation.view.fragment.CategoriesFragment;
 import ru.arink_group.deliveryapp.presentation.view.fragment.OrdersHistoryFragment;
@@ -31,6 +32,8 @@ public class MenuPresenterImpl implements MenuPresenter {
             fragment = new CategoriesFragment();
         } else if (itemId == R.id.orders) {
             fragment = new OrdersHistoryFragment();
+        } else if (itemId == R.id.news) {
+            fragment = new NewsFragment();
         } else if (itemId == R.id.basket) {
             fragment = new OrderFragment();
         } else if (itemId == R.id.account) {

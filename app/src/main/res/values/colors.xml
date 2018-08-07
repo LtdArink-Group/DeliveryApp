@@ -80,6 +80,7 @@
 
 <!--Burgx-->
 <resources>
+    <color name="colorTimePicker">#6AC7E9</color>
     <color name="colorPrimary">#f7f6f6</color>
     <color name="colorPrimaryLight">#f7f6f6</color>
     <color name="colorPrimaryDark">#f7f6f6</color>
@@ -104,4 +105,6 @@
     <color name="colorstatusCancelled">#ee7c0d</color>
     <color name="colorButtonRetry">#95b824</color>
     <color name="colorButtonCancell">#ee7c0d</color>
+    <color name="colorNewsElement">#f3dc40</color>
+    <color name="colorSeparator">#90909090</color>
 </resources>
