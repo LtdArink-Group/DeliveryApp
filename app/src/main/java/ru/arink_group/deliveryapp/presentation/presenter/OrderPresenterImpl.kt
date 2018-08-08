@@ -84,7 +84,6 @@ class OrderPresenterImpl(val orderView: OrderView): BasePresenter(), OrderPresen
         }
     }
 
-
     inner class AccountDisposableObserver: DisposableObserver<Account>() {
         override fun onError(e: Throwable) {
             val error = handleGetNetError(e)
@@ -172,5 +171,4 @@ class OrderPresenterImpl(val orderView: OrderView): BasePresenter(), OrderPresen
         }
 
     }
-
 }

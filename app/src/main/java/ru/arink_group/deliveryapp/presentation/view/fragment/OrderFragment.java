@@ -1,8 +1,6 @@
 package ru.arink_group.deliveryapp.presentation.view.fragment;
 
 
-import android.app.Dialog;
-import android.app.TimePickerDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.app.Fragment;
@@ -56,7 +54,6 @@ import ru.arink_group.deliveryapp.presentation.view.activity.MenuActivity;
 public class OrderFragment extends Fragment implements OrderView,
         OrdersListAdapter.ProductChangeListener,
         View.OnClickListener,
-        TimePickerDialog.OnTimeSetListener,
         TimePicker.OnTimeChangedListener {
     public static final String REDIRECT_TO_ORDER = "redirect to order";
 
@@ -374,7 +371,7 @@ public class OrderFragment extends Fragment implements OrderView,
             sendButton.startAnimation();
             if (verifyOrder() && verifyDeliveryTime())
                 orderPresenter.sendOrderToServer();
-        } else if(!(v.getId()==note.getId())) {
+        } else if(v.getId() != note.getId()) {
             showErrorMessage(null);
         }
     }
@@ -395,33 +392,6 @@ public class OrderFragment extends Fragment implements OrderView,
             return true;
         Toast.makeText(getActivity(), errorAddressEmpty, Toast.LENGTH_SHORT).show();
         return false;
-    }
-
-    @Override
-    public void onTimeSet(TimePicker timePicker, int hour, int minute) {
-        DateTime start = GetCompanyFromShared.INSTANCE.getCompanyOrDefault().getCurrentDayOrFirst().startTimeClass();
-        DateTime end = GetCompanyFromShared.INSTANCE.getCompanyOrDefault().getCurrentDayOrFirst().endTimeClass();
-
-        Calendar c = Calendar.getInstance();
-        DateTime current = new DateTime(c.get(Calendar.HOUR_OF_DAY), c.get(Calendar.MINUTE));
-
-
-        selectedTime = new DateTime(hour, minute);
-
-        if (start == null || end == null) {
-            Toast.makeText(getActivity(), R.string.error_cant_order_is_rest, Toast.LENGTH_SHORT).show();
-        } else if (selectedTime.isGreaterThen(end) || selectedTime.isLowerThen(start)) {
-            String delivery_error = getString(R.string.time_should_be_between, start, end);
-            Toast.makeText(getActivity(), delivery_error, Toast.LENGTH_SHORT).show();
-        } else if (selectedTime.isLowerThen(current)) {
-            Toast.makeText(getActivity(), R.string.error_cant_be_less_then_current, Toast.LENGTH_SHORT).show();
-        } else if (selectedTime.isLowerThenNextHourOf(current) && end.isLowerThenNextHourOf(current)) {
-            Toast.makeText(getActivity(), R.string.error_cant_to_late, Toast.LENGTH_SHORT).show();
-        } else if (selectedTime.isLowerThenNextHourOf(current)) {
-            Toast.makeText(getActivity(), R.string.error_cant_be_greater_then_hour, Toast.LENGTH_SHORT).show();
-        } else {
-            startDateDialog.setText(selectedTime.toString());
-        }
     }
 
     @Override
@@ -477,8 +447,8 @@ public class OrderFragment extends Fragment implements OrderView,
 
     @Override
     public void onTimeChanged(TimePicker view, int hourOfDay, int minute) {
-        if (hourOfDay == -1 && minute == -1) {
-            selectedTime = new DateTime(-1,-1);
+        if (hourOfDay == null && minute == null) {
+            selectedTime = new DateTime(null,null);
             startDateDialog.setText(R.string.soon);
         }
         else {

@@ -13,9 +13,9 @@ public class NewsDTO {
     @SerializedName("description")
     @Expose
     private String description;
-    @SerializedName("imgUrl")
+    @SerializedName("img_url")
     @Expose
-    private String imgUrl;
+    private String img_url;
 
     public Integer getId() {
         return id;
@@ -43,10 +43,10 @@ public class NewsDTO {
     }
 
     public String getImgUrl() {
-        return imgUrl;
+        return img_url;
     }
 
     public void setImgUrl(String imgUrl) {
-        this.imgUrl = imgUrl;
+        this.img_url = imgUrl;
     }
 }

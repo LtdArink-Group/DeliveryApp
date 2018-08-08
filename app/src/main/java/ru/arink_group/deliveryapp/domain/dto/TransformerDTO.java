@@ -1,7 +1,5 @@
 package ru.arink_group.deliveryapp.domain.dto;
 
-import android.support.annotation.Nullable;
-
 import java.util.ArrayList;
 import java.util.List;
 

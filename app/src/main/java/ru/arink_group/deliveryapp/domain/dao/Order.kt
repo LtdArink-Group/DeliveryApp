@@ -19,7 +19,7 @@ class Order(
         val deliveryTime: String,
         val note: String?,
         val pickup: Boolean,
-        val products: MutableList<OrderProduct>,
+        val products: List<OrderProduct>,
         val num: Int,
         val addressInfo: OrderAddressInfo?
 ) : Serializable {
@@ -28,7 +28,7 @@ class Order(
         val pattern = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS")
         val date = pattern.parse(deliveryTime)
         val dateTime = DateTime(date)
-        if (dateTime.minute == 59 && dateTime.hour == 22)
+        if (dateTime.minute == null && dateTime.hour == null)
             return true
         val currentCal = Calendar.getInstance()
         val diff = dateTime.getTimeInMillis() - currentCal.timeInMillis

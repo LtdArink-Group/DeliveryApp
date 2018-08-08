@@ -9,7 +9,6 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import ru.arink_group.deliveryapp.R
-import ru.arink_group.deliveryapp.R.string.soon
 import ru.arink_group.deliveryapp.domain.dao.Order
 import ru.arink_group.deliveryapp.presentation.adapters.interfaces.OnOrdersHistoryClickListener
 import ru.arink_group.deliveryapp.presentation.shared.DateTime
@@ -65,7 +64,7 @@ class OrdersHistoryAdapter(val isActive: Boolean = true) : RecyclerView.Adapter<
             val currentCal = Calendar.getInstance()
             val diff = dateTime.getTimeInMillis() - currentCal.timeInMillis
 
-            if (dateTime.minute == 59 && dateTime.hour == 22) {
+            if (dateTime.minute == null && dateTime.hour == null) {
                 counterView.setText(R.string.soon)
                 counterView.visibility = View.VISIBLE
             } else {

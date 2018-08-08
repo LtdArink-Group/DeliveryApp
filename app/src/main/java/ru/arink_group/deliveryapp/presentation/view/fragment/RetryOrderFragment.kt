@@ -4,13 +4,11 @@ package ru.arink_group.deliveryapp.presentation.view.fragment
 import android.app.AlertDialog
 import android.os.Bundle
 import android.app.Fragment
-import android.app.TimePickerDialog
 import android.content.Intent
 import android.support.v4.content.ContextCompat
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
 import android.support.v7.widget.SwitchCompat
-import android.text.Editable
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -40,7 +38,7 @@ import java.util.*
 /**
  * A simple [Fragment] subclass.
  */
-class RetryOrderFragment : Fragment(), RetryOrderView, TimePickerDialog.OnTimeSetListener, TimePicker.OnTimeChangedListener {
+class RetryOrderFragment : Fragment(), RetryOrderView, TimePicker.OnTimeChangedListener {
 
 
     lateinit var order: Order
@@ -185,7 +183,7 @@ class RetryOrderFragment : Fragment(), RetryOrderView, TimePickerDialog.OnTimeSe
         val pattern = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS")
         val date = pattern.parse(order.deliveryTime)
         val dateTime = DateTime(date)
-        if (dateTime.minute == 59 && dateTime.hour == 22)
+        if (dateTime.minute == null && dateTime.hour == null)
             timePicker.text = "На ближайшее время"
         else
             timePicker.text = dateTime.toTimeWithDate()
@@ -212,34 +210,11 @@ class RetryOrderFragment : Fragment(), RetryOrderView, TimePickerDialog.OnTimeSe
         })
     }
 
-    override fun onTimeSet(view: TimePicker, hour: Int, minute: Int) {
-        val start = GetCompanyFromShared.getCompanyOrDefault().getCurrentDayOrFirst().startTimeClass()
-        val end = GetCompanyFromShared.getCompanyOrDefault().getCurrentDayOrFirst().endTimeClass()
 
-        val c = Calendar.getInstance()
-        val current = DateTime(c.get(Calendar.HOUR_OF_DAY), c.get(Calendar.MINUTE))
-
-        selectedTime = DateTime(hour, minute)
-
-        if (start == null || end == null) {
-            Toast.makeText(activity, R.string.error_cant_order_is_rest, Toast.LENGTH_SHORT).show()
-        } else if (selectedTime.isGreaterThen(end) || selectedTime.isLowerThen(start)) {
-            val delivery_error = getString(R.string.time_should_be_between, start, end)
-            Toast.makeText(activity, delivery_error, Toast.LENGTH_SHORT).show()
-        } else if (selectedTime.isLowerThen(current)) {
-            Toast.makeText(activity, R.string.error_cant_be_less_then_current, Toast.LENGTH_SHORT).show()
-        } else if (selectedTime.isLowerThenNextHourOf(current) && end.isLowerThenNextHourOf(current)) {
-            Toast.makeText(activity, R.string.error_cant_to_late, Toast.LENGTH_SHORT).show()
-        } else if (selectedTime.isLowerThenNextHourOf(current)) {
-            Toast.makeText(activity, R.string.error_cant_be_greater_then_hour, Toast.LENGTH_SHORT).show()
-        } else {
-            timePicker.text = selectedTime.toString()
-        }
-    }
 
     override fun onTimeChanged(view: TimePicker?, hourOfDay: Int, minute: Int) {
-        if (hourOfDay == -1 && minute == -1) run {
-            selectedTime = DateTime(-1, -1)
+        if (hourOfDay == null && minute == null) run {
+            selectedTime = DateTime(null, null)
 
         }
         else {
