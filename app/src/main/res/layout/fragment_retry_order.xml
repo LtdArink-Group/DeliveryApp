@@ -10,15 +10,15 @@
         android:layout_height="match_parent">
 
         <LinearLayout
-            android:paddingBottom="@dimen/big_margin"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:paddingBottom="@dimen/big_margin">
 
             <android.support.v7.widget.RecyclerView
                 android:id="@+id/recycler_retry_order"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"/>
+                android:layout_height="wrap_content" />
 
             <RelativeLayout
                 android:layout_width="match_parent"
@@ -27,169 +27,192 @@
                 android:layout_marginRight="@dimen/big_margin">
 
                 <TextView
+                    android:id="@+id/summary_self_export"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:id="@+id/summary_self_export"
                     android:layout_alignParentLeft="true"
-                    android:text="@string/self_export"/>
+                    android:text="@string/self_export" />
 
                 <android.support.v7.widget.SwitchCompat
+                    android:id="@+id/summary_self_export_switch"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_alignParentRight="true"
-                    android:id="@+id/summary_self_export_switch"/>
+                    android:layout_alignParentRight="true" />
             </RelativeLayout>
 
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/small_margin"
                 android:layout_marginLeft="@dimen/big_margin"
-                android:layout_marginRight="@dimen/big_margin">
+                android:layout_marginRight="@dimen/big_margin"
+                android:layout_marginTop="@dimen/small_margin">
 
                 <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentLeft="true"
                     android:id="@+id/summary_cost_title"
-                    android:text="@string/summary_cost_with_discount"/>
-
-                <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_alignParentRight="true"
-                    android:id="@+id/summary_cost_with_discount"/>
+                    android:layout_alignParentLeft="true"
+                    android:text="@string/summary_cost_with_discount" />
+
+                <TextView
+                    android:id="@+id/summary_cost_with_discount"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true" />
 
             </RelativeLayout>
 
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/small_margin"
                 android:layout_marginLeft="@dimen/big_margin"
-                android:layout_marginRight="@dimen/big_margin">
+                android:layout_marginRight="@dimen/big_margin"
+                android:layout_marginTop="@dimen/small_margin">
 
                 <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentLeft="true"
                     android:id="@+id/summary_delivery_title"
-                    android:text="@string/delivery_cost"/>
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentRight="true"
-                    android:id="@+id/summary_delivery"/>
-
-            </RelativeLayout>
-
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/small_margin"
-                android:layout_marginLeft="@dimen/big_margin"
-                android:layout_marginRight="@dimen/big_margin">
-
-                <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentLeft="true"
-                    android:id="@+id/summary_title"
-                    android:text="@string/to_pay"/>
+                    android:text="@string/delivery_cost" />
 
                 <TextView
+                    android:id="@+id/summary_delivery"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_alignParentRight="true"
-                    android:id="@+id/summary"/>
+                    android:layout_alignParentRight="true" />
 
             </RelativeLayout>
 
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/small_margin"
                 android:layout_marginLeft="@dimen/big_margin"
-                android:layout_marginRight="@dimen/big_margin">
+                android:layout_marginRight="@dimen/big_margin"
+                android:layout_marginTop="@dimen/small_margin">
+
+                <TextView
+                    android:id="@+id/summary_title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:text="@string/to_pay" />
+
+                <TextView
+                    android:id="@+id/summary"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true" />
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/big_margin"
+                android:layout_marginRight="@dimen/big_margin"
+                android:layout_marginTop="@dimen/small_margin">
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentLeft="true"
                     android:layout_centerVertical="true"
-                    android:text="@string/summary_delivery_time"/>
+                    android:text="@string/summary_delivery_time" />
 
                 <Button
+                    android:id="@+id/start_date_picker"
                     style="@style/AppTheme.MyButton"
-                    android:gravity="end"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentRight="true"
-                    android:id="@+id/start_date_picker"
-                    android:text="@string/summary_delivery_time"/>
+                    android:gravity="end"
+                    android:text="@string/summary_delivery_time" />
 
             </RelativeLayout>
 
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/small_margin"
                 android:layout_marginLeft="@dimen/big_margin"
-                android:layout_marginRight="@dimen/big_margin">
+                android:layout_marginRight="@dimen/big_margin"
+                android:layout_marginTop="@dimen/small_margin">
 
                 <TextView
+                    android:id="@+id/summary_address_list"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:id="@+id/summary_address_list"
                     android:layout_alignParentLeft="true"
                     android:layout_centerVertical="true"
-                    android:text="@string/summary_address_list"/>
+                    android:text="@string/summary_address_list" />
 
                 <ProgressBar
                     android:id="@+id/summary_address_progress"
-                    android:layout_alignParentEnd="true"
                     android:layout_width="24dp"
-                    android:layout_height="24dp" />
+                    android:layout_height="24dp"
+                    android:layout_alignParentEnd="true" />
 
                 <TextView
                     android:id="@+id/summary_address_text"
-                    android:layout_alignParentEnd="true"
                     android:layout_width="wrap_content"
-                    android:visibility="gone"
-                    android:layout_height="wrap_content" />
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:visibility="gone" />
 
                 <Spinner
+                    android:id="@+id/summary_address_list_spinner"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentEnd="true"
                     android:layout_centerVertical="true"
-                    android:visibility="gone"
-                    android:id="@+id/summary_address_list_spinner"
-                    />
+                    android:visibility="gone" />
 
             </RelativeLayout>
 
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/small_margin"
                 android:layout_marginLeft="@dimen/big_margin"
-                android:layout_marginRight="@dimen/big_margin">
+                android:layout_marginRight="@dimen/big_margin"
+                android:layout_marginTop="@dimen/small_margin">
+
+                <TextView
+                    android:id="@+id/note_title"
+                    android:layout_alignParentLeft="true"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/note"/>
+
+                <TextView
+                    android:id="@+id/note"
+                    android:layout_alignParentRight="true"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:cursorVisible="false"
+                    android:focusable="false"
+                    android:longClickable="false" />
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/big_margin"
+                android:layout_marginRight="@dimen/big_margin"
+                android:layout_marginTop="@dimen/small_margin">
 
                 <br.com.simplepass.loading_button_lib.customViews.CircularProgressButton
-                    android:padding="@dimen/small_margin"
                     android:id="@+id/send_order_button"
                     android:layout_width="@dimen/btn_width"
                     android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:layout_marginBottom="@dimen/big_margin"
                     android:background="@color/colorButtonIdle"
+                    android:padding="@dimen/small_margin"
+                    android:text="@string/to_order"
                     android:textColor="@color/colorOnAccentText"
                     app:spinning_bar_color="@color/colorOnAccentText"
-                    android:text="@string/to_order"
-                    android:layout_centerInParent="true"
-                    app:spinning_bar_padding="0dp"
-                    android:layout_marginBottom="@dimen/big_margin"
-                    />
+                    app:spinning_bar_padding="0dp" />
 
             </RelativeLayout>
 

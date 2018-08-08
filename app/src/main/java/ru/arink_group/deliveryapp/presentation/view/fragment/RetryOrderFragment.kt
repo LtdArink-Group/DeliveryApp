@@ -4,7 +4,6 @@ package ru.arink_group.deliveryapp.presentation.view.fragment
 import android.app.AlertDialog
 import android.os.Bundle
 import android.app.Fragment
-import android.app.TimePickerDialog
 import android.content.Intent
 import android.support.v4.content.ContextCompat
 import android.support.v7.widget.LinearLayoutManager
@@ -15,6 +14,8 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.*
 import br.com.simplepass.loading_button_lib.customViews.CircularProgressButton
+import kotlinx.android.synthetic.*
+import kotlinx.android.synthetic.main.fragment_order.view.*
 
 import ru.arink_group.deliveryapp.R
 import ru.arink_group.deliveryapp.domain.dao.Address
@@ -37,7 +38,8 @@ import java.util.*
 /**
  * A simple [Fragment] subclass.
  */
-class RetryOrderFragment : Fragment(), RetryOrderView, TimePickerDialog.OnTimeSetListener {
+class RetryOrderFragment : Fragment(), RetryOrderView, TimePicker.OnTimeChangedListener {
+
 
     lateinit var order: Order
     lateinit var actionButton: CircularProgressButton
@@ -48,6 +50,7 @@ class RetryOrderFragment : Fragment(), RetryOrderView, TimePickerDialog.OnTimeSe
     lateinit var addressesAdapter: ArrayAdapter<String>
     var addressesList: List<Address> = emptyList()
     lateinit var selectedTime: DateTime
+
 
     val presenter: RetryOrderPresenter = RetryOrderPresenterImpl(this)
 
@@ -79,6 +82,12 @@ class RetryOrderFragment : Fragment(), RetryOrderView, TimePickerDialog.OnTimeSe
         val summaryCostWithDiscount = view.findViewById<TextView>(R.id.summary_cost_with_discount)
         val deliveryCost = view.findViewById<TextView>(R.id.summary_delivery)
         val summaryCost = view.findViewById<TextView>(R.id.summary)
+        val noteString = view.findViewById<TextView>(R.id.note)
+
+        if (order.note == null)
+            noteString.text = ""
+        else
+            noteString.text = "${order.note}"
 
         selfExport.isChecked = order.pickup
         selfExport.isEnabled = false
@@ -91,6 +100,9 @@ class RetryOrderFragment : Fragment(), RetryOrderView, TimePickerDialog.OnTimeSe
             deliveryCost.text = "${order.deliveryCost} р"
         }
         summaryCost.text = "${order.totalCost + order.deliveryCost} р"
+
+
+
 
         actionButton = view.findViewById(R.id.send_order_button)
         if (order.isActive() && order.status == Statuses.NEW) {
@@ -118,7 +130,7 @@ class RetryOrderFragment : Fragment(), RetryOrderView, TimePickerDialog.OnTimeSe
         }
     }
 
-    private fun verifyViews() : Boolean {
+    private fun verifyViews(): Boolean {
         var flag: Boolean
 
         flag = verifyDeliveryTime()
@@ -171,8 +183,10 @@ class RetryOrderFragment : Fragment(), RetryOrderView, TimePickerDialog.OnTimeSe
         val pattern = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS")
         val date = pattern.parse(order.deliveryTime)
         val dateTime = DateTime(date)
-
-        timePicker.text = dateTime.toTimeWithDate()
+        if (dateTime.minute == null && dateTime.hour == null)
+            timePicker.text = "На ближайшее время"
+        else
+            timePicker.text = dateTime.toTimeWithDate()
     }
 
     private fun hideAddressSpiner(view: View) {
@@ -196,28 +210,36 @@ class RetryOrderFragment : Fragment(), RetryOrderView, TimePickerDialog.OnTimeSe
         })
     }
 
-    override fun onTimeSet(view: TimePicker, hour: Int, minute: Int) {
-        val start = GetCompanyFromShared.getCompanyOrDefault().getCurrentDayOrFirst().startTimeClass()
-        val end = GetCompanyFromShared.getCompanyOrDefault().getCurrentDayOrFirst().endTimeClass()
 
-        val c = Calendar.getInstance()
-        val current = DateTime(c.get(Calendar.HOUR_OF_DAY), c.get(Calendar.MINUTE))
 
-        selectedTime = DateTime(hour, minute)
+    override fun onTimeChanged(view: TimePicker?, hourOfDay: Int, minute: Int) {
+        if (hourOfDay == null && minute == null) run {
+            selectedTime = DateTime(null, null)
 
-        if (start == null || end == null) {
-            Toast.makeText(activity, R.string.error_cant_order_is_rest, Toast.LENGTH_SHORT).show()
-        } else if (selectedTime.isGreaterThen(end) || selectedTime.isLowerThen(start)) {
-            val delivery_error = getString(R.string.time_should_be_between, start, end)
-            Toast.makeText(activity, delivery_error, Toast.LENGTH_SHORT).show()
-        } else if (selectedTime.isLowerThen(current)) {
-            Toast.makeText(activity, R.string.error_cant_be_less_then_current, Toast.LENGTH_SHORT).show()
-        } else if (selectedTime.isLowerThenNextHourOf(current) && end.isLowerThenNextHourOf(current)) {
-            Toast.makeText(activity, R.string.error_cant_to_late, Toast.LENGTH_SHORT).show()
-        } else if (selectedTime.isLowerThenNextHourOf(current)) {
-            Toast.makeText(activity, R.string.error_cant_be_greater_then_hour, Toast.LENGTH_SHORT).show()
-        } else {
-            timePicker.text = selectedTime.toString()
+        }
+        else {
+            val start = GetCompanyFromShared.getCompanyOrDefault().getCurrentDayOrFirst().startTimeClass()
+            val end = GetCompanyFromShared.getCompanyOrDefault().getCurrentDayOrFirst().endTimeClass()
+
+            val c = Calendar.getInstance()
+            val current = DateTime(c.get(Calendar.HOUR_OF_DAY), c.get(Calendar.MINUTE))
+
+            selectedTime = DateTime(hourOfDay, minute)
+
+            if (start == null || end == null) {
+                Toast.makeText(activity, R.string.error_cant_order_is_rest, Toast.LENGTH_SHORT).show()
+            } else if (selectedTime.isGreaterThen(end) || selectedTime.isLowerThen(start)) {
+                val delivery_error = getString(R.string.time_should_be_between, start, end)
+                Toast.makeText(activity, delivery_error, Toast.LENGTH_SHORT).show()
+            } else if (selectedTime.isLowerThen(current)) {
+                Toast.makeText(activity, R.string.error_cant_be_less_then_current, Toast.LENGTH_SHORT).show()
+            } else if (selectedTime.isLowerThenNextHourOf(current) && end.isLowerThenNextHourOf(current)) {
+                Toast.makeText(activity, R.string.error_cant_to_late, Toast.LENGTH_SHORT).show()
+            } else if (selectedTime.isLowerThenNextHourOf(current)) {
+                Toast.makeText(activity, R.string.error_cant_be_greater_then_hour, Toast.LENGTH_SHORT).show()
+            } else {
+                timePicker.text = selectedTime.toString()
+            }
         }
     }
 
@@ -294,6 +316,11 @@ class RetryOrderFragment : Fragment(), RetryOrderView, TimePickerDialog.OnTimeSe
         return addressesList[pos].id
     }
 
-    override fun getDeliveryTime(): DateTime = selectedTime
+    override fun getDeliveryTime(): DateTime? = selectedTime
+
+    override fun getNote(): String? {
+        return order.note
+    }
+
 
 }// Required empty public constructor

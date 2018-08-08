@@ -69,7 +69,8 @@ class OrderPresenterImpl(val orderView: OrderView): BasePresenter(), OrderPresen
                                 orderView.listProducts,
                                 orderView.selectedAddressId,
                                 orderView.selectedTime,
-                                orderView.isSelfPickup
+                                orderView.isSelfPickup,
+                                orderView.note
                         )
                 )
     }

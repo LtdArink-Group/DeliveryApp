@@ -50,6 +50,9 @@ public class OrderDTO {
     @SerializedName("order_products")
     @Expose
     private List<OrderProductDTO> orderProducts = null;
+    @SerializedName("note")
+    @Expose
+    private String note;
 
     public Integer getCompanyId() {
         return companyId;
@@ -154,4 +157,9 @@ public class OrderDTO {
     public void setDevice(String device) {
         this.device = device;
     }
+
+    public String getNote() {return note;}
+
+    public void setNote(String value) {this.note=value;}
+
 }

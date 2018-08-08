@@ -22,6 +22,10 @@
         <item name="colorButtonNormal">@color/colorOnAccentText</item>
         <item name="android:textColor">@color/colorAccent</item>
     </style>
+    <style name="AppTheme.MyButton.TimePicker" parent="Widget.AppCompat.Button.Borderless.Colored">
+        <item name="colorButtonNormal">@color/colorOnAccentText</item>
+        <item name="android:textColor">@color/colorTimePicker</item>
+    </style>
 
     <style name="AppTheme.MyBorderButton" parent="Widget.AppCompat.Button.Colored">
         <item name="colorButtonNormal">@color/colorAccent</item>
